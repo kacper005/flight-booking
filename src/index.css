@@ -1,0 +1,8 @@
+body {
+ font-family: 'Montserrat', sans-serif;
+ margin: 0;
+ background-image: url('../src/assets/airplane-sky.svg');
+ background-size: cover;
+ background-repeat: no-repeat;
+ background-attachment: fixed;
+}
