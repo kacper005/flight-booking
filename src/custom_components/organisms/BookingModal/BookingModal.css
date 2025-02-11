@@ -1,0 +1,63 @@
+.booking-container {
+ position: relative;
+ display: inline-block;
+}
+
+.dropdown {
+ position: absolute;
+ top: 50px; 
+ left: 0;
+ background: #EDE8F5;
+ border: 1px solid #ccc;
+ border-radius: 8px;
+ box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+ padding: 15px;
+ width: auto;
+ z-index: 1000;
+}
+
+.booking-dialog {
+ display: flex;
+ flex-direction: column;
+ gap: 5px;
+}
+
+.passenger-row {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+
+.counter button {
+ background: #3D52A0;
+ width: 35px;
+ color: white;
+ border: none;
+ padding: 10px;
+ cursor: pointer;
+}
+
+.count-value {
+ display: inline-block;
+ width: 25px;  
+ text-align: center;
+ font-weight: bold;
+}
+
+
+.cabin-classes {
+ display: flex;
+ gap: 10px;
+}
+
+.cabin-classes button {
+ padding: 5px 10px;
+ cursor: pointer;
+}
+
+.selected {
+ background: #3D52A0;
+ color: white;
+}
+
+/* TODO: Add media queries */
