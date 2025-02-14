@@ -26,7 +26,7 @@ export const Footer = () => {
                         target={"_blank"}
                         rel={"noopener noreferrer"} /* Improves security */
                     >
-                        <img src={"../src/assets/github-mark-white.svg"} alt="Github logo"
+                        <img src={"../src/assets/logos/github-mark-white.svg"} alt="Github logo"
                              width={"50px"}/>
                     </a>
                 </div>
@@ -67,6 +67,25 @@ export const Footer = () => {
                     provided here is a result of imagination. Any resemblance with real companies or
                     products is a coincidence.
                 </p>
+            </div>
+
+            <div style={{
+                backgroundColor: "#3D52A0",
+                color: "white",
+                textAlign: "center",
+                padding: "20px",
+                display: "flex",
+                justifyContent: "center",
+                gap: "5px",
+            }}>
+                <img src={"../src/assets/logos/visa-white-mark.svg"} alt="Visa logo"
+                     width={"100px"}/>
+                <img src={"../src/assets/logos/mastercard-mark.svg"} alt="Mastercard logo"
+                     width={"75px"}/>
+                <img src={"../src/assets/logos/applepay-mark.svg"} alt="Apple Pay logo"
+                     width={"55px"}/>
+                <img src={"../src/assets/logos/googlepay-mark.svg"} alt="Google Pay logo"
+                     width={"68px"}/>
             </div>
         </>
     );
