@@ -1,13 +1,12 @@
 import React from "react";
 import { Input } from "../atoms/Input";
-
+import { PageTemplate } from "../templates/PageTempate";
 
 export const Login = () => {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <h1>Login Page</h1>
-      <Input type={"username"} placeholder={"Username"}/>
-      <Input type={"password"} placeholder={"Password"}/>
-    </div>
+    <PageTemplate title="Login">
+      <Input type={"username"} placeholder={"Username"} />
+      <Input type={"password"} placeholder={"Password"} />
+    </PageTemplate>
   );
 };

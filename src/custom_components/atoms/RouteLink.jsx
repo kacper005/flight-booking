@@ -3,8 +3,16 @@ import { Link } from "react-router-dom";
 
 export const RouteLink = ({ to, children }) => {
   return (
-    <Link style={{ color: "white", textDecoration: "none", padding: "0 10px" }} to={to}>
+    <Link
+      style={{
+        color: "#EDE8F5",
+        textDecoration: "none",
+        float: "right",
+        margin: "0 1rem",
+      }}
+      to={to}
+    >
       {children}
     </Link>
   );
-}
+};

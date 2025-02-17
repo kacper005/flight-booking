@@ -7,6 +7,7 @@ export const Button = ({
   width,
   height,
   onClick,
+  icon: Icon,
 }) => {
   return (
     <button
@@ -22,8 +23,9 @@ export const Button = ({
         fontSize: "16px",
       }}
       className={className}
-      onClick={onClick} 
+      onClick={onClick}
     >
+      {Icon && <Icon />}
       {children}
     </button>
   );

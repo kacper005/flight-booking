@@ -1,8 +1,32 @@
+* {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+:root {
+  --mainColor: #3d52a0;
+  --mainColorLight: #7091e6;
+  --secondaryColor: #8697c4;
+  --textColor: #ede8f5;
+  --textColorLight: #f5f5f5;
+  --textColorDark: #141619;
+
+  --warningColor: #c50900;
+}
+
 body {
- font-family: 'Montserrat', sans-serif;
- margin: 0;
- background-image: url('../src/assets/airplane-sky.svg');
- background-size: cover;
- background-repeat: no-repeat;
- background-attachment: fixed;
+  background-image: url("../src/assets/airplane_bg.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    background-image: url("");
+  }
 }
