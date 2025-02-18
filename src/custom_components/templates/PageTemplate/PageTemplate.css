@@ -1,7 +1,10 @@
 .container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
   gap: 20px;
+  width: 80%;
 }
 
 @media (max-width: 1200px) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Input } from "../atoms/Input";
-import { PageTemplate } from "../templates/PageTempate";
+import { PageTemplate } from "../templates/PageTemplate/PageTempate";
 
 export const Login = () => {
   return (
