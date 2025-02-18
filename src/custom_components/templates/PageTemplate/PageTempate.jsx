@@ -1,15 +1,9 @@
 import React from "react";
+import "./PageTemplate.css";
 
 export const PageTemplate = ({ title, children }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "50%",
-        padding: "20px",
-      }}
-    >
+    <div className="container">
       <div>
         <h1 style={{ margin: "20px", color: "var(--textColorLight)" }}>
           {title}
