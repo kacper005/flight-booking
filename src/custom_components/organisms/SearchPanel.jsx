@@ -1,23 +1,46 @@
 import React from "react";
 import { Card } from "../atoms/Card/Card";
-import { Input } from "../atoms/Input";
 import { Button } from "../atoms/Button";
 import BookingModal from "./BookingModal/BookingModal";
-import { Select } from "../atoms/Select";
-import SearchIcon from "../../assets/icons/search.svg?react";
+import { Calendar } from "lucide-react";
+import SwitchButton from "../molecules/SwitchButton/SwitchButton";
+import { IconInput } from "../molecules/IconInput/IconInput";
 
 export const SearchPanel = () => {
   return (
-    <Card color={"#EDE8F5"}>
-      <Input type={"text"} placeholder={"From (destination)"} required={true} />
-      <Input type={"text"} placeholder={"To (destnation)"} required={true} />
-      <Select />
-      <Input type={"date"} />
-      <Input type={"date"} />
+    <Card flexDirection="column">
+      <SwitchButton />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "auto",
+          gap: "45px",
+        }}
+      >
+        <IconInput type="date" icon={Calendar} />
+        <IconInput type="date" icon={Calendar} />
+      </div>
 
-      <BookingModal />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "space-evenly",
+          gap: "16px",
+        }}
+      >
+        <>
+          <BookingModal />
+        </>
+      </div>
       <Button>
-        <ion-icon name="search-outline"></ion-icon>
+        {/* <Search size={"16px"} /> */}
+        Search
       </Button>
     </Card>
   );

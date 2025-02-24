@@ -21,14 +21,25 @@ export const Button = ({
         width: width,
         height: height,
         fontSize: "16px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
       className={className}
       onClick={onClick}
     >
-      {Icon && <Icon />}
+      {Icon && (
+        <span
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Icon />
+        </span>
+      )}
       {children}
     </button>
   );
 };
-
-// TODO: Add prop types and icon support for Button component

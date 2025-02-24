@@ -1,6 +1,8 @@
 import React from "react";
 import { RouteLink } from "../../atoms/RouteLink";
 import { Logo } from "../../atoms/Logo";
+import { Menu } from "lucide-react";
+import { X } from "lucide-react";
 import "./Header.css";
 
 export const Header = () => {
@@ -17,11 +19,11 @@ export const Header = () => {
         <RouteLink to="/saved-trips">Saved Trips</RouteLink>
         <RouteLink to="/login">Login</RouteLink>
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
-          <ion-icon name="close-outline"></ion-icon>
+          <X />
         </button>
       </nav>
       <button className="nav-btn" onClick={showNavbar}>
-        <ion-icon name="menu-outline"></ion-icon>
+        <Menu />
       </button>
     </header>
   );
