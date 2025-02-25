@@ -15,7 +15,7 @@ export default function SwitchButton() {
   };
 
   return (
-    <div className="container">
+    <div className="switch-button-container">
       <IconInput
         type={"text"}
         placeholder={"From"}
