@@ -5,8 +5,8 @@ export const Footer = () => {
     <>
       <nav
         style={{
-          backgroundColor: "#3D52A0",
-          color: "white",
+          backgroundColor: "var(--mainColor)",
+          color: "var(--textColor)",
           padding: "20px 40px",
           display: "flex",
           alignItems: "start",
@@ -70,6 +70,7 @@ export const Footer = () => {
           style={{
             fontStyle: "italic",
             fontSize: "14px",
+            color: "var(--textColor)",
             maxWidth: "650px",
             margin: "auto",
           }}
