@@ -2,8 +2,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  border-radius: 10px;
   width: auto;
   gap: 45px;
+  background-color: #ffffff;
 }
 
 input {
@@ -16,10 +18,10 @@ input {
 }
 
 .swap-button {
-  background-color: var(--textColorLight);
+  background-color: #ffffff;
   border: none;
   padding: 8px;
-  border-radius: 50%;
+  border-radius: 30%;
   cursor: pointer;
   transition: 0.3s;
   display: flex;

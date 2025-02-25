@@ -5,6 +5,8 @@ export const Card = ({
   children,
   width = "auto",
   height = "auto",
+  maxWidth,
+  maxHeight,
   color = "var(--secondaryColor)",
   display = "flex",
   padding = "20px",
@@ -21,6 +23,8 @@ export const Card = ({
       style={{
         width,
         height,
+        maxWidth,
+        maxHeight,
         backgroundColor: color,
         display,
         padding,

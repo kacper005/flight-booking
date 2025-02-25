@@ -19,7 +19,7 @@
 }
 
 body {
-  background-image: url("../src/assets/airplane_bg.svg");
+  background-image: url("../src/assets/plane_bg.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
