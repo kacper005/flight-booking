@@ -18,12 +18,13 @@ export const Footer = () => {
           style={{ display: "grid", alignItems: "center", lineHeight: "1.5" }}
         >
           <p style={{ fontWeight: "bold", marginBottom: "0px" }}>About us</p>
-          <p style={{ textDecoration: "underline", marginTop: "10px" }}>
-            About us <br />
-            Important information <br />
-            Sustainability
-          </p>
-          <a
+            <p style={{ textDecoration: "underline", marginTop: "10px" }}>
+                <a href="/about-us" style={{ color: "inherit", textDecoration: "none" }}>About us</a> <br />
+                Important information <br />
+                Sustainability
+            </p>
+
+            <a
             href={"https://github.com/kacper005/flight-booking"}
             target={"_blank"}
             rel={"noopener noreferrer"} /* Improves security */
