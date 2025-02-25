@@ -12,6 +12,8 @@ export const Recommendations = () => {
         display: "flex",
         justifyContent: "start",
         flexWrap: "wrap",
+        paddingTop: "10px",
+        paddingBottom: "20px",
       }}
     >
       <h1
