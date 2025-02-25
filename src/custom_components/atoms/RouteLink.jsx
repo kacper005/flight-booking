@@ -5,7 +5,7 @@ export const RouteLink = ({ to, children }) => {
   return (
     <Link
       style={{
-        color: "#EDE8F5",
+        color: "var(--textColor)",
         textDecoration: "none",
         float: "right",
         margin: "0 1rem",

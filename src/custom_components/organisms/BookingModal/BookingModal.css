@@ -16,6 +16,12 @@
   z-index: 1000;
 }
 
+@media (max-width: 768px) {
+  .dropdown {
+    left: -50%;
+  }
+}
+
 .booking-dialog {
   display: flex;
   flex-direction: column;
@@ -33,6 +39,7 @@
   width: 35px;
   color: white;
   border: none;
+  border-radius: 4px;
   padding: 10px;
   cursor: pointer;
 }
@@ -50,13 +57,16 @@
 }
 
 .cabin-classes button {
+  font-size: 16px;
   padding: 5px 10px;
   cursor: pointer;
+  border-radius: 10px; /* Corrected */
+  border: 1px solid #ccc; /* Optional: Adds a subtle border */
 }
 
 .selected {
   background: #3d52a0;
   color: white;
+  border-radius: 10px; /* Ensures the selected button keeps the rounded corners */
 }
-
 /* TODO: Add media queries */

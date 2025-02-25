@@ -52,7 +52,7 @@ header nav {
     background-color: var(--mainColor);
     opacity: 0.9;
     transition: 1s;
-    z-index: 1;
+    z-index: 2;
   }
 
   header .responsive_nav {

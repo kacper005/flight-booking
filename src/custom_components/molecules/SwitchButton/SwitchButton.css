@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: auto;
+  gap: 45px;
+}
+
+input {
+  padding: 8px;
+  height: 60px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.swap-button {
+  background-color: var(--textColorLight);
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 1;
+}
+
+.swap-button:hover {
+  background-color: #ddd;
+}
+
+.swap-icon {
+  width: 20px;
+  height: 20px;
+}
