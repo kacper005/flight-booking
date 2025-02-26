@@ -28,9 +28,3 @@
     margin-top: 5px;
     box-shadow: darkgray 10px 10px 20px;
 }
-
-/* Screen smaller than 696px, center H1 and cards */
-
-@media screen and (max-width: 696px) {
-
-}
