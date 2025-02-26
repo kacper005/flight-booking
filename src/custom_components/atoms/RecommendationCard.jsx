@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
 
-function RecommendationCard(props) {
+export default function RecommendationCard({
+  imageSrcSet = "https://picsum.photos/seed/picsum/400/300",
+  title = "Recommendation",
+  info = "Recommendation description text.",
+}) {
   return (
     <div
       style={{
@@ -19,34 +23,24 @@ function RecommendationCard(props) {
           height: "160px",
           borderRadius: "8px 8px 0 0",
         }}
-        src={props.imageSrcSet}
+        src={imageSrcSet}
+        alt={title}
       />
-      <h2 style={{ padding: "2px 10px" }}>{props.title}</h2>
+      <h2 style={{ padding: "2px 10px" }}>{title}</h2>
       <p
         style={{
           width: "98%",
           padding: "5px 10px",
         }}
       >
-        {props.info}
+        {info}
       </p>
     </div>
   );
 }
 
-// Default props: values that are applied to a prop if not passed into the component.
-RecommendationCard.defaultProps = {
-  imageSrcSet: "https://picsum.photos/seed/picsum/400/300",
-  title: "Recommendation",
-  info: "Recommendation description text.",
-};
-
-// PropTypes: mechanism to validate correct data types are passed into props.
-// Used for debugging in the browser console.
-RecommendationCard.propType = {
+RecommendationCard.propTypes = {
   imageSrcSet: PropTypes.string,
   title: PropTypes.string,
   info: PropTypes.string,
 };
-
-export default RecommendationCard;

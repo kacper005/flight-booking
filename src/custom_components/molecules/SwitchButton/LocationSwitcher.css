@@ -1,12 +1,14 @@
 .switch-button-container {
+  width: auto;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
   border-radius: 10px;
   border-radius: 10px;
-  width: auto;
-  background-color: #ffffff;
+  gap: 10px;
+  position: relative;
 }
 
 input {
@@ -20,15 +22,28 @@ input {
 
 .swap-button {
   background-color: #ffffff;
+  width: 60px;
+  height: 60px;
   border: none;
-  padding: 8px;
-  border-radius: 30%;
+  border-radius: 20%;
   cursor: pointer;
   transition: 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1;
+}
+
+@media screen and (max-width: 600px) {
+  .swap-button {
+    position: absolute;
+    left: 75%;
+    border: 1px solid #ccc;
+  }
+
+  .switch-button-container {
+    gap: 0px;
+  }
 }
 
 .swap-button:hover {

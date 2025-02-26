@@ -1,11 +1,11 @@
 import React from "react";
-import "./SwitchButton.css";
+import "./LocationSwitcher.css";
 import { IconInput } from "../IconInput/IconInput";
 import { PlaneLanding } from "lucide-react";
 import { PlaneTakeoff } from "lucide-react";
 import { ArrowRightLeft } from "lucide-react";
 
-export default function SwitchButton() {
+export default function LocationSwitcher() {
   const [from, setFrom] = React.useState("");
   const [to, setTo] = React.useState("");
 

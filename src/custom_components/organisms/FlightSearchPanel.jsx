@@ -1,15 +1,15 @@
 import React from "react";
 import { Card } from "../atoms/Card/Card";
 import { Button } from "../atoms/Button";
-import BookingModal from "./BookingModal/BookingModal";
+import BookingOptionsModal from "./BookingOptionsModal/BookingOptionsModal";
 import { Calendar } from "lucide-react";
-import SwitchButton from "../molecules/SwitchButton/SwitchButton";
 import { IconInput } from "../molecules/IconInput/IconInput";
+import LocationSwitcher from "../molecules/SwitchButton/LocationSwitcher";
 
-export const SearchPanel = () => {
+export const FlightSearchPanel = () => {
   return (
     <Card flexDirection="column">
-      <SwitchButton />
+      <LocationSwitcher />
       <div
         style={{
           display: "flex",
@@ -18,7 +18,7 @@ export const SearchPanel = () => {
           alignItems: "center",
           justifyContent: "center",
           width: "auto",
-          gap: "45px",
+          gap: "80px",
         }}
       >
         <IconInput type="date" icon={Calendar} />
@@ -35,13 +35,10 @@ export const SearchPanel = () => {
         }}
       >
         <>
-          <BookingModal />
+          <BookingOptionsModal />
         </>
       </div>
-      <Button>
-        {/* <Search size={"16px"} /> */}
-        Search
-      </Button>
+      <Button>Search</Button>
     </Card>
   );
 };

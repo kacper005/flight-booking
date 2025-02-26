@@ -1,5 +1,5 @@
 import React from "react";
-import { SearchPanel } from "../organisms/SearchPanel";
+import { FlightSearchPanel } from "../organisms/FlightSearchPanel";
 import { Recommendations } from "../organisms/Recommendations";
 import { PageTemplate } from "@/custom_components/templates/PageTemplate/PageTempate.jsx";
 
@@ -15,7 +15,7 @@ export const Home = () => {
         }}
       >
         <PageTemplate>
-          <SearchPanel />
+          <FlightSearchPanel />
         </PageTemplate>
         <Recommendations />
       </div>
