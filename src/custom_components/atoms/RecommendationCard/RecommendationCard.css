@@ -1,0 +1,36 @@
+.recommendationCard {
+    display: block;
+    margin: 10px 5px;
+    height: 400px;
+    width: 270px;
+    box-shadow: lightgrey 5px 5px 10px;
+    background-color: white;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.recommendationCard img {
+    width: 270px;
+    height: 160px;
+    border-radius: 8px 8px 0 0;
+}
+
+.recommendationCard h2 {
+    padding: 2px 10px;
+}
+
+.recommendationCard p {
+    width: 98%;
+    padding: 5px 10px;
+}
+
+.recommendationCard:hover {
+    margin-top: 5px;
+    box-shadow: darkgray 10px 10px 20px;
+}
+
+/* Screen smaller than 696px, center H1 and cards */
+
+@media screen and (max-width: 696px) {
+
+}
