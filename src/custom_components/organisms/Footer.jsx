@@ -2,7 +2,7 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <>
+    <footer style={{ marginTop: "auto" }}>
       <nav
         style={{
           backgroundColor: "var(--mainColor)",
@@ -18,21 +18,27 @@ export const Footer = () => {
           style={{ display: "grid", alignItems: "center", lineHeight: "1.5" }}
         >
           <p style={{ fontWeight: "bold", marginBottom: "0px" }}>About us</p>
-            <p style={{ textDecoration: "underline", marginTop: "10px" }}>
-                <a href="/about-us" style={{ color: "inherit", textDecoration: "none" }}>About us</a> <br />
-                Important information <br />
-                Sustainability
-            </p>
-
+          <p style={{ textDecoration: "underline", marginTop: "10px" }}>
             <a
-            href={"https://github.com/kacper005/flight-booking"}
-            target={"_blank"}
-            rel={"noopener noreferrer"} /* Improves security */
+              href="/about-us"
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              About us
+            </a>{" "}
+            <br />
+            Important information <br />
+            Sustainability
+          </p>
+
+          <a
+            href="https://github.com/kacper005/flight-booking"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <img
-              src={"../src/assets/logos/github-mark-white.svg"}
+              src="../src/assets/logos/github-mark-white.svg"
               alt="Github logo"
-              width={"50px"}
+              width="50px"
             />
           </a>
         </div>
@@ -100,26 +106,26 @@ export const Footer = () => {
         }}
       >
         <img
-          src={"../src/assets/logos/visa-white-mark.svg"}
+          src="../src/assets/logos/visa-white-mark.svg"
           alt="Visa logo"
-          width={"100px"}
+          width="100px"
         />
         <img
-          src={"../src/assets/logos/mastercard-mark.svg"}
+          src="../src/assets/logos/mastercard-mark.svg"
           alt="Mastercard logo"
-          width={"75px"}
+          width="75px"
         />
         <img
-          src={"../src/assets/logos/applepay-mark.svg"}
+          src="../src/assets/logos/applepay-mark.svg"
           alt="Apple Pay logo"
-          width={"55px"}
+          width="55px"
         />
         <img
-          src={"../src/assets/logos/googlepay-mark.svg"}
+          src="../src/assets/logos/googlepay-mark.svg"
           alt="Google Pay logo"
-          width={"68px"}
+          width="68px"
         />
       </div>
-    </>
+    </footer>
   );
 };
