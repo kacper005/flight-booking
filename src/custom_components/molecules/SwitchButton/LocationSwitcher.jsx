@@ -14,30 +14,55 @@ export default function LocationSwitcher() {
     setTo(from);
   };
 
+  const airports = [
+    "New York (JFK)",
+    "Los Angeles (LAX)",
+    "Oslo (OSL)",
+    "Ålesund (AES)",
+    "Amsterdam (AMS)",
+    "London Heathrow (LHR)",
+    "Zurich (ZRH)",
+    "Rome (FCO)",
+    "Paris (CDG)",
+    "Dallas (DFD)",
+    "Chicago (ORD)",
+    "Frankfurt (FRA)",
+    "Tokyo (HND)",
+    "Dubai (DXB)",
+    "Doha (DOH)",
+    "Sydney (SYD)",
+    "Singapore (SIN)",
+  ];
+
+  const fromOptions = airports.filter((airport) => airport !== to);
+  const toOptions = airports.filter((airport) => airport !== from);
+
   return (
     <div className="switch-button-container">
       <IconInput
-        type={"text"}
-        placeholder={"From"}
+        type="text"
+        placeholder="From"
         value={from}
-        onChange={(e) => setFrom(e.target.value)}
         required={true}
+        list="from-airports"
+        options={fromOptions}
         icon={PlaneTakeoff}
+        onChange={(e) => setFrom(e.target.value)}
       />
 
-      {/* Swap Button */}
       <button onClick={swapLocations} className="swap-button">
         <ArrowRightLeft className="swap-icon" />
       </button>
 
-      {/* To Input */}
       <IconInput
-        type={"text"}
-        placeholder={"To"}
+        type="text"
+        placeholder="To"
         value={to}
-        onChange={(e) => setTo(e.target.value)}
         required={true}
+        list="to-airports"
+        options={toOptions}
         icon={PlaneLanding}
+        onChange={(e) => setTo(e.target.value)}
       />
     </div>
   );

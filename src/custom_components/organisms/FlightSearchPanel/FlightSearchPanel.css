@@ -1,0 +1,15 @@
+.date-picker-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  gap: 80px;
+}
+
+@media screen and (max-width: 900px) {
+  .date-picker-container {
+    gap: 0;
+  }
+}

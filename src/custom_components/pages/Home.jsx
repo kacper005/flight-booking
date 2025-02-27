@@ -1,5 +1,5 @@
 import React from "react";
-import { FlightSearchPanel } from "../organisms/FlightSearchPanel";
+import { FlightSearchPanel } from "../organisms/FlightSearchPanel/FlightSearchPanel";
 import { Recommendations } from "../organisms/Recommendations";
 import { PageTemplate } from "@/custom_components/templates/PageTemplate/PageTempate.jsx";
 
