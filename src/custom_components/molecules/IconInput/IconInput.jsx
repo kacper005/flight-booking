@@ -4,9 +4,11 @@ import "./IconInput.css";
 export const IconInput = ({
   type,
   placeholder,
-  icon: Icon,
   required,
   value,
+  list,
+  options = [],
+  icon: Icon,
   onChange,
 }) => {
   return (
@@ -21,8 +23,16 @@ export const IconInput = ({
         placeholder={placeholder}
         required={required}
         value={value}
+        list={list}
         onChange={onChange}
       />
+      {list && (
+        <datalist id={list}>
+          {options.map((option) => (
+            <option value={option} key={option} />
+          ))}
+        </datalist>
+      )}
     </div>
   );
 };

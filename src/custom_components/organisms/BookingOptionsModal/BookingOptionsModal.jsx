@@ -1,7 +1,6 @@
 import React from "react";
 import "./BookingOptionsModal.css";
 import { Button } from "@/custom_components/atoms/Button";
-import Typography from "@/custom_components/atoms/Typography";
 
 export default function BookingOptionsModal() {
   const [isOpen, setIsOpen] = React.useState(false);
