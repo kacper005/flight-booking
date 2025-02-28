@@ -8,7 +8,8 @@ export const RouteLink = ({ to, children }) => {
         color: "var(--textColor)",
         textDecoration: "none",
         float: "right",
-        margin: "0 1rem",
+        margin: "0 1.6rem",
+        fontSize: "1.6rem",
       }}
       to={to}
     >
