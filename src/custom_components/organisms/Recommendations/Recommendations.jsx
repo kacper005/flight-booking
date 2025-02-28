@@ -1,39 +1,12 @@
 import React from "react";
 import RecommendationCard from "@/custom_components/atoms/RecommendationCard/RecommendationCard.jsx";
+import "./Recommendations.css";
 
 export const Recommendations = () => {
   return (
-    <section
-      style={{
-        backgroundColor: "var(--textColor)",
-        width: "100vw",
-        margin: "20% 0 0 0",
-        display: "flex",
-        justifyContent: "start",
-        flexWrap: "wrap",
-        paddingTop: "10px",
-        paddingBottom: "20px",
-      }}
-    >
-      <h1
-        style={{
-          left: "20px",
-          padding: "20px 10%",
-        }}
-      >
-        Recommendations
-      </h1>
-      <div
-        style={{
-          padding: "20px 9.8%",
-          display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          width: "100%",
-          flexGrow: 2,
-          paddingTop: "0",
-        }}
-      >
+    <section className={"recommendations"}>
+      <h1>Recommendations</h1>
+      <div className={"recommendationCardContainer"}>
         <RecommendationCard
           imageSrcSet="https://picsum.photos/270/160?=rnd1"
           title="Recommendation 1"

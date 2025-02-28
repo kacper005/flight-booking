@@ -1,6 +1,6 @@
 import React from "react";
 import { FlightSearchPanel } from "../organisms/FlightSearchPanel";
-import { Recommendations } from "../organisms/Recommendations";
+import { Recommendations } from "../organisms/Recommendations/Recommendations.jsx";
 import { PageTemplate } from "@/custom_components/templates/PageTemplate/PageTempate.jsx";
 
 export const Home = () => {

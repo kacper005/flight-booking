@@ -10,7 +10,6 @@ import { Footer } from "./custom_components/organisms/Footer.jsx";
 export const App = () => {
   return (
     <Router>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <div className="App">
         <Header />
         <ContentWrapper>
