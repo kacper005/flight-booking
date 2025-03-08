@@ -3,7 +3,7 @@ import "./Card.css";
 
 export const Card = ({
   children,
-  width = "auto",
+  width = "100%",
   height = "auto",
   maxWidth,
   maxHeight,
@@ -16,6 +16,7 @@ export const Card = ({
   justifyContent = "space-evenly",
   className,
   flexWrap = "wrap",
+  margin,
 }) => {
   return (
     <div
@@ -33,6 +34,7 @@ export const Card = ({
         alignItems,
         justifyContent,
         flexWrap,
+        margin,
       }}
     >
       {children}

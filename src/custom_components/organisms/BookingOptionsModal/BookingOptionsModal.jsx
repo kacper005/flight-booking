@@ -1,6 +1,8 @@
 import React from "react";
 import "./BookingOptionsModal.css";
 import { Button } from "@/custom_components/atoms/Button";
+import { Plus } from "lucide-react";
+import { Minus } from "lucide-react";
 
 export default function BookingOptionsModal() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -79,7 +81,7 @@ function BookingDialog({
         { label: "Infants (0-23 months)", type: "infant" },
       ].map(({ label, type }) => (
         <div key={type} className="passenger-row">
-          <span>{label}</span>
+          <p>{label}</p>
           <div className="counter">
             <button
               disabled={passengers[type] === 0}
@@ -87,7 +89,7 @@ function BookingDialog({
             >
               -
             </button>
-            <span className="count-value">{passengers[type]}</span>
+            <p className="count-value">{passengers[type]}</p>
             <button
               disabled={totalTravelers >= 10}
               onClick={() => handleChange(type, 1)}

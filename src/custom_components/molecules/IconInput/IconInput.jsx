@@ -2,9 +2,12 @@ import React from "react";
 import "./IconInput.css";
 
 export const IconInput = ({
+  className,
+  width,
   type,
   placeholder,
   required,
+  disabled,
   value,
   list,
   options = [],
@@ -19,9 +22,12 @@ export const IconInput = ({
         </span>
       )}
       <input
+        className={`${className}`}
+        width={width}
         type={type}
         placeholder={placeholder}
         required={required}
+        disabled={disabled}
         value={value}
         list={list}
         onChange={onChange}

@@ -1,11 +1,13 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "./custom_components/pages/Login";
 import { Home } from "./custom_components/pages/Home";
-import { AboutUs } from "./custom_components/pages/AboutUs"; // Import About Us page
+import { AboutUs } from "./custom_components/pages/AboutUs";
 import { Header } from "./custom_components/organisms/Header/Header";
 import { ContentWrapper } from "./custom_components/layout/ContentWrapper";
 import { Footer } from "./custom_components/organisms/Footer.jsx";
+
+import { FAQ } from "./custom_components/pages/FAQ";
+import { SignUp } from "./custom_components/pages/SignUp/SignUp";
 
 export const App = () => {
   return (
@@ -15,9 +17,11 @@ export const App = () => {
         <ContentWrapper>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/sign-in" element={<Login />} />
+            <Route path="/sign-up" element={<SignUp />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/about-us" element={<AboutUs />} /> {/* New Route */}
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/faq" element={<FAQ />} />
           </Routes>
         </ContentWrapper>
         <Footer />

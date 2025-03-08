@@ -4,6 +4,7 @@ import { PageTemplate } from "../templates/PageTemplate/PageTempate";
 import { Card } from "../atoms/Card/Card";
 import { Button } from "../atoms/Button";
 import { CircleCheckBig } from "lucide-react";
+import { RouteLink } from "../atoms/RouteLink";
 
 export const Login = () => {
   return (
@@ -17,14 +18,22 @@ export const Login = () => {
           gap: "20px",
         }}
       >
-        <Card display="flex" flexDirection="column" alignItems="center">
+        <Card
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          maxWidth={"300px"}
+        >
           <h1 style={{ color: "var(--textColor)" }}>Sign In</h1>
-          <Input type={"username"} placeholder={"Username"} />
+          <Input type={"email"} placeholder={"Username"} />
           <Input type={"password"} placeholder={"Password"} />
+          <Button width={"100%"}>Sign In</Button>
           <div>
-            <a href="#" style={{ color: "var(--colorText)" }}>
-              Forgot your password?
-            </a>
+            <p>
+              <a href="#" style={{ color: "var(--colorText)" }}>
+                Forgot your password?
+              </a>
+            </p>
           </div>
         </Card>
         <Card
@@ -32,7 +41,6 @@ export const Login = () => {
           flexDirection="column"
           alignItems="center"
           maxWidth={"500px"}
-          s
         >
           <h1 style={{ color: "var(--textColor)" }}>New to flight finder?</h1>
           <div
@@ -55,16 +63,11 @@ export const Login = () => {
             </p>
           </div>
           <div>
-            <Button>Create New Profile</Button>
+            <RouteLink to="/sign-up">
+              <Button>Create New Profile</Button>
+            </RouteLink>
           </div>
         </Card>
-      </div>
-      <div style={{ marginTop: "20px", color: "var(--textColor)" }}>
-        <p>
-          © 2025 Flight Finder ASA. Please note that this is a Flight Finder
-          retail site, hence Flight Finder legislation and rules apply to any
-          fees and/or charges.
-        </p>
       </div>
     </PageTemplate>
   );

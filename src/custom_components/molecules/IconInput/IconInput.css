@@ -1,6 +1,6 @@
 .input-container {
   position: relative;
-  width: 370px;
+  width: 100%;
 }
 
 .input-container input {
@@ -23,4 +23,13 @@
 
 .input-container input:focus {
   border-color: var(--mainColor);
+}
+
+@media screen and (max-width: 1075px) {
+  .input-container {
+    width: 100%;
+  }
+  .input-container input {
+    width: 100%;
+  }
 }

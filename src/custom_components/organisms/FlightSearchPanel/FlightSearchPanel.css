@@ -1,15 +1,21 @@
 .date-picker-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  width: auto;
-  gap: 80px;
+  width: 100%;
+  gap: 10px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1075px) {
   .date-picker-container {
+    flex-direction: column;
+    width: 100%;
     gap: 0;
   }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
 }

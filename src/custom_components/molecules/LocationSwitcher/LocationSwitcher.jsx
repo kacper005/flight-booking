@@ -48,6 +48,7 @@ export default function LocationSwitcher() {
         options={fromOptions}
         icon={PlaneTakeoff}
         onChange={(e) => setFrom(e.target.value)}
+        className="input-left"
       />
 
       <button onClick={swapLocations} className="swap-button">
@@ -63,6 +64,7 @@ export default function LocationSwitcher() {
         options={toOptions}
         icon={PlaneLanding}
         onChange={(e) => setTo(e.target.value)}
+        className="input-right"
       />
     </div>
   );

@@ -17,7 +17,7 @@ export const Header = () => {
       <Logo />
       <nav ref={navRef}>
         <RouteLink to="/saved-trips">Saved Trips</RouteLink>
-        <RouteLink to="/login">Login</RouteLink>
+        <RouteLink to="/sign-in">Sign In</RouteLink>
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <X />
         </button>

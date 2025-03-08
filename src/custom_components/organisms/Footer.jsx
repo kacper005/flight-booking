@@ -1,4 +1,5 @@
 import React from "react";
+import { RouteLink } from "../atoms/RouteLink";
 
 export const Footer = () => {
   return (
@@ -18,17 +19,17 @@ export const Footer = () => {
           style={{ display: "grid", alignItems: "center", lineHeight: "1.5" }}
         >
           <p style={{ fontWeight: "bold", marginBottom: "0px" }}>About us</p>
-          <p style={{ textDecoration: "underline", marginTop: "10px" }}>
-            <a
-              href="/about-us"
-              style={{ color: "inherit", textDecoration: "none" }}
-            >
-              About us
-            </a>{" "}
-            <br />
-            Important information <br />
+          <span style={{ marginTop: "10px" }} />
+          <RouteLink to="/about-us" margin={0} textDecoration="underline">
+            About us
+          </RouteLink>
+          <RouteLink to="/#" margin={0} textDecoration="underline">
+            Important information
+          </RouteLink>
+          <RouteLink to="/#" margin={0} textDecoration="underline">
             Sustainability
-          </p>
+          </RouteLink>
+          <span style={{ marginBottom: "10px" }} />
 
           <a
             href="https://github.com/kacper005/flight-booking"
@@ -46,22 +47,34 @@ export const Footer = () => {
           style={{ display: "grid", alignItems: "center", lineHeight: "1.5" }}
         >
           <p style={{ fontWeight: "bold", marginBottom: "0px" }}>Support</p>
-          <p style={{ textDecoration: "underline", marginTop: "10px" }}>
-            Contact us <br />
-            FAQ <br />
-            Airline information <br />
+          <span style={{ marginTop: "10px" }} />
+          <RouteLink to="/#" margin={0} textDecoration="underline">
+            Contact us
+          </RouteLink>
+          <RouteLink to="/faq" margin={0} textDecoration="underline">
+            FAQ
+          </RouteLink>
+          <RouteLink to="/#" margin={0} textDecoration="underline">
+            Airline information
+          </RouteLink>
+          <RouteLink to="/#" margin={0} textDecoration="underline">
             Terms and conditions
-          </p>
+          </RouteLink>
         </div>
         <div
           style={{ display: "grid", alignItems: "center", lineHeight: "1.5" }}
         >
           <p style={{ fontWeight: "bold", marginBottom: "0px" }}>Log in</p>
-          <p style={{ textDecoration: "underline", marginTop: "10px" }}>
-            Log in <br />
-            Register <br />
+          <span style={{ marginTop: "10px" }} />
+          <RouteLink to="/sign-in" margin={0} textDecoration="underline">
+            Log in
+          </RouteLink>
+          <RouteLink to="/#" margin={0} textDecoration="underline">
+            Register
+          </RouteLink>
+          <RouteLink to="/#" margin={0} textDecoration="underline">
             My bookings
-          </p>
+          </RouteLink>
         </div>
       </nav>
 

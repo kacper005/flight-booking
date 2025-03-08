@@ -5,20 +5,18 @@ import { PageTemplate } from "@/custom_components/templates/PageTemplate/PageTem
 
 export const Home = () => {
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <PageTemplate>
-          <FlightSearchPanel />
-        </PageTemplate>
-        <Recommendations />
-      </div>
-    </>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <PageTemplate>
+        <FlightSearchPanel />
+      </PageTemplate>
+      <Recommendations />
+    </div>
   );
 };

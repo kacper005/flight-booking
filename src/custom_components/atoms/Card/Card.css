@@ -6,7 +6,7 @@
   width: 50%;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1075px) {
   .card-container {
     width: 100%;
     flex-direction: column;
