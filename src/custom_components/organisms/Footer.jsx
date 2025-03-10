@@ -100,13 +100,25 @@ export const Footer = () => {
           }}
         >
           This website is a result of a university group project, performed in
-          the course
-          <span style={{ textDecoration: "underline" }}>
-            {" "}
+          the course{" "}
+          <a
+            style={{ textDecoration: "underline", color: "var(--textColor)" }}
+            href={"https://www.ntnu.edu/studies/courses/IDATA2301#tab=omEmnet"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             IDATA2301 Web technologies
-          </span>
-          , at <span style={{ textDecoration: "underline" }}>NTNU</span>. All
-          the information provided here is a result of imagination. Any
+          </a>
+          , at{" "}
+          <a
+            style={{ textDecoration: "underline", color: "var(--textColor)" }}
+            href={"https://www.ntnu.edu/"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            NTNU
+          </a>
+          . All the information provided here is a result of imagination. Any
           resemblance with real companies or products is a coincidence.
         </p>
       </div>

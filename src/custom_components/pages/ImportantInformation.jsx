@@ -84,7 +84,7 @@ export const ImportantInformation = () => {
 
           <br />
           <p style={{ textAlign: "justify", maxWidth: "700px" }}>
-            © 2025 Flight Finder ASA. All information provided here is for
+            © 2025 Flight Finder. All information provided here is for
             educational purposes.
           </p>
         </Card>
