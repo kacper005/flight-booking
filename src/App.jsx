@@ -6,6 +6,7 @@ import { Header } from "./custom_components/organisms/Header/Header";
 import { ContentWrapper } from "./custom_components/layout/ContentWrapper";
 import { Footer } from "./custom_components/organisms/Footer.jsx";
 
+import { ImportantInformation } from "./custom_components/pages/ImportantInformation";
 import { FAQ } from "./custom_components/pages/FAQ";
 import { SignUp } from "./custom_components/pages/SignUp/SignUp";
 
@@ -21,6 +22,10 @@ export const App = () => {
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about-us" element={<AboutUs />} />
+            <Route
+              path="/important-information"
+              element={<ImportantInformation />}
+            />
             <Route path="/faq" element={<FAQ />} />
           </Routes>
         </ContentWrapper>
