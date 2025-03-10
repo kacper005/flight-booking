@@ -72,12 +72,13 @@ export const AboutUs = () => {
                         Finder, set off on every journey
                         with confidence and let your travel aspirations take flight.
                     </p>
+
+                    <br/>
+                    <p style={{textAlign: "justify", maxWidth: "700px"}}>
+                        © 2025 Flight Finder. All information provided here is for
+                        educational purposes.
+                    </p>
                 </Card>
             </div>
-            <div style={{marginTop: "20px", textAlign: "center", color: "#141619"}}>
-                <p>© 2025 Flight Finder ASA. All information provided here is for educational
-                    purposes.</p>
-            </div>
-        </PageTemplate>
-    );
+        </PageTemplate>);
 };
