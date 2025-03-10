@@ -9,6 +9,7 @@ import { Footer } from "./custom_components/organisms/Footer.jsx";
 import { ImportantInformation } from "./custom_components/pages/ImportantInformation";
 import { FAQ } from "./custom_components/pages/FAQ";
 import { SignUp } from "./custom_components/pages/SignUp/SignUp";
+import { Sustainability } from "./custom_components/pages/Sustainability";
 
 export const App = () => {
   return (
@@ -26,6 +27,7 @@ export const App = () => {
               path="/important-information"
               element={<ImportantInformation />}
             />
+            <Route path="/sustainability" element={<Sustainability />} />
             <Route path="/faq" element={<FAQ />} />
           </Routes>
         </ContentWrapper>
