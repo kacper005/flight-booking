@@ -25,6 +25,9 @@ body {
   --textColorLight: #f5f5f5;
   --textColorDark: #141619;
   --warningColor: #c50900;
+
+  --black: #252525;
+  --white: #ffffff;
 }
 
 body {

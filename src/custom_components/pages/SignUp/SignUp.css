@@ -1,7 +1,7 @@
 .signup-container {
   background: var(--secondaryColor);
   padding: 30px;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 450px;
   text-align: center;
@@ -29,7 +29,14 @@ h2 {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.input-group select {
+  height: 60px;
+  font-size: 2rem;
+  cursor: pointer;
 }
 
 .gender-options {
@@ -41,7 +48,7 @@ h2 {
   font-weight: normal;
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 
 .gender-options input {
@@ -60,7 +67,7 @@ h2 {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 
 .signup-btn:hover {
@@ -69,7 +76,7 @@ h2 {
 
 .error {
   color: var(--warningColor);
-  font-size: 12px;
+  font-size: 1.4rem;
 }
 
 .login-link {

@@ -2,6 +2,9 @@ import React from "react";
 
 export const Box = ({
   children,
+  width,
+  height,
+  maxWidth,
   backgroundColor = "var(--secondaryColor)",
   padding = "20px",
   borderRadius = "10px",
@@ -10,6 +13,9 @@ export const Box = ({
   return (
     <div
       style={{
+        width: width,
+        height: height,
+        maxWidth: maxWidth,
         backgroundColor: backgroundColor,
         padding: padding,
         borderRadius: borderRadius,

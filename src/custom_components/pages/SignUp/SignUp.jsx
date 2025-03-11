@@ -104,11 +104,11 @@ export const SignUp = () => {
         </div>
 
         <div className="input-group">
-          <label>Password</label>
+          <label>Repeat Password</label>
           <input
             type="password"
             name="repeatPassword"
-            value={formData.repeatPasswordassword}
+            value={formData.repeatPassword}
             onChange={handleChange}
             placeholder="Repeat your password"
           />
@@ -162,11 +162,14 @@ export const SignUp = () => {
         <div className="input-group">
           <label>Date of Birth</label>
           <input
+            id="dob"
             type="date"
-            name="dob"
+            name="dateOfBirth"
             value={formData.dateOfBirth}
             onChange={handleChange}
-            placeholder="Enter your birth date"
+            onFocus={(e) => e.target.showPicker && e.target.showPicker()}
+            max={new Date().toISOString().split("T")[0]}
+            required
           />
           {errors.dateOfBirth && (
             <small className="error">{errors.dateOfBirth}</small>
@@ -191,6 +194,8 @@ export const SignUp = () => {
             <option value="France">France</option>
             <option value="Japan">Japan</option>
             <option value="Brazil">Brazil</option>
+            <option value="Mexico">Poland</option>
+            <option value="Mexico">Norway</option>
           </select>
           {errors.country && <small className="error">{errors.country}</small>}
         </div>

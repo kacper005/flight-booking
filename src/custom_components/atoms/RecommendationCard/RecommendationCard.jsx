@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import "./RecommendationCard.css";
 
 export default function RecommendationCard({
@@ -14,9 +13,3 @@ export default function RecommendationCard({
     </div>
   );
 }
-
-RecommendationCard.propTypes = {
-  imageSrcSet: PropTypes.string,
-  title: PropTypes.string,
-  info: PropTypes.string,
-};

@@ -6,28 +6,74 @@ import { Button } from "../atoms/Button";
 import { CircleCheckBig } from "lucide-react";
 import { RouteLink } from "../atoms/RouteLink";
 
-export const Login = () => {
+export const SignIn = () => {
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = React.useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const validate = () => {
+    let newErrors = {};
+    if (!formData.email.includes("@")) newErrors.email = "Valid email required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      alert("Login Successful!");
+      setFormData({
+        email: "",
+        password: "",
+      });
+    }
+  };
+
   return (
     <PageTemplate>
       <div
         style={{
+          width: "100%",
           display: "flex",
           flexDirection: "row",
+          alignItems: "flex-start",
           justifyContent: "center",
           flexWrap: "wrap",
           gap: "20px",
         }}
       >
-        <Card
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          maxWidth={"300px"}
+        <div
+          style={{
+            backgroundColor: "var(--secondaryColor)",
+            borderRadius: "8px",
+            width: "100%",
+            maxWidth: "500px",
+            padding: "20px",
+          }}
         >
-          <h1 style={{ color: "var(--textColor)" }}>Sign In</h1>
-          <Input type={"email"} placeholder={"Username"} />
-          <Input type={"password"} placeholder={"Password"} />
-          <Button width={"100%"}>Sign In</Button>
+          <h1 style={{ color: "var(--textColor)", marginBottom: "10px" }}>
+            Sign In
+          </h1>
+          <form onSubmit={handleSubmit}>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+            >
+              <Input type={"email"} placeholder={"Email"} />
+              <Input type={"password"} placeholder={"Password"} />
+              <Button width={"100%"} margin={"0px 0px 10px 0px"} type="submit">
+                Sign In
+              </Button>
+            </div>
+          </form>
           <div>
             <p>
               <a href="#" style={{ color: "var(--colorText)" }}>
@@ -35,7 +81,7 @@ export const Login = () => {
               </a>
             </p>
           </div>
-        </Card>
+        </div>
         <Card
           display="flex"
           flexDirection="column"

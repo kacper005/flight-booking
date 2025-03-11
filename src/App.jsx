@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Login } from "./custom_components/pages/Login";
+import { SignIn } from "./custom_components/pages/SignIn";
 import { Home } from "./custom_components/pages/Home";
 import { AboutUs } from "./custom_components/pages/AboutUs";
 import { Header } from "./custom_components/organisms/Header/Header";
@@ -20,7 +20,7 @@ export const App = () => {
         <ContentWrapper>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/sign-in" element={<Login />} />
+            <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about-us" element={<AboutUs />} />

@@ -1,31 +1,42 @@
 import React from "react";
 
 export const Button = ({
-  className,
   children,
-  bgColor = "#3D52A0",
+  className,
   width,
   height,
+  maxWidth,
+  maxHeight,
+  bgColor = "var(--mainColor)",
+  color = "var(--textColor)",
+  textAlign,
+  padding = "10px 20px",
+  margin,
+  border = "none",
+  borderRadius = "5px",
+  cursor = "pointer",
+  fontSize = "1.8rem",
   onClick,
   icon: Icon,
 }) => {
   return (
     <button
+      className={className}
       style={{
-        backgroundColor: bgColor,
-        color: "white",
-        padding: "10px 20px",
-        border: "none",
-        borderRadius: "5px",
-        cursor: "pointer",
         width: width,
         height: height,
-        fontSize: "16px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        maxWidth: maxWidth,
+        maxHeight: maxHeight,
+        backgroundColor: bgColor,
+        color: color,
+        textAlign: textAlign,
+        padding: padding,
+        margin: margin,
+        border: border,
+        borderRadius: borderRadius,
+        cursor: cursor,
+        fontSize: fontSize,
       }}
-      className={className}
       onClick={onClick}
     >
       {Icon && (

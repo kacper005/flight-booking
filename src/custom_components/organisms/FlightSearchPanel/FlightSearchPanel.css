@@ -19,3 +19,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: none;
   -webkit-appearance: none;
 }
+
+.booking-options-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+@media screen and (max-width: 1075px) {
+  .booking-options-container {
+    flex-wrap: wrap;
+    gap: 0px;
+  }
+}

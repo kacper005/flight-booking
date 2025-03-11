@@ -5,13 +5,10 @@
 
 .input-container input {
   width: 100%;
-  padding: 10px 10px 10px;
   padding-left: 45px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  outline: none;
-  font-size: 16px;
-  text-decoration: none;
+  outline-color: var(--mainColor);
 }
 
 .input-container .icon {

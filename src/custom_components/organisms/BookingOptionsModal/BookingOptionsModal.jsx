@@ -1,8 +1,6 @@
 import React from "react";
 import "./BookingOptionsModal.css";
 import { Button } from "@/custom_components/atoms/Button";
-import { Plus } from "lucide-react";
-import { Minus } from "lucide-react";
 
 export default function BookingOptionsModal() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -35,7 +33,16 @@ export default function BookingOptionsModal() {
 
   return (
     <div className="booking-container" ref={dropdownRef}>
-      <Button onClick={() => setIsOpen(!isOpen)}>
+      <Button
+        height={"60px"}
+        width={"100%"}
+        bgColor={"var(--white)"}
+        color={"var(--black)"}
+        borderRadius={"8px"}
+        textAlign={"left"}
+        border={"1px solid #cccccc"}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         {totalTravelers} {travelerText}, {cabinClass}
       </Button>
 
@@ -72,9 +79,7 @@ function BookingDialog({
   return (
     <div className="booking-dialog">
       <h2>Travellers</h2>
-      {totalTravelers >= 10 && (
-        <Typography as="h4">This is a group booking</Typography>
-      )}
+      {totalTravelers >= 10 && <h4>This is a group booking</h4>}
       {[
         { label: "Adults", type: "adult" },
         { label: "Children (2-11 years)", type: "child" },
