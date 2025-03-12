@@ -1,6 +1,6 @@
 import React from "react";
-import {PageTemplate} from "../templates/PageTemplate/PageTempate";
-import {Card} from "../atoms/Card/Card";
+import { PageTemplate } from "../templates/PageTemplate/PageTempate";
+import { Card } from "../atoms/Card/Card";
 
 export const AboutUs = () => {
     return (
@@ -8,10 +8,7 @@ export const AboutUs = () => {
             <div
                 style={{
                     display: "flex",
-                    flexDirection: "row",
                     justifyContent: "center",
-                    flexWrap: "wrap",
-                    gap: "20px",
                 }}
             >
                 <Card
@@ -19,9 +16,8 @@ export const AboutUs = () => {
                     display="flex"
                     flexDirection="column"
                     alignItems="center"
-                    maxWidth="800px"
+                    maxWidth="900px"
                     style={{
-                        //backgroundColor: "#EDE8F5",
                         color: "#141619",
                         padding: "30px",
                         borderRadius: "10px",
@@ -29,56 +25,79 @@ export const AboutUs = () => {
                     }}
                 >
                     <h1 style={{textAlign: "center"}}>About us and our services</h1>
-                    <p style={{textAlign: "justify", maxWidth: "700px"}}>
+                    <p style={{textAlign: "justify", maxWidth: "800px"}}>
                         Welcome to Flight Finder, where your journey into the skies begins with the
-                        perfect flight option
-                        tailored to your needs. At Flight Finder, we’ve taken to the skies,
-                        transforming the flight booking
-                        experience by aggregating real-time prices and schedules from a plethora of
-                        trusted airline partners.
+                        perfect flight option tailored to your needs. At Flight Finder, we’ve taken
+                        to the skies, transforming the flight booking experience by aggregating
+                        real-time prices and schedules from a plethora of trusted airline partners.
                         No more endless tab-switching to hunt down the best deal—our platform brings
-                        all the information to you
-                        in a single, streamlined experience.
+                        all the information to you in a single, streamlined experience.
                     </p>
 
-                    <p style={{textAlign: "justify", maxWidth: "700px"}}>
+                    <p style={{textAlign: "justify", maxWidth: "800px"}}>
                         Our commitment goes beyond simply offering a vast array of flight options;
-                        we are dedicated to ensuring
-                        transparency, efficiency, and an exhilarating booking experience. Our
-                        user-friendly interface allows you
-                        to effortlessly compare flights, ensuring you find the perfect match for
-                        your travel preferences and budget.
-                        Farewell to the hidden fees and complex booking procedures—welcome to a
-                        smooth flight booking journey.
+                        we are dedicated to ensuring transparency, efficiency, and an exhilarating
+                        booking experience. Our user-friendly interface allows you to effortlessly
+                        compare flights, ensuring you find the perfect match for your travel
+                        preferences and budget. Farewell to the hidden fees and complex booking
+                        procedures—welcome to a smooth flight booking journey.
                     </p>
 
-                    <p style={{textAlign: "justify", maxWidth: "700px"}}>
+                    <p style={{textAlign: "justify", maxWidth: "800px"}}>
                         Flight Finder is not just about finding flights; it’s about commencing your
-                        travel adventure on the
-                        right note. Our platform is crafted to infuse a sense of excitement into the
-                        planning process. From
-                        last-minute getaways to well-planned business trips, we ensure you have all
-                        the choices at your fingertips.
-                        Our services are designed to bring you closer to the world, one flight at a
-                        time.
+                        travel adventure on the right note. Our platform is crafted to infuse a
+                        sense of excitement into the planning process. From last-minute getaways to
+                        well-planned business trips, we ensure you have all the choices at your
+                        fingertips. Our services are designed to bring you closer to the world, one
+                        flight at a time.
                     </p>
 
-                    <p style={{textAlign: "justify", maxWidth: "700px"}}>
+                    <p style={{textAlign: "justify", maxWidth: "800px"}}>
                         Join Flight Finder and elevate your travel planning to new heights. Whether
-                        you’re chasing the Northern
-                        Lights, jetting off to a tropical paradise, or heading to a bustling city
-                        for a conference, every flight
-                        booked with us is a promise of discovery and reliability. With Flight
-                        Finder, set off on every journey
-                        with confidence and let your travel aspirations take flight.
+                        you’re chasing the Northern Lights, jetting off to a tropical paradise, or
+                        heading to a bustling city for a conference, every flight booked with us is
+                        a promise of discovery and reliability. With Flight Finder, set off on every
+                        journey with confidence and let your travel aspirations take flight.
                     </p>
 
-                    <br/>
-                    <p style={{textAlign: "justify", maxWidth: "700px"}}>
-                        © 2025 Flight Finder. All information provided here is for
-                        educational purposes.
-                    </p>
+                    {/* Contact & Reminder Section */}
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            flexWrap: "wrap",
+                            width: "100%",
+                            marginTop: "30px",
+                        }}
+                    >
+                        {/* Contact Section */}
+                        <div style={{flex: "1", minWidth: "300px", paddingRight: "20px"}}>
+                            <h2>Contact</h2>
+                            <p style={{marginBottom: "5px"}}>Flight Finder ASA</p>
+                            <p style={{marginBottom: "5px"}}>Larsgårdsvegen 2</p>
+                            <p style={{marginBottom: "5px"}}>6009 Ålesund, Norway</p>
+                            <p style={{marginBottom: "15px"}}>Email: support@flightfinder.com</p>
+                            <p style={{fontWeight: "bold"}}>Company Information</p>
+                            <p>Norway, Org. 987654321</p>
+                        </div>
+
+                        {/* Reminder Section */}
+                        <div style={{flex: "1", minWidth: "300px"}}>
+                            <h2>Reminder</h2>
+                            <p>
+                                We are not a travel agency and do not sell tickets. If you have any
+                                questions regarding a reservation, please contact the travel
+                                provider
+                                or airline directly.
+                            </p>
+                        </div>
+                    </div>
+                    <div style={{marginTop: "20px", textAlign: "center", color: "#141619"}}>
+                        <p>© 2025 Flight Finder. All information provided here is for educational
+                            purposes.</p>
+                    </div>
                 </Card>
             </div>
-        </PageTemplate>);
+        </PageTemplate>
+    );
 };
