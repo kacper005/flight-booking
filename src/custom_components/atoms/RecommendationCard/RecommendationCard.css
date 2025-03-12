@@ -27,5 +27,6 @@
 
 .recommendationCard:hover {
     margin-top: 5px;
+    margin-bottom: 15px;
     box-shadow: darkgray 10px 10px 20px;
 }
