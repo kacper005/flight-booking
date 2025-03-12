@@ -10,11 +10,13 @@ import { ImportantInformation } from "./custom_components/pages/ImportantInforma
 import { FAQ } from "./custom_components/pages/FAQ";
 import { SignUp } from "./custom_components/pages/SignUp/SignUp";
 import { Sustainability } from "./custom_components/pages/Sustainability";
-import {TermsAndConditions} from "./custom_components/pages/TermsAndConditions";
+import { TermsAndConditions } from "./custom_components/pages/TermsAndConditions";
+import ScrollToTop from "./custom_components/molecules/ScrollToTop";
 
 export const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <Header />
         <ContentWrapper>
@@ -30,7 +32,10 @@ export const App = () => {
             />
             <Route path="/sustainability" element={<Sustainability />} />
             <Route path="/faq" element={<FAQ />} />
-            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+            <Route
+              path="/terms-and-conditions"
+              element={<TermsAndConditions />}
+            />
           </Routes>
         </ContentWrapper>
         <Footer />
