@@ -60,38 +60,7 @@ export const AboutUs = () => {
                         journey with confidence and let your travel aspirations take flight.
                     </p>
 
-                    {/* Contact & Reminder Section */}
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            flexWrap: "wrap",
-                            width: "100%",
-                            marginTop: "30px",
-                        }}
-                    >
-                        {/* Contact Section */}
-                        <div style={{flex: "1", minWidth: "300px", paddingRight: "20px"}}>
-                            <h2>Contact</h2>
-                            <p style={{marginBottom: "5px"}}>Flight Finder ASA</p>
-                            <p style={{marginBottom: "5px"}}>Larsgårdsvegen 2</p>
-                            <p style={{marginBottom: "5px"}}>6009 Ålesund, Norway</p>
-                            <p style={{marginBottom: "15px"}}>Email: support@flightfinder.com</p>
-                            <p style={{fontWeight: "bold"}}>Company Information</p>
-                            <p>Norway, Org. 987654321</p>
-                        </div>
-
-                        {/* Reminder Section */}
-                        <div style={{flex: "1", minWidth: "300px"}}>
-                            <h2>Reminder</h2>
-                            <p>
-                                We are not a travel agency and do not sell tickets. If you have any
-                                questions regarding a reservation, please contact the travel
-                                provider
-                                or airline directly.
-                            </p>
-                        </div>
-                    </div>
+                    {/* Footer Text Inside the Card */}
                     <div style={{marginTop: "20px", textAlign: "center", color: "#141619"}}>
                         <p>© 2025 Flight Finder. All information provided here is for educational
                             purposes.</p>

@@ -12,6 +12,8 @@ import { SignUp } from "./custom_components/pages/SignUp/SignUp";
 import { Sustainability } from "./custom_components/pages/Sustainability";
 import { TermsAndConditions } from "./custom_components/pages/TermsAndConditions";
 import ScrollToTop from "./custom_components/molecules/ScrollToTop";
+import {ContactUsPage} from "@/custom_components/pages/ContactUs.jsx";
+
 
 export const App = () => {
   return (
@@ -31,6 +33,7 @@ export const App = () => {
               element={<ImportantInformation />}
             />
             <Route path="/sustainability" element={<Sustainability />} />
+            <Route path="/contactus" element={<ContactUsPage />} />
             <Route path="/faq" element={<FAQ />} />
             <Route
               path="/terms-and-conditions"

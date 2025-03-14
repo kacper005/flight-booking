@@ -52,7 +52,7 @@ export const Footer = () => {
         >
           <p style={{ fontWeight: "bold", marginBottom: "0px" }}>Support</p>
           <span style={{ marginTop: "10px" }} />
-          <RouteLink to="/#" margin={0} textDecoration="underline">
+          <RouteLink to="/contactus" margin={0} textDecoration="underline">
             Contact us
           </RouteLink>
           <RouteLink to="/faq" margin={0} textDecoration="underline">
