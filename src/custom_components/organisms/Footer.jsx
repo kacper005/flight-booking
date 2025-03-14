@@ -58,7 +58,7 @@ export const Footer = () => {
           <RouteLink to="/faq" margin={0} textDecoration="underline">
             FAQ
           </RouteLink>
-          <RouteLink to="/#" margin={0} textDecoration="underline">
+          <RouteLink to="/airline-information" margin={0} textDecoration="underline">
             Airline information
           </RouteLink>
           <RouteLink
