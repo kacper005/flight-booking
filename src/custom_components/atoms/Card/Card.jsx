@@ -7,7 +7,7 @@ export const Card = ({
   height = "auto",
   maxWidth,
   maxHeight,
-  color = "var(--secondaryColor)",
+  color = "var(--mainColor)",
   display = "flex",
   padding = "20px",
   borderRadius = "10px",

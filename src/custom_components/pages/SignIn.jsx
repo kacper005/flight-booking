@@ -53,7 +53,7 @@ export const SignIn = () => {
       >
         <div
           style={{
-            backgroundColor: "var(--secondaryColor)",
+            backgroundColor: "var(--mainColor)",
             borderRadius: "8px",
             width: "100%",
             maxWidth: "500px",
@@ -76,7 +76,7 @@ export const SignIn = () => {
           </form>
           <div>
             <p>
-              <a href="#" style={{ color: "var(--colorText)" }}>
+              <a href="#" style={{ color: "var(--textColor)" }}>
                 Forgot your password?
               </a>
             </p>
@@ -96,17 +96,23 @@ export const SignIn = () => {
               Get more benefits when you create a Flight Finder profile, and
               join our free loyality programme, Flight Finder Reward.
             </p>
-            <p style={{ color: "var(--textColor)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <CircleCheckBig color="var(--textColor)" />
-              Earn points and save on future flights
-            </p>
-            <p style={{ color: "var(--textColor)" }}>
-              <CircleCheckBig color="var(--textColor)" /> Make booking faster
-            </p>
-            <p style={{ color: "var(--textColor)" }}>
+              <p style={{ color: "var(--textColor)" }}>
+                Earn points and save on future flights
+              </p>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <CircleCheckBig color="var(--textColor)" />
-              Receive special deals and discounts
-            </p>
+              <p style={{ color: "var(--textColor)" }}>Make booking faster</p>
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <CircleCheckBig color="var(--textColor)" />
+              <p style={{ color: "var(--textColor)" }}>
+                Receive special deals and discounts
+              </p>
+            </div>
           </div>
           <div>
             <RouteLink to="/sign-up">

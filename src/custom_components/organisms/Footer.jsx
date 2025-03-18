@@ -58,7 +58,11 @@ export const Footer = () => {
           <RouteLink to="/faq" margin={0} textDecoration="underline">
             FAQ
           </RouteLink>
-          <RouteLink to="/airline-information" margin={0} textDecoration="underline">
+          <RouteLink
+            to="/airline-information"
+            margin={0}
+            textDecoration="underline"
+          >
             Airline information
           </RouteLink>
           <RouteLink
@@ -135,9 +139,14 @@ export const Footer = () => {
           padding: "20px",
           display: "flex",
           justifyContent: "center",
-          gap: "5px",
+          gap: "8px",
         }}
       >
+        <img
+          src="../src/assets/logos/klarna.svg"
+          alt="Visa logo"
+          width="100px"
+        />
         <img
           src="../src/assets/logos/visa-white-mark.svg"
           alt="Visa logo"

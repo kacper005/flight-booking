@@ -12,10 +12,8 @@ import { SignUp } from "./custom_components/pages/SignUp/SignUp";
 import { Sustainability } from "./custom_components/pages/Sustainability";
 import { TermsAndConditions } from "./custom_components/pages/TermsAndConditions";
 import ScrollToTop from "./custom_components/molecules/ScrollToTop";
-import {ContactUsPage} from "./custom_components/pages/ContactUs";
-import {AirlineInformation} from "./custom_components/pages/AirlineInformation";
-
-
+import { ContactUsPage } from "./custom_components/pages/ContactUs";
+import { AirlineInformation } from "./custom_components/pages/AirlineInformation";
 
 export const App = () => {
   return (
@@ -23,27 +21,25 @@ export const App = () => {
       <ScrollToTop />
       <div className="App">
         <Header />
-        <ContentWrapper>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route
-              path="/important-information"
-              element={<ImportantInformation />}
-            />
-            <Route path="/sustainability" element={<Sustainability />} />
-            <Route path="/contactus" element={<ContactUsPage />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/airline-information" element={<AirlineInformation />} />
-            <Route
-              path="/terms-and-conditions"
-              element={<TermsAndConditions />}
-            />
-          </Routes>
-        </ContentWrapper>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route
+            path="/important-information"
+            element={<ImportantInformation />}
+          />
+          <Route path="/sustainability" element={<Sustainability />} />
+          <Route path="/contactus" element={<ContactUsPage />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/airline-information" element={<AirlineInformation />} />
+          <Route
+            path="/terms-and-conditions"
+            element={<TermsAndConditions />}
+          />
+        </Routes>
         <Footer />
       </div>
     </Router>

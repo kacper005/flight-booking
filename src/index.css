@@ -13,6 +13,8 @@ html {
 html,
 body {
   height: 100%;
+  min-height: 100vh;
+  background-color: var(--textColor);
   font-family: "Montserrat", sans-serif;
   scroll-behavior: smooth;
 }
@@ -30,18 +32,11 @@ body {
   --white: #ffffff;
 }
 
-body {
-  min-height: 100vh;
-  background-image: url("../src/assets/plane_bg.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
 .App {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  margin: 0;
 }
 
 h1 {

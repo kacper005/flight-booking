@@ -5,7 +5,7 @@ export const Box = ({
   width,
   height,
   maxWidth,
-  backgroundColor = "var(--secondaryColor)",
+  backgroundColor,
   padding = "20px",
   borderRadius = "10px",
   margin = "25px 0px 25px 0px",

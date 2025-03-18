@@ -2,12 +2,13 @@ import React from "react";
 
 export const Button = ({
   children,
-  className,
+  className = "custom-btn",
   width,
   height,
   maxWidth,
   maxHeight,
-  bgColor = "var(--mainColor)",
+  bgColor = "var(--mainColorLight)",
+  hoverBgColor = "var(--secondaryColor)",
   color = "var(--textColor)",
   textAlign,
   padding = "10px 20px",
@@ -19,15 +20,17 @@ export const Button = ({
   onClick,
   icon: Icon,
 }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+
   return (
     <button
-      className={className}
+      className
       style={{
         width: width,
         height: height,
         maxWidth: maxWidth,
         maxHeight: maxHeight,
-        backgroundColor: bgColor,
+        backgroundColor: isHovered ? hoverBgColor : bgColor,
         color: color,
         textAlign: textAlign,
         padding: padding,
@@ -38,6 +41,8 @@ export const Button = ({
         fontSize: fontSize,
       }}
       onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {Icon && (
         <span

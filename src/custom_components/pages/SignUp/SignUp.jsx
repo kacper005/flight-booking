@@ -1,6 +1,7 @@
 import React from "react";
 import "./SignUp.css";
 import { RouteLink } from "@/custom_components/atoms/RouteLink";
+import { Button } from "@/custom_components/atoms/Button";
 
 export const SignUp = () => {
   const [formData, setFormData] = React.useState({
@@ -72,6 +73,8 @@ export const SignUp = () => {
       });
     }
   };
+
+  console.log(formData);
 
   return (
     <div className="signup-container">
@@ -194,8 +197,8 @@ export const SignUp = () => {
             <option value="France">France</option>
             <option value="Japan">Japan</option>
             <option value="Brazil">Brazil</option>
-            <option value="Mexico">Poland</option>
-            <option value="Mexico">Norway</option>
+            <option value="Poland">Poland</option>
+            <option value="Norway">Norway</option>
           </select>
           {errors.country && <small className="error">{errors.country}</small>}
         </div>
@@ -227,9 +230,9 @@ export const SignUp = () => {
           {errors.gender && <small className="error">{errors.gender}</small>}
         </div>
 
-        <button type="submit" className="signup-btn">
+        <Button width={"100%"} type="submit" className="signup-btn">
           Sign Up
-        </button>
+        </Button>
       </form>
       <div className="login-link">
         <RouteLink to="/sign-in" margin="none" float="none">
