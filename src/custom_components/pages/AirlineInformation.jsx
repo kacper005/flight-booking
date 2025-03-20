@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { PageTemplate } from "../templates/PageTemplate/PageTempate";
 import { Card } from "../atoms/Card/Card";
 
@@ -79,6 +79,30 @@ export const AirlineInformation = () => {
     },
   ];
 
+  // State to track selected image and open/close state
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Function to open the modal
+    const openImageModal = (index) => {
+        setSelectedImage(index);
+    };
+
+    // Function to close the modal
+    const closeImageModal = () => {
+        setSelectedImage(null);
+    };
+
+    // Close modal on "Esc" key press
+    React.useEffect(() => {
+        const handleKeyPress = (event) => {
+            if (event.key === "Escape") {
+                closeImageModal();
+            }
+        };
+        window.addEventListener("keydown", handleKeyPress);
+        return () => window.removeEventListener("keydown", handleKeyPress);
+    }, []);
+
   return (
     <PageTemplate>
       <div
@@ -137,7 +161,7 @@ export const AirlineInformation = () => {
                 </p>
               </div>
 
-              {/* Placeholder for Image (To Be Replaced with Image Slider) */}
+                {/* Image Section with clickable functionality */}
               <div
                 style={{
                   flex: "1",
@@ -149,9 +173,10 @@ export const AirlineInformation = () => {
                   borderRadius: "8px",
                   overflow: "hidden",
                   boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+                  cursor: "pointer",
                 }}
+                onClick={() => openImageModal(airline.image)}
               >
-                {airline.image ? (
                   <img
                     src={airline.image}
                     alt={airline.name}
@@ -162,25 +187,50 @@ export const AirlineInformation = () => {
                       borderRadius: "8px",
                     }}
                   />
-                ) : (
-                  <div
+                </div>
+            </div>
+            ))}
+
+          {/* Image Modal */}
+          {selectedImage && (
+              <div
+                style={{
+                  position: "fixed",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "rgba(0, 0, 0, 0.8)", // Dark overlay
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  zIndex: 1000,
+                }}
+                onClick={closeImageModal} // Close modal on click
+              >
+                <div
+                    style={{
+                        position: "relative",
+                        width: "80%",
+                        height: "80%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                  <img
+                    src={selectedImage}
+                    alt="Enlarged airline image"
                     style={{
                       width: "100%",
                       height: "100%",
-                      backgroundColor: "#ddd",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "14px",
-                      color: "#555",
+                      objectFit: "contain",
+                      borderRadius: "8px",
                     }}
-                  >
-                    No Image Available
-                  </div>
-                )}
+                    />
+                </div>
               </div>
-            </div>
-          ))}
+          )}
 
           {/* Footer */}
           <div
