@@ -25,7 +25,7 @@ export const AboutUs = () => {
           }}
         >
           <h1 style={{ textAlign: "center" }}>About us and our services</h1>
-          <p style={{ textAlign: "justify", maxWidth: "800px" }}>
+          <p style={{ textAlign: "justify", maxWidth: "800px", }}>
             Welcome to Flight Finder, where your journey into the skies begins
             with the perfect flight option tailored to your needs. At Flight
             Finder, we’ve taken to the skies, transforming the flight booking

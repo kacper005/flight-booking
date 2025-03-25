@@ -197,8 +197,9 @@ export const AirlineInformation = () => {
           <h1
             style={{
               textAlign: "center",
-              marginBottom: "20px",
-              fontSize: "28px",
+              marginBottom: "30px",
+              fontSize: "32px",
+              fontWeight: "700",
             }}
           >
             Airline Information
@@ -213,8 +214,10 @@ export const AirlineInformation = () => {
                 justifyContent: "space-between",
                 alignItems: "center",
                 width: "100%",
-                marginBottom: "30px",
+                marginBottom: "40px",
+                padding: "24px",
                 paddingBottom: "15px",
+                borderRadius: "12px",
                 borderBottom: "1px solid #ccc",
               }}
             >
@@ -222,10 +225,10 @@ export const AirlineInformation = () => {
               <div
                 style={{ flex: "1", minWidth: "300px", paddingRight: "20px" }}
               >
-                <h2 style={{ fontSize: "22px", marginBottom: "10px" }}>
+                <h2 style={{ fontSize: "24px", marginBottom: "10px" }}>
                   {airline.name}
                 </h2>
-                <p style={{ lineHeight: "1.5", textAlign: "justify" }}>
+                <p style={{ lineHeight: "1.6", fontSize: "16px", textAlign: "justify" }}>
                   {airline.description}
                 </p>
               </div>
@@ -239,10 +242,11 @@ export const AirlineInformation = () => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  borderRadius: "8px",
+                  borderRadius: "12px",
                   overflow: "hidden",
                   boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
                   cursor: "pointer",
+                  transition: "transform 0.3s ease",
                 }}
                 onClick={() => openImageModal(airlineIndex, 0)} // Open modal on first image
               >
@@ -253,7 +257,8 @@ export const AirlineInformation = () => {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    borderRadius: "8px",
+                    borderRadius: "12px",
+                    transition: "transform 0.3s ease",
                   }}
                 />
               </div>
@@ -298,8 +303,7 @@ export const AirlineInformation = () => {
                     left: 0,
                     top: 0,
                     height: "100%",
-                    width: "15%", // Clickable area width
-                    //backgroundColor: "rgba(0, 0, 0, 0.2)",
+                    width: "5%", // Clickable area width
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -328,8 +332,7 @@ export const AirlineInformation = () => {
                     right: 0,
                     top: 0,
                     height: "100%",
-                    width: "15%", // Clickable area width
-                    //backgroundColor: "rgba(0, 0, 0, 0.2)",
+                    width: "5%", // Clickable area width
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
