@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteLink } from "../atoms/RouteLink";
+import { RouteLink } from "@atoms/RouteLink";
 
 export const Footer = () => {
   return (
@@ -41,7 +41,7 @@ export const Footer = () => {
             rel="noopener noreferrer"
           >
             <img
-              src="../src/assets/logos/github-mark-white.svg"
+              src="@assets/logos/github-mark-white.svg"
               alt="Github logo"
               width="50px"
             />
@@ -142,28 +142,24 @@ export const Footer = () => {
           gap: "8px",
         }}
       >
+        <img src="@assets/logos/klarna.svg" alt="Visa logo" width="100px" />
         <img
-          src="../src/assets/logos/klarna.svg"
+          src="@assets/logos/visa-white-mark.svg"
           alt="Visa logo"
           width="100px"
         />
         <img
-          src="../src/assets/logos/visa-white-mark.svg"
-          alt="Visa logo"
-          width="100px"
-        />
-        <img
-          src="../src/assets/logos/mastercard-mark.svg"
+          src="@assets/logos/mastercard-mark.svg"
           alt="Mastercard logo"
           width="75px"
         />
         <img
-          src="../src/assets/logos/applepay-mark.svg"
+          src="@assets/logos/applepay-mark.svg"
           alt="Apple Pay logo"
           width="55px"
         />
         <img
-          src="../src/assets/logos/googlepay-mark.svg"
+          src="@assets/logos/googlepay-mark.svg"
           alt="Google Pay logo"
           width="68px"
         />

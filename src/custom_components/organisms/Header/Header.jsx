@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteLink } from "../../atoms/RouteLink";
+import { RouteLink } from "@atoms/RouteLink";
 import { Logo } from "@/custom_components/atoms/Logo/Logo";
 import { Menu } from "lucide-react";
 import { X } from "lucide-react";

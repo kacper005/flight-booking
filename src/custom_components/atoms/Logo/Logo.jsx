@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "../../../assets/logo.svg";
-import small_logo from "../../../assets/small_logo.svg";
+import logo from "@assets/logo.svg";
+import small_logo from "@assets/small_logo.svg";
 import { RouteLink } from "../RouteLink";
 import "./Logo.css";
 

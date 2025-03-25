@@ -8,6 +8,7 @@ export const Box = ({
   backgroundColor,
   padding = "20px",
   borderRadius = "10px",
+  borderColor,
   margin = "25px 0px 25px 0px",
 }) => {
   return (
@@ -19,6 +20,7 @@ export const Box = ({
         backgroundColor: backgroundColor,
         padding: padding,
         borderRadius: borderRadius,
+        borderColor: borderColor,
         margin: margin,
       }}
     >

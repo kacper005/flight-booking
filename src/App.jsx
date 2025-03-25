@@ -1,19 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { SignIn } from "./custom_components/pages/SignIn";
-import { Home } from "./custom_components/pages/Home";
-import { AboutUs } from "./custom_components/pages/AboutUs";
-import { Header } from "./custom_components/organisms/Header/Header";
-import { ContentWrapper } from "./custom_components/layout/ContentWrapper";
-import { Footer } from "./custom_components/organisms/Footer.jsx";
+import { FAQ } from "@pages/FAQ";
+import { Home } from "@pages/Home";
+import { SignIn } from "@pages/SignIn";
+import { AboutUs } from "@pages/AboutUs";
+import { SignUp } from "@pages/SignUp/SignUp";
+import { ContactUsPage } from "@pages/ContactUs";
+import { SearchResults } from "@pages/SearchResults";
+import { Sustainability } from "@pages/Sustainability";
+import { AirlineInformation } from "@pages/AirlineInformation";
+import { TermsAndConditions } from "@pages/TermsAndConditions";
+import { ImportantInformation } from "@pages/ImportantInformation";
 
-import { ImportantInformation } from "./custom_components/pages/ImportantInformation";
-import { FAQ } from "./custom_components/pages/FAQ";
-import { SignUp } from "./custom_components/pages/SignUp/SignUp";
-import { Sustainability } from "./custom_components/pages/Sustainability";
-import { TermsAndConditions } from "./custom_components/pages/TermsAndConditions";
-import ScrollToTop from "./custom_components/molecules/ScrollToTop";
-import { ContactUsPage } from "./custom_components/pages/ContactUs";
-import { AirlineInformation } from "./custom_components/pages/AirlineInformation";
+import { Header } from "@organisms/Header/Header";
+import { Footer } from "@organisms/Footer.jsx";
+import ScrollToTop from "@molecules/ScrollToTop";
 
 export const App = () => {
   return (
@@ -39,6 +39,7 @@ export const App = () => {
             path="/terms-and-conditions"
             element={<TermsAndConditions />}
           />
+          <Route path="/search-results" element={<SearchResults />} />
         </Routes>
         <Footer />
       </div>

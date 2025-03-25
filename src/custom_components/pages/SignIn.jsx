@@ -1,10 +1,10 @@
 import React from "react";
-import { Input } from "../atoms/Input/Input";
-import { PageTemplate } from "../templates/PageTemplate/PageTempate";
-import { Card } from "../atoms/Card/Card";
-import { Button } from "../atoms/Button";
+import { Input } from "@atoms/Input/Input";
+import { PageTemplate } from "@templates/PageTemplate/PageTempate";
+import { Card } from "@atoms/Card/Card";
+import { Button } from "@atoms/Button";
 import { CircleCheckBig } from "lucide-react";
-import { RouteLink } from "../atoms/RouteLink";
+import { RouteLink } from "@atoms/RouteLink";
 
 export const SignIn = () => {
   const [formData, setFormData] = React.useState({
