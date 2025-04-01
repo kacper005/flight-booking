@@ -28,3 +28,10 @@
     bottom: 32px;
     padding: 0 25px;
 }
+
+.stars {
+    display: flex;
+    gap: 2px;
+    padding-left: 25px; /* Align with text */
+    margin-bottom: 8px;
+}

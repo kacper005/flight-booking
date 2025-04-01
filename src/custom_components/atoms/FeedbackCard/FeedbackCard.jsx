@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import "./FeedbackCard.css";
+import { Star } from "lucide-react";
 
 export default function FeedbackCard({
   name = "User",
@@ -10,7 +11,19 @@ export default function FeedbackCard({
   return (
     <div className="feedbackCard">
       <h2>{name}</h2>
-      <p>Rating: {rating}</p>
+
+      <div className={"stars"}>
+        {[...Array(rating)].map((_, index) => (
+          <Star
+            key={index}
+            size={25}
+            fill={"#ffd250"}
+            stroke={"#141619"}
+            strokeWidth={1}
+          />
+        ))}
+      </div>
+
       <p>{feedback}</p>
       <p id={"date"}>{date}</p>
     </div>
