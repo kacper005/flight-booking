@@ -35,3 +35,10 @@
     padding-left: 25px; /* Align with text */
     margin-bottom: 8px;
 }
+
+@media screen and (max-width: 520px) {
+    .feedbackCard {
+        height: 350px;
+        width: 270px;
+    }
+}

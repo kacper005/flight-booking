@@ -4,12 +4,23 @@ import FeedbackCard from "@/custom_components/atoms/FeedbackCard/FeedbackCard.js
 import { ChevronLeft } from "lucide-react";
 import { ChevronRight } from "lucide-react";
 
-const ITEM_WIDTH = 430; // Width of each feedback card
-
 export const Feedback = () => {
   const [scrollPosition, setScrollPosition] = React.useState(0);
-
+  const [itemWidth, setItemWidth] = React.useState(getItemWidth());
   const containerRef = React.useRef();
+
+  // Function to determine ITEM_WIDTH dynamically
+  function getItemWidth() {
+    return window.innerWidth <= 520 ? 295 : 425;
+  }
+
+  // Update itemWidth when the window is resized
+  React.useEffect(() => {
+    const handleResize = () => setItemWidth(getItemWidth());
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Function to handle scrolling when the button is clicked
   const handleScroll = (scrollAmount) => {
@@ -73,7 +84,7 @@ export const Feedback = () => {
         <button
           className={"leftButton"}
           onClick={() => {
-            handleScroll(-ITEM_WIDTH);
+            handleScroll(-itemWidth);
           }}
         >
           <ChevronLeft size={"50"} />
@@ -81,7 +92,7 @@ export const Feedback = () => {
         <button
           className={"rightButton"}
           onClick={() => {
-            handleScroll(ITEM_WIDTH);
+            handleScroll(itemWidth);
           }}
         >
           <ChevronRight size={"50"} />

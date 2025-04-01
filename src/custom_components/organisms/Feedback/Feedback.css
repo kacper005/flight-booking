@@ -41,7 +41,6 @@
 .container button {
     position: absolute;
     top: 8px;
-    font-size: 1.6rem;
     font-weight: normal;
     color: var(--textColorDark);
     background-color: #ADBBDA;
@@ -56,4 +55,22 @@
 
 .rightButton {
     right: 0;
+}
+
+@media screen and (max-width: 630px) {
+    .container button {
+        padding: 119px 0;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .container button {
+        padding: 154px 0;
+    }
+    .feedback {
+        justify-content: center;
+    }
+    .feedbackCardContainer {
+        padding: 0 14% 20px;
+    }
 }
