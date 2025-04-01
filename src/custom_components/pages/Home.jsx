@@ -3,6 +3,7 @@ import { FlightSearchPanel } from "@organisms/FlightSearchPanel/FlightSearchPane
 import { Recommendations } from "@organisms/Recommendations/Recommendations.jsx";
 import { PageTemplate } from "@/custom_components/templates/PageTemplate/PageTempate.jsx";
 import planeBg from "@assets/plane_bg.svg";
+import { Feedback } from "../organisms/Feedback/Feedback.jsx";
 
 export const Home = () => {
   return (
@@ -23,6 +24,7 @@ export const Home = () => {
         <FlightSearchPanel />
       </PageTemplate>
       <Recommendations />
+      <Feedback />
     </div>
   );
 };

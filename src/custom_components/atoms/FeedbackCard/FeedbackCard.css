@@ -1,0 +1,29 @@
+.feedbackCard {
+    display: block;
+    margin: 10px 5px;
+    height: 270px;
+    width: 400px;
+    box-shadow: #ababab 5px 5px 10px;
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+}
+
+.feedbackCard h2 {
+    color: var(--textColorDark);
+    padding: 32px 0 8px 25px;
+    margin: 0;
+    font-size: 2.4rem;
+}
+
+.feedbackCard p {
+    color: var(--textColorDark);
+    padding: 8px 25px;
+}
+
+#date {
+    color: #14161980;
+    position: absolute;
+    bottom: 32px;
+    padding: 0 25px;
+}
