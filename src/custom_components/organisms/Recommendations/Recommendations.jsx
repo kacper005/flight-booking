@@ -10,21 +10,29 @@ export const Recommendations = () => {
         <RecommendationCard
           imageSrcSet="https://picsum.photos/270/160?=rnd1"
           title="Recommendation 1"
+          departurePoint={"Oslo"}
+          price={"€120"}
           info="Recommendation 1 Description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
         />
         <RecommendationCard
           imageSrcSet="https://picsum.photos/270/160?=rnd2"
           title="Recommendation 2"
+          departurePoint={"New York"}
+          price={"$150"}
           info="Recommendation 2 Description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
         />
         <RecommendationCard
           imageSrcSet="https://picsum.photos/270/160?=rnd3"
           title="Recommendation 3"
+          departurePoint={"London"}
+          price={"£100"}
           info="Recommendation 3 Description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
         />
         <RecommendationCard
           imageSrcSet="https://picsum.photos/270/160?=rnd4"
           title={"Recommendation 4"}
+          departurePoint={"Frankfurt"}
+          price={"€80"}
           info="Recommendation 4 Description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
         />
       </div>
