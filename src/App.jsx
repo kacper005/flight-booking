@@ -5,6 +5,7 @@ import { SignIn } from "@pages/SignIn";
 import { AboutUs } from "@pages/AboutUs";
 import { SignUp } from "@pages/SignUp/SignUp";
 import { ContactUsPage } from "@pages/ContactUs";
+import { SearchResults } from "@pages/SearchResults";
 import { Sustainability } from "@pages/Sustainability";
 import { AirlineInformation } from "@pages/AirlineInformation";
 import { TermsAndConditions } from "@pages/TermsAndConditions";
@@ -38,6 +39,7 @@ export const App = () => {
             path="/terms-and-conditions"
             element={<TermsAndConditions />}
           />
+          <Route path="/search-results" element={<SearchResults />} />
         </Routes>
         <Footer />
       </div>

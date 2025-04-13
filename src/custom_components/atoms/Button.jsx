@@ -2,7 +2,6 @@ import React from "react";
 
 export const Button = ({
   children,
-  className = "custom-btn",
   width,
   height,
   maxWidth,
@@ -24,7 +23,6 @@ export const Button = ({
 
   return (
     <button
-      className
       style={{
         width: width,
         height: height,

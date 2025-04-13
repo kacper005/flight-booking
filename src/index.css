@@ -24,9 +24,12 @@ body {
   --mainColorLight: #7091e6;
   --secondaryColor: #8697c4;
   --textColor: #ede8f5;
+  --textColor2: #fffff5;
   --textColorLight: #f5f5f5;
   --textColorDark: #141619;
-  --warningColor: #c50900;
+  --errorColor: #c50900;
+  --successColor: #00c500;
+  --warningColor: #ffcc00;
 
   --black: #252525;
   --white: #ffffff;

@@ -8,6 +8,7 @@ export const SignUp = () => {
     email: "",
     password: "",
     repeatPassword: "",
+    phoneCode: "+1",
     phone: "",
     firstName: "",
     lastName: "",
@@ -41,8 +42,8 @@ export const SignUp = () => {
     if (formData.repeatPassword.length < 6)
       newErrors.repeatPassword = "Password must be at least 6 characters";
     if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
-    if (formData.phone.length < 10)
-      newErrors.phone = "Phone number must be at least 10 characters";
+    if (formData.phone.length < 7)
+      newErrors.phone = "Phone number must be at least 7 characters";
     if (!formData.phone.match(/^[0-9]+$/))
       newErrors.phone = "Phone number must be a number";
     if (formData.password !== formData.repeatPassword)
@@ -120,17 +121,33 @@ export const SignUp = () => {
           )}
         </div>
 
-        {/* TODO: Fix country code */}
         <div className="input-group">
           <label>Mobile Number</label>
-          <input
-            type="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="Enter your mobile number"
-          />
-          {errors.password && <small className="error">{errors.phone}</small>}
+          <div className="phone-container">
+            <select
+              name="phoneCode"
+              value={formData.phoneCode}
+              onChange={handleChange}
+              className="phone-code"
+            >
+              <option value="+1">+1 (USA)</option>
+              <option value="+44">+44 (UK)</option>
+              <option value="+91">+91 (India)</option>
+              <option value="+61">+61 (Australia)</option>
+              <option value="+49">+47 (Norway)</option>
+              <option value="+49">+48 (Poland)</option>
+              <option value="+49">+49 (Germany)</option>
+            </select>
+            <input
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="Enter your mobile number"
+              className="phone-input"
+            />
+          </div>
+          {errors.phone && <small className="error">{errors.phone}</small>}
         </div>
 
         <div className="input-group">
@@ -172,7 +189,6 @@ export const SignUp = () => {
             onChange={handleChange}
             onFocus={(e) => e.target.showPicker && e.target.showPicker()}
             max={new Date().toISOString().split("T")[0]}
-            required
           />
           {errors.dateOfBirth && (
             <small className="error">{errors.dateOfBirth}</small>

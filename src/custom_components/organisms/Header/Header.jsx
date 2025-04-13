@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import "./Header.css";
 
 export const Header = () => {
+  const loggedIn = false; // Replace with actual authentication logic
   const navRef = React.useRef();
 
   const showNavbar = () => {
@@ -16,7 +17,7 @@ export const Header = () => {
     <header>
       <Logo />
       <nav ref={navRef}>
-        <RouteLink to="/saved-trips">Saved Trips</RouteLink>
+        {loggedIn && <RouteLink to="/saved-trips">Saved Trips</RouteLink>}
         <RouteLink to="/sign-in">Sign In</RouteLink>
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <X />

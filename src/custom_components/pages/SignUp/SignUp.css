@@ -71,3 +71,24 @@ h2 {
 .login-link a:hover {
   text-decoration: underline;
 }
+
+.phone-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.phone-code {
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.phone-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
