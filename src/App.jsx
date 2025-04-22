@@ -10,6 +10,7 @@ import { Sustainability } from "@pages/Sustainability";
 import { AirlineInformation } from "@pages/AirlineInformation";
 import { TermsAndConditions } from "@pages/TermsAndConditions";
 import { ImportantInformation } from "@pages/ImportantInformation";
+import { Admin } from "@pages/Admin";
 
 import { Header } from "@organisms/Header/Header";
 import { Footer } from "@organisms/Footer.jsx";
@@ -40,6 +41,7 @@ export const App = () => {
             element={<TermsAndConditions />}
           />
           <Route path="/search-results" element={<SearchResults />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
         <Footer />
       </div>
