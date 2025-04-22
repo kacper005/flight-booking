@@ -9,7 +9,7 @@ import { MessageSquare } from "lucide-react";
 
 export const Admin = () => {
   return (
-    <div
+    <body
       className={"adminDashboard"}
       style={{
         display: "flex",
@@ -46,6 +46,6 @@ export const Admin = () => {
         <AdminCard icon={CalendarDays} title={"Bookings"} />
         <AdminCard icon={MessageSquare} title={"Feedback"} />
       </div>
-    </div>
+    </body>
   );
 };
