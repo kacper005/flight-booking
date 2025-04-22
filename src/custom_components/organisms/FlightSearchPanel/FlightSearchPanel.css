@@ -15,11 +15,6 @@
   }
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  display: none;
-  -webkit-appearance: none;
-}
-
 .booking-options-container {
   display: flex;
   flex-direction: row;
