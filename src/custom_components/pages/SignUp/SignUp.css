@@ -74,15 +74,16 @@ h2 {
 
 .phone-container {
   display: flex;
-  align-items: center;
   gap: 10px;
+  width: 100%;
 }
 
 .phone-code {
-  padding: 4px;
+  flex: 0 0 100px;
+  max-width: 120px;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  cursor: pointer;
   font-size: 0.9rem;
   text-align: center;
 }
@@ -91,4 +92,5 @@ h2 {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  width: 80%;
 }

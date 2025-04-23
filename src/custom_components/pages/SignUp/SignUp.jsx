@@ -1,7 +1,11 @@
 import React from "react";
 import "./SignUp.css";
-import { RouteLink } from "@/custom_components/atoms/RouteLink";
-import { Button } from "@/custom_components/atoms/Button";
+import { RouteLink } from "@atoms/RouteLink";
+import { Button } from "@atoms/Button";
+import { createUser } from "@api/userApi";
+import { showToast } from "@atoms/Toast/Toast";
+import { BirthDatePicker } from "@atoms/DatePicker/BirthDatePicker";
+import { allCountries } from "country-telephone-data";
 
 export const SignUp = () => {
   const [formData, setFormData] = React.useState({
@@ -12,8 +16,8 @@ export const SignUp = () => {
     phone: "",
     firstName: "",
     lastName: "",
-    dateOfBirth: "",
-    country: "",
+    dateOfBirth: null,
+    country: null,
     gender: "",
   });
 
@@ -48,8 +52,24 @@ export const SignUp = () => {
       newErrors.phone = "Phone number must be a number";
     if (formData.password !== formData.repeatPassword)
       newErrors.repeatPassword = "Passwords do not match";
-    if (!formData.dateOfBirth.trim())
+    if (!formData.dateOfBirth) {
       newErrors.dateOfBirth = "Date of Birth is required";
+    } else {
+      const today = new Date();
+      const birthDate = new Date(formData.dateOfBirth);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      const dayDiff = today.getDate() - birthDate.getDate();
+
+      if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        age--;
+      }
+
+      if (age < 18) {
+        newErrors.dateOfBirth = "You must be at least 18 years old to sign up";
+      }
+    }
+
     if (!formData.gender) newErrors.gender = "Please select your gender";
     if (!formData.country) newErrors.country = "Please select your country";
 
@@ -57,25 +77,50 @@ export const SignUp = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      alert("Signup Successful!");
-      setFormData({
-        email: "",
-        password: "",
-        repeatPassword: "",
-        phone: "",
-        firstName: "",
-        lastName: "",
-        dateOfBirth: "",
-        country: "",
-        gender: "",
-      });
+      try {
+        const userPayload = {
+          email: formData.email,
+          password: formData.password,
+          phone: `${formData.phoneCode}${formData.phone}`,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          dateOfBirth: formData.dateOfBirth,
+          country: formData.country,
+          gender: formData.gender,
+          role: "USER",
+          createdAt: new Date().toLocaleString("en-GB"),
+        };
+
+        await createUser(userPayload);
+        showToast({ message: "Signup Successful!", type: "success" });
+
+        setFormData({
+          email: "",
+          password: "",
+          repeatPassword: "",
+          phoneCode: "+1",
+          phone: "",
+          firstName: "",
+          lastName: "",
+          dateOfBirth: null,
+          country: "",
+          gender: "",
+        });
+      } catch (error) {
+        console.error(error);
+        const message =
+          typeof error.response?.data === "string"
+            ? error.response.data
+            : error.response?.data?.message ||
+              "Something went wrong. Please try again.";
+
+        showToast({ message: `Signup failed. ${message} `, type: "error" });
+      }
     }
   };
-
-  console.log(formData);
 
   return (
     <div className="signup-container">
@@ -130,13 +175,11 @@ export const SignUp = () => {
               onChange={handleChange}
               className="phone-code"
             >
-              <option value="+1">+1 (USA)</option>
-              <option value="+44">+44 (UK)</option>
-              <option value="+91">+91 (India)</option>
-              <option value="+61">+61 (Australia)</option>
-              <option value="+49">+47 (Norway)</option>
-              <option value="+49">+48 (Poland)</option>
-              <option value="+49">+49 (Germany)</option>
+              {allCountries.map(({ iso2, dialCode }) => (
+                <option key={iso2} value={`+${dialCode}`}>
+                  (+{dialCode}) {iso2.toUpperCase()}
+                </option>
+              ))}
             </select>
             <input
               type="text"
@@ -177,24 +220,17 @@ export const SignUp = () => {
             <small className="error">{errors.lastName}</small>
           )}
         </div>
-
-        {/* TODO: Fix the datepicker */}
         <div className="input-group">
           <label>Date of Birth</label>
-          <input
-            id="dob"
-            type="date"
-            name="dateOfBirth"
-            value={formData.dateOfBirth}
-            onChange={handleChange}
-            onFocus={(e) => e.target.showPicker && e.target.showPicker()}
-            max={new Date().toISOString().split("T")[0]}
+          <BirthDatePicker
+            formData={formData}
+            setFormData={setFormData}
+            errors={errors}
           />
           {errors.dateOfBirth && (
             <small className="error">{errors.dateOfBirth}</small>
           )}
         </div>
-
         {/* TODO: Add other countries */}
         <div className="input-group">
           <label>Country</label>
@@ -203,18 +239,11 @@ export const SignUp = () => {
             value={formData.country}
             onChange={handleChange}
           >
-            <option value="">Select your country</option>
-            <option value="USA">United States</option>
-            <option value="UK">United Kingdom</option>
-            <option value="Canada">Canada</option>
-            <option value="Australia">Australia</option>
-            <option value="India">India</option>
-            <option value="Germany">Germany</option>
-            <option value="France">France</option>
-            <option value="Japan">Japan</option>
-            <option value="Brazil">Brazil</option>
-            <option value="Poland">Poland</option>
-            <option value="Norway">Norway</option>
+            {allCountries.map(({ iso2, name }) => (
+              <option key={iso2} value={name}>
+                {name}
+              </option>
+            ))}
           </select>
           {errors.country && <small className="error">{errors.country}</small>}
         </div>

@@ -3,9 +3,9 @@ import { Card } from "@atoms/Card/Card";
 import { Button } from "@atoms/Button";
 import BookingOptionsModal from "../BookingOptionsModal/BookingOptionsModal";
 import LocationSwitcher from "@molecules/LocationSwitcher/LocationSwitcher";
-import { Select } from "@/custom_components/atoms/Select";
-import { RouteLink } from "@/custom_components/atoms/RouteLink";
-import { DateRangePicker } from "@/custom_components/atoms/DatePicker/DateRangePicker";
+import { Select } from "@atoms/Select";
+import { RouteLink } from "@atoms/RouteLink";
+import { DateRangePicker } from "@atoms/DatePicker/DateRangePicker";
 import "./FlightSearchPanel.css";
 
 export const FlightSearchPanel = () => {

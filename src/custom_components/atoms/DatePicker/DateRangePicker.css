@@ -26,6 +26,17 @@
   font-size: 1.8rem;
 }
 
+/* Target dropdowns for month and year */
+.react-datepicker__month-select,
+.react-datepicker__year-select {
+  font-size: 1.6rem !important;
+  padding: 4px 6px !important;
+  height: auto !important;
+  width: auto !important;
+  max-width: 100px;
+  margin-top: 10px;
+}
+
 .react-datepicker__day-name {
   font-size: 1.6rem;
   font-weight: bold;

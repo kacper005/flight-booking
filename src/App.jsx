@@ -14,6 +14,7 @@ import { ImportantInformation } from "@pages/ImportantInformation";
 import { Header } from "@organisms/Header/Header";
 import { Footer } from "@organisms/Footer.jsx";
 import ScrollToTop from "@molecules/ScrollToTop";
+import { ToastContainer } from "react-toastify";
 
 export const App = () => {
   return (
@@ -41,6 +42,7 @@ export const App = () => {
           />
           <Route path="/search-results" element={<SearchResults />} />
         </Routes>
+        <ToastContainer />
         <Footer />
       </div>
     </Router>

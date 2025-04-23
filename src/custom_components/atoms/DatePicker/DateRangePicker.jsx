@@ -19,12 +19,14 @@ export const DateRangePicker = ({ roundTrip }) => {
           monthsShown={2}
           dateFormat="dd/MM/yyyy"
           placeholderText="Select a departure and return date"
+          minDate={new Date()}
         />
       ) : (
         <DatePicker
           selected={startDate2}
           dateFormat="dd/MM/yyyy"
           onChange={(date) => setStartDate2(date)}
+          minDate={new Date()}
         />
       )}
     </>

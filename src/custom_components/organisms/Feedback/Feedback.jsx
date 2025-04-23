@@ -1,6 +1,6 @@
 import React from "react";
 import "./Feedback.css";
-import FeedbackCard from "@/custom_components/atoms/FeedbackCard/FeedbackCard.jsx";
+import FeedbackCard from "@atoms/FeedbackCard/FeedbackCard.jsx";
 import { ChevronLeft } from "lucide-react";
 import { ChevronRight } from "lucide-react";
 

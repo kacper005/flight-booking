@@ -2,16 +2,34 @@ import React from "react";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
 import { Button } from "@atoms/Button";
 import { SearchResultCard } from "@organisms/SearchResultCard/SearchResultCard";
-import { useFetch } from "@hooks/useFetch";
+//import { useFetch } from "@hooks/useFetch";
+import { getRoundTripFlights } from "@api/flightApi";
 
 export const SearchResults = () => {
-  const apiUrl = import.meta.env.VITE_FLIGHT_FINDER_API_URL;
+  const [flights, setFlights] = React.useState([]);
+  const [loadingFlights, setLoading] = React.useState(true);
+  const [flightsError, setError] = React.useState(null);
 
-  const {
-    data: flights,
-    loading: loadingFlights,
-    error: flightsError,
-  } = useFetch(`${apiUrl}/flights/roundtrip`);
+  // const {
+  //   data: flights,
+  //   loading: loadingFlights,
+  //   error: flightsError,
+  // } = useFetch(`${apiUrl}/flights/roundtrip`);
+
+  React.useEffect(() => {
+    const fetchFlights = async () => {
+      try {
+        const res = await getRoundTripFlights();
+        setFlights(res.data);
+      } catch (err) {
+        setError(err.message || "Failed to load flights.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFlights();
+  }, []);
 
   const formatDate = (isoString) => {
     const date = new Date(isoString);
@@ -97,8 +115,7 @@ export const SearchResults = () => {
             {loadingFlights && <h3>Loading Flights...</h3>}
             {flightsError && (
               <h3>
-                {flightsError.message ||
-                  "An error occurred while fetching flights."}
+                {flightsError || "An error occurred while fetching flights."}
               </h3>
             )}
             {flights?.length === 0 && <h3>No flights found</h3>}

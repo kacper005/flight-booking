@@ -1,5 +1,5 @@
 import React from "react";
-import RecommendationCard from "@/custom_components/atoms/RecommendationCard/RecommendationCard.jsx";
+import RecommendationCard from "@atoms/RecommendationCard/RecommendationCard.jsx";
 import "./Recommendations.css";
 
 export const Recommendations = () => {
