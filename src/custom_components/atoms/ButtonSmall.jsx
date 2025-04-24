@@ -8,7 +8,7 @@ export const ButtonSmall = ({
   maxHeight,
   bgColor = "var(--mainColorLight)",
   hoverBgColor = "var(--secondaryColor)",
-  color = "var(--textColor)",
+  color = "var(--textColor2)",
   textAlign,
   padding = "5px 21px",
   margin,

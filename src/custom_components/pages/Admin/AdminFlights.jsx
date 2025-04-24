@@ -1,7 +1,6 @@
 import React from "react";
 import "./AdminFlights.css";
 import { ButtonSmall } from "../../atoms/ButtonSmall";
-// import { useFetch } from "@hooks/useFetch.js";
 import { getFlights } from "@api/flightApi.js";
 
 export const AdminFlights = () => {
@@ -24,56 +23,63 @@ export const AdminFlights = () => {
     fetchFlights();
   }, []);
 
-  return (
-    <body>
-      <h1>Edit Flights</h1>
-      <br />
-      <div>
-        {loadingFlights && <h3>Loading Flights...</h3>}
-        {flightsError && (
-          <h3>
-            {flightsError.message ||
-              "An error occurred while fetching flights."}
-          </h3>
-        )}
-        {flights?.length === 0 && <h3>No flights found</h3>}
-      </div>
+  const formatDateTime = (isoString) => {
+    const date = new Date(isoString);
+    return new Intl.DateTimeFormat("en-GB", {
+      dateStyle: "short",
+      timeStyle: "short",
+    }).format(date);
+  };
 
-      {flights?.map((flight, index) => {
-        {
-          /* Retrieve data from the DB and show them on the site */
-        }
-        return (
-          <p key={index}>
-            <br />
-            <strong>Flight ID:</strong> {flight.flightId}
-            <br />
-            <strong>Departure Airport:</strong> {flight.departureAirport.code}
-            <br />
-            <strong>Arrival Airport:</strong> {flight.arrivalAirport.code}
-            <br />
-            <strong>Round Trip:</strong> {flight.roundTrip ? "Yes" : "No"}
-            <br />
-            <strong>Status:</strong> {flight.status}
-            <br />
-            <strong>Departure Time:</strong> {flight.departureTime}
-            <br />
-            <strong>Arrival Time:</strong> {flight.arrivalTime}
-            <br />
-            <strong>Price:</strong> {flight.prices?.[0]?.price || ""}
-            <br />
-            <strong>Currency:</strong> {flight.prices?.[0]?.currency || ""}
-            <br />
-            <strong>Airline:</strong> {flight.airline.name}
-            <br />
-            <strong>Flight Number:</strong> {flight.flightNumber}
-            <br />
-            <strong>Available Classes:</strong> {flight.availableClasses}
-            <br />
-            <ButtonSmall>Edit</ButtonSmall>
-          </p>
-        );
-      })}
-    </body>
+  return (
+    <div className={"adminClassContainer"}>
+      <h1>Edit Flights</h1>
+      {loadingFlights && <h3>Loading Flights...</h3>}
+      {flightsError && <h3>{flightsError}</h3>}
+      {!loadingFlights && flights.length === 0 && <h3>No flights found</h3>}
+
+      {!loadingFlights && flights.length > 0 && (
+        <table className={"flightsTable"}>
+          <thead>
+            <tr>
+              <th className={"colFlightNumber"}>Flight Number</th>
+              <th className={"colDeparture"}>Departure Airport</th>
+              <th className={"colArrival"}>Arrival Airport</th>
+              <th className={"colRoundTrip"}>Round Trip</th>
+              <th className={"colStatus"}>Status</th>
+              <th className={"colDepartureTime"}>Departure Time</th>
+              <th className={"colArrivalTime"}>Arrival Time</th>
+              <th className={"colClasses"}>Available Classes</th>
+              <th className={"colEdit"}></th>
+            </tr>
+          </thead>
+          <tbody>
+            {flights.map((flight, index) => (
+              <tr key={index}>
+                <td className={"colFlightNumber"}>{flight.flightNumber}</td>
+                <td className={"colDeparture"}>
+                  {flight.departureAirport.code}
+                </td>
+                <td className={"colArrival"}>{flight.arrivalAirport.code}</td>
+                <td className={"colRoundTrip"}>
+                  {flight.roundTrip ? "True" : "False"}
+                </td>
+                <td className={"colStatus"}>{flight.status}</td>
+                <td className={"colDepartureTime"}>
+                  {formatDateTime(flight.departureTime)}
+                </td>
+                <td className={"colArrivalTime"}>
+                  {formatDateTime(flight.arrivalTime)}
+                </td>
+                <td className={"colClasses"}>{flight.availableClasses}</td>
+                <td className={"colEdit"}>
+                  <ButtonSmall>Edit</ButtonSmall>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
   );
 };
