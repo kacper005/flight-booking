@@ -1,16 +1,28 @@
 import React from "react";
 import "./AdminFlights.css";
 import { ButtonSmall } from "../../atoms/ButtonSmall";
-import { useFetch } from "@hooks/useFetch.js";
+// import { useFetch } from "@hooks/useFetch.js";
+import { getFlights } from "@api/flightApi.js";
 
 export const AdminFlights = () => {
-  const apiUrl = import.meta.env.VITE_FLIGHT_FINDER_API_URL;
+  const [flights, setFlights] = React.useState([]);
+  const [loadingFlights, setLoading] = React.useState(true);
+  const [flightsError, setError] = React.useState(null);
 
-  const {
-    data: flights,
-    loading: loadingFlights,
-    error: flightsError,
-  } = useFetch(`${apiUrl}/flights`);
+  React.useEffect(() => {
+    const fetchFlights = async () => {
+      try {
+        const res = await getFlights();
+        setFlights(res.data);
+      } catch (err) {
+        setError(err.message || "Failed to load flights.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFlights();
+  }, []);
 
   return (
     <body>
@@ -33,6 +45,7 @@ export const AdminFlights = () => {
         }
         return (
           <p key={index}>
+            <br />
             <strong>Flight ID:</strong> {flight.flightId}
             <br />
             <strong>Departure Airport:</strong> {flight.departureAirport.code}
