@@ -16,6 +16,7 @@ import { AdminFlights } from "@pages/Admin/AdminFlights.jsx";
 import { Header } from "@organisms/Header/Header";
 import { Footer } from "@organisms/Footer.jsx";
 import ScrollToTop from "@molecules/ScrollToTop";
+import { ToastContainer } from "react-toastify";
 
 export const App = () => {
   return (
@@ -45,6 +46,7 @@ export const App = () => {
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin-flights" element={<AdminFlights />} />
         </Routes>
+        <ToastContainer />
         <Footer />
       </div>
     </Router>

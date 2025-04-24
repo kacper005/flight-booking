@@ -1,10 +1,9 @@
 import React from "react";
 import "./BookingOptionsModal.css";
-import { Button } from "@/custom_components/atoms/Button";
+import { Button } from "@atoms/Button";
 
 export default function BookingOptionsModal() {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [cabinClass, setCabinClass] = React.useState("Economy");
   const [passengers, setPassengers] = React.useState({
     adult: 1,
     child: 0,
@@ -43,7 +42,7 @@ export default function BookingOptionsModal() {
         border={"1px solid #cccccc"}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {totalTravelers} {travelerText}, {cabinClass}
+        {totalTravelers} {travelerText}
       </Button>
 
       {isOpen && (
@@ -51,8 +50,6 @@ export default function BookingOptionsModal() {
           <BookingDialog
             passengers={passengers}
             setPassengers={setPassengers}
-            cabinClass={cabinClass}
-            setCabinClass={setCabinClass}
             totalTravelers={totalTravelers}
           />
         </div>
@@ -61,13 +58,7 @@ export default function BookingOptionsModal() {
   );
 }
 
-function BookingDialog({
-  passengers,
-  setPassengers,
-  cabinClass,
-  setCabinClass,
-  totalTravelers,
-}) {
+function BookingDialog({ passengers, setPassengers, totalTravelers }) {
   const handleChange = (type, delta) => {
     if (totalTravelers + delta > 10) return;
     setPassengers((prev) => ({
@@ -104,21 +95,6 @@ function BookingDialog({
           </div>
         </div>
       ))}
-
-      <h2>Class</h2>
-      <div className="cabin-classes">
-        {["Economy", "Premium Economy", "Business", "First class"].map(
-          (cls) => (
-            <button
-              key={cls}
-              className={cabinClass === cls ? "selected" : ""}
-              onClick={() => setCabinClass(cls)}
-            >
-              {cls}
-            </button>
-          )
-        )}
-      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { FlightSearchPanel } from "@organisms/FlightSearchPanel/FlightSearchPanel";
 import { Recommendations } from "@organisms/Recommendations/Recommendations.jsx";
-import { PageTemplate } from "@/custom_components/templates/PageTemplate/PageTempate.jsx";
+import { PageTemplate } from "@templates/PageTemplate/PageTempate.jsx";
 import planeBg from "@assets/plane_bg.svg";
 import { Feedback } from "../organisms/Feedback/Feedback.jsx";
 
