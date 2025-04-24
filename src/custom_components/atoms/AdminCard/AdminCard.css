@@ -8,6 +8,8 @@
     box-shadow: lightgrey 5px 5px 10px;
     background-color: white;
     border-radius: 10px;
+    color: var(--textColorDark);
+    cursor: pointer;
 }
 
 .h2 {

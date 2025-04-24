@@ -10,7 +10,8 @@ import { Sustainability } from "@pages/Sustainability";
 import { AirlineInformation } from "@pages/AirlineInformation";
 import { TermsAndConditions } from "@pages/TermsAndConditions";
 import { ImportantInformation } from "@pages/ImportantInformation";
-import { Admin } from "@pages/Admin";
+import { Admin } from "@pages/Admin/Admin.jsx";
+import { AdminFlights } from "@pages/Admin/AdminFlights.jsx";
 
 import { Header } from "@organisms/Header/Header";
 import { Footer } from "@organisms/Footer.jsx";
@@ -42,6 +43,7 @@ export const App = () => {
           />
           <Route path="/search-results" element={<SearchResults />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin-flights" element={<AdminFlights />} />
         </Routes>
         <Footer />
       </div>

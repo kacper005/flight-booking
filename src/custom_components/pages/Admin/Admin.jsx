@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import AdminCard from "@atoms/AdminCard/AdminCard.jsx";
 import { Plane } from "lucide-react";
 import { PlaneTakeoff } from "lucide-react";
@@ -39,7 +40,9 @@ export const Admin = () => {
           paddingBottom: "70px",
         }}
       >
-        <AdminCard icon={Plane} title={"Flights"} />
+        <Link to={"/admin-flights"}>
+          <AdminCard icon={Plane} title={"Flights"} />
+        </Link>
         <AdminCard icon={PlaneTakeoff} title={"Airlines"} />
         <AdminCard icon={TowerControl} title={"Airports"} />
         <AdminCard icon={UserRoundPen} title={"Users"} />

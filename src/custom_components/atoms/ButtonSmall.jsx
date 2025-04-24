@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Button = ({
+export const ButtonSmall = ({
   children,
   width,
   height,
@@ -10,12 +10,12 @@ export const Button = ({
   hoverBgColor = "var(--secondaryColor)",
   color = "var(--textColor)",
   textAlign,
-  padding = "10px 20px",
+  padding = "5px 21px",
   margin,
   border = "none",
   borderRadius = "5px",
   cursor = "pointer",
-  fontSize = "1.8rem",
+  fontSize = "1.6rem",
   fontFamily = "Montserrat, sans-serif",
   onClick,
   icon: Icon,
