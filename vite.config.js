@@ -16,6 +16,7 @@ export default defineConfig({
       "@pages": path.resolve(__dirname, "src/custom_components/pages"),
       "@hooks": path.resolve(__dirname, "src/hooks"),
       "@api": path.resolve(__dirname, "src/api"),
+      "@context": path.resolve(__dirname, "src/context"),
     },
   },
 });

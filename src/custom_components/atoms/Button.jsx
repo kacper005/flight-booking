@@ -18,6 +18,7 @@ export const Button = ({
   fontSize = "1.8rem",
   onClick,
   icon: Icon,
+  disabled,
 }) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
@@ -41,6 +42,7 @@ export const Button = ({
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      disabled={disabled}
     >
       {Icon && (
         <span

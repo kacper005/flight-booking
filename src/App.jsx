@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { FAQ } from "@pages/FAQ";
 import { Home } from "@pages/Home";
-import { SignIn } from "@pages/SignIn";
 import { AboutUs } from "@pages/AboutUs";
+import { SignIn } from "@pages/SignIn/SignIn";
 import { SignUp } from "@pages/SignUp/SignUp";
 import { ContactUsPage } from "@pages/ContactUs";
+import { UserProfile } from "@pages/UserProfile";
 import { SearchResults } from "@pages/SearchResults";
 import { Sustainability } from "@pages/Sustainability";
 import { AirlineInformation } from "@pages/AirlineInformation";
@@ -15,7 +16,9 @@ import { Header } from "@organisms/Header/Header";
 import { Footer } from "@organisms/Footer.jsx";
 import ScrollToTop from "@molecules/ScrollToTop";
 import { ToastContainer } from "react-toastify";
+import { NotFound } from "@pages/404";
 
+//TODO: Implement protected routes
 export const App = () => {
   return (
     <Router>
@@ -41,6 +44,9 @@ export const App = () => {
             element={<TermsAndConditions />}
           />
           <Route path="/search-results" element={<SearchResults />} />
+          <Route path="/404" element={<NotFound />} />
+
+          <Route path="/profile" element={<UserProfile />} />
         </Routes>
         <ToastContainer />
         <Footer />

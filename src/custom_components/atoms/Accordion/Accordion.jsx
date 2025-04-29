@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { ChevronDown } from "lucide-react";
 import "./Accordion.css";
 
 const Accordion = ({ title, content }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <div className="accordion">

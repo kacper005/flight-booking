@@ -15,8 +15,8 @@ export const Select = ({ value, onChange }) => {
       value={value}
       onChange={onChange}
     >
-      <option value="0">Round trip</option>
-      <option value="1">One-way</option>
+      <option value="true">Round trip</option>
+      <option value="false">One-way</option>
     </select>
   );
 };

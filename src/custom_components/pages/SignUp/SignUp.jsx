@@ -6,6 +6,7 @@ import { createUser } from "@api/userApi";
 import { showToast } from "@atoms/Toast/Toast";
 import { BirthDatePicker } from "@atoms/DatePicker/BirthDatePicker";
 import { allCountries } from "country-telephone-data";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
   const [formData, setFormData] = React.useState({
@@ -22,6 +23,8 @@ export const SignUp = () => {
   });
 
   const [errors, setErrors] = React.useState({});
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -65,8 +68,8 @@ export const SignUp = () => {
         age--;
       }
 
-      if (age < 18) {
-        newErrors.dateOfBirth = "You must be at least 18 years old to sign up";
+      if (age < 16) {
+        newErrors.dateOfBirth = "You must be at least 16 years old to sign up";
       }
     }
 
@@ -94,6 +97,7 @@ export const SignUp = () => {
 
         await createUser(userPayload);
         showToast({ message: "Signup Successful!", type: "success" });
+        navigate("/sign-in");
 
         setFormData({
           email: "",

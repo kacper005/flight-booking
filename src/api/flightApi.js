@@ -3,6 +3,8 @@ import axios from "./axiosInstance";
 const BASE_URL = "/flights";
 
 export const getFlights = () => axios.get(BASE_URL);
+export const getSearchFlights = (params) =>
+  axios.get(`${BASE_URL}/search`, { params });
 export const getOneWayFlights = () => axios.get(`${BASE_URL}/oneway`);
 export const getRoundTripFlights = () => axios.get(`${BASE_URL}/roundtrip`);
 export const getFlightById = (id) => axios.get(`${BASE_URL}/${id}`);
