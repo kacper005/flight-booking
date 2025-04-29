@@ -4,28 +4,53 @@ import "./AdminFlightsModal.css";
 import { Button } from "@atoms/Button";
 import { showToast } from "@atoms/Toast/Toast.jsx";
 import { updateFlight } from "@api/flightApi.js";
+import { getAirports, getAirportsArray } from "@api/airportApi.js";
 
 export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
   const [formData, setFormData] = React.useState({ ...flight });
+  const [loadingAirports, setLoadingAirports] = React.useState(true);
+  const [airports, setAirports] = React.useState([]);
 
   // Reset formData when flight prop changes
   React.useEffect(() => {
     setFormData({ ...flight });
   }, [flight]);
 
+  React.useEffect(() => {
+    const fetchAirports = async () => {
+      try {
+        const data = await getAirportsArray();
+        setAirports(data);
+      } catch (error) {
+        console.error("Failed to fetch airports:", error);
+      } finally {
+        setLoadingAirports(false);
+      }
+    };
+
+    fetchAirports();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const upperValue = value.toUpperCase();
 
     // Handle nested objects like departureAirport.code
     if (name === "departureAirport") {
+      const matched = airports.find((a) => a.code === upperValue);
       setFormData((prev) => ({
         ...prev,
-        departureAirport: { ...prev.departureAirport, code: value },
+        departureAirport: matched
+          ? { ...matched, code: upperValue }
+          : { ...prev.departureAirport, code: upperValue },
       }));
     } else if (name === "arrivalAirport") {
+      const matched = airports.find((a) => a.code === upperValue);
       setFormData((prev) => ({
         ...prev,
-        arrivalAirport: { ...prev.arrivalAirport, code: value },
+        arrivalAirport: matched
+          ? { ...matched, code: upperValue }
+          : { ...prev.arrivalAirport, code: value },
       }));
     } else if (name === "roundTrip") {
       setFormData((prev) => ({
@@ -39,36 +64,49 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (
+      formData.departureAirport.airportId === formData.arrivalAirport.airportId
+    ) {
+      const userConfirmed = window.confirm(
+        "Departure and arrival airports are the same. Do you want to continue?",
+      );
+
+      if (!userConfirmed) {
+        return; // Stops form submission if user cancels
+      }
+    }
+
     try {
       const flightPayload = {
         flightNumber: formData.flightNumber,
-        airline: formData.airline,
-        departureAirport: formData.departureAirport,
-        arrivalAirport: formData.arrivalAirport,
-        roundTrip: formData.roundTrip,
-        status: formData.status,
         departureTime: formData.departureTime,
         arrivalTime: formData.arrivalTime,
+        roundTrip: formData.roundTrip,
+        extraFeatures: formData.extraFeatures,
+        availableClasses: formData.availableClasses,
+        status: formData.status,
+        airline: {
+          airlineId: formData.airline.airlineId,
+        } /* TODO: Make Airline a select */,
+        departureAirport: { airportId: formData.departureAirport.airportId },
+        arrivalAirport: { airportId: formData.arrivalAirport.airportId },
+
         prices: [
           {
-            price: formData.prices[0].price,
-            currency: formData.prices[0].currency,
-            priceProviderName: formData.prices[0].priceProviderName,
+            priceId: formData.prices[0].priceId,
+            /*currency: formData.prices[0].currency,
+            priceProviderName: formData.prices[0].priceProviderName,*/
           },
           {
-            price: formData.prices[1].price,
-            currency: formData.prices[1].currency,
-            priceProviderName: formData.prices[1].priceProviderName,
+            priceId: formData.prices[1].priceId,
+            /*currency: formData.prices[1].currency,
+            priceProviderName: formData.prices[1].priceProviderName,*/
           },
         ],
-        availableClasses: formData.availableClasses,
-        extraFeatures: formData.extraFeatures,
       };
 
-      let myString = JSON.stringify(flightPayload);
-      console.log("Flight payload: " + myString);
-
-      await updateFlight(flight.id, flightPayload);
+      await updateFlight(flight.flightId, flightPayload);
       onSave({ ...flight, ...flightPayload });
       onClose();
       showToast({ message: "Flight data saved successfully", type: "success" });
@@ -108,19 +146,37 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
             </div>
             <div className={"formField"}>
               <label>Departure Airport</label>
-              <input
-                name="departureAirport"
+              <select
+                name={"departureAirport"}
                 value={formData.departureAirport.code}
                 onChange={handleChange}
-              />
+              >
+                {airports
+                  .slice() // make a copy to avoid mutating state
+                  .sort((a, b) => a.city.localeCompare(b.city))
+                  .map((airport) => (
+                    <option key={airport.airportId} value={airport.code}>
+                      {airport.city} ({airport.code})
+                    </option>
+                  ))}
+              </select>
             </div>
             <div className={"formField"}>
               <label>Arrival Airport</label>
-              <input
+              <select
                 name="arrivalAirport"
                 value={formData.arrivalAirport.code}
                 onChange={handleChange}
-              />
+              >
+                {airports
+                  .slice() // make a copy to avoid mutating state
+                  .sort((a, b) => a.city.localeCompare(b.city))
+                  .map((airport) => (
+                    <option key={airport.airportId} value={airport.code}>
+                      {airport.city} ({airport.code})
+                    </option>
+                  ))}
+              </select>
             </div>
             <div className={"formField"}>
               <label>Round Trip</label>

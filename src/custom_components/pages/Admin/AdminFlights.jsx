@@ -35,11 +35,14 @@ export const AdminFlights = () => {
 
   const handleSave = async (updatedFlight) => {
     try {
-      await updateFlight(updatedFlight.id, updatedFlight);
+      await updateFlight(updatedFlight.flightId, updatedFlight);
       setFlights((prev) =>
-        prev.map((f) => (f.id === updatedFlight.id ? updatedFlight : f)),
+        prev.map((f) =>
+          f.flightId === updatedFlight.flightId ? updatedFlight : f,
+        ),
       );
       setSelectedFlight(null);
+      window.location.reload();
     } catch (error) {
       console.error("Error updating flight:", error);
       setError("Failed to update flight.");
