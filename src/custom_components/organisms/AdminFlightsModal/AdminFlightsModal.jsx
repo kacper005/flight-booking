@@ -4,12 +4,13 @@ import "./AdminFlightsModal.css";
 import { Button } from "@atoms/Button";
 import { showToast } from "@atoms/Toast/Toast.jsx";
 import { updateFlight } from "@api/flightApi.js";
-import { getAirports, getAirportsArray } from "@api/airportApi.js";
+import { getAirportsArray } from "@api/airportApi.js";
+import { getAirlines } from "@api/airlineApi";
 
 export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
   const [formData, setFormData] = React.useState({ ...flight });
-  const [loadingAirports, setLoadingAirports] = React.useState(true);
   const [airports, setAirports] = React.useState([]);
+  const [airlines, setAirlines] = React.useState([]);
 
   // Reset formData when flight prop changes
   React.useEffect(() => {
@@ -23,12 +24,23 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
         setAirports(data);
       } catch (error) {
         console.error("Failed to fetch airports:", error);
-      } finally {
-        setLoadingAirports(false);
       }
     };
 
     fetchAirports();
+  }, []);
+
+  React.useEffect(() => {
+    const fetchAirlines = async () => {
+      try {
+        const response = await getAirlines(); // <- response, not array
+        setAirlines(response.data); // <- use the actual data array
+      } catch (error) {
+        console.error("Failed to fetch airlines:", error);
+      }
+    };
+
+    fetchAirlines();
   }, []);
 
   const handleChange = (e) => {
@@ -56,6 +68,13 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
       setFormData((prev) => ({
         ...prev,
         roundTrip: value === "true",
+      }));
+    } else if (name === "airline") {
+      const selectedId = parseInt(value);
+      const selectedAirline = airlines.find((a) => a.airlineId === selectedId);
+      setFormData((prev) => ({
+        ...prev,
+        airline: selectedAirline || prev.airline,
       }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
@@ -88,7 +107,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
         status: formData.status,
         airline: {
           airlineId: formData.airline.airlineId,
-        } /* TODO: Make Airline a select */,
+        },
         departureAirport: { airportId: formData.departureAirport.airportId },
         arrivalAirport: { airportId: formData.arrivalAirport.airportId },
 
@@ -108,7 +127,6 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
 
       await updateFlight(flight.flightId, flightPayload);
       onSave({ ...flight, ...flightPayload });
-      onClose();
       showToast({ message: "Flight data saved successfully", type: "success" });
     } catch (error) {
       console.error("Error saving flight data:", error);
@@ -134,15 +152,22 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 name="flightNumber"
                 value={formData.flightNumber}
                 onChange={handleChange}
+                placeholder={"E.g. AB123"}
               />
             </div>
             <div className={"formField"}>
               <label>Airline</label>
-              <input
+              <select
                 name="airline"
-                value={formData.airline.name}
+                value={formData.airline.airlineId}
                 onChange={handleChange}
-              />
+              >
+                {airlines.map((airline) => (
+                  <option key={airline.airlineId} value={airline.airlineId}>
+                    {airline.name}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className={"formField"}>
               <label>Departure Airport</label>
@@ -357,6 +382,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
               name="extraFeatures"
               value={formData.extraFeatures}
               onChange={handleChange}
+              placeholder={"E.g. WiFi, Extra Legroom"}
             />
           </div>
 

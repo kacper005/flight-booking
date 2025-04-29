@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { FAQ } from "@pages/FAQ";
 import { Home } from "@pages/Home";
-import { SignIn } from "@pages/SignIn";
 import { AboutUs } from "@pages/AboutUs";
 import { SignIn } from "@pages/SignIn/SignIn";
 import { SignUp } from "@pages/SignUp/SignUp";

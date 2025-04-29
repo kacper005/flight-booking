@@ -47,4 +47,8 @@ h1 {
     .colEdit {
         display: none;
     }
+    .flightsTable tr:hover {
+        background-color: lightgray;
+        cursor: pointer;
+    }
 }

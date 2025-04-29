@@ -56,18 +56,6 @@ export const AdminFlights = () => {
       {flightsError && <h3>{flightsError}</h3>}
       {!loadingFlights && flights.length === 0 && <h3>No flights found</h3>}
 
-      {/* Used for debugging
-      {!loadingFlights &&
-        flights.length > 0 &&
-        flights.map((flight, index) => (
-          <div key={index}>
-            <h2>{flight.flightNumber}</h2>
-            <p>Price: {flight.prices?.[0]?.price}</p>
-            <p>Price proider: {flight.prices?.[0]?.priceProviderName}</p>
-          </div>
-        ))}
-        */}
-
       {!loadingFlights && flights.length > 0 && (
         <table className={"flightsTable"}>
           <thead>
@@ -85,7 +73,13 @@ export const AdminFlights = () => {
           </thead>
           <tbody>
             {flights.map((flight, index) => (
-              <tr key={index}>
+              <tr
+                key={index}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedFlight(flight);
+                }}
+              >
                 <td className={"colFlightNumber"}>{flight.flightNumber}</td>
                 <td className={"colDeparture"}>
                   {flight.departureAirport.code}
