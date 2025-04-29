@@ -19,7 +19,7 @@ export const DateRangePicker = ({
           selectsRange
           startDate={startDate}
           endDate={endDate}
-          onChange={(update) => setDateRange(update)}
+          onChange={(date) => setDateRange(date)}
           monthsShown={2}
           dateFormat="dd/MM/yyyy"
           placeholderText="Select a departure and return date"

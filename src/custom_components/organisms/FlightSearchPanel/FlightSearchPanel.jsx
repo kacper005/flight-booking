@@ -25,7 +25,16 @@ export const FlightSearchPanel = () => {
     return formatted;
   };
 
-  //TODO: Fix date formatting for one way trip
+  const handleOneWayDateChange = (date) => {
+    if (date) {
+      const normalizedDate = new Date(date);
+      normalizedDate.setHours(0, 0, 0, 0);
+      setOneWayDepartureDate(normalizedDate);
+    } else {
+      setOneWayDepartureDate(null);
+    }
+  };
+
   const handleSearch = () => {
     const start = isRoundTrip
       ? formatDate(dateRange[0])
@@ -72,7 +81,7 @@ export const FlightSearchPanel = () => {
           dateRange={dateRange}
           setDateRange={setDateRange}
           oneWayDate={oneWayDepartureDate}
-          setOneWayDate={setOneWayDepartureDate}
+          setOneWayDate={handleOneWayDateChange}
         />
       </div>
 
