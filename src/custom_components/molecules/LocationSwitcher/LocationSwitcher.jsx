@@ -28,8 +28,12 @@ export default function LocationSwitcher({ from, setFrom, to, setTo }) {
     fetchAirports();
   }, []);
 
-  const fromOptions = airports.filter((airport) => airport.code !== to);
-  const toOptions = airports.filter((airport) => airport.code !== from);
+  const fromOptions = Array.isArray(airports)
+    ? airports.filter((airport) => airport.code !== to)
+    : [];
+  const toOptions = Array.isArray(airports)
+    ? airports.filter((airport) => airport.code !== from)
+    : [];
 
   return (
     <div className="switch-button-container">
