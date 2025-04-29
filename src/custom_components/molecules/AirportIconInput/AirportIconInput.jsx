@@ -1,7 +1,7 @@
 import React from "react";
-import "./IconInput.css";
+import "./AirportIconInput.css";
 
-export const IconInput = ({
+export const AirportIconInput = ({
   className,
   width,
   type,
@@ -35,7 +35,13 @@ export const IconInput = ({
       {list && (
         <datalist id={list}>
           {options.map((option) => (
-            <option value={option} key={option} />
+            <option
+              value={option.code}
+              placeholder={option.name}
+              key={option.code}
+            >
+              {option.name} ({option.city}, {option.country})
+            </option>
           ))}
         </datalist>
       )}

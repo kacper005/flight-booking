@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
 import { Card } from "@atoms/Card/Card";
 
@@ -126,8 +126,8 @@ export const AirlineInformation = () => {
   ];
 
   // State to track selected airline image index
-  const [selectedAirlineIndex, setSelectedAirlineIndex] = useState(null);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [selectedAirlineIndex, setSelectedAirlineIndex] = React.useState(null);
+  const [selectedImageIndex, setSelectedImageIndex] = React.useState(0);
 
   // Open image modal
   const openImageModal = (airlineIndex, imageIndex) => {
@@ -162,7 +162,7 @@ export const AirlineInformation = () => {
   };
 
   // Handle keybord navigation
-  useEffect(() => {
+  React.useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Escape") closeImageModal();
       if (e.key === "ArrowRight") handleNextImage();
@@ -228,7 +228,13 @@ export const AirlineInformation = () => {
                 <h2 style={{ fontSize: "24px", marginBottom: "10px" }}>
                   {airline.name}
                 </h2>
-                <p style={{ lineHeight: "1.6", fontSize: "16px", textAlign: "justify" }}>
+                <p
+                  style={{
+                    lineHeight: "1.6",
+                    fontSize: "16px",
+                    textAlign: "justify",
+                  }}
+                >
                   {airline.description}
                 </p>
               </div>

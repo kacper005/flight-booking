@@ -3,19 +3,23 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./DateRangePicker.css";
 
-export const DateRangePicker = ({ roundTrip }) => {
-  const [dateRange, setDateRange] = React.useState([null, null]);
+export const DateRangePicker = ({
+  roundTrip,
+  dateRange,
+  setDateRange,
+  oneWayDate,
+  setOneWayDate,
+}) => {
   const [startDate, endDate] = dateRange;
-  const [startDate2, setStartDate2] = React.useState(new Date());
 
   return (
     <>
-      {roundTrip == 0 ? (
+      {roundTrip ? (
         <DatePicker
           selectsRange
           startDate={startDate}
           endDate={endDate}
-          onChange={(update) => setDateRange(update)}
+          onChange={(date) => setDateRange(date)}
           monthsShown={2}
           dateFormat="dd/MM/yyyy"
           placeholderText="Select a departure and return date"
@@ -23,10 +27,12 @@ export const DateRangePicker = ({ roundTrip }) => {
         />
       ) : (
         <DatePicker
-          selected={startDate2}
+          selected={oneWayDate}
           dateFormat="dd/MM/yyyy"
-          onChange={(date) => setStartDate2(date)}
+          onChange={(date) => setOneWayDate(date)}
+          placeholderText="Select a departure date"
           minDate={new Date()}
+          isClearable
         />
       )}
     </>

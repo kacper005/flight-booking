@@ -1,4 +1,3 @@
-// src/components/ToastService.jsx
 import { toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

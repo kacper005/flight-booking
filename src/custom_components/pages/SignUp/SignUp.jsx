@@ -6,13 +6,14 @@ import { createUser } from "@api/userApi";
 import { showToast } from "@atoms/Toast/Toast";
 import { BirthDatePicker } from "@atoms/DatePicker/BirthDatePicker";
 import { allCountries } from "country-telephone-data";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
     repeatPassword: "",
-    phoneCode: "+1",
+    phoneCode: "+47",
     phone: "",
     firstName: "",
     lastName: "",
@@ -22,6 +23,8 @@ export const SignUp = () => {
   });
 
   const [errors, setErrors] = React.useState({});
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -65,8 +68,8 @@ export const SignUp = () => {
         age--;
       }
 
-      if (age < 18) {
-        newErrors.dateOfBirth = "You must be at least 18 years old to sign up";
+      if (age < 16) {
+        newErrors.dateOfBirth = "You must be at least 16 years old to sign up";
       }
     }
 
@@ -90,23 +93,22 @@ export const SignUp = () => {
           dateOfBirth: formData.dateOfBirth,
           country: formData.country,
           gender: formData.gender,
-          role: "USER",
-          createdAt: new Date().toLocaleString("en-GB"),
         };
 
         await createUser(userPayload);
         showToast({ message: "Signup Successful!", type: "success" });
+        navigate("/sign-in");
 
         setFormData({
           email: "",
           password: "",
           repeatPassword: "",
-          phoneCode: "+1",
+          phoneCode: "+47",
           phone: "",
           firstName: "",
           lastName: "",
           dateOfBirth: null,
-          country: "",
+          country: null,
           gender: "",
         });
       } catch (error) {
@@ -231,14 +233,17 @@ export const SignUp = () => {
             <small className="error">{errors.dateOfBirth}</small>
           )}
         </div>
-        {/* TODO: Add other countries */}
+
         <div className="input-group">
           <label>Country</label>
           <select
             name="country"
-            value={formData.country}
+            value={formData.country || ""}
             onChange={handleChange}
           >
+            <option value="" disabled>
+              Select your country
+            </option>
             {allCountries.map(({ iso2, name }) => (
               <option key={iso2} value={name}>
                 {name}

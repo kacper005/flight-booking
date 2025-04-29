@@ -1,10 +1,13 @@
 import React from "react";
-import { Input } from "@atoms/Input/Input";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
 import { Card } from "@atoms/Card/Card";
 import { Button } from "@atoms/Button";
-import { CircleCheckBig } from "lucide-react";
+import { CircleCheckBig, LogIn } from "lucide-react";
 import { RouteLink } from "@atoms/RouteLink";
+import { signIn } from "@api/signInApi";
+import { showToast } from "@atoms/Toast/Toast";
+import { useNavigate } from "react-router-dom";
+import "./SignIn.css";
 
 export const SignIn = () => {
   const [formData, setFormData] = React.useState({
@@ -22,19 +25,36 @@ export const SignIn = () => {
   const validate = () => {
     let newErrors = {};
     if (!formData.email.includes("@")) newErrors.email = "Valid email required";
+    if (!formData.password.trim()) newErrors.password = "Password is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      alert("Login Successful!");
-      setFormData({
-        email: "",
-        password: "",
+
+    if (!validate()) return;
+
+    try {
+      const response = await signIn({
+        username: formData.email,
+        password: formData.password,
       });
+
+      const { jwt, user } = response.data;
+
+      localStorage.setItem("token", jwt);
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("isLoggedIn", "true");
+
+      showToast({ message: "Login Successful!", type: "success" });
+      setFormData({ email: "", password: "" });
+      navigate("/home");
+    } catch (error) {
+      const errMsg = error.response?.data || "Login failed. Please try again.";
+      setErrors({ server: errMsg });
     }
   };
 
@@ -67,8 +87,27 @@ export const SignIn = () => {
             <div
               style={{ display: "flex", flexDirection: "column", gap: "20px" }}
             >
-              <Input type={"email"} placeholder={"Email"} />
-              <Input type={"password"} placeholder={"Password"} />
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Email"
+              />
+              {errors.email && <small className="error">{errors.email}</small>}
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Password"
+              />
+              {errors.password && (
+                <small className="error">{errors.password}</small>
+              )}
+              {errors.server && (
+                <small className="error">{errors.server}</small>
+              )}
               <Button width={"100%"} margin={"0px 0px 10px 0px"} type="submit">
                 Sign In
               </Button>

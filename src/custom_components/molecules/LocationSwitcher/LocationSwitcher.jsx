@@ -1,45 +1,43 @@
 import React from "react";
 import "./LocationSwitcher.css";
-import { IconInput } from "../IconInput/IconInput";
-import { PlaneLanding } from "lucide-react";
-import { PlaneTakeoff } from "lucide-react";
-import { ArrowRightLeft } from "lucide-react";
+import { AirportIconInput } from "../AirportIconInput/AirportIconInput";
+import { PlaneLanding, PlaneTakeoff, ArrowRightLeft } from "lucide-react";
+import { getAirports } from "@api/airportApi";
 
-export default function LocationSwitcher() {
-  const [from, setFrom] = React.useState("");
-  const [to, setTo] = React.useState("");
+export default function LocationSwitcher({ from, setFrom, to, setTo }) {
+  const [airports, setAirports] = React.useState([]);
+  const [loadingAirports, setLoadingAirports] = React.useState(true);
+  const [airportsError, setAirportsError] = React.useState(null);
 
   const swapLocations = () => {
     setFrom(to);
     setTo(from);
   };
 
-  const airports = [
-    "New York (JFK)",
-    "Los Angeles (LAX)",
-    "Oslo (OSL)",
-    "Ålesund (AES)",
-    "Amsterdam (AMS)",
-    "London Heathrow (LHR)",
-    "Zurich (ZRH)",
-    "Rome (FCO)",
-    "Paris (CDG)",
-    "Dallas (DFD)",
-    "Chicago (ORD)",
-    "Frankfurt (FRA)",
-    "Tokyo (HND)",
-    "Dubai (DXB)",
-    "Doha (DOH)",
-    "Sydney (SYD)",
-    "Singapore (SIN)",
-  ];
+  React.useEffect(() => {
+    const fetchAirports = async () => {
+      try {
+        const res = await getAirports();
+        setAirports(res.data);
+      } catch (err) {
+        setAirportsError(err.message || "Failed to load airports.");
+      } finally {
+        setLoadingAirports(false);
+      }
+    };
+    fetchAirports();
+  }, []);
 
-  const fromOptions = airports.filter((airport) => airport !== to);
-  const toOptions = airports.filter((airport) => airport !== from);
+  const fromOptions = Array.isArray(airports)
+    ? airports.filter((airport) => airport.code !== to)
+    : [];
+  const toOptions = Array.isArray(airports)
+    ? airports.filter((airport) => airport.code !== from)
+    : [];
 
   return (
     <div className="switch-button-container">
-      <IconInput
+      <AirportIconInput
         type="text"
         placeholder="From"
         value={from}
@@ -55,7 +53,7 @@ export default function LocationSwitcher() {
         <ArrowRightLeft className="swap-icon" />
       </button>
 
-      <IconInput
+      <AirportIconInput
         type="text"
         placeholder="To"
         value={to}
