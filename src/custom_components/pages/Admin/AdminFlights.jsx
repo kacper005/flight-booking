@@ -1,12 +1,14 @@
 import React from "react";
 import "./AdminFlights.css";
 import { ButtonSmall } from "../../atoms/ButtonSmall";
-import { getFlights } from "@api/flightApi.js";
+import { getFlights, updateFlight } from "@api/flightApi.js";
+import { AdminFlightsModal } from "@organisms/AdminFlightsModal/AdminFlightsModal.jsx";
 
 export const AdminFlights = () => {
   const [flights, setFlights] = React.useState([]);
   const [loadingFlights, setLoading] = React.useState(true);
   const [flightsError, setError] = React.useState(null);
+  const [selectedFlight, setSelectedFlight] = React.useState(null);
 
   React.useEffect(() => {
     const fetchFlights = async () => {
@@ -31,12 +33,37 @@ export const AdminFlights = () => {
     }).format(date);
   };
 
+  const handleSave = async (updatedFlight) => {
+    try {
+      await updateFlight(updatedFlight.id, updatedFlight);
+      setFlights((prev) =>
+        prev.map((f) => (f.id === updatedFlight.id ? updatedFlight : f)),
+      );
+      setSelectedFlight(null);
+    } catch (error) {
+      console.error("Error updating flight:", error);
+      setError("Failed to update flight.");
+    }
+  };
+
   return (
     <div className={"adminClassContainer"}>
       <h1>Edit Flights</h1>
       {loadingFlights && <h3>Loading Flights...</h3>}
       {flightsError && <h3>{flightsError}</h3>}
       {!loadingFlights && flights.length === 0 && <h3>No flights found</h3>}
+
+      {/* Used for debugging
+      {!loadingFlights &&
+        flights.length > 0 &&
+        flights.map((flight, index) => (
+          <div key={index}>
+            <h2>{flight.flightNumber}</h2>
+            <p>Price: {flight.prices?.[0]?.price}</p>
+            <p>Price proider: {flight.prices?.[0]?.priceProviderName}</p>
+          </div>
+        ))}
+        */}
 
       {!loadingFlights && flights.length > 0 && (
         <table className={"flightsTable"}>
@@ -73,12 +100,27 @@ export const AdminFlights = () => {
                 </td>
                 <td className={"colClasses"}>{flight.availableClasses}</td>
                 <td className={"colEdit"}>
-                  <ButtonSmall>Edit</ButtonSmall>
+                  <ButtonSmall
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedFlight(flight);
+                    }}
+                  >
+                    Edit
+                  </ButtonSmall>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      )}
+
+      {selectedFlight && (
+        <AdminFlightsModal
+          flight={selectedFlight}
+          onClose={() => setSelectedFlight(null)}
+          onSave={handleSave}
+        />
       )}
     </div>
   );

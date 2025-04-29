@@ -8,7 +8,7 @@ export const Button = ({
   maxHeight,
   bgColor = "var(--mainColorLight)",
   hoverBgColor = "var(--secondaryColor)",
-  color = "var(--textColor)",
+  color = "var(--textColor2)",
   textAlign,
   padding = "10px 20px",
   margin,
