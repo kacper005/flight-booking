@@ -208,9 +208,11 @@ export const SearchResultCard = ({
             </div>
           )}
           <p style={{ marginTop: "auto", fontSize: "14px", color: "#555" }}>
-            {outboundOperatingAirlineName === returnOperatingAirlineName
-              ? outboundOperatingAirlineName
-              : `${outboundOperatingAirlineName} & ${returnOperatingAirlineName}`}
+            {returnOperatingAirlineName
+              ? outboundOperatingAirlineName === returnOperatingAirlineName
+                ? outboundOperatingAirlineName
+                : `${outboundOperatingAirlineName} & ${returnOperatingAirlineName}`
+              : outboundOperatingAirlineName}
           </p>
         </div>
 
