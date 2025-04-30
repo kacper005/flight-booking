@@ -3,6 +3,7 @@ import "./AdminFlights.css";
 import { ButtonSmall } from "../../atoms/ButtonSmall";
 import { getFlights, updateFlight } from "@api/flightApi.js";
 import { AdminFlightsModal } from "@organisms/AdminFlightsModal/AdminFlightsModal.jsx";
+import { Button } from "@atoms/Button.jsx";
 
 export const AdminFlights = () => {
   const [flights, setFlights] = React.useState([]);
@@ -52,6 +53,8 @@ export const AdminFlights = () => {
   return (
     <div className={"adminClassContainer"}>
       <h1>Edit Flights</h1>
+      <Button margin={"0 0 20px 0"}>Add Flight (WIP)</Button>
+
       {loadingFlights && <h3>Loading Flights...</h3>}
       {flightsError && <h3>{flightsError}</h3>}
       {!loadingFlights && flights.length === 0 && <h3>No flights found</h3>}
