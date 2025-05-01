@@ -88,7 +88,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
       formData.departureAirport.airportId === formData.arrivalAirport.airportId
     ) {
       const userConfirmed = window.confirm(
-        "Departure and arrival airports are the same. Do you want to continue?",
+        "Departure and arrival airports are the same. Do you want to continue?"
       );
 
       if (!userConfirmed) {
@@ -269,6 +269,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                   <option value={"NOK"}>NOK</option>
                   <option value={"SGD"}>SGD</option>
                   <option value={"USD"}>USD</option>
+                  <option value={"PLN"}>PLN</option>
                 </select>
               </div>
             </div>

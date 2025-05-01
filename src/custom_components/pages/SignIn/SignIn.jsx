@@ -2,11 +2,12 @@ import React from "react";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
 import { Card } from "@atoms/Card/Card";
 import { Button } from "@atoms/Button";
-import { CircleCheckBig, LogIn } from "lucide-react";
+import { CircleCheckBig } from "lucide-react";
 import { RouteLink } from "@atoms/RouteLink";
 import { signIn } from "@api/signInApi";
 import { showToast } from "@atoms/Toast/Toast";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@context/AuthContext";
 import "./SignIn.css";
 
 export const SignIn = () => {
@@ -31,6 +32,8 @@ export const SignIn = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const { login } = useAuth();
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,15 +46,13 @@ export const SignIn = () => {
         password: formData.password,
       });
 
-      const { jwt, user } = response.data;
+      const { jwt } = response.data;
 
-      localStorage.setItem("token", jwt);
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("isLoggedIn", "true");
+      await login(jwt);
 
       showToast({ message: "Login Successful!", type: "success" });
       setFormData({ email: "", password: "" });
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       const errMsg = error.response?.data || "Login failed. Please try again.";
       setErrors({ server: errMsg });
@@ -127,7 +128,7 @@ export const SignIn = () => {
           alignItems="center"
           maxWidth={"500px"}
         >
-          <h1 style={{ color: "var(--textColor)" }}>New to flight finder?</h1>
+          <h1 style={{ color: "var(--textColor)" }}>New to Flight Finder?</h1>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "10px" }}
           >

@@ -1,9 +1,10 @@
 import React from "react";
-import { PageTemplate } from "@templates/PageTemplate/PageTempate";
-import { Button } from "@atoms/Button";
-import { SearchResultCard } from "@organisms/SearchResultCard/SearchResultCard";
 import { useLocation } from "react-router-dom";
 import { getSearchFlights } from "@api/flightApi";
+import { Button } from "@atoms/Button";
+import LoadingSpinner from "@atoms/LoadingSpinner";
+import { SearchResultCard } from "@organisms/SearchResultCard/SearchResultCard";
+import { PageTemplate } from "@templates/PageTemplate/PageTempate";
 
 export const SearchResults = () => {
   const [flights, setFlights] = React.useState([]);
@@ -120,7 +121,6 @@ export const SearchResults = () => {
               justifyContent: "center",
             }}
           >
-            {loadingFlights && <h3>Loading Flights...</h3>}
             {flightsError && (
               <h3>
                 {flightsError || "An error occurred while fetching flights."}
@@ -128,6 +128,7 @@ export const SearchResults = () => {
             )}
             {flights?.length === 0 && <h3>No flights found</h3>}
           </div>
+          {loadingFlights && <LoadingSpinner />}
 
           {flights?.map((flight, index) => {
             const outbound = flight.outboundFlight || flight;

@@ -4,6 +4,7 @@ import { ButtonSmall } from "../../atoms/ButtonSmall";
 import { getFlights, updateFlight } from "@api/flightApi.js";
 import { AdminFlightsModal } from "@organisms/AdminFlightsModal/AdminFlightsModal.jsx";
 import { Button } from "@atoms/Button.jsx";
+import LoadingSpinner from "@atoms/LoadingSpinner";
 
 export const AdminFlights = () => {
   const [flights, setFlights] = React.useState([]);
@@ -37,13 +38,9 @@ export const AdminFlights = () => {
   const handleSave = async (updatedFlight) => {
     try {
       await updateFlight(updatedFlight.flightId, updatedFlight);
-      setFlights((prev) =>
-        prev.map((f) =>
-          f.flightId === updatedFlight.flightId ? updatedFlight : f,
-        ),
-      );
+      const res = await getFlights();
+      setFlights(res.data);
       setSelectedFlight(null);
-      window.location.reload();
     } catch (error) {
       console.error("Error updating flight:", error);
       setError("Failed to update flight.");
@@ -54,8 +51,7 @@ export const AdminFlights = () => {
     <div className={"adminClassContainer"}>
       <h1>Edit Flights</h1>
       <Button margin={"0 0 20px 0"}>Add Flight (WIP)</Button>
-
-      {loadingFlights && <h3>Loading Flights...</h3>}
+      {loadingFlights && <LoadingSpinner />}
       {flightsError && <h3>{flightsError}</h3>}
       {!loadingFlights && flights.length === 0 && <h3>No flights found</h3>}
 
