@@ -6,11 +6,14 @@ import { showToast } from "@atoms/Toast/Toast.jsx";
 import { updateFlight } from "@api/flightApi.js";
 import { getAirportsArray } from "@api/airportApi.js";
 import { getAirlines } from "@api/airlineApi";
+import { getPrices, updatePrice } from "@api/priceApi.js";
 
 export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
   const [formData, setFormData] = React.useState({ ...flight });
   const [airports, setAirports] = React.useState([]);
   const [airlines, setAirlines] = React.useState([]);
+  const [priceProviders, setPriceProviders] = React.useState([]);
+  const [currency, setCurrency] = React.useState([]);
 
   // Reset formData when flight prop changes
   React.useEffect(() => {
@@ -43,8 +46,55 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
     fetchAirlines();
   }, []);
 
+  React.useEffect(() => {
+    const fetchPriceProviders = async () => {
+      try {
+        const response = await getPrices();
+        const providers = [
+          ...new Set(response.data.map((p) => p.priceProviderName)),
+        ]; // Unique list
+        setPriceProviders(providers);
+      } catch (error) {
+        console.error("Failed to fetch price providers:", error);
+      }
+    };
+
+    fetchPriceProviders();
+  }, []);
+
+  React.useEffect(() => {
+    const fetchCurrency = async () => {
+      try {
+        const response = await getPrices();
+        const currencies = [...new Set(response.data.map((p) => p.currency))];
+        setCurrency(currencies);
+      } catch (error) {
+        console.error("Failed to fetch price currencies:", error);
+      }
+    };
+
+    fetchCurrency();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    const arrayMatch = name.match(/(\w+)\[(\d+)]/);
+    if (arrayMatch) {
+      const [, field, indexStr] = arrayMatch;
+      const index = parseInt(indexStr, 10);
+
+      setFormData((prev) => {
+        const updatedPrices = [...(prev.prices || [])];
+        updatedPrices[index] = {
+          ...updatedPrices[index],
+          [field]: field === "price" ? parseFloat(value) : value,
+        };
+        return { ...prev, prices: updatedPrices };
+      });
+      return;
+    }
+
     const upperValue = value.toUpperCase();
 
     // Handle nested objects like departureAirport.code
@@ -110,19 +160,6 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
         },
         departureAirport: { airportId: formData.departureAirport.airportId },
         arrivalAirport: { airportId: formData.arrivalAirport.airportId },
-
-        prices: [
-          {
-            priceId: formData.prices[0].priceId,
-            /*currency: formData.prices[0].currency,
-            priceProviderName: formData.prices[0].priceProviderName,*/
-          },
-          {
-            priceId: formData.prices[1].priceId,
-            /*currency: formData.prices[1].currency,
-            priceProviderName: formData.prices[1].priceProviderName,*/
-          },
-        ],
       };
 
       await updateFlight(flight.flightId, flightPayload);
@@ -136,7 +173,36 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
           : error.response?.data?.message ||
             "Something went wrong while saving flight data";
 
-      showToast({ message: `Failed to add flight. ${message}`, type: "error" });
+      showToast({
+        message: `Failed to update flight. ${message}`,
+        type: "error",
+      });
+    }
+
+    try {
+      const updatePromises = formData.prices.map((p) =>
+        updatePrice(p.priceId, {
+          priceId: p.priceId,
+          price: p.price,
+          currency: p.currency,
+          priceProviderName: p.priceProviderName,
+        }),
+      );
+
+      await Promise.all(updatePromises);
+      showToast({ message: "Price data saved successfully", type: "success" });
+    } catch (error) {
+      console.error("Error saving price data:", error);
+      const message =
+        typeof error.response?.data === "string"
+          ? error.response.data
+          : error.response?.data?.message ||
+            "Something went wrong while saving price data";
+
+      showToast({
+        message: `Failed to update price. ${message}`,
+        type: "error",
+      });
     }
   };
 
@@ -251,7 +317,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
               <div className={"formField"}>
                 <label>Price</label>
                 <input
-                  name="price"
+                  name="price[0]"
                   type="number"
                   value={formData.prices?.[0]?.price}
                   onChange={handleChange}
@@ -260,49 +326,36 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
               <div className={"formField"} id={"formFieldCurrency"}>
                 <label>Currency</label>
                 <select
-                  name={"currency"}
+                  name={"currency[0]"}
                   value={formData.prices?.[0]?.currency}
                   onChange={handleChange}
                 >
-                  <option value={"EUR"}>EUR</option>
-                  <option value={"GBP"}>GBP</option>
-                  <option value={"NOK"}>NOK</option>
-                  <option value={"SGD"}>SGD</option>
-                  <option value={"USD"}>USD</option>
+                  {currency
+                    .slice() // make a copy to avoid mutating state
+                    .sort((a, b) => a.localeCompare(b))
+                    .map((provider, i) => (
+                      <option key={i} value={provider}>
+                        {provider}
+                      </option>
+                    ))}
                 </select>
               </div>
             </div>
             <div className={"formField"}>
               <label>Price Provider</label>{" "}
               <select
-                name="prices[0].priceProviderName"
+                name="priceProviderName[0]"
                 value={formData.prices?.[0]?.priceProviderName || ""}
                 onChange={handleChange}
               >
-                <option value="Air France Website">Air France Website</option>
-                <option value="American Airlines Website">
-                  American Airlines Website
-                </option>
-                <option value="CheapOair">CheapOair</option>
-                <option value="eDreams">eDreams</option>
-                <option value="Emirates Website">Emirates Website</option>
-                <option value="Expedia">Expedia</option>
-                <option value="Google Flights">Google Flights</option>
-                <option value="JustFly">JustFly</option>
-                <option value="Kayak">Kayak</option>
-                <option value="Lufthansa Website">Lufthansa Website</option>
-                <option value="Momondo">Momondo</option>
-                <option value="OneTravel">OneTravel</option>
-                <option value="Orbitz">Orbitz</option>
-                <option value="Priceline">Priceline</option>
-                <option value="Qatar Airways Website">
-                  Qatar Airways Website
-                </option>
-                <option value="Singapore Airlines Website">
-                  Singapore Airlines Website
-                </option>
-                <option value="SkyScanner">SkyScanner</option>
-                <option value="Travelocity">Travelocity</option>
+                {priceProviders
+                  .slice() // make a copy to avoid mutating state
+                  .sort((a, b) => a.localeCompare(b))
+                  .map((provider, i) => (
+                    <option key={i} value={provider}>
+                      {provider}
+                    </option>
+                  ))}
               </select>
             </div>
           </div>
@@ -313,7 +366,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
               <div className={"formField"}>
                 <label>Price</label>
                 <input
-                  name="price"
+                  name="price[1]"
                   type="number"
                   value={formData.prices?.[1]?.price}
                   onChange={handleChange}
@@ -322,49 +375,36 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
               <div className={"formField"} id={"formFieldCurrency"}>
                 <label>Currency</label>
                 <select
-                  name={"currency"}
+                  name={"currency[1]"}
                   value={formData.prices?.[1]?.currency}
                   onChange={handleChange}
                 >
-                  <option value={"EUR"}>EUR</option>
-                  <option value={"GBP"}>GBP</option>
-                  <option value={"NOK"}>NOK</option>
-                  <option value={"SGD"}>SGD</option>
-                  <option value={"USD"}>USD</option>
+                  {currency
+                    .slice() // make a copy to avoid mutating state
+                    .sort((a, b) => a.localeCompare(b))
+                    .map((provider, i) => (
+                      <option key={i} value={provider}>
+                        {provider}
+                      </option>
+                    ))}
                 </select>
               </div>
             </div>
             <div className={"formField"}>
               <label>Price Provider</label>{" "}
               <select
-                name="priceProviderName"
+                name="priceProviderName[1]"
                 value={formData.prices?.[1]?.priceProviderName || ""}
                 onChange={handleChange}
               >
-                <option value="Air France Website">Air France Website</option>
-                <option value="American Airlines Website">
-                  American Airlines Website
-                </option>
-                <option value="CheapOair">CheapOair</option>
-                <option value="eDreams">eDreams</option>
-                <option value="Emirates Website">Emirates Website</option>
-                <option value="Expedia">Expedia</option>
-                <option value="Google Flights">Google Flights</option>
-                <option value="JustFly">JustFly</option>
-                <option value="Kayak">Kayak</option>
-                <option value="Lufthansa Website">Lufthansa Website</option>
-                <option value="Momondo">Momondo</option>
-                <option value="OneTravel">OneTravel</option>
-                <option value="Orbitz">Orbitz</option>
-                <option value="Priceline">Priceline</option>
-                <option value="Qatar Airways Website">
-                  Qatar Airways Website
-                </option>
-                <option value="Singapore Airlines Website">
-                  Singapore Airlines Website
-                </option>
-                <option value="SkyScanner">SkyScanner</option>
-                <option value="Travelocity">Travelocity</option>
+                {priceProviders
+                  .slice() // make a copy to avoid mutating state
+                  .sort((a, b) => a.localeCompare(b))
+                  .map((provider, i) => (
+                    <option key={i} value={provider}>
+                      {provider}
+                    </option>
+                  ))}
               </select>
             </div>
           </div>
@@ -387,7 +427,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
           </div>
 
           <div className="modalActions">
-            <Button width={"101px"} margin={"0 32px 0 0"} type={"submit"}>
+            <Button width={"101px"} margin={"0 0 0 0"} type={"submit"}>
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>

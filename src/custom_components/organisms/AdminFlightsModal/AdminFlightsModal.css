@@ -32,6 +32,12 @@
 }
 
 .modalActions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 32px;
+    align-items: center;
+    width: 100%;
     margin-top: 36px;
     text-align: center;
 }
@@ -103,4 +109,50 @@
 .h3Price {
     font-size: 1.8rem;
     padding: 20px 0 8px 0;
+}
+
+@media screen and (max-width: 519px) {
+    .modalContent{
+        max-width: 380px;
+    }
+
+    .modalGrid{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modalContent textarea,
+    .modalContent input,
+    .modalContent select{
+        width: 260px;
+    }
+
+    .formPriceCurrency input,
+    .formPriceCurrency select {
+        width: 117px;
+    }
+}
+
+@media screen and (max-width: 379px) {
+    .modalContent{
+        max-width: 260px;
+        align-items: center;
+        padding: 20px 40px;
+    }
+
+    .modalContent textarea,
+    .modalContent input,
+    .modalContent select{
+        width: 180px;
+    }
+
+    .formPriceCurrency input,
+    .formPriceCurrency select {
+        width: 77px;
+    }
+
+    .modalActions{
+        flex-direction: column;
+        gap: 16px;
+    }
 }
