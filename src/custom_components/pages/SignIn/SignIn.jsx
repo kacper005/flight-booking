@@ -94,6 +94,7 @@ export const SignIn = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Email"
+                autoComplete="username"
               />
               {errors.email && <small className="error">{errors.email}</small>}
               <input
@@ -102,6 +103,7 @@ export const SignIn = () => {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Password"
+                autoComplete="current-password"
               />
               {errors.password && (
                 <small className="error">{errors.password}</small>

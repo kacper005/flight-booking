@@ -6,6 +6,7 @@ const AuthContext = React.createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [user, setUser] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
 
   const fetchUser = async () => {
     try {
@@ -15,6 +16,8 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.error("Failed to fetch user:", err);
       logout();
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -41,12 +44,14 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("token");
     if (token) {
       fetchUser();
+    } else {
+      setLoading(false);
     }
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, user, login, logout, fetchUser }}
+      value={{ isLoggedIn, user, login, logout, fetchUser, loading }}
     >
       {children}
     </AuthContext.Provider>

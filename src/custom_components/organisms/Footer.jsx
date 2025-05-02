@@ -6,8 +6,11 @@ import visaLogo from "@assets/logos/visa-white-mark.svg";
 import mastercardLogo from "@assets/logos/mastercard-mark.svg";
 import applePayLogo from "@assets/logos/applepay-mark.svg";
 import googlePayLogo from "@assets/logos/googlepay-mark.svg";
+import { useAuth } from "@context/AuthContext";
 
 export const Footer = () => {
+  const { isLoggedIn } = useAuth();
+
   return (
     <footer style={{ marginTop: "auto" }}>
       <nav
@@ -78,17 +81,30 @@ export const Footer = () => {
         <div
           style={{ display: "grid", alignItems: "center", lineHeight: "1.5" }}
         >
-          <p style={{ fontWeight: "bold", marginBottom: "0px" }}>Log in</p>
+          <p style={{ fontWeight: "bold", marginBottom: "0px" }}>
+            {isLoggedIn ? `Profile` : `Log In`}
+          </p>
           <span style={{ marginTop: "10px" }} />
-          <RouteLink to="/sign-in" margin={0} textDecoration="underline">
-            Log in
-          </RouteLink>
-          <RouteLink to="/sign-up" margin={0} textDecoration="underline">
-            Register
-          </RouteLink>
-          <RouteLink to="/#" margin={0} textDecoration="underline">
-            My bookings
-          </RouteLink>
+          {!isLoggedIn && (
+            <RouteLink to="/sign-in" margin={0} textDecoration="underline">
+              Log in
+            </RouteLink>
+          )}
+          {!isLoggedIn && (
+            <RouteLink to="/sign-up" margin={0} textDecoration="underline">
+              Register
+            </RouteLink>
+          )}
+          {isLoggedIn && (
+            <RouteLink to="/profile" margin={0} textDecoration="underline">
+              Profile
+            </RouteLink>
+          )}
+          {isLoggedIn && (
+            <RouteLink to="/saved-trips" margin={0} textDecoration="underline">
+              Saved trips
+            </RouteLink>
+          )}
         </div>
       </nav>
 

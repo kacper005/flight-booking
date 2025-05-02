@@ -136,6 +136,7 @@ export const SignUp = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder="Enter your email"
+            autoComplete="email"
           />
           {errors.email && <small className="error">{errors.email}</small>}
         </div>
@@ -148,6 +149,7 @@ export const SignUp = () => {
             value={formData.password}
             onChange={handleChange}
             placeholder="Create a password"
+            autoComplete="new-password"
           />
           {errors.password && (
             <small className="error">{errors.password}</small>
@@ -162,6 +164,7 @@ export const SignUp = () => {
             value={formData.repeatPassword}
             onChange={handleChange}
             placeholder="Repeat your password"
+            autoComplete="new-password"
           />
           {errors.repeatPassword && (
             <small className="error">{errors.repeatPassword}</small>
@@ -190,6 +193,7 @@ export const SignUp = () => {
               onChange={handleChange}
               placeholder="Enter your mobile number"
               className="phone-input"
+              autoComplete="tel"
             />
           </div>
           {errors.phone && <small className="error">{errors.phone}</small>}
