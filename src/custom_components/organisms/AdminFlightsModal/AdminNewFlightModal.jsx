@@ -1,24 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./AdminFlightsModal.css";
-import { Button } from "@atoms/Button";
-import { showToast } from "@atoms/Toast/Toast.jsx";
-import { updateFlight } from "@api/flightApi.js";
+import { Button } from "@atoms/Button.jsx";
 import { getAirportsArray } from "@api/airportApi.js";
-import { getAirlines } from "@api/airlineApi";
-import { getPrices, updatePrice } from "@api/priceApi.js";
+import { getAirlines } from "@api/airlineApi.js";
+import { getPrices } from "@api/priceApi.js";
+import { createFlight } from "@api/flightApi.js";
+import { showToast } from "@atoms/Toast/Toast.jsx";
 
-export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
-  const [formData, setFormData] = React.useState({ ...flight });
+export const AdminNewFlightModal = ({ onClose, onSave }) => {
+  const [formData, setFormData] = React.useState({
+    flightNumber: "",
+    airline: { airlineId: "" },
+    departureAirport: { airportId: "", code: "" },
+    arrivalAirport: { airportId: "", code: "" },
+    roundTrip: "",
+    status: "",
+    departureTime: "",
+    arrivalTime: "",
+    availableClasses: "",
+    extraFeatures: "",
+    prices: [
+      { price: "", currency: "", priceProviderName: "" },
+      { price: "", currency: "", priceProviderName: "" },
+    ],
+  });
   const [airports, setAirports] = React.useState([]);
   const [airlines, setAirlines] = React.useState([]);
   const [priceProviders, setPriceProviders] = React.useState([]);
   const [currency, setCurrency] = React.useState([]);
-
-  // Reset formData when flight prop changes
-  React.useEffect(() => {
-    setFormData({ ...flight });
-  }, [flight]);
 
   React.useEffect(() => {
     const fetchAirports = async () => {
@@ -79,55 +89,57 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    const arrayMatch = name.match(/(\w+)\[(\d+)]/);
-    if (arrayMatch) {
-      const [, field, indexStr] = arrayMatch;
-      const index = parseInt(indexStr, 10);
-
+    const priceMatch = name.match(
+      /^(price|currency|priceProviderName)\[(\d+)\]$/,
+    );
+    if (priceMatch) {
+      const [, field, index] = priceMatch;
       setFormData((prev) => {
-        const updatedPrices = [...(prev.prices || [])];
-        updatedPrices[index] = {
-          ...updatedPrices[index],
-          [field]: field === "price" ? parseFloat(value) : value,
+        const newPrices = [...prev.prices];
+        newPrices[index] = {
+          ...newPrices[index],
+          [field]: value,
         };
-        return { ...prev, prices: updatedPrices };
+        return { ...prev, prices: newPrices };
       });
       return;
     }
 
-    const upperValue = value.toUpperCase();
-
-    // Handle nested objects like departureAirport.code
-    if (name === "departureAirport") {
-      const matched = airports.find((a) => a.code === upperValue);
+    // Handle nested objects like airline, departureAirport, arrivalAirport
+    if (name === "airline") {
       setFormData((prev) => ({
         ...prev,
-        departureAirport: matched
-          ? { ...matched, code: upperValue }
-          : { ...prev.departureAirport, code: upperValue },
+        airline: {
+          ...prev.airline,
+          airlineId: Number(value),
+        },
+      }));
+    } else if (name === "departureAirport") {
+      const selected = airports.find((a) => a.code === value);
+      if (!selected) return;
+      setFormData((prev) => ({
+        ...prev,
+        departureAirport: {
+          airportId: selected.airportId,
+          code: selected.code,
+        },
       }));
     } else if (name === "arrivalAirport") {
-      const matched = airports.find((a) => a.code === upperValue);
+      const selected = airports.find((a) => a.code === value);
+      if (!selected) return;
       setFormData((prev) => ({
         ...prev,
-        arrivalAirport: matched
-          ? { ...matched, code: upperValue }
-          : { ...prev.arrivalAirport, code: value },
-      }));
-    } else if (name === "roundTrip") {
-      setFormData((prev) => ({
-        ...prev,
-        roundTrip: value === "true",
-      }));
-    } else if (name === "airline") {
-      const selectedId = parseInt(value);
-      const selectedAirline = airlines.find((a) => a.airlineId === selectedId);
-      setFormData((prev) => ({
-        ...prev,
-        airline: selectedAirline || prev.airline,
+        arrivalAirport: {
+          airportId: selected.airportId,
+          code: selected.code,
+        },
       }));
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      // Default flat field handling
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
     }
   };
 
@@ -162,9 +174,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
         arrivalAirport: { airportId: formData.arrivalAirport.airportId },
       };
 
-      await updateFlight(flight.flightId, flightPayload);
-      onSave({ ...flight, ...flightPayload });
-      showToast({ message: "Flight data saved successfully", type: "success" });
+      await createFlight(flightPayload);
+      onSave({ ...flightPayload });
+      showToast({ message: "Flight added successfully", type: "success" });
     } catch (error) {
       console.error("Error saving flight data:", error);
       const message =
@@ -174,42 +186,16 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
             "Something went wrong while saving flight data";
 
       showToast({
-        message: `Failed to update flight. ${message}`,
-        type: "error",
-      });
-    }
-
-    try {
-      const updatePromises = formData.prices.map((p) =>
-        updatePrice(p.priceId, {
-          priceId: p.priceId,
-          price: p.price,
-          currency: p.currency,
-          priceProviderName: p.priceProviderName,
-        }),
-      );
-
-      await Promise.all(updatePromises);
-      showToast({ message: "Price data saved successfully", type: "success" });
-    } catch (error) {
-      console.error("Error saving price data:", error);
-      const message =
-        typeof error.response?.data === "string"
-          ? error.response.data
-          : error.response?.data?.message ||
-            "Something went wrong while saving price data";
-
-      showToast({
-        message: `Failed to update price. ${message}`,
+        message: `Failed to add flight. ${message}`,
         type: "error",
       });
     }
   };
 
   return (
-    <div className="modalOverlay" onClick={onClose}>
-      <div className="modalContent" onClick={(e) => e.stopPropagation()}>
-        <h2>Edit Flight</h2>
+    <div className={"modalOverlay"} onClick={onClose}>
+      <div className={"modalContent"} onClick={(e) => e.stopPropagation()}>
+        <h2>Add New Flight</h2>
         <form onSubmit={handleSubmit}>
           <div className="modalGrid">
             <div className={"formField"}>
@@ -228,6 +214,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 value={formData.airline.airlineId}
                 onChange={handleChange}
               >
+                <option value={""} disabled={true}>
+                  - Select Airline -
+                </option>
                 {airlines.map((airline) => (
                   <option key={airline.airlineId} value={airline.airlineId}>
                     {airline.name}
@@ -242,6 +231,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 value={formData.departureAirport.code}
                 onChange={handleChange}
               >
+                <option value={""} disabled={true}>
+                  - Select Airport -
+                </option>
                 {airports
                   .slice() // make a copy to avoid mutating state
                   .sort((a, b) => a.city.localeCompare(b.city))
@@ -259,6 +251,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 value={formData.arrivalAirport.code}
                 onChange={handleChange}
               >
+                <option value={""} disabled={true}>
+                  - Select Airport -
+                </option>
                 {airports
                   .slice() // make a copy to avoid mutating state
                   .sort((a, b) => a.city.localeCompare(b.city))
@@ -276,6 +271,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 value={formData.roundTrip}
                 onChange={handleChange}
               >
+                <option value={""} disabled={true}>
+                  - Select Status -
+                </option>
                 <option value="true">True</option>
                 <option value="false">False</option>
               </select>
@@ -287,6 +285,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 value={formData.status}
                 onChange={handleChange}
               >
+                <option value={""} disabled={true}>
+                  - Select Status -
+                </option>
                 <option value="SCHEDULED">Scheduled</option>
                 <option value="CANCELLED">Cancelled</option>
                 <option value="DELAYED">Delayed</option>
@@ -330,6 +331,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                   value={formData.prices?.[0]?.currency}
                   onChange={handleChange}
                 >
+                  <option value={""} disabled={true}>
+                    ---
+                  </option>
                   {currency
                     .slice() // make a copy to avoid mutating state
                     .sort((a, b) => a.localeCompare(b))
@@ -348,6 +352,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 value={formData.prices?.[0]?.priceProviderName || ""}
                 onChange={handleChange}
               >
+                <option value={""} disabled={true}>
+                  - Select Provider -
+                </option>
                 {priceProviders
                   .slice() // make a copy to avoid mutating state
                   .sort((a, b) => a.localeCompare(b))
@@ -379,6 +386,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                   value={formData.prices?.[1]?.currency}
                   onChange={handleChange}
                 >
+                  <option value={""} disabled={true}>
+                    ---
+                  </option>
                   {currency
                     .slice() // make a copy to avoid mutating state
                     .sort((a, b) => a.localeCompare(b))
@@ -397,6 +407,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 value={formData.prices?.[1]?.priceProviderName || ""}
                 onChange={handleChange}
               >
+                <option value={""} disabled={true}>
+                  - Select Provider -
+                </option>
                 {priceProviders
                   .slice() // make a copy to avoid mutating state
                   .sort((a, b) => a.localeCompare(b))
@@ -427,10 +440,10 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
           </div>
 
           <div className="modalActions">
-            <Button width={"101px"} type={"submit"}>
-              Save
+            <Button type={"submit"}>Add Flight</Button>
+            <Button width={"135px"} onClick={onClose}>
+              Cancel
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
           </div>
         </form>
       </div>
@@ -438,8 +451,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
   );
 };
 
-AdminFlightsModal.propTypes = {
-  flight: PropTypes.object.isRequired,
+AdminNewFlightModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
 };

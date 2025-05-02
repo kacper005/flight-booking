@@ -1,8 +1,9 @@
 import React from "react";
 import "./AdminFlights.css";
 import { ButtonSmall } from "../../atoms/ButtonSmall";
-import { getFlights, updateFlight } from "@api/flightApi.js";
+import { createFlight, getFlights, updateFlight } from "@api/flightApi.js";
 import { AdminFlightsModal } from "@organisms/AdminFlightsModal/AdminFlightsModal.jsx";
+import { AdminNewFlightModal } from "@organisms/AdminFlightsModal/AdminNewFlightModal.jsx";
 import { Button } from "@atoms/Button.jsx";
 import LoadingSpinner from "@atoms/LoadingSpinner";
 
@@ -11,6 +12,7 @@ export const AdminFlights = () => {
   const [loadingFlights, setLoading] = React.useState(true);
   const [flightsError, setError] = React.useState(null);
   const [selectedFlight, setSelectedFlight] = React.useState(null);
+  const [showAddFlightModal, setShowAddFlightModal] = React.useState(false);
 
   React.useEffect(() => {
     const fetchFlights = async () => {
@@ -43,14 +45,36 @@ export const AdminFlights = () => {
       setSelectedFlight(null);
     } catch (error) {
       console.error("Error updating flight:", error);
-      setError("Failed to update flight.");
     }
   };
+
+  const handleAddFlight = async () => {
+    try {
+      toggleModal();
+      const res = await getFlights();
+      setFlights(res.data);
+    } catch (error) {
+      console.error("Error adding flight:", error);
+    }
+  };
+
+  const toggleModal = () => {
+    setShowAddFlightModal(!showAddFlightModal);
+  };
+
+  // Prevent scrolling behind modal when modal is open
+  if (selectedFlight || showAddFlightModal) {
+    document.body.classList.add("active-modal");
+  } else {
+    document.body.classList.remove("active-modal");
+  }
 
   return (
     <div className={"adminClassContainer"}>
       <h1>Edit Flights</h1>
-      <Button margin={"0 0 20px 0"}>Add Flight (WIP)</Button>
+      <Button margin={"0 0 20px 0"} onClick={toggleModal}>
+        Add Flight
+      </Button>
       {loadingFlights && <LoadingSpinner />}
       {flightsError && <h3>{flightsError}</h3>}
       {!loadingFlights && flights.length === 0 && <h3>No flights found</h3>}
@@ -116,6 +140,13 @@ export const AdminFlights = () => {
           flight={selectedFlight}
           onClose={() => setSelectedFlight(null)}
           onSave={handleSave}
+        />
+      )}
+      {showAddFlightModal && (
+        <AdminNewFlightModal
+          addNewFlight={toggleModal}
+          onClose={toggleModal}
+          onSave={handleAddFlight}
         />
       )}
     </div>
