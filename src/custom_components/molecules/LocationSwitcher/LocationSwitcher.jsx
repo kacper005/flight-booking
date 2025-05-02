@@ -6,8 +6,8 @@ import { getAirports } from "@api/airportApi";
 
 export default function LocationSwitcher({ from, setFrom, to, setTo }) {
   const [airports, setAirports] = React.useState([]);
-  const [loadingAirports, setLoadingAirports] = React.useState(true);
-  const [airportsError, setAirportsError] = React.useState(null);
+  const [_, setLoadingAirports] = React.useState(true);
+  const [__, setAirportsError] = React.useState(null);
 
   const swapLocations = () => {
     setFrom(to);

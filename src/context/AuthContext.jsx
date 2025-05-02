@@ -18,11 +18,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const login = async (user, token) => {
+  const login = async (token) => {
     localStorage.setItem("token", token);
-    localStorage.setItem("isLoggedIn", "true");
-    setIsLoggedIn(true);
-    await fetchUser();
+    try {
+      await fetchUser();
+      localStorage.setItem("isLoggedIn", true);
+      setIsLoggedIn(true);
+    } catch (err) {
+      console.error("Login failed while fetching user:", err);
+      logout();
+    }
   };
 
   const logout = () => {
@@ -40,7 +45,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, user, login, logout, fetchUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import "./PageTemplate.css";
 
-export const PageTemplate = ({ title, children }) => {
+export const PageTemplate = ({ children }) => {
   return (
     <div className="page-template-container">
       <div

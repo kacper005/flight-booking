@@ -1,0 +1,67 @@
+.sidenav {
+  position: fixed;
+  top: 70px;
+  right: -240px;
+  width: 240px;
+  height: 100vh;
+  background: var(--mainColor);
+  padding: 0 30px;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.sidenav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidenav ul li {
+  padding: 10px 0;
+}
+
+.sidenav ul li a {
+  font-size: 1.6rem;
+  text-decoration: none;
+  color: var(--textColor);
+  display: block;
+  padding: 10px 10px;
+  width: 100%;
+}
+
+.sidenav ul li a:hover {
+  background: var(--textColor);
+  color: var(--textColorDark);
+  border-radius: 5px;
+}
+
+.sidenav ul li a.active {
+  color: var(--textColor);
+  font-weight: bold;
+  border-right: 3px solid var(--textColor);
+  padding-right: 1rem;
+}
+
+.sidenav ul li a.active:hover {
+  background: var(--textColor);
+  color: var(--textColorDark);
+  border-radius: 5px;
+}
+
+.sidenav.open {
+  right: 0;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px 0 20px 0;
+}

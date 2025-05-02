@@ -63,13 +63,6 @@ export const FlightSearchPanel = () => {
     }
   };
 
-  console.log(formatDate(dateRange[0]));
-  console.log(formatDate(dateRange[1]));
-  console.log(formatDate(oneWayDepartureDate));
-  console.log(isRoundTrip);
-  console.log(from);
-  console.log(to);
-
   return (
     <Card flexDirection="column" maxWidth={"900px"}>
       <h1 style={{ color: "var(--textColor)" }}>Find your next flight</h1>

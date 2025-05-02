@@ -1,37 +1,55 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { FAQ } from "@pages/FAQ";
 import { Home } from "@pages/Home";
+import { NotFound } from "@pages/NotFound";
 import { AboutUs } from "@pages/AboutUs";
 import { SignIn } from "@pages/SignIn/SignIn";
 import { SignUp } from "@pages/SignUp/SignUp";
+import { Admin } from "@pages/Admin/Admin.jsx";
+import { SavedTrips } from "@pages/SavedTrips";
 import { ContactUsPage } from "@pages/ContactUs";
 import { UserProfile } from "@pages/UserProfile";
 import { SearchResults } from "@pages/SearchResults";
 import { Sustainability } from "@pages/Sustainability";
+import { AdminFlights } from "@pages/Admin/AdminFlights.jsx";
 import { AirlineInformation } from "@pages/AirlineInformation";
 import { TermsAndConditions } from "@pages/TermsAndConditions";
 import { ImportantInformation } from "@pages/ImportantInformation";
-import { Admin } from "@pages/Admin/Admin.jsx";
-import { AdminFlights } from "@pages/Admin/AdminFlights.jsx";
 
+import { ToastContainer } from "react-toastify";
+
+import AdminRoute from "@atoms/AdminRoute";
+import ScrollToTop from "@atoms/ScrollToTop";
+import ProtectedRoute from "@atoms/ProtectedRoute";
 import { Header } from "@organisms/Header/Header";
 import { Footer } from "@organisms/Footer.jsx";
-import ScrollToTop from "@molecules/ScrollToTop";
-import { ToastContainer } from "react-toastify";
-import { NotFound } from "@pages/404";
+import { Navbar } from "@organisms/Navbar/Navbar";
+import { useAuth } from "@context/AuthContext";
 
-//TODO: Implement protected routes
 export const App = () => {
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
+
+  const { isLoggedIn } = useAuth();
+
+  const toggleSidebar = () => {
+    setSidebarOpen((prev) => !prev);
+  };
+
   return (
     <Router>
       <ScrollToTop />
       <div className="App">
-        <Header />
+        <Header toggleSidebar={toggleSidebar} />
+        <Navbar
+          key={isLoggedIn ? "auth-true" : "auth-false"}
+          isOpen={sidebarOpen}
+          setIsOpen={setSidebarOpen}
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/home" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route
             path="/important-information"
@@ -46,11 +64,17 @@ export const App = () => {
             element={<TermsAndConditions />}
           />
           <Route path="/search-results" element={<SearchResults />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin-flights" element={<AdminFlights />} />
-          <Route path="/404" element={<NotFound />} />
+          <Route path="/not-found" element={<NotFound />} />
 
-          <Route path="/profile" element={<UserProfile />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/saved-trips" element={<SavedTrips />} />
+
+            <Route element={<AdminRoute />}>
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/admin-flights" element={<AdminFlights />} />
+            </Route>
+          </Route>
         </Routes>
         <ToastContainer />
         <Footer />
