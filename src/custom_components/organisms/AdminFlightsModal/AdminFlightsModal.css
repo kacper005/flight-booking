@@ -111,6 +111,11 @@
     padding: 20px 0 8px 0;
 }
 
+.flightError {
+    color: var(--errorColor);
+    font-size: 1.4rem;
+}
+
 @media screen and (max-width: 519px) {
     .modalContent{
         max-width: 380px;

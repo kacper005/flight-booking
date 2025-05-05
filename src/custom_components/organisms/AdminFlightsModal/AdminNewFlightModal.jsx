@@ -29,6 +29,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
   const [airlines, setAirlines] = React.useState([]);
   const [priceProviders, setPriceProviders] = React.useState([]);
   const [currency, setCurrency] = React.useState([]);
+  const [errors, setErrors] = React.useState({});
 
   React.useEffect(() => {
     const fetchAirports = async () => {
@@ -85,6 +86,47 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
 
     fetchCurrency();
   }, []);
+
+  const validate = () => {
+    let newErrors = {};
+    if (!formData.flightNumber.trim())
+      newErrors.flightNumber = "Flight number is required";
+    if (!formData.airline.airlineId) newErrors.airline = "Airline is required";
+    if (!formData.departureAirport.airportId)
+      newErrors.departureAirport = "Departure airport is required";
+    if (!formData.arrivalAirport.airportId)
+      newErrors.arrivalAirport = "Arrival airport is required";
+    if (!formData.roundTrip)
+      newErrors.roundTrip = "Round trip status is required";
+    if (!formData.status) newErrors.status = "Flight status is required";
+    if (!formData.departureTime)
+      newErrors.departureTime = "Departure time is required";
+    if (!formData.arrivalTime)
+      newErrors.arrivalTime = "Arrival time is required";
+
+    if (!formData.prices[0].price) {
+      newErrors.price1 = "Price is required";
+    } else if (formData.prices[0].price <= 0) {
+      newErrors.price1 = "Price must be greater than 0";
+    }
+    if (!formData.prices[0].currency)
+      newErrors.currency1 = "Currency is required";
+    if (!formData.prices[0].priceProviderName)
+      newErrors.priceProviderName1 = "Price provider is required";
+
+    if (!formData.prices[1].price) {
+      newErrors.price2 = "Price is required";
+    } else if (formData.prices[1].price <= 0) {
+      newErrors.price2 = "Price must be greater than 0";
+    }
+    if (!formData.prices[1].currency)
+      newErrors.currency2 = "Currency is required";
+    if (!formData.prices[1].priceProviderName)
+      newErrors.priceProviderName2 = "Price provider is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -145,88 +187,91 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let flightId;
+    if (validate()) {
+      let flightId;
 
-    if (
-      formData.departureAirport.airportId === formData.arrivalAirport.airportId
-    ) {
-      const userConfirmed = window.confirm(
-        "Departure and arrival airports are the same. Do you want to continue?",
-      );
+      if (
+        formData.departureAirport.airportId ===
+        formData.arrivalAirport.airportId
+      ) {
+        const userConfirmed = window.confirm(
+          "Departure and arrival airports are the same. Do you want to continue?",
+        );
 
-      if (!userConfirmed) {
-        return; // Stops form submission if user cancels
+        if (!userConfirmed) {
+          return; // Stops form submission if user cancels
+        }
       }
-    }
 
-    try {
-      const flightPayload = {
-        flightNumber: formData.flightNumber,
-        departureTime: formData.departureTime,
-        arrivalTime: formData.arrivalTime,
-        roundTrip: formData.roundTrip,
-        extraFeatures: formData.extraFeatures,
-        availableClasses: formData.availableClasses,
-        status: formData.status,
-        airline: {
-          airlineId: formData.airline.airlineId,
-        },
-        departureAirport: { airportId: formData.departureAirport.airportId },
-        arrivalAirport: { airportId: formData.arrivalAirport.airportId },
-      };
+      try {
+        const flightPayload = {
+          flightNumber: formData.flightNumber,
+          departureTime: formData.departureTime,
+          arrivalTime: formData.arrivalTime,
+          roundTrip: formData.roundTrip,
+          extraFeatures: formData.extraFeatures,
+          availableClasses: formData.availableClasses,
+          status: formData.status,
+          airline: {
+            airlineId: formData.airline.airlineId,
+          },
+          departureAirport: { airportId: formData.departureAirport.airportId },
+          arrivalAirport: { airportId: formData.arrivalAirport.airportId },
+        };
 
-      const flightResponse = await createFlight(flightPayload);
+        const flightResponse = await createFlight(flightPayload);
 
-      flightId = flightResponse.data.flightId;
+        flightId = flightResponse.data.flightId;
 
-      showToast({ message: "Flight added successfully", type: "success" });
-    } catch (error) {
-      console.error("Error saving flight data:", error);
-      const message =
-        typeof error.response?.data === "string"
-          ? error.response.data
-          : error.response?.data?.message ||
-            "Something went wrong while saving flight data";
+        showToast({ message: "Flight added successfully", type: "success" });
+      } catch (error) {
+        console.error("Error saving flight data:", error);
+        const message =
+          typeof error.response?.data === "string"
+            ? error.response.data
+            : error.response?.data?.message ||
+              "Something went wrong while saving flight data";
 
-      showToast({
-        message: `Failed to add flight. ${message}`,
-        type: "error",
-      });
-    }
+        showToast({
+          message: `Failed to add flight. ${message}`,
+          type: "error",
+        });
+      }
 
-    try {
-      const createdPrices = await Promise.all(
-        formData.prices.map((p) =>
-          createPrice({
-            price: p.price,
-            currency: p.currency,
-            priceProviderName: p.priceProviderName,
-          }),
-        ),
-      );
+      try {
+        const createdPrices = await Promise.all(
+          formData.prices.map((p) =>
+            createPrice({
+              price: p.price,
+              currency: p.currency,
+              priceProviderName: p.priceProviderName,
+            }),
+          ),
+        );
 
-      const priceIds = createdPrices.map((res) => ({
-        priceId: res.data.priceId,
-      }));
+        const priceIds = createdPrices.map((res) => ({
+          priceId: res.data.priceId,
+        }));
 
-      const flightResponseData = await addPricesToFlight(flightId, priceIds);
-      const flightData = flightResponseData.data;
+        const flightResponseData = await addPricesToFlight(flightId, priceIds);
+        const flightData = flightResponseData.data;
 
-      onSave({ flightData });
+        onSave({ flightData });
 
-      showToast({ message: "Prices added successfully", type: "success" });
-    } catch (error) {
-      console.error("Error creating new price data:", error);
-      const message =
-        typeof error.response?.data === "string"
-          ? error.response.data
-          : error.response?.data?.message ||
-            "Something went wrong while saving price data";
+        showToast({ message: "Prices added successfully", type: "success" });
+      } catch (error) {
+        console.error("Error creating new price data:", error);
+        const message =
+          typeof error.response?.data === "string"
+            ? error.response.data
+            : error.response?.data?.message ||
+              "Something went wrong while saving price data";
 
-      showToast({
-        message: `Failed to add price. ${message}`,
-        type: "error",
-      });
+        showToast({
+          message: `Failed to add price. ${message}`,
+          type: "error",
+        });
+      }
     }
   };
 
@@ -244,6 +289,9 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                 onChange={handleChange}
                 placeholder={"E.g. AB123"}
               />
+              {errors.flightNumber && (
+                <small className={"flightError"}>{errors.flightNumber}</small>
+              )}
             </div>
             <div className={"formField"}>
               <label>Airline</label>
@@ -261,6 +309,9 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   </option>
                 ))}
               </select>
+              {errors.airline && (
+                <small className={"flightError"}>{errors.airline}</small>
+              )}
             </div>
             <div className={"formField"}>
               <label>Departure Airport</label>
@@ -281,6 +332,11 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                     </option>
                   ))}
               </select>
+              {errors.departureAirport && (
+                <small className={"flightError"}>
+                  {errors.departureAirport}
+                </small>
+              )}
             </div>
             <div className={"formField"}>
               <label>Arrival Airport</label>
@@ -301,6 +357,9 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                     </option>
                   ))}
               </select>
+              {errors.arrivalAirport && (
+                <small className={"flightError"}>{errors.arrivalAirport}</small>
+              )}
             </div>
             <div className={"formField"}>
               <label>Round Trip</label>
@@ -315,6 +374,9 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                 <option value="true">True</option>
                 <option value="false">False</option>
               </select>
+              {errors.roundTrip && (
+                <small className={"flightError"}>{errors.roundTrip}</small>
+              )}
             </div>
             <div className={"formField"}>
               <label>Status</label>{" "}
@@ -330,6 +392,9 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                 <option value="CANCELLED">Cancelled</option>
                 <option value="DELAYED">Delayed</option>
               </select>
+              {errors.status && (
+                <small className={"flightError"}>{errors.status}</small>
+              )}
             </div>
             <div className={"formField"}>
               <label>Departure time</label>
@@ -339,6 +404,9 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                 value={formData.departureTime}
                 onChange={handleChange}
               />
+              {errors.departureTime && (
+                <small className={"flightError"}>{errors.departureTime}</small>
+              )}
             </div>
             <div className={"formField"}>
               <label>Arrival time</label>
@@ -348,6 +416,9 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                 value={formData.arrivalTime}
                 onChange={handleChange}
               />
+              {errors.arrivalTime && (
+                <small className={"flightError"}>{errors.arrivalTime}</small>
+              )}
             </div>
           </div>
           <h3 className={"h3Price"}>Price 1</h3>
@@ -361,6 +432,9 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   value={formData.prices?.[0]?.price}
                   onChange={handleChange}
                 />
+                {errors.price1 && (
+                  <small className={"flightError"}>{errors.price1}</small>
+                )}
               </div>
               <div className={"formField"} id={"formFieldCurrency"}>
                 <label>Currency</label>
@@ -381,6 +455,9 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                       </option>
                     ))}
                 </select>
+                {errors.currency1 && (
+                  <small className={"flightError"}>{errors.currency1}</small>
+                )}
               </div>
             </div>
             <div className={"formField"}>
@@ -402,6 +479,11 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                     </option>
                   ))}
               </select>
+              {errors.priceProviderName1 && (
+                <small className={"flightError"}>
+                  {errors.priceProviderName1}
+                </small>
+              )}
             </div>
           </div>
 
@@ -416,6 +498,9 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   value={formData.prices?.[1]?.price}
                   onChange={handleChange}
                 />
+                {errors.price2 && (
+                  <small className={"flightError"}>{errors.price2}</small>
+                )}
               </div>
               <div className={"formField"} id={"formFieldCurrency"}>
                 <label>Currency</label>
@@ -436,6 +521,9 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                       </option>
                     ))}
                 </select>
+                {errors.currency2 && (
+                  <small className={"flightError"}>{errors.currency2}</small>
+                )}
               </div>
             </div>
             <div className={"formField"}>
@@ -457,6 +545,11 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                     </option>
                   ))}
               </select>
+              {errors.priceProviderName2 && (
+                <small className={"flightError"}>
+                  {errors.priceProviderName2}
+                </small>
+              )}
             </div>
           </div>
 

@@ -14,6 +14,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
   const [airlines, setAirlines] = React.useState([]);
   const [priceProviders, setPriceProviders] = React.useState([]);
   const [currency, setCurrency] = React.useState([]);
+  const [errors, setErrors] = React.useState({});
 
   // Reset formData when flight prop changes
   React.useEffect(() => {
@@ -76,6 +77,31 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
     fetchCurrency();
   }, []);
 
+  const validate = () => {
+    let newErrors = {};
+    if (!formData.flightNumber.trim())
+      newErrors.flightNumber = "Flight number is required";
+    if (!formData.departureTime)
+      newErrors.departureTime = "Departure time is required";
+    if (!formData.arrivalTime)
+      newErrors.arrivalTime = "Arrival time is required";
+
+    if (!formData.prices[0].price) {
+      newErrors.price1 = "Price is required";
+    } else if (formData.prices[0].price <= 0) {
+      newErrors.price1 = "Price must be greater than 0";
+    }
+
+    if (!formData.prices[1].price) {
+      newErrors.price2 = "Price is required";
+    } else if (formData.prices[1].price <= 0) {
+      newErrors.price2 = "Price must be greater than 0";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -134,75 +160,84 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      formData.departureAirport.airportId === formData.arrivalAirport.airportId
-    ) {
-      const userConfirmed = window.confirm(
-        "Departure and arrival airports are the same. Do you want to continue?",
-      );
+    if (validate()) {
+      if (
+        formData.departureAirport.airportId ===
+        formData.arrivalAirport.airportId
+      ) {
+        const userConfirmed = window.confirm(
+          "Departure and arrival airports are the same. Do you want to continue?",
+        );
 
-      if (!userConfirmed) {
-        return; // Stops form submission if user cancels
+        if (!userConfirmed) {
+          return; // Stops form submission if user cancels
+        }
       }
-    }
 
-    try {
-      const flightPayload = {
-        flightNumber: formData.flightNumber,
-        departureTime: formData.departureTime,
-        arrivalTime: formData.arrivalTime,
-        roundTrip: formData.roundTrip,
-        extraFeatures: formData.extraFeatures,
-        availableClasses: formData.availableClasses,
-        status: formData.status,
-        airline: {
-          airlineId: formData.airline.airlineId,
-        },
-        departureAirport: { airportId: formData.departureAirport.airportId },
-        arrivalAirport: { airportId: formData.arrivalAirport.airportId },
-      };
+      try {
+        const flightPayload = {
+          flightNumber: formData.flightNumber,
+          departureTime: formData.departureTime,
+          arrivalTime: formData.arrivalTime,
+          roundTrip: formData.roundTrip,
+          extraFeatures: formData.extraFeatures,
+          availableClasses: formData.availableClasses,
+          status: formData.status,
+          airline: {
+            airlineId: formData.airline.airlineId,
+          },
+          departureAirport: { airportId: formData.departureAirport.airportId },
+          arrivalAirport: { airportId: formData.arrivalAirport.airportId },
+        };
 
-      await updateFlight(flight.flightId, flightPayload);
-      onSave({ ...flight, ...flightPayload });
-      showToast({ message: "Flight data saved successfully", type: "success" });
-    } catch (error) {
-      console.error("Error saving flight data:", error);
-      const message =
-        typeof error.response?.data === "string"
-          ? error.response.data
-          : error.response?.data?.message ||
-            "Something went wrong while saving flight data";
+        await updateFlight(flight.flightId, flightPayload);
+        onSave({ ...flight, ...flightPayload });
+        showToast({
+          message: "Flight data saved successfully",
+          type: "success",
+        });
+      } catch (error) {
+        console.error("Error saving flight data:", error);
+        const message =
+          typeof error.response?.data === "string"
+            ? error.response.data
+            : error.response?.data?.message ||
+              "Something went wrong while saving flight data";
 
-      showToast({
-        message: `Failed to update flight. ${message}`,
-        type: "error",
-      });
-    }
+        showToast({
+          message: `Failed to update flight. ${message}`,
+          type: "error",
+        });
+      }
 
-    try {
-      const updatePromises = formData.prices.map((p) =>
-        updatePrice(p.priceId, {
-          priceId: p.priceId,
-          price: p.price,
-          currency: p.currency,
-          priceProviderName: p.priceProviderName,
-        }),
-      );
+      try {
+        const updatePromises = formData.prices.map((p) =>
+          updatePrice(p.priceId, {
+            priceId: p.priceId,
+            price: p.price,
+            currency: p.currency,
+            priceProviderName: p.priceProviderName,
+          }),
+        );
 
-      await Promise.all(updatePromises);
-      showToast({ message: "Price data saved successfully", type: "success" });
-    } catch (error) {
-      console.error("Error saving price data:", error);
-      const message =
-        typeof error.response?.data === "string"
-          ? error.response.data
-          : error.response?.data?.message ||
-            "Something went wrong while saving price data";
+        await Promise.all(updatePromises);
+        showToast({
+          message: "Price data saved successfully",
+          type: "success",
+        });
+      } catch (error) {
+        console.error("Error saving price data:", error);
+        const message =
+          typeof error.response?.data === "string"
+            ? error.response.data
+            : error.response?.data?.message ||
+              "Something went wrong while saving price data";
 
-      showToast({
-        message: `Failed to update price. ${message}`,
-        type: "error",
-      });
+        showToast({
+          message: `Failed to update price. ${message}`,
+          type: "error",
+        });
+      }
     }
   };
 
@@ -220,6 +255,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 onChange={handleChange}
                 placeholder={"E.g. AB123"}
               />
+              {errors.flightNumber && (
+                <small className={"flightError"}>{errors.flightNumber}</small>
+              )}
             </div>
             <div className={"formField"}>
               <label>Airline</label>
@@ -300,6 +338,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 value={formData.departureTime}
                 onChange={handleChange}
               />
+              {errors.departureTime && (
+                <small className={"flightError"}>{errors.departureTime}</small>
+              )}
             </div>
             <div className={"formField"}>
               <label>Arrival time</label>
@@ -309,6 +350,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 value={formData.arrivalTime}
                 onChange={handleChange}
               />
+              {errors.arrivalTime && (
+                <small className={"flightError"}>{errors.arrivalTime}</small>
+              )}
             </div>
           </div>
           <h3 className={"h3Price"}>Price 1</h3>
@@ -322,6 +366,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                   value={formData.prices?.[0]?.price}
                   onChange={handleChange}
                 />
+                {errors.price1 && (
+                  <small className={"flightError"}>{errors.price1}</small>
+                )}
               </div>
               <div className={"formField"} id={"formFieldCurrency"}>
                 <label>Currency</label>
@@ -371,6 +418,9 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                   value={formData.prices?.[1]?.price}
                   onChange={handleChange}
                 />
+                {errors.price2 && (
+                  <small className={"flightError"}>{errors.price2}</small>
+                )}
               </div>
               <div className={"formField"} id={"formFieldCurrency"}>
                 <label>Currency</label>
