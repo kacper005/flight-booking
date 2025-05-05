@@ -11,3 +11,5 @@ export const getFlightById = (id) => axios.get(`${BASE_URL}/${id}`);
 export const createFlight = (data) => axios.post(BASE_URL, data);
 export const updateFlight = (id, data) => axios.put(`${BASE_URL}/${id}`, data);
 export const deleteFlight = (id) => axios.delete(`${BASE_URL}/${id}`);
+export const addPricesToFlight = (flightId, priceData) =>
+  axios.post(`${BASE_URL}/${flightId}/prices`, priceData);

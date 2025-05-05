@@ -1,7 +1,7 @@
 import React from "react";
 import "./AdminFlights.css";
 import { ButtonSmall } from "../../atoms/ButtonSmall";
-import { createFlight, getFlights, updateFlight } from "@api/flightApi.js";
+import { getFlights, updateFlight } from "@api/flightApi.js";
 import { AdminFlightsModal } from "@organisms/AdminFlightsModal/AdminFlightsModal.jsx";
 import { AdminNewFlightModal } from "@organisms/AdminFlightsModal/AdminNewFlightModal.jsx";
 import { Button } from "@atoms/Button.jsx";

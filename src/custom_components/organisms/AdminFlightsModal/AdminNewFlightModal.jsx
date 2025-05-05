@@ -4,8 +4,8 @@ import "./AdminFlightsModal.css";
 import { Button } from "@atoms/Button.jsx";
 import { getAirportsArray } from "@api/airportApi.js";
 import { getAirlines } from "@api/airlineApi.js";
-import { getPrices } from "@api/priceApi.js";
-import { createFlight } from "@api/flightApi.js";
+import { createPrice, getPrices } from "@api/priceApi.js";
+import { addPricesToFlight, createFlight } from "@api/flightApi.js";
 import { showToast } from "@atoms/Toast/Toast.jsx";
 
 export const AdminNewFlightModal = ({ onClose, onSave }) => {
@@ -145,6 +145,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let flightId;
 
     if (
       formData.departureAirport.airportId === formData.arrivalAirport.airportId
@@ -174,8 +175,10 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
         arrivalAirport: { airportId: formData.arrivalAirport.airportId },
       };
 
-      await createFlight(flightPayload);
-      onSave({ ...flightPayload });
+      const flightResponse = await createFlight(flightPayload);
+
+      flightId = flightResponse.data.flightId;
+
       showToast({ message: "Flight added successfully", type: "success" });
     } catch (error) {
       console.error("Error saving flight data:", error);
@@ -187,6 +190,41 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
 
       showToast({
         message: `Failed to add flight. ${message}`,
+        type: "error",
+      });
+    }
+
+    try {
+      const createdPrices = await Promise.all(
+        formData.prices.map((p) =>
+          createPrice({
+            price: p.price,
+            currency: p.currency,
+            priceProviderName: p.priceProviderName,
+          }),
+        ),
+      );
+
+      const priceIds = createdPrices.map((res) => ({
+        priceId: res.data.priceId,
+      }));
+
+      const flightResponseData = await addPricesToFlight(flightId, priceIds);
+      const flightData = flightResponseData.data;
+
+      onSave({ flightData });
+
+      showToast({ message: "Prices added successfully", type: "success" });
+    } catch (error) {
+      console.error("Error creating new price data:", error);
+      const message =
+        typeof error.response?.data === "string"
+          ? error.response.data
+          : error.response?.data?.message ||
+            "Something went wrong while saving price data";
+
+      showToast({
+        message: `Failed to add price. ${message}`,
         type: "error",
       });
     }
