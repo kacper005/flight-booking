@@ -1,66 +1,55 @@
 .profile-container {
-    padding: 2rem;
-    max-width: 800px;
-    margin: auto;
-    background-color: #f9f7ff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  background-color: #f9f7ff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .welcome {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 0.5rem;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
 
 .subtitle {
-    font-size: 1.5rem;
-    text-align: center;
-    margin-bottom: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .profile-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .field {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .field label {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .field input {
-    padding: 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
 }
 
 .button-container {
-    display: flex;
-    align-items: flex-end;
-}
-
-button {
-    padding: 0.8rem 1.5rem;
-    background-color: #4054b2;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    opacity: 0.6;
+  display: flex;
+  justify-content: end;
 }

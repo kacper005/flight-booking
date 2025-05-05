@@ -2,6 +2,7 @@ import React from "react";
 
 export const Button = ({
   children,
+  type = "button",
   width,
   height,
   maxWidth,
@@ -41,6 +42,7 @@ export const Button = ({
         fontSize: fontSize,
         fontFamily: fontFamily,
       }}
+      type={type}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
