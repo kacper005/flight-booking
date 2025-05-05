@@ -189,6 +189,8 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
     e.preventDefault();
     if (validate()) {
       let flightId;
+      let flightAdded,
+        priceAdded = false;
 
       if (
         formData.departureAirport.airportId ===
@@ -223,7 +225,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
 
         flightId = flightResponse.data.flightId;
 
-        showToast({ message: "Flight added successfully", type: "success" });
+        flightAdded = true;
       } catch (error) {
         console.error("Error saving flight data:", error);
         const message =
@@ -258,7 +260,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
 
         onSave({ flightData });
 
-        showToast({ message: "Prices added successfully", type: "success" });
+        priceAdded = true;
       } catch (error) {
         console.error("Error creating new price data:", error);
         const message =
@@ -271,6 +273,17 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
           message: `Failed to add price. ${message}`,
           type: "error",
         });
+      }
+
+      if (flightAdded && priceAdded) {
+        showToast({
+          message: "All data added successfully",
+          type: "success",
+        });
+      } else if (flightAdded) {
+        showToast({ message: "Flight added successfully", type: "success" });
+      } else if (priceAdded) {
+        showToast({ message: "Price added successfully", type: "success" });
       }
     }
   };

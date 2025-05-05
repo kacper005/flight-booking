@@ -159,6 +159,8 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let flightAdded,
+      priceAdded = false;
 
     if (validate()) {
       if (
@@ -192,10 +194,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
 
         await updateFlight(flight.flightId, flightPayload);
         onSave({ ...flight, ...flightPayload });
-        showToast({
-          message: "Flight data saved successfully",
-          type: "success",
-        });
+        flightAdded = true;
       } catch (error) {
         console.error("Error saving flight data:", error);
         const message =
@@ -221,10 +220,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
         );
 
         await Promise.all(updatePromises);
-        showToast({
-          message: "Price data saved successfully",
-          type: "success",
-        });
+        priceAdded = true;
       } catch (error) {
         console.error("Error saving price data:", error);
         const message =
@@ -236,6 +232,23 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
         showToast({
           message: `Failed to update price. ${message}`,
           type: "error",
+        });
+      }
+
+      if (flightAdded && priceAdded) {
+        showToast({
+          message: "All data saved successfully",
+          type: "success",
+        });
+      } else if (flightAdded) {
+        showToast({
+          message: "Flight data saved successfully",
+          type: "success",
+        });
+      } else if (priceAdded) {
+        showToast({
+          message: "Price data saved successfully",
+          type: "success",
         });
       }
     }
