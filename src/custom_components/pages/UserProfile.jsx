@@ -1,41 +1,149 @@
-import React from "react";
-import { PageTemplate } from "@templates/PageTemplate/PageTempate";
-import { useAuth } from "@context/AuthContext";
+import React, {useState, useEffect} from "react";
+import {PageTemplate} from "@templates/PageTemplate/PageTempate";
+import {useAuth} from "@context/AuthContext";
+import {updateOwnProfile} from "@api/userApi.js";
+import {showToast} from "@atoms/Toast/Toast.jsx";
+import "./UserProfile.css";
 
 export const UserProfile = () => {
-  const { user } = useAuth();
+    const {user} = useAuth();
 
-  return (
-    <PageTemplate>
-      <div className="user-profile">
-        <h1>Welcome {user?.firstName}</h1>
-        <h2>Your Profile</h2>
-        <div className="profile-details">
-          <p>
-            <strong>Email:</strong> {user?.email}
-          </p>
-          <p>
-            <strong>First Name:</strong> {user?.firstName}
-          </p>
-          <p>
-            <strong>Last Name:</strong> {user?.lastName}
-          </p>
-          <p>
-            <strong>Phone Number:</strong> {user?.phone}
-          </p>
-          <p>
-            <strong>Date of Birth:</strong> {user?.dateOfBirth}
-          </p>
-          <p>
-            <strong>Country:</strong> {user?.country}
-          </p>
-          {user?.role === "ADMIN" && (
-            <p>
-              <strong>Role:</strong> {user?.role}
-            </p>
-          )}
-        </div>
-      </div>
-    </PageTemplate>
-  );
+    // Set up local state for editable fields
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [country, setCountry] = useState("");
+    const [dateOfBirth, setDateOfBirth] = useState(null);
+    const [gender, setGender] = useState(null);
+
+    // Populate fields from user when component loads
+    useEffect(() => {
+        if (user) {
+            setFirstName(user.firstName || "");
+            setLastName(user.lastName || "");
+            setPhone(user.phone || "");
+            setEmail(user.email || "");
+            setPassword(""); // Always empty for security
+            setCountry(user.country || "");
+
+            // Store untouched values for sending back
+            setDateOfBirth(user.dateOfBirth || null);
+            setGender(user.gender || null);
+        }
+    }, [user]);
+
+    const handleSave = async () => {
+        const token = localStorage.getItem("token");
+        console.log("token", token);
+
+        const updatedUser = {
+            firstName,
+            lastName,
+            phone,
+            email,
+            country,
+            dateOfBirth,
+            gender,
+        };
+
+        if (password.trim()) {
+            updatedUser.password = password;
+        }
+
+        try {
+            await updateOwnProfile(updatedUser, token);
+            showToast({message: "Profile updated successfully!", type: "success"});
+        } catch (error) {
+            const message =
+                typeof error.response?.data === "string"
+                    ? error.response.data
+                    : error.response?.data?.message || "Something went wrong";
+
+            showToast({ message: `Failed to update profile. ${message}`, type: "error" });
+            console.error("Profile update error:", error);
+        }
+    };
+
+
+    return (
+        <PageTemplate>
+            <div className="profile-container">
+                <h1 className="welcome">Welcome {firstName}</h1>
+                <h2 className="subtitle">Your Profile</h2>
+
+                <form className="profile-form">
+                    <div className="row">
+                        <div className="field">
+                            <label>First Name</label>
+                            <input
+                                type="text"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                            />
+                        </div>
+                        <div className="field">
+                            <label>Last Name</label>
+                            <input
+                                type="text"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="field">
+                            <label>Phone Number</label>
+                            <input
+                                type="text"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="field">
+                            <label>Email</label>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="field">
+                            <label>Password</label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="field">
+                            <label>Country</label>
+                            <input
+                                type="text"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="button-container">
+                            <button type="button" onClick={handleSave}>
+                                SAVE
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </PageTemplate>
+    );
 };
