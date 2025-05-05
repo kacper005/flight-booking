@@ -54,7 +54,7 @@
     align-items: flex-end;
 }
 
-button {
+.button {
     padding: 0.8rem 1.5rem;
     background-color: #4054b2;
     color: white;

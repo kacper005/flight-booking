@@ -1,60 +1,52 @@
-import React, {useState, useEffect} from "react";
-import {PageTemplate} from "@templates/PageTemplate/PageTempate";
-import {useAuth} from "@context/AuthContext";
-import {updateOwnProfile} from "@api/userApi.js";
-import {showToast} from "@atoms/Toast/Toast.jsx";
+import React from "react";
+import { PageTemplate } from "@templates/PageTemplate/PageTempate";
+import { useAuth } from "@context/AuthContext";
+import { updateOwnProfile } from "@api/userApi.js";
+import { showToast } from "@atoms/Toast/Toast.jsx";
 import "./UserProfile.css";
 
 export const UserProfile = () => {
-    const {user} = useAuth();
+    const { user } = useAuth();
 
-    // Set up local state for editable fields
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [country, setCountry] = useState("");
-    const [dateOfBirth, setDateOfBirth] = useState(null);
-    const [gender, setGender] = useState(null);
+    const [formData, setFormData] = React.useState({
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        password: "",
+        country: "",
+        dateOfBirth: null,
+        gender: null,
+    });
 
     // Populate fields from user when component loads
-    useEffect(() => {
+    React.useEffect(() => {
         if (user) {
-            setFirstName(user.firstName || "");
-            setLastName(user.lastName || "");
-            setPhone(user.phone || "");
-            setEmail(user.email || "");
-            setPassword(""); // Always empty for security
-            setCountry(user.country || "");
-
-            // Store untouched values for sending back
-            setDateOfBirth(user.dateOfBirth || null);
-            setGender(user.gender || null);
+            setFormData({
+                firstName: user.firstName || "",
+                lastName: user.lastName || "",
+                phone: user.phone || "",
+                email: user.email || "",
+                password: "",
+                country: user.country || "",
+                dateOfBirth: user.dateOfBirth || null,
+                gender: user.gender || null,
+            });
         }
     }, [user]);
 
     const handleSave = async () => {
         const token = localStorage.getItem("token");
-        console.log("token", token);
+        const updatedUser = { ...formData };
 
-        const updatedUser = {
-            firstName,
-            lastName,
-            phone,
-            email,
-            country,
-            dateOfBirth,
-            gender,
-        };
-
-        if (password.trim()) {
-            updatedUser.password = password;
+        // Remove password field if left blank
+        if (!formData.password.trim()) {
+            delete updatedUser.password;
         }
 
         try {
             await updateOwnProfile(updatedUser, token);
-            showToast({message: "Profile updated successfully!", type: "success"});
+            showToast({ message: "Profile updated successfully!", type: "success" });
         } catch (error) {
             const message =
                 typeof error.response?.data === "string"
@@ -66,11 +58,10 @@ export const UserProfile = () => {
         }
     };
 
-
     return (
         <PageTemplate>
             <div className="profile-container">
-                <h1 className="welcome">Welcome {firstName}</h1>
+                <h1 className="welcome">Welcome {formData.firstName}</h1>
                 <h2 className="subtitle">Your Profile</h2>
 
                 <form className="profile-form">
@@ -79,16 +70,16 @@ export const UserProfile = () => {
                             <label>First Name</label>
                             <input
                                 type="text"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
+                                value={formData.firstName}
+                                onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
                             />
                         </div>
                         <div className="field">
                             <label>Last Name</label>
                             <input
                                 type="text"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
+                                value={formData.lastName}
+                                onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
                             />
                         </div>
                     </div>
@@ -98,8 +89,8 @@ export const UserProfile = () => {
                             <label>Phone Number</label>
                             <input
                                 type="text"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
+                                value={formData.phone}
+                                onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                             />
                         </div>
                     </div>
@@ -109,8 +100,8 @@ export const UserProfile = () => {
                             <label>Email</label>
                             <input
                                 type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={formData.email}
+                                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                             />
                         </div>
                     </div>
@@ -120,8 +111,8 @@ export const UserProfile = () => {
                             <label>Password</label>
                             <input
                                 type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                value={formData.password}
+                                onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
                             />
                         </div>
                     </div>
@@ -131,8 +122,8 @@ export const UserProfile = () => {
                             <label>Country</label>
                             <input
                                 type="text"
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
+                                value={formData.country}
+                                onChange={(e) => setFormData(prev => ({ ...prev, country: e.target.value }))}
                             />
                         </div>
 
