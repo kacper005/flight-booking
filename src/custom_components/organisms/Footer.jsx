@@ -110,7 +110,7 @@ export const Footer = () => {
 
       <div
         style={{
-          backgroundColor: "#3D52A0",
+          backgroundColor: "var(--mainColor)",
           color: "white",
           textAlign: "center",
           padding: "20px",
@@ -151,7 +151,7 @@ export const Footer = () => {
 
       <div
         style={{
-          backgroundColor: "#3D52A0",
+          backgroundColor: "var(--mainColor)",
           color: "white",
           textAlign: "center",
           padding: "20px",

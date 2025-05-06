@@ -24,7 +24,7 @@ body.active-modal {
 }
 
 .flightsTable th {
-    background-color: #f4f4f4;
+    background-color: var(--TableHeaderColor);
     font-weight: bold;
 }
 

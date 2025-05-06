@@ -517,8 +517,8 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
           </div>
           <div className="bottomModalActions">
             <Button
-              bgColor={"#e64848"}
-              hoverBgColor={"#c23636"}
+              bgColor={"var(--buttonColorRed)"}
+              hoverBgColor={"var(--buttonColorRedHover)"}
               onClick={handleDelete}
             >
               Delete
