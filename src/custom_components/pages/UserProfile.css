@@ -31,6 +31,15 @@
   gap: 2rem;
 }
 
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 .field {
   flex: 1;
   display: flex;
@@ -46,7 +55,12 @@
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: var(--white);
+}
+
+.errors {
+  color: var(--errorColor);
+  font-size: 1.4rem;
 }
 
 .button-container {
