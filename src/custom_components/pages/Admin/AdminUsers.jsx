@@ -6,12 +6,14 @@ import {getUsers, updateUser} from "@api/userApi.js";
 import {Button} from "@atoms/Button.jsx";
 import LoadingSpinner from "@atoms/LoadingSpinner.jsx";
 import {AdminUsersModal} from "@organisms/AdminUserModal/AdminUsersModal.jsx";
+import {AdminNewUserModal} from "@organisms/AdminUserModal/AdminNewUserModal.jsx";
 
 export const AdminUsers = () => {
     const [users, setUsers] = React.useState([]);
-    const [loading, setLoading] = React.useState(true);
+    const [loading, setloading] = React.useState(true);
     const [error, setError] = React.useState(null);
     const [selectedUser, setSelectedUser] = React.useState(null);
+    const [showAddUserModal, setShowAddUserModal] = React.useState(false);
 
     React.useEffect(() => {
         const fetchUsers = async () => {
@@ -21,7 +23,7 @@ export const AdminUsers = () => {
             } catch (err) {
                 setError(err.message || "Failed to load users.");
             } finally {
-                setLoading(false);
+                setloading(false);
             }
         };
 
@@ -48,16 +50,52 @@ export const AdminUsers = () => {
         }
     };
 
+    const handleClose = async () => {
+        try {
+            const res = await getUsers();
+            setUsers(res.data);
+            setSelectedUser(null);
+        } catch (error) {
+            console.error("Error updating user:", error);
+            setError("Failed to update user.");
+        }
+    };
+
+    const handleAddUser = async (newUser) => {
+        try {
+            toggleModal();
+            await updateUser(newUser.userId, newUser);
+            const res = await getUsers();
+            setUsers(res.data);
+        } catch (error) {
+            console.error("Error adding user:", error);
+            setError("Failed to add user.");
+        }
+    };
+
+    const toggleModal = () => {
+        setShowAddUserModal(!showAddUserModal);
+    };
+
+    // Prevent scrolling behind modal when modal is open
+    if (selectedUser || showAddUserModal) {
+        document.body.classList.add("active-modal");
+    } else {
+        document.body.classList.remove("active-modal");
+    }
+
     return (
         <div className={"adminClassContainer"}>
             <h1>Edit Users</h1>
-            <Button margin={"0 0 20px 0"}>Add User (WIP)</Button>
+            <Button margin={"0 0 20px 0"} onClick={toggleModal}>
+                Add New User
+            </Button>
             {loading && <LoadingSpinner/>}
             {error && <h3>{error}</h3>}
             {!loading && users.length === 0 && <h3>No users found</h3>}
 
             {!loading && users.length > 0 && (
-                <table className={"flightsTable"}>
+                <table className={"adminTable"}>
                     <thead>
                     <tr>
                         <th className={"colUserId"}>User ID</th>
@@ -104,9 +142,16 @@ export const AdminUsers = () => {
             {selectedUser && (
                 <AdminUsersModal
                     users={selectedUser}
-                    onClose={() => setSelectedUser(null)}
+                    onClose={handleClose}
                     onSave={handleSave}
                 />
+            )}
+            {showAddUserModal && (
+            <AdminNewUserModal
+                addNewUser={toggleModal}
+                onClose={toggleModal}
+                onSave={handleAddUser}
+            />
             )}
         </div>
     );

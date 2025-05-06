@@ -90,7 +90,7 @@ export const AdminFlights = () => {
       {!loadingFlights && flights.length === 0 && <h3>No flights found</h3>}
 
       {!loadingFlights && flights.length > 0 && (
-        <table className={"flightsTable"}>
+        <table className={"adminTable"}>
           <thead>
             <tr>
               <th className={"colFlightNumber"}>Flight Number</th>

@@ -6,7 +6,7 @@ body.active-modal {
     padding: 40px 8% 70px 8%;
 }
 
-.flightsTable {
+.adminTable {
     width: 100%;
     border-collapse: collapse;
     background: white;
@@ -16,14 +16,14 @@ body.active-modal {
     font-size: 1.6rem;
 }
 
-.flightsTable th,
-.flightsTable td {
+.adminTable th,
+.adminTable td {
     padding: 6px 16px;
     text-align: left;
     border-bottom: 1px solid #141619;
 }
 
-.flightsTable th {
+.adminTable th {
     background-color: #f4f4f4;
     font-weight: bold;
 }
@@ -51,7 +51,7 @@ h1 {
     .colEdit {
         display: none;
     }
-    .flightsTable tr:hover {
+    .adminTable tr:hover {
         background-color: lightgray;
         cursor: pointer;
     }

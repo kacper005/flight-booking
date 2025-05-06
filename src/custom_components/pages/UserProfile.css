@@ -29,6 +29,21 @@
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
+  font-size: 1.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  font-size: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--textColorDark);
 }
 
 .input-group input,
