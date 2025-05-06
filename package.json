@@ -13,6 +13,7 @@
     "@radix-ui/react-slot": "^1.1.1",
     "axios": "^1.8.4",
     "class-variance-authority": "^0.7.1",
+    "country-list": "^2.3.0",
     "country-telephone-data": "^0.6.3",
     "install": "^0.13.0",
     "lucide-react": "^0.475.0",
