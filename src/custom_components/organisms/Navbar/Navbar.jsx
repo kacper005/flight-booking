@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { useAuth } from "@context/AuthContext";
 import { CircleUserRound } from "lucide-react";
+import { useAuth } from "@context/AuthContext";
 import "./Navbar.css";
 
 export const Navbar = ({ isOpen, setIsOpen }) => {

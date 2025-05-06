@@ -9,7 +9,9 @@ export const Button = ({
   maxHeight,
   bgColor = "var(--mainColorLight)",
   hoverBgColor = "var(--secondaryColor)",
+  disabledBgColor = "var(--disabledColor)",
   color = "var(--textColor2)",
+  disabledColor = "var(--textColor2)",
   textAlign,
   padding = "10px 20px",
   margin,
@@ -24,6 +26,14 @@ export const Button = ({
 }) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
+  const currentBgColor = disabled
+    ? disabledBgColor
+    : isHovered
+    ? hoverBgColor
+    : bgColor;
+
+  const currentColor = disabled ? disabledColor : color;
+
   return (
     <button
       style={{
@@ -31,21 +41,21 @@ export const Button = ({
         height: height,
         maxWidth: maxWidth,
         maxHeight: maxHeight,
-        backgroundColor: isHovered ? hoverBgColor : bgColor,
-        color: color,
+        backgroundColor: currentBgColor,
+        color: currentColor,
         textAlign: textAlign,
         padding: padding,
         margin: margin,
         border: border,
         borderRadius: borderRadius,
-        cursor: cursor,
+        cursor: disabled ? "not-allowed" : cursor,
         fontSize: fontSize,
         fontFamily: fontFamily,
       }}
       type={type}
-      onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onClick={disabled ? undefined : onClick}
+      onMouseEnter={() => !disabled && setIsHovered(true)}
+      onMouseLeave={() => !disabled && setIsHovered(false)}
       disabled={disabled}
     >
       {Icon && (
@@ -54,6 +64,7 @@ export const Button = ({
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            marginRight: children ? "8px" : "0",
           }}
         >
           <Icon />

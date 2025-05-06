@@ -7,6 +7,7 @@ import { showToast } from "@atoms/Toast/Toast";
 import { BirthDatePicker } from "@atoms/DatePicker/BirthDatePicker";
 import { allCountries } from "country-telephone-data";
 import { useNavigate } from "react-router-dom";
+import { getNames } from "country-list";
 
 export const SignUp = () => {
   const [formData, setFormData] = React.useState({
@@ -248,8 +249,8 @@ export const SignUp = () => {
             <option value="" disabled>
               Select your country
             </option>
-            {allCountries.map(({ iso2, name }) => (
-              <option key={iso2} value={name}>
+            {getNames().map((name) => (
+              <option key={name} value={name}>
                 {name}
               </option>
             ))}

@@ -24,6 +24,7 @@ export const DateRangePicker = ({
           dateFormat="dd/MM/yyyy"
           placeholderText="Select a departure and return date"
           minDate={new Date()}
+          isClearable
         />
       ) : (
         <DatePicker

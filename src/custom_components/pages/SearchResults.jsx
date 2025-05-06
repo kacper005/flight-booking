@@ -1,10 +1,10 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { getSearchFlights } from "@api/flightApi";
-import { Button } from "@atoms/Button";
 import LoadingSpinner from "@atoms/LoadingSpinner";
 import { SearchResultCard } from "@organisms/SearchResultCard/SearchResultCard";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
+import { ActiveSearchPanel } from "@organisms/FlightSearchPanel/ActiveSearchPanel";
 
 export const SearchResults = () => {
   const [flights, setFlights] = React.useState([]);
@@ -51,130 +51,111 @@ export const SearchResults = () => {
     }).format(date);
   };
 
+  const adult = parseInt(params.get("adult") || "1");
+  const child = parseInt(params.get("child") || "0");
+  const infant = parseInt(params.get("infant") || "0");
+
   return (
     <PageTemplate>
+      <div style={{ width: "100%", maxWidth: "800px" }}>
+        <ActiveSearchPanel
+          initialFrom={from}
+          initialTo={to}
+          initialIsRoundTrip={roundTrip === "true"}
+          initialDateRange={
+            roundTrip === "true" && start && end
+              ? [new Date(start), new Date(end)]
+              : [null, null]
+          }
+          initialOneWayDate={
+            roundTrip === "false" && start ? new Date(start) : null
+          }
+          initialPassengers={{ adult, child, infant }}
+        />
+      </div>
+
       <div
         style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "flex-start",
-          justifyContent: "space-around",
           width: "100%",
-          maxWidth: "1000px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
           gap: "16px",
+          maxWidth: "800px",
         }}
       >
-        <div style={{ width: "25%" }}>
-          <h4>Filters</h4>
-          <br />
-          <p style={{ marginBottom: "10px" }}>Flight changes</p>
-          <label style={{ display: "block", marginBottom: "8px" }}>
-            <input
-              type="checkbox"
-              style={{ width: "24px", height: "24px", marginRight: "8px" }}
-            />{" "}
-            Show all
-          </label>
-          <label style={{ display: "block", marginBottom: "8px" }}>
-            <input
-              type="checkbox"
-              style={{ width: "24px", height: "24px", marginRight: "8px" }}
-            />{" "}
-            Direct
-          </label>
-          <label style={{ display: "block", marginBottom: "8px" }}>
-            <input
-              type="checkbox"
-              style={{ width: "24px", height: "24px", marginRight: "8px" }}
-            />{" "}
-            1 stop
-          </label>
-          <label style={{ display: "block", marginBottom: "8px" }}>
-            <input
-              type="checkbox"
-              style={{ width: "24px", height: "24px", marginRight: "8px" }}
-            />{" "}
-            2+ stops
-          </label>
-          <br />
-          <p>Price</p>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <input style={{ height: "35px", width: "60px", padding: "4px" }} />{" "}
-            -
-            <input style={{ height: "35px", width: "60px", padding: "4px" }} />
-          </div>
-          <br />
-          <Button>Save Search</Button>
-        </div>
-
         <div
           style={{
-            width: "100%",
             display: "flex",
-            flexDirection: "column",
-            gap: "16px",
+            justifyContent: "space-around",
+            alignItems: "center",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            {flightsError && (
-              <h3>
-                {flightsError || "An error occurred while fetching flights."}
-              </h3>
-            )}
-            {flights?.length === 0 && <h3>No flights found</h3>}
-          </div>
-          {loadingFlights && <LoadingSpinner />}
-
-          {flights?.map((flight, index) => {
-            const outbound = flight.outboundFlight || flight;
-            const ret = flight.returnFlight;
-
-            const prices = outbound.prices || [];
-
-            const lowestOutboundPrice = prices.reduce(
-              (min, p) => (p.price < min ? p.price : min),
-              prices[0]?.price || 0
-            );
-
-            return (
-              <SearchResultCard
-                key={index}
-                price={lowestOutboundPrice}
-                currency={prices[0]?.currency || ""}
-                outbandFlightDepartureTime={formatTime(outbound.departureTime)}
-                outbandFlightArrivalTime={formatTime(outbound.arrivalTime)}
-                returnFlightDepartureTime={
-                  ret ? formatTime(ret.departureTime) : ""
-                }
-                returnFlightArrivalTime={ret ? formatTime(ret.arrivalTime) : ""}
-                roundTrip={!!ret}
-                outboundOperatingAirlineName={outbound.airline?.name}
-                returnOperatingAirlineName={ret?.airline?.name}
-                outboundOperatingAirlineLogo={outbound.airline?.logoFileName}
-                returnOperatingAirlineLogo={ret?.airline?.logoFileName}
-                outbandFlightDepartureDate={formatDate(outbound.departureTime)}
-                returnFlightDepartureDate={
-                  ret ? formatDate(ret.departureTime) : ""
-                }
-                outbandFlightArrivalDate={outbound.arrivalTime?.split("T")[0]}
-                returnFlightArrivalDate={ret?.arrivalTime?.split("T")[0] || ""}
-                outbandFlightOriginAirportCode={outbound.arrivalAirport?.code}
-                outbandFlightDestinationAirportCode={
-                  outbound.departureAirport?.code
-                }
-                returnFlightOriginAirportCode={ret?.arrivalAirport?.code}
-                returnFlightDestinationAirportCode={ret?.departureAirport?.code}
-                availableClasses={outbound.availableClasses}
-                extraFeatures={outbound.extraFeatures}
-              />
-            );
-          })}
+          {flightsError && (
+            <h3 style={{ marginTop: "30px" }}>
+              {flightsError || "An error occurred while fetching flights."}
+            </h3>
+          )}
+          {flights?.length === 0 && (
+            <h3 style={{ marginTop: "30px" }}>No flights found</h3>
+          )}
         </div>
+        {loadingFlights && <LoadingSpinner />}
+
+        {flights?.map((flight, index) => {
+          const outbound = flight.outboundFlight || flight;
+          const ret = flight.returnFlight;
+
+          const prices = outbound.prices || [];
+
+          const lowestOutboundPrice = prices.reduce(
+            (min, p) => (p.price < min ? p.price : min),
+            prices[0]?.price || 0
+          );
+
+          const adultPrice = lowestOutboundPrice;
+          const childPrice = adultPrice * 0.85;
+          const totalPrice = adult * adultPrice + child * childPrice;
+
+          return (
+            <SearchResultCard
+              key={index}
+              price={lowestOutboundPrice}
+              currency={prices[0]?.currency || ""}
+              outbandFlightDepartureTime={formatTime(outbound.departureTime)}
+              outbandFlightArrivalTime={formatTime(outbound.arrivalTime)}
+              returnFlightDepartureTime={
+                ret ? formatTime(ret.departureTime) : ""
+              }
+              returnFlightArrivalTime={ret ? formatTime(ret.arrivalTime) : ""}
+              roundTrip={!!ret}
+              outboundOperatingAirlineName={outbound.airline?.name}
+              returnOperatingAirlineName={ret?.airline?.name}
+              outboundOperatingAirlineLogo={outbound.airline?.logoFileName}
+              returnOperatingAirlineLogo={ret?.airline?.logoFileName}
+              outbandFlightDepartureDate={formatDate(outbound.departureTime)}
+              returnFlightDepartureDate={
+                ret ? formatDate(ret.departureTime) : ""
+              }
+              outbandFlightArrivalDate={outbound.arrivalTime?.split("T")[0]}
+              returnFlightArrivalDate={ret?.arrivalTime?.split("T")[0] || ""}
+              outbandFlightOriginAirportCode={outbound.arrivalAirport?.code}
+              outbandFlightDestinationAirportCode={
+                outbound.departureAirport?.code
+              }
+              returnFlightOriginAirportCode={ret?.arrivalAirport?.code}
+              returnFlightDestinationAirportCode={ret?.departureAirport?.code}
+              availableClasses={outbound.availableClasses}
+              extraFeatures={outbound.extraFeatures}
+              pricePerAdult={adultPrice}
+              totalPrice={totalPrice}
+              numAdults={adult}
+              numChildren={child}
+              numInfants={infant}
+            />
+          );
+        })}
       </div>
     </PageTemplate>
   );

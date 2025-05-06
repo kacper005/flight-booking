@@ -1,44 +1,44 @@
 .feedbackCard {
-    display: block;
-    margin: 10px 5px;
-    height: 270px;
-    width: 400px;
-    box-shadow: #a1a1a1 3px 3px 5px;
-    background-color: white;
-    border-radius: 10px;
-    position: relative;
-    flex-shrink: 0;
+  display: block;
+  margin: 10px 5px;
+  height: 270px;
+  width: 400px;
+  box-shadow: #a1a1a1 3px 3px 5px;
+  background-color: white;
+  border-radius: 10px;
+  position: relative;
+  flex-shrink: 0;
 }
 
 .feedbackCard h2 {
-    color: var(--textColorDark);
-    padding: 32px 0 8px 25px;
-    margin: 0;
-    font-size: 2.4rem;
+  color: var(--textColorDark);
+  padding: 32px 0 8px 25px;
+  margin: 0;
+  font-size: 2.4rem;
 }
 
 .feedbackCard p {
-    color: var(--textColorDark);
-    padding: 8px 25px;
+  color: var(--textColorDark);
+  padding: 8px 25px;
 }
 
 #date {
-    color: #14161980;
-    position: absolute;
-    bottom: 32px;
-    padding: 0 25px;
+  color: #14161980;
+  position: absolute;
+  bottom: 32px;
+  padding: 0 25px;
 }
 
 .stars {
-    display: flex;
-    gap: 2px;
-    padding-left: 25px; /* Align with text */
-    margin-bottom: 8px;
+  display: flex;
+  gap: 2px;
+  padding-left: 25px; /* Align with text */
+  margin-bottom: 8px;
 }
 
 @media screen and (max-width: 520px) {
-    .feedbackCard {
-        height: 350px;
-        width: 270px;
-    }
+  .feedbackCard {
+    height: 350px;
+    width: 270px;
+  }
 }

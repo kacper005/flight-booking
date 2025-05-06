@@ -2,14 +2,8 @@ import React from "react";
 import "./BookingOptionsModal.css";
 import { Button } from "@atoms/Button";
 
-export default function BookingOptionsModal() {
+export default function BookingOptionsModal({ passengers, setPassengers }) {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [passengers, setPassengers] = React.useState({
-    adult: 1,
-    child: 0,
-    infant: 0,
-  });
-
   const dropdownRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -37,6 +31,7 @@ export default function BookingOptionsModal() {
         width={"100%"}
         bgColor={"var(--white)"}
         color={"var(--black)"}
+        hoverBgColor={"var(--white)"}
         borderRadius={"8px"}
         textAlign={"left"}
         border={"1px solid #cccccc"}
