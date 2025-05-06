@@ -1,12 +1,12 @@
 import React from "react";
-import { PageTemplate } from "@templates/PageTemplate/PageTempate";
-import { Card } from "@atoms/Card/Card";
-import { Button } from "@atoms/Button";
-import { CircleCheckBig } from "lucide-react";
-import { RouteLink } from "@atoms/RouteLink";
-import { signIn } from "@api/signInApi";
-import { showToast } from "@atoms/Toast/Toast";
 import { useNavigate } from "react-router-dom";
+import { CircleCheckBig } from "lucide-react";
+import { Button } from "@atoms/Button";
+import { Card } from "@atoms/Card/Card";
+import { RouteLink } from "@atoms/RouteLink";
+import { showToast } from "@atoms/Toast/Toast";
+import { PageTemplate } from "@templates/PageTemplate/PageTempate";
+import { signIn } from "@api/signInApi";
 import { useAuth } from "@context/AuthContext";
 import "./SignIn.css";
 
@@ -55,7 +55,8 @@ export const SignIn = () => {
       navigate("/");
     } catch (error) {
       const errMsg = error.response?.data || "Login failed. Please try again.";
-      setErrors({ server: errMsg });
+      showToast({ message: errMsg, type: "error" });
+      console.error("Login error:", errMsg);
     }
   };
 

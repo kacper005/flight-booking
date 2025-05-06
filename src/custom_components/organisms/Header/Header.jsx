@@ -1,6 +1,6 @@
 import React from "react";
-import { Logo } from "@atoms/Logo/Logo";
 import { Menu } from "lucide-react";
+import { Logo } from "@atoms/Logo/Logo";
 import "./Header.css";
 
 export const Header = ({ toggleSidebar }) => {

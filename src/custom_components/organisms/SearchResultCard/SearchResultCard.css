@@ -1,0 +1,39 @@
+.search-result-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: auto;
+  gap: 20px;
+}
+
+.price-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 12px 12px 0px 12px;
+  border-left: 2px solid #ccc;
+  min-width: 200px;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .search-result-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .price-info {
+    border-left: none !important;
+    border-top: 1px solid #ccc;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+}

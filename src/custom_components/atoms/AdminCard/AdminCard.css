@@ -1,29 +1,29 @@
 .adminCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    height: 250px;
-    width: 250px;
-    box-shadow: lightgrey 5px 5px 10px;
-    background-color: white;
-    border-radius: 10px;
-    color: var(--textColorDark);
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  height: 250px;
+  width: 250px;
+  box-shadow: lightgrey 5px 5px 10px;
+  background-color: white;
+  border-radius: 10px;
+  color: var(--textColorDark);
+  cursor: pointer;
 }
 
 .h2 {
-    color: var(--textColorDark);
-    font-size: 3.2rem;
-    margin: 0;
-    padding: 0;
+  color: var(--textColorDark);
+  font-size: 3.2rem;
+  margin: 0;
+  padding: 0;
 }
 
 .iconContainer {
-    padding-top: 46px;
-    padding-bottom: 20px;
+  padding-top: 46px;
+  padding-bottom: 20px;
 }
 
 .adminCard:hover {
-    background-color: #ADBBDA;
+  background-color: #adbbda;
 }

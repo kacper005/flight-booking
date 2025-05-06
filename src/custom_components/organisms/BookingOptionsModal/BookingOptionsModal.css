@@ -1,3 +1,7 @@
+:root {
+  --textColor: #ffffff;
+}
+
 .booking-container {
   position: relative;
   width: 100%;
@@ -5,37 +9,49 @@
 
 .dropdown {
   position: absolute;
-  top: 65px;
+  top: 75px;
   left: 0;
   background: var(--textColor);
   border: 1px solid #cccccc;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 15px;
-  width: auto;
+  min-width: 280px;
+  max-width: 90vw;
   z-index: 1000;
 }
 
 .booking-dialog {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
+  min-width: 250px;
 }
 
 .passenger-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 5px 0;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .counter button {
   background: #3d52a0;
-  width: 35px;
+  width: 30px;
+  height: 30px;
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 10px;
+  padding: 0;
+  font-size: 1.2rem;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .count-value {
@@ -48,18 +64,26 @@
 .cabin-classes {
   display: flex;
   gap: 10px;
+  margin-top: 10px;
 }
 
 .cabin-classes button {
-  font-size: 1.6rem;
-  padding: 5px 10px;
+  font-size: 1rem;
+  padding: 6px 12px;
   cursor: pointer;
   border-radius: 8px;
   border: 1px solid #ccc;
+  background-color: white;
 }
 
-.selected {
+.cabin-classes button.selected {
   background: #3d52a0;
   color: white;
-  border-radius: 8px;
+}
+
+/* Removed dropdown width override from media query */
+@media (max-width: 800px) {
+  .booking-container {
+    width: 100%;
+  }
 }
