@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./AdminFlightsModal.css";
 import { Button } from "@atoms/Button.jsx";
 import { getAirportsArray } from "@api/airportApi.js";
 import { getAirlines } from "@api/airlineApi.js";
 import { createPrice, getPrices } from "@api/priceApi.js";
 import { addPricesToFlight, createFlight } from "@api/flightApi.js";
 import { showToast } from "@atoms/Toast/Toast.jsx";
+import "./AdminFlightsModal.css";
 
 export const AdminNewFlightModal = ({ onClose, onSave }) => {
   const [formData, setFormData] = React.useState({

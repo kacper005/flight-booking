@@ -1,11 +1,11 @@
 import React from "react";
-import "./AdminFlights.css";
-import { ButtonSmall } from "../../atoms/ButtonSmall";
+import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
 import { getFlights, updateFlight } from "@api/flightApi.js";
 import { AdminFlightsModal } from "@organisms/AdminFlightsModal/AdminFlightsModal.jsx";
 import { AdminNewFlightModal } from "@organisms/AdminFlightsModal/AdminNewFlightModal.jsx";
 import { Button } from "@atoms/Button.jsx";
 import LoadingSpinner from "@atoms/LoadingSpinner";
+import "./AdminFlights.css";
 
 export const AdminFlights = () => {
   const [flights, setFlights] = React.useState([]);
@@ -40,6 +40,16 @@ export const AdminFlights = () => {
   const handleSave = async (updatedFlight) => {
     try {
       await updateFlight(updatedFlight.flightId, updatedFlight);
+      const res = await getFlights();
+      setFlights(res.data);
+      setSelectedFlight(null);
+    } catch (error) {
+      console.error("Error updating flight:", error);
+    }
+  };
+
+  const handleClose = async () => {
+    try {
       const res = await getFlights();
       setFlights(res.data);
       setSelectedFlight(null);
@@ -138,7 +148,7 @@ export const AdminFlights = () => {
       {selectedFlight && (
         <AdminFlightsModal
           flight={selectedFlight}
-          onClose={() => setSelectedFlight(null)}
+          onClose={handleClose}
           onSave={handleSave}
         />
       )}

@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./AdminFlightsModal.css";
 import { Button } from "@atoms/Button";
 import { showToast } from "@atoms/Toast/Toast.jsx";
-import { updateFlight } from "@api/flightApi.js";
+import { deleteFlight, updateFlight } from "@api/flightApi.js";
 import { getAirportsArray } from "@api/airportApi.js";
 import { getAirlines } from "@api/airlineApi";
 import { getPrices, updatePrice } from "@api/priceApi.js";
+import "./AdminFlightsModal.css";
 
 export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
   const [formData, setFormData] = React.useState({ ...flight });
@@ -154,6 +154,29 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
       }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    const userConfirmed = window.confirm(
+      "Are you sure you want to delete this flight?",
+    );
+    if (userConfirmed) {
+      try {
+        await deleteFlight(flight.flightId);
+        showToast({
+          message: "Flight deleted successfully",
+          type: "success",
+        });
+        onClose();
+      } catch (error) {
+        console.error("Error deleting flight:", error);
+        showToast({
+          message: "Failed to delete flight",
+          type: "error",
+        });
+      }
     }
   };
 
@@ -419,7 +442,6 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
               </select>
             </div>
           </div>
-
           <h3 className={"h3Price"}>Price 2</h3>
           <div className="modalGrid">
             <div className={"formPriceCurrency"}>
@@ -471,7 +493,6 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
               </select>
             </div>
           </div>
-
           <div className={"formClassFeature"}>
             <label className={"labelClassFeature"}>Available Classes</label>
             <textarea
@@ -488,12 +509,20 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
               placeholder={"E.g. WiFi, Extra Legroom"}
             />
           </div>
-
           <div className="modalActions">
             <Button width={"101px"} type={"submit"}>
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>
+          </div>
+          <div className="bottomModalActions">
+            <Button
+              bgColor={"#e64848"}
+              hoverBgColor={"#c23636"}
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
           </div>
         </form>
       </div>
