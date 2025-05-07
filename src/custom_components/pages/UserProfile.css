@@ -32,22 +32,22 @@
   font-size: 1.5rem;
 }
 
-.input-group {
+.user-input-group {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
   font-size: 1.5rem;
 }
 
-.input-group label {
+.user-input-group label {
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;
   color: var(--textColorDark);
 }
 
-.input-group input,
-.input-group select {
+.user-input-group input,
+.user-input-group select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;

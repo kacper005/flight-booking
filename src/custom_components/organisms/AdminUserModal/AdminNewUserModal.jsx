@@ -81,7 +81,7 @@ export const AdminNewUserModal = ({onClose, onSave}) => {
                 const userPayload = {
                     email: formData.email,
                     password: formData.password,
-                    phone: '${formData.phoneCode}${formData.phone}',
+                    phone: `${formData.phoneCode}${formData.phone}`,
                     firstName: formData.firstName,
                     lastName: formData.lastName,
                     dateOfBirth: formData.dateOfBirth,

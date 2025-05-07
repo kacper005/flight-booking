@@ -141,7 +141,7 @@ export const UserProfile = () => {
                         </div>
                     </div>
 
-                    <div className="input-group">
+                    <div className="user-input-group">
                         <div className="field">
                             <label>Country</label>
                             <select
