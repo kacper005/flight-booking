@@ -105,7 +105,7 @@ export const AdminUsers = () => {
                         <th className={"colPhone"}>Phone</th>
                         <th className={"colCreatedAt"}>Created At</th>
                         <th className={"colRole"}>Role</th>
-                        <th className={"colEdit"}>Edit</th>
+                        <th className={"colEdit-admin-user"}>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -123,7 +123,7 @@ export const AdminUsers = () => {
                             <td className={"colPhone"}>{users.phone}</td>
                             <td className={"colCreatedAt"}>{formDateTime(users.createdAt)}</td>
                             <td className={"colRole"}>{getDisplayRole(users.role)}</td>
-                            <td className={"colEdit"}>
+                            <td className={"colEdit-admin-user"}>
                                 <ButtonSmall
                                     onClick={(e) => {
                                         e.stopPropagation();
