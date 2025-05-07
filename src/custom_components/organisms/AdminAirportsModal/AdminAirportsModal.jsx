@@ -2,24 +2,23 @@ import React from "react";
 import { getNames } from "country-list";
 import { Button } from "@atoms/Button";
 import { showToast } from "@atoms/Toast/Toast.jsx";
-import { deleteAirline, updateAirline } from "@api/airlineApi.js";
-import { getFlights } from "@api/flightApi.js";
 import "./../AdminFlightsModal/AdminFlightsModal.css";
+import { deleteAirport, updateAirport } from "@api/airportApi.js";
+import { getFlights } from "@api/flightApi.js";
 
-export const AdminAirlinesModal = ({ airline, onClose, onSave }) => {
-  const [formData, setFormData] = React.useState({ ...airline });
+export const AdminAirportsModal = ({ airport, onClose, onSave }) => {
+  const [formData, setFormData] = React.useState({ ...airport });
   const [errors, setErrors] = React.useState({});
 
   React.useEffect(() => {
-    setFormData({ ...airline });
-  }, [airline]);
+    setFormData({ ...airport });
+  }, [airport]);
 
   const validate = () => {
     let newErrors = {};
-    if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.code.trim()) newErrors.code = "Code is required";
-    if (!formData.logoFileName.trim())
-      newErrors.logoFileName = "Logo File Name is required";
+    if (!formData.city.trim()) newErrors.city = "City is required";
+    if (!formData.name.trim()) newErrors.name = "Name is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -36,9 +35,12 @@ export const AdminAirlinesModal = ({ airline, onClose, onSave }) => {
     try {
       const flights = await getFlights();
       for (const flight of flights.data) {
-        if (flight.airline.airlineId === airline.airlineId) {
+        if (
+          flight.departureAirport.airportId === airport.airportId ||
+          flight.arrivalAirport.airportId === airport.airportId
+        ) {
           alert(
-            "This airline is connected to one or more existing flights.\nPlease delete the flights before deleting the airline.",
+            "This airport is connected to one or more existing flights.\nPlease delete the flights before deleting the airport.",
           );
           return;
         }
@@ -48,20 +50,20 @@ export const AdminAirlinesModal = ({ airline, onClose, onSave }) => {
     }
 
     const userConfirmed = window.confirm(
-      "Are you sure you want to delete this airline?",
+      "Are you sure you want to delete this airport?",
     );
     if (userConfirmed) {
       try {
-        await deleteAirline(airline.airlineId);
+        await deleteAirport(airport.airportId);
         showToast({
-          message: "Airline deleted successfully",
+          message: "Airport deleted successfully",
           type: "success",
         });
         onClose();
       } catch (error) {
-        console.error("Error deleting airline:", error);
+        console.error("Error deleting airport:", error);
         showToast({
-          message: "Failed to delete airline",
+          message: "Failed to delete airport",
           type: "error",
         });
       }
@@ -73,18 +75,18 @@ export const AdminAirlinesModal = ({ airline, onClose, onSave }) => {
 
     if (validate()) {
       try {
-        const airlinePayload = {
-          airlineId: airline.airlineId,
-          name: formData.name,
+        const airportPayload = {
+          airportId: airport.airportId,
           code: formData.code,
+          city: formData.city,
           country: formData.country,
-          logoFileName: formData.logoFileName,
+          name: formData.name,
         };
 
-        await updateAirline(airline.airlineId, airlinePayload);
-        onSave({ ...airline, ...airlinePayload });
+        await updateAirport(airport.airportId, airportPayload);
+        onSave({ ...airport, ...airportPayload });
         showToast({
-          message: "Airline updated successfully",
+          message: "Airport updated successfully",
           type: "success",
         });
       } catch (error) {
@@ -92,10 +94,10 @@ export const AdminAirlinesModal = ({ airline, onClose, onSave }) => {
           typeof error.response?.data === "string"
             ? error.response.data
             : error.response?.data?.message ||
-              "Something went wrong while saving airline data";
+              "Something went wrong while saving airport data";
 
         showToast({
-          message: `Failed to update airline. ${message}`,
+          message: `Failed to update airport. ${message}`,
           type: "error",
         });
       }
@@ -105,56 +107,52 @@ export const AdminAirlinesModal = ({ airline, onClose, onSave }) => {
   return (
     <div className="modalOverlay" onClick={onClose}>
       <div className="modalContent" onClick={(e) => e.stopPropagation()}>
-        <h2>Edit Airline</h2>
+        <h2>Edit Airport</h2>
         <form onSubmit={handleSubmit}>
           <div className="modalGrid">
-            <div className="formField">
-              <label>Name</label>
-              <input
-                name={"name"}
-                value={formData.name}
-                onChange={handleChange}
-                placeholder={"Airline Name"}
-              />
-              {errors.name && <span className="adminError">{errors.name}</span>}
-            </div>
             <div className="formField">
               <label>Code</label>
               <input
                 name={"code"}
                 value={formData.code}
                 onChange={handleChange}
-                placeholder={"Airline Code"}
+                placeholder={"Airport Code"}
               />
               {errors.code && <span className="adminError">{errors.code}</span>}
             </div>
             <div className="formField">
+              <label>City</label>
+              <input
+                name={"city"}
+                value={formData.city}
+                onChange={handleChange}
+                placeholder={"Airport City"}
+              />
+              {errors.city && <span className="adminError">{errors.city}</span>}
+            </div>
+            <div className="formField">
               <label>Country</label>
               <select
-                name="country"
+                name={"country"}
                 value={formData.country}
                 onChange={handleChange}
               >
-                {getNames()
-                  .sort((a, b) => a.localeCompare(b))
-                  .map((name) => (
-                    <option key={name} value={name}>
-                      {name}
-                    </option>
-                  ))}
+                {getNames().map((country, index) => (
+                  <option key={index} value={country}>
+                    {country}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="formField">
-              <label>Logo File Name</label>
+              <label>Name</label>
               <input
-                name={"logoFileName"}
-                value={formData.logoFileName}
+                name={"name"}
+                value={formData.name}
                 onChange={handleChange}
-                placeholder={"Logo File Name"}
+                placeholder={"Airport Name"}
               />
-              {errors.logoFileName && (
-                <span className="adminError">{errors.logoFileName}</span>
-              )}
+              {errors.name && <span className="adminError">{errors.name}</span>}
             </div>
           </div>
           <div className="modalActions">

@@ -4,6 +4,7 @@ import { Button } from "@atoms/Button.jsx";
 import LoadingSpinner from "@atoms/LoadingSpinner";
 import { getAirports, updateAirport } from "@api/airportApi.js";
 import "./AdminFlights.css";
+import { AdminAirportsModal } from "@organisms/AdminAirportsModal/AdminAirportsModal.jsx";
 
 export const AdminAirports = () => {
   const [airports, setAirports] = React.useState([]);
@@ -30,7 +31,7 @@ export const AdminAirports = () => {
 
   const handleSave = async (updatedAirport) => {
     try {
-      await updatedAirport(updatedAirport.airportId, updatedAirport);
+      await updateAirport(updatedAirport.airportId, updatedAirport);
       const res = await getAirports();
       const sorted = res.data.sort((a, b) => a.code.localeCompare(b.code));
       setAirports(sorted);
@@ -123,7 +124,13 @@ export const AdminAirports = () => {
         </table>
       )}
 
-      {/* TODO: Modal Edit Airline */}
+      {selectedAirport && (
+        <AdminAirportsModal
+          airport={selectedAirport}
+          onClose={handleClose}
+          onSave={handleSave}
+        />
+      )}
 
       {/* TODO: Modal Add Airline */}
     </div>
