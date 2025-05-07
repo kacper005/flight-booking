@@ -75,12 +75,12 @@ export const App = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/saved-trips" element={<SavedTrips />} />
+          </Route>
 
-            <Route path="/admin" element={<AdminRoute />}>
-              <Route index element={<Admin />} />
-              <Route path="flights" element={<AdminFlights />} />
-              <Route path="users" element={<AdminUsers />} />
-            </Route>
+          <Route path="/admin" element={<AdminRoute />}>
+            <Route index element={<Admin />} />
+            <Route path="flights" element={<AdminFlights />} />
+            <Route path="users" element={<AdminUsers />} />
           </Route>
         </Routes>
         <ToastContainer />
