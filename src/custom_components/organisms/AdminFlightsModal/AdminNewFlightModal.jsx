@@ -303,7 +303,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                 placeholder={"E.g. AB123"}
               />
               {errors.flightNumber && (
-                <small className={"flightError"}>{errors.flightNumber}</small>
+                <small className={"adminError"}>{errors.flightNumber}</small>
               )}
             </div>
             <div className={"formField"}>
@@ -323,7 +323,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                 ))}
               </select>
               {errors.airline && (
-                <small className={"flightError"}>{errors.airline}</small>
+                <small className={"adminError"}>{errors.airline}</small>
               )}
             </div>
             <div className={"formField"}>
@@ -346,7 +346,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   ))}
               </select>
               {errors.departureAirport && (
-                <small className={"flightError"}>
+                <small className={"adminError"}>
                   {errors.departureAirport}
                 </small>
               )}
@@ -371,7 +371,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   ))}
               </select>
               {errors.arrivalAirport && (
-                <small className={"flightError"}>{errors.arrivalAirport}</small>
+                <small className={"adminError"}>{errors.arrivalAirport}</small>
               )}
             </div>
             <div className={"formField"}>
@@ -388,7 +388,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                 <option value="false">False</option>
               </select>
               {errors.roundTrip && (
-                <small className={"flightError"}>{errors.roundTrip}</small>
+                <small className={"adminError"}>{errors.roundTrip}</small>
               )}
             </div>
             <div className={"formField"}>
@@ -406,7 +406,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                 <option value="DELAYED">Delayed</option>
               </select>
               {errors.status && (
-                <small className={"flightError"}>{errors.status}</small>
+                <small className={"adminError"}>{errors.status}</small>
               )}
             </div>
             <div className={"formField"}>
@@ -418,7 +418,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                 onChange={handleChange}
               />
               {errors.departureTime && (
-                <small className={"flightError"}>{errors.departureTime}</small>
+                <small className={"adminError"}>{errors.departureTime}</small>
               )}
             </div>
             <div className={"formField"}>
@@ -430,7 +430,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                 onChange={handleChange}
               />
               {errors.arrivalTime && (
-                <small className={"flightError"}>{errors.arrivalTime}</small>
+                <small className={"adminError"}>{errors.arrivalTime}</small>
               )}
             </div>
           </div>
@@ -446,7 +446,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   onChange={handleChange}
                 />
                 {errors.price1 && (
-                  <small className={"flightError"}>{errors.price1}</small>
+                  <small className={"adminError"}>{errors.price1}</small>
                 )}
               </div>
               <div className={"formField"} id={"formFieldCurrency"}>
@@ -469,7 +469,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                     ))}
                 </select>
                 {errors.currency1 && (
-                  <small className={"flightError"}>{errors.currency1}</small>
+                  <small className={"adminError"}>{errors.currency1}</small>
                 )}
               </div>
             </div>
@@ -493,7 +493,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   ))}
               </select>
               {errors.priceProviderName1 && (
-                <small className={"flightError"}>
+                <small className={"adminError"}>
                   {errors.priceProviderName1}
                 </small>
               )}
@@ -512,7 +512,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   onChange={handleChange}
                 />
                 {errors.price2 && (
-                  <small className={"flightError"}>{errors.price2}</small>
+                  <small className={"adminError"}>{errors.price2}</small>
                 )}
               </div>
               <div className={"formField"} id={"formFieldCurrency"}>
@@ -535,7 +535,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                     ))}
                 </select>
                 {errors.currency2 && (
-                  <small className={"flightError"}>{errors.currency2}</small>
+                  <small className={"adminError"}>{errors.currency2}</small>
                 )}
               </div>
             </div>
@@ -559,7 +559,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   ))}
               </select>
               {errors.priceProviderName2 && (
-                <small className={"flightError"}>
+                <small className={"adminError"}>
                   {errors.priceProviderName2}
                 </small>
               )}
@@ -593,9 +593,4 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
       </div>
     </div>
   );
-};
-
-AdminNewFlightModal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
 };

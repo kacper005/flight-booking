@@ -292,7 +292,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 placeholder={"E.g. AB123"}
               />
               {errors.flightNumber && (
-                <small className={"flightError"}>{errors.flightNumber}</small>
+                <small className={"adminError"}>{errors.flightNumber}</small>
               )}
             </div>
             <div className={"formField"}>
@@ -375,7 +375,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 onChange={handleChange}
               />
               {errors.departureTime && (
-                <small className={"flightError"}>{errors.departureTime}</small>
+                <small className={"adminError"}>{errors.departureTime}</small>
               )}
             </div>
             <div className={"formField"}>
@@ -387,7 +387,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                 onChange={handleChange}
               />
               {errors.arrivalTime && (
-                <small className={"flightError"}>{errors.arrivalTime}</small>
+                <small className={"adminError"}>{errors.arrivalTime}</small>
               )}
             </div>
           </div>
@@ -403,7 +403,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                   onChange={handleChange}
                 />
                 {errors.price1 && (
-                  <small className={"flightError"}>{errors.price1}</small>
+                  <small className={"adminError"}>{errors.price1}</small>
                 )}
               </div>
               <div className={"formField"} id={"formFieldCurrency"}>
@@ -454,7 +454,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
                   onChange={handleChange}
                 />
                 {errors.price2 && (
-                  <small className={"flightError"}>{errors.price2}</small>
+                  <small className={"adminError"}>{errors.price2}</small>
                 )}
               </div>
               <div className={"formField"} id={"formFieldCurrency"}>
