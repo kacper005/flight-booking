@@ -17,7 +17,7 @@ export const BirthDatePicker = ({ formData, setFormData }) => {
       showYearDropdown
       showMonthDropdown
       dropdownMode="select"
-      placeholderText="Select your birth date"
+      placeholderText="DD/MM/YYYY"
       maxDate={new Date()}
       isClearable
     />

@@ -37,6 +37,7 @@
   flex-wrap: wrap;
   gap: 2rem;
   font-size: 1.5rem;
+  color: var(--textColor);
 }
 
 .user-input-group label {
@@ -66,12 +67,20 @@
   margin-bottom: 0.5rem;
 }
 
-.field input {
+.field input{
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: var(--white);
 }
+
+.field select {
+  height: 60px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+
 
 .errors {
   color: var(--errorColor);

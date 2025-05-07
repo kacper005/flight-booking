@@ -1,18 +1,20 @@
 import React from "react";
 
-import "./AdminUserModal.css";
+
+import "@organisms/AdminFlightsModal/AdminFlightsModal.css";
 import PropTypes from "prop-types";
 import {showToast} from "@atoms/Toast/Toast.jsx";
 import {Button} from "@atoms/Button.jsx";
 import {getDisplayRole} from "@/enums/UserRole.js";
-import {allCountries} from "country-telephone-data";
+import { getNames } from "country-list";
+import {deleteUser} from "@api/userApi.js";
 import {useAuth} from "@context/AuthContext.jsx";
 
 
 export const AdminUsersModal = ({users, onClose, onSave}) => {
-        const {user} = useAuth();
         const [formData, setFormData] = React.useState({...users});
         const [errors, setErrors] = React.useState({});
+        const {user: authUser} = useAuth();
 
         const RoleDisplayMap = {
             ADMIN: "Admin",
@@ -21,12 +23,7 @@ export const AdminUsersModal = ({users, onClose, onSave}) => {
 
 
         React.useEffect(() => {
-            const matchedCountry = allCountries.find(
-                (c) => c.name.toLowerCase() === (user.country || "").toLowerCase()
-            );
-            setFormData({
-                ...users, country: matchedCountry ? matchedCountry.name : "",
-            });
+            setFormData({...users });
         }, [users]);
 
         const handleChange = (e) => {
@@ -67,6 +64,38 @@ export const AdminUsersModal = ({users, onClose, onSave}) => {
                         : error.response?.data?.message || "Something went wrong. Please try again.";
 
                 showToast({message: `Failed to update user. ${message}`, type: "error"});
+            }
+        };
+
+        const handleDelete = async (e) => {
+            e.preventDefault();
+
+            // Prevent self-deletion
+            if (formData.userId === authUser.userId) {
+                showToast({
+                    message: "You cannot delete your own account.",
+                    type: "error"
+                });
+                return;
+            }
+
+            const userConfirmed = window.confirm("Are you sure you want to delete this user?"
+            );
+
+            if (userConfirmed) {
+                try {
+                    await deleteUser(formData.userId);
+                    showToast({
+                        message: "User deleted successfully",
+                        type: "success"});
+                    onClose();
+                } catch (error) {
+                    console.error("Error deleting user:", error);
+                    showToast({
+                        message: "Failed to delete user",
+                        type: "error"
+                    });
+                }
             }
         };
 
@@ -123,11 +152,13 @@ export const AdminUsersModal = ({users, onClose, onSave}) => {
                                     onChange={handleChange}
                                 >
                                     <option value="" disabled>Select your country</option>
-                                    {allCountries.map(({iso2, name}) => (
-                                        <option key={iso2} value={name}>
-                                            {name}
-                                        </option>
-                                    ))}
+                                    {getNames()
+                                        .sort((a, b) => a.localeCompare(b))
+                                        .map((name) => (
+                                            <option key={name} value={name}>
+                                                {name}
+                                            </option>
+                                        ))}
                                 </select>
                                 {errors.country &&
                                     <small className="adminError">{errors.country}</small>}
@@ -148,6 +179,15 @@ export const AdminUsersModal = ({users, onClose, onSave}) => {
                         <div className="modalActions">
                             <Button type="submit">Save</Button>
                             <Button onClick={onClose}>Cancel</Button>
+                        </div>
+                            <div className="bottomModalActions">
+                                <Button
+                                    bgColor={"var(--buttonColorRed)"}
+                                    hoverBgColor={"var(--buttonColorRedHover)"}
+                                    onClick={handleDelete}
+                                >
+                                    Delete
+                                </Button>
                         </div>
                     </form>
                 </div>

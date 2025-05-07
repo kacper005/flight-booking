@@ -3,8 +3,9 @@ import {createUser} from "@api/userApi.js";
 import {showToast} from "@atoms/Toast/Toast.jsx";
 import PropTypes from "prop-types";
 import {Button} from "@atoms/Button.jsx";
-import {allCountries} from "country-telephone-data";
 import {BirthDatePicker} from "@atoms/DatePicker/BirthDatePicker.jsx";
+import { allCountries } from "country-telephone-data";
+import {getNames} from "country-list";
 import "./AdminUserModal.css";
 
 
@@ -90,9 +91,11 @@ export const AdminNewUserModal = ({onClose, onSave}) => {
                 };
 
                 await createUser(userPayload);
-                showToast({message: "User created successfully!", type: "success"});
-                onSave();
-                onClose();
+                onSave({...userPayload});
+                showToast({
+                    message: "User created successfully!",
+                    type: "success",
+                });
             } catch (error) {
                 console.error(error);
                 const message =
@@ -100,7 +103,9 @@ export const AdminNewUserModal = ({onClose, onSave}) => {
                         ? error.response.data
                         : error.response?.data?.message || "Something went wrong. Please try again.";
 
-                showToast({message: `User creation failed. ${message}`, type: "error"});
+                showToast({
+                    message: `User creation failed. ${message}`,
+                    type: "error"});
             }
         }
     };
@@ -138,17 +143,17 @@ export const AdminNewUserModal = ({onClose, onSave}) => {
                             {errors.password &&
                                 <small className="flightsError">{errors.password}</small>}
                         </div>
-                        <div className="formField" style={{gridColumn: '1 / 3'}}>
+                        <div className="formField formField-phone">
                             <label>Mobile Number</label>
-                            <div className="phone-container">
+                            <div className="phone-container-user-admin">
                                 <select
                                     name="phoneCode"
                                     value={formData.phoneCode}
                                     onChange={handleChange}
-                                    className="phone-code"
+                                    className="phone-code-user-admin"
                                 >
-                                    {allCountries.map(({iso2, dialCode}) => (
-                                        <option key={iso2} value={`${dialCode}`}>
+                                    {allCountries.map(({ iso2, dialCode }) => (
+                                        <option key={iso2} value={`+${dialCode}`}>
                                             (+{dialCode}) {iso2.toUpperCase()}
                                         </option>
                                     ))}
@@ -159,21 +164,25 @@ export const AdminNewUserModal = ({onClose, onSave}) => {
                                     value={formData.phone}
                                     onChange={handleChange}
                                     placeholder="Enter phone number"
-                                    className="phone-input"
+                                    className="phone-input-user-admin"
                                     autoComplete="tel"
                                 />
                             </div>
                             {errors.phone && <small className="adminError">{errors.phone}</small>}
                         </div>
 
-                        <div className="formField">
+                        <div className="formField formField-country">
                             <label>Country</label>
                             <select name="country" value={formData.country || ""}
                                     onChange={handleChange}>
                                 <option value="" disabled>Select your country</option>
-                                {allCountries.map(({iso2, name}) => (
-                                    <option key={iso2} value={name}>{name}</option>
-                                ))}
+                                {getNames()
+                                    .sort((a, b) => a.localeCompare(b))
+                                    .map((name) => (
+                                        <option key={name} value={name}>
+                                            {name}
+                                        </option>
+                                    ))}
                             </select>
                             {errors.country &&
                                 <small className="adminError">{errors.country}</small>}
@@ -187,7 +196,7 @@ export const AdminNewUserModal = ({onClose, onSave}) => {
                         </div>
                         <div className="formField" style={{gridColumn: '1 / 3'}}>
                             <label>Gender</label>
-                            <div className="gender-options">
+                            <div className="gender-options-user-admin">
                                 <label>
                                     <input type="checkbox" name="gender" value="Male"
                                            checked={formData.gender === "Male"}

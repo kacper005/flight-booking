@@ -62,10 +62,9 @@ export const AdminUsers = () => {
         }
     };
 
-    const handleAddUser = async (newUser) => {
+    const handleAddUser = async () => {
         try {
             toggleModal();
-            await updateUser(newUser.userId, newUser);
             const res = await getUsers();
             setUsers(res.data);
         } catch (error) {
