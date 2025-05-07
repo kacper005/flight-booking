@@ -76,10 +76,10 @@ export const App = () => {
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/saved-trips" element={<SavedTrips />} />
 
-            <Route element={<AdminRoute />}>
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/admin-flights" element={<AdminFlights />} />
-              <Route path="/admin-users" element={<AdminUsers />} />
+            <Route path="/admin" element={<AdminRoute />}>
+              <Route index element={<Admin />} />
+              <Route path="flights" element={<AdminFlights />} />
+              <Route path="users" element={<AdminUsers />} />
             </Route>
           </Route>
         </Routes>

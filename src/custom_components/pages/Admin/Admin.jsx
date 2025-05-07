@@ -39,12 +39,12 @@ export const Admin = () => {
           paddingBottom: "70px",
         }}
       >
-        <Link to={"/admin-flights"}>
+        <Link to={"/admin/flights"}>
           <AdminCard icon={Plane} title={"Flights"} />
         </Link>
         <AdminCard icon={PlaneTakeoff} title={"Airlines"} />
         <AdminCard icon={TowerControl} title={"Airports"} />
-        <Link to={"/admin-users"}>
+        <Link to={"/admin/users"}>
           <AdminCard icon={UserRoundPen} title={"Users"} />
         </Link>
         <AdminCard icon={CalendarDays} title={"Bookings"} />
