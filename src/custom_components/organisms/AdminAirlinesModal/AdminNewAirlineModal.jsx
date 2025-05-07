@@ -45,8 +45,6 @@ export const AdminNewAirlineModal = ({ onClose, onSave }) => {
 
         await createAirline(airlinePayload);
 
-        // TODO: Check if onSave needs ResponseData.
-
         onSave({ ...airlinePayload });
         showToast({
           message: "Airline added successfully",

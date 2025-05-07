@@ -4,41 +4,16 @@ import { useAuth } from "@context/AuthContext";
 import { updateOwnProfile } from "@api/userApi.js";
 import { showToast } from "@atoms/Toast/Toast.jsx";
 import { Button } from "@atoms/Button";
-import { allCountries } from "country-telephone-data";
 import "./UserProfile.css";
+import {getNames} from "country-list";
 
 export const UserProfile = () => {
     const { user } = useAuth();
-
-    const [formData, setFormData] = React.useState({
-        firstName: "",
-        lastName: "",
-        phone: "",
-        email: "",
-        password: "",
-        country: "",
-        dateOfBirth: null,
-        gender: null,
-    });
-
+    const [formData, setFormData] = React.useState({ ...user});
     const [errors, setErrors] = React.useState({});
 
     React.useEffect(() => {
-        if (user) {
-            const matchedCountry = allCountries.find(
-                (c) => c.name.toLowerCase() === (user.country || "").toLowerCase()
-            );
-            setFormData({
-                firstName: user.firstName || "",
-                lastName: user.lastName || "",
-                phone: user.phone || "",
-                email: user.email || "",
-                password: "",
-                country: matchedCountry ? matchedCountry.name : "",
-                dateOfBirth: user.dateOfBirth || null,
-                gender: user.gender || null,
-            });
-        }
+        setFormData({ ...user, password: "" });
     }, [user]);
 
     const validate = () => {
@@ -153,9 +128,13 @@ export const UserProfile = () => {
                                 }))}
                             >
                                 <option value="" disabled>Select your country</option>
-                                {allCountries.map(({iso2, name}) => (
-                                    <option key={iso2} value={name}>{name}</option>
-                                ))}
+                                {getNames()
+                                    .sort((a, b) => a.localeCompare(b))
+                                    .map((name) => (
+                                        <option key={name} value={name}>
+                                            {name}
+                                        </option>
+                                    ))}
                             </select>
                             {errors.country && <small className="errors">{errors.country}</small>}
                         </div>

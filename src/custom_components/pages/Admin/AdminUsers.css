@@ -51,7 +51,7 @@ h1 {
 }
 
 @media screen and (max-width: 600px) {
-    .colEdit {
+    .colEdit-admin-user {
         display: none;
     }
 }
