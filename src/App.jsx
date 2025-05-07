@@ -40,6 +40,10 @@ export const App = () => {
     setSidebarOpen((prev) => !prev);
   };
 
+  React.useEffect(() => {
+    overwriteCountries();
+  }, []);
+
   return (
     <Router>
       <ScrollToTop />
