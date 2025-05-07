@@ -7,6 +7,7 @@ import { Select } from "@atoms/Select";
 import { DateRangePicker } from "@atoms/DatePicker/DateRangePicker";
 import LocationSwitcher from "@molecules/LocationSwitcher/LocationSwitcher";
 import BookingOptionsModal from "@organisms/BookingOptionsModal/BookingOptionsModal";
+import "./ActiveSearchPanel.css";
 
 export const ActiveSearchPanel = ({
   initialFrom,
@@ -85,17 +86,9 @@ export const ActiveSearchPanel = ({
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-      <div
-        className="input-row"
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "16px",
-          width: "100%",
-        }}
-      >
-        <div style={{ flex: 1, minWidth: "280px" }}>
+    <div className="active-search-panel">
+      <div className="input-row">
+        <div className="location-switcher">
           <LocationSwitcher
             from={from}
             setFrom={setFrom}
@@ -103,9 +96,7 @@ export const ActiveSearchPanel = ({
             setTo={setTo}
           />
         </div>
-        <div
-          style={{ flex: 1, minWidth: "280px", display: "flex", gap: "16px" }}
-        >
+        <div className="booking-options">
           <BookingOptionsModal
             passengers={passengers}
             setPassengers={setPassengers}
@@ -116,17 +107,8 @@ export const ActiveSearchPanel = ({
           />
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "16px",
-          width: "100%",
-          height: "100%",
-          alignItems: "flex-end",
-        }}
-      >
-        <div style={{ flex: 1, minWidth: "280px" }}>
+      <div className="input-row">
+        <div className="date-picker">
           <DateRangePicker
             roundTrip={isRoundTrip}
             dateRange={dateRange}
@@ -135,9 +117,9 @@ export const ActiveSearchPanel = ({
             setOneWayDate={handleOneWayDateChange}
           />
         </div>
-
-        <div>
+        <div className="search-button-container">
           <Button
+            width={"100%"}
             height={"60px"}
             onClick={handleSearch}
             disabled={isSearchDisabled()}

@@ -1,0 +1,46 @@
+.active-search-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+.location-switcher {
+  flex: 1;
+  min-width: 280px;
+}
+
+.booking-options {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  gap: 16px;
+}
+
+.date-picker {
+  flex: 1;
+  min-width: 280px;
+  width: 100%;
+}
+
+@media screen and (max-width: 1080px) {
+  .booking-options {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search-button-container {
+    width: 100%;
+  }
+}
