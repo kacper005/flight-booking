@@ -141,16 +141,19 @@ export const UserProfile = () => {
                         </div>
                     </div>
 
-                    <div className="input-group">
+                    <div className="user-input-group">
                         <div className="field">
                             <label>Country</label>
                             <select
                                 name="country"
                                 value={formData.country || ""}
-                                onChange={(e) => setFormData(prev => ({ ...prev, country: e.target.value }))}
+                                onChange={(e) => setFormData(prev => ({
+                                    ...prev,
+                                    country: e.target.value
+                                }))}
                             >
                                 <option value="" disabled>Select your country</option>
-                                {allCountries.map(({ iso2, name }) => (
+                                {allCountries.map(({iso2, name}) => (
                                     <option key={iso2} value={name}>{name}</option>
                                 ))}
                             </select>

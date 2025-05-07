@@ -1,28 +1,41 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import { Search } from "lucide-react";
 import { Button } from "@atoms/Button";
 import { Select } from "@atoms/Select";
-import { Card } from "@atoms/Card/Card";
 import { DateRangePicker } from "@atoms/DatePicker/DateRangePicker";
-import BookingOptionsModal from "@organisms/BookingOptionsModal/BookingOptionsModal";
 import LocationSwitcher from "@molecules/LocationSwitcher/LocationSwitcher";
-import "./FlightSearchPanel.css";
+import BookingOptionsModal from "@organisms/BookingOptionsModal/BookingOptionsModal";
+import "./ActiveSearchPanel.css";
 
-export const FlightSearchPanel = () => {
-  const [isRoundTrip, setIsRoundTrip] = React.useState(true);
-  const [from, setFrom] = React.useState("");
-  const [to, setTo] = React.useState("");
-  const [dateRange, setDateRange] = React.useState([null, null]);
+export const ActiveSearchPanel = ({
+  initialFrom,
+  initialTo,
+  initialIsRoundTrip,
+  initialDateRange,
+  initialOneWayDate,
+  initialPassengers,
+}) => {
+  const [isRoundTrip, setIsRoundTrip] = React.useState(
+    initialIsRoundTrip ?? true
+  );
+  const [from, setFrom] = React.useState(initialFrom ?? "");
+  const [to, setTo] = React.useState(initialTo ?? "");
+  const [dateRange, setDateRange] = React.useState(
+    initialDateRange ?? [null, null]
+  );
   const [oneWayDepartureDate, setOneWayDepartureDate] = React.useState(
-    new Date()
+    initialOneWayDate ?? new Date()
   );
 
-  const [passengers, setPassengers] = React.useState({
-    adult: 1,
-    child: 0,
-    infant: 0,
-  });
+  const [passengers, setPassengers] = React.useState(
+    initialPassengers ?? {
+      adult: 1,
+      child: 0,
+      infant: 0,
+    }
+  );
 
   const navigate = useNavigate();
 
@@ -73,38 +86,48 @@ export const FlightSearchPanel = () => {
   };
 
   return (
-    <Card flexDirection="column" maxWidth={"900px"}>
-      <h1 style={{ color: "var(--textColor)" }}>Find your next flight</h1>
-      <LocationSwitcher from={from} setFrom={setFrom} to={to} setTo={setTo} />
-
-      <div className="booking-options-container">
-        <DateRangePicker
-          roundTrip={isRoundTrip}
-          dateRange={dateRange}
-          setDateRange={setDateRange}
-          oneWayDate={oneWayDepartureDate}
-          setOneWayDate={handleOneWayDateChange}
-        />
-      </div>
-
-      <div className="booking-options-container">
-        <div style={{ width: "100%" }}>
+    <div className="active-search-panel">
+      <div className="input-row">
+        <div className="location-switcher">
+          <LocationSwitcher
+            from={from}
+            setFrom={setFrom}
+            to={to}
+            setTo={setTo}
+          />
+        </div>
+        <div className="booking-options">
           <BookingOptionsModal
             passengers={passengers}
             setPassengers={setPassengers}
           />
-        </div>
-        <div style={{ width: "100%" }}>
           <Select
             value={isRoundTrip ? "true" : "false"}
             onChange={(e) => setIsRoundTrip(e.target.value === "true")}
           />
         </div>
       </div>
-
-      <Button onClick={handleSearch} disabled={isSearchDisabled()}>
-        Search
-      </Button>
-    </Card>
+      <div className="input-row">
+        <div className="date-picker">
+          <DateRangePicker
+            roundTrip={isRoundTrip}
+            dateRange={dateRange}
+            setDateRange={setDateRange}
+            oneWayDate={oneWayDepartureDate}
+            setOneWayDate={handleOneWayDateChange}
+          />
+        </div>
+        <div className="search-button-container">
+          <Button
+            width={"100%"}
+            height={"60px"}
+            onClick={handleSearch}
+            disabled={isSearchDisabled()}
+          >
+            <Search size={25} />
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 };

@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { FAQ } from "@pages/FAQ";
 import { Home } from "@pages/Home";
-import { NotFound } from "@pages/NotFound";
 import { AboutUs } from "@pages/AboutUs";
 import { SignIn } from "@pages/SignIn/SignIn";
 import { SignUp } from "@pages/SignUp/SignUp";
@@ -10,12 +9,15 @@ import { Admin } from "@pages/Admin/Admin.jsx";
 import { SavedTrips } from "@pages/SavedTrips";
 import { ContactUsPage } from "@pages/ContactUs";
 import { UserProfile } from "@pages/UserProfile";
+import { NotFound } from "@pages/NotFound/NotFound";
 import { SearchResults } from "@pages/SearchResults";
 import { Sustainability } from "@pages/Sustainability";
+import { AdminUsers } from "@pages/Admin/AdminUsers.jsx";
 import { AdminFlights } from "@pages/Admin/AdminFlights.jsx";
 import { AdminAirlines } from "@pages/Admin/AdminAirlines.jsx";
 import { AirlineInformation } from "@pages/AirlineInformation";
 import { TermsAndConditions } from "@pages/TermsAndConditions";
+import { SearchResultDetails } from "@pages/SearchResultDetails";
 import { ImportantInformation } from "@pages/ImportantInformation";
 import { overwriteCountries } from "@/formatters/FormatCountries.jsx";
 
@@ -28,7 +30,6 @@ import { Header } from "@organisms/Header/Header";
 import { Footer } from "@organisms/Footer.jsx";
 import { Navbar } from "@organisms/Navbar/Navbar";
 import { useAuth } from "@context/AuthContext";
-import { AdminUsers } from "@pages/Admin/AdminUsers.jsx";
 
 export const App = () => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
@@ -38,10 +39,6 @@ export const App = () => {
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
   };
-
-  React.useEffect(() => {
-    overwriteCountries();
-  }, []);
 
   return (
     <Router>
@@ -71,17 +68,18 @@ export const App = () => {
             element={<TermsAndConditions />}
           />
           <Route path="/search-results" element={<SearchResults />} />
+          <Route path="/details" element={<SearchResultDetails />} />
           <Route path="/not-found" element={<NotFound />} />
 
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/saved-trips" element={<SavedTrips />} />
 
-            <Route element={<AdminRoute />}>
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/admin-flights" element={<AdminFlights />} />
-              <Route path={"/admin-airlines"} element={<AdminAirlines />} />
-              <Route path="/admin-users" element={<AdminUsers />} />
+            <Route path="/admin" element={<AdminRoute />}>
+              <Route index element={<Admin />} />
+              <Route path="flights" element={<AdminFlights />} />
+              <Route path={"airlines"} element={<AdminAirlines />} />
+              <Route path="users" element={<AdminUsers />} />
             </Route>
           </Route>
         </Routes>
