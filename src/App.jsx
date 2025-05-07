@@ -66,21 +66,18 @@ export const App = () => {
             element={<TermsAndConditions />}
           />
           <Route path="/search-results" element={<SearchResults />} />
-          <Route
-            path="/search-results-details"
-            element={<SearchResultDetails />}
-          />
+          <Route path="/details" element={<SearchResultDetails />} />
           <Route path="/not-found" element={<NotFound />} />
 
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/saved-trips" element={<SavedTrips />} />
-          </Route>
 
-          <Route path="/admin" element={<AdminRoute />}>
-            <Route index element={<Admin />} />
-            <Route path="flights" element={<AdminFlights />} />
-            <Route path="users" element={<AdminUsers />} />
+            <Route path="/admin" element={<AdminRoute />}>
+              <Route index element={<Admin />} />
+              <Route path="flights" element={<AdminFlights />} />
+              <Route path="users" element={<AdminUsers />} />
+            </Route>
           </Route>
         </Routes>
         <ToastContainer />
