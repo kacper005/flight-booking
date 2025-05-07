@@ -45,7 +45,9 @@ export const Admin = () => {
         <Link to={"/admin/airlines"}>
           <AdminCard icon={PlaneTakeoff} title={"Airlines"} />
         </Link>
-        <AdminCard icon={TowerControl} title={"Airports"} />
+        <Link to={"/admin/airports"}>
+          <AdminCard icon={TowerControl} title={"Airports"} />
+        </Link>
         <Link to={"/admin/users"}>
           <AdminCard icon={UserRoundPen} title={"Users"} />
         </Link>
