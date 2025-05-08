@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AdminCard from "@atoms/AdminCard/AdminCard.jsx";
 import { Plane } from "lucide-react";
 import { PlaneTakeoff } from "lucide-react";
 import { TowerControl } from "lucide-react";
 import { UserRoundPen } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { MessageSquare } from "lucide-react";
+import AdminCard from "@atoms/AdminCard/AdminCard.jsx";
 
 export const Admin = () => {
   return (

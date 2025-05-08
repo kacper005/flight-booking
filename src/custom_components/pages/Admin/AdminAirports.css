@@ -1,0 +1,11 @@
+@media screen and (max-width: 640px) {
+    .colAirportCity {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .colAirportCountry {
+        display: none;
+    }
+}

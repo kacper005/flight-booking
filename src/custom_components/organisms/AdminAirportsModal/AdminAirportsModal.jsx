@@ -2,9 +2,9 @@ import React from "react";
 import { getNames } from "country-list";
 import { Button } from "@atoms/Button";
 import { showToast } from "@atoms/Toast/Toast.jsx";
-import "./../AdminFlightsModal/AdminFlightsModal.css";
-import { deleteAirport, updateAirport } from "@api/airportApi.js";
 import { getFlights } from "@api/flightApi.js";
+import { deleteAirport, updateAirport } from "@api/airportApi.js";
+import "./../AdminFlightsModal/AdminFlightsModal.css";
 
 export const AdminAirportsModal = ({ airport, onClose, onSave }) => {
   const [formData, setFormData] = React.useState({ ...airport });

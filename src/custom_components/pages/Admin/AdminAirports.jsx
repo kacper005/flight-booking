@@ -3,8 +3,10 @@ import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
 import { Button } from "@atoms/Button.jsx";
 import LoadingSpinner from "@atoms/LoadingSpinner";
 import { getAirports, updateAirport } from "@api/airportApi.js";
-import "./AdminFlights.css";
 import { AdminAirportsModal } from "@organisms/AdminAirportsModal/AdminAirportsModal.jsx";
+import { AdminNewAirportModal } from "@organisms/AdminAirportsModal/AdminNewAirportModal.jsx";
+import "./AdminFlights.css";
+import "./AdminAirports.css";
 
 export const AdminAirports = () => {
   const [airports, setAirports] = React.useState([]);
@@ -132,7 +134,13 @@ export const AdminAirports = () => {
         />
       )}
 
-      {/* TODO: Modal Add Airline */}
+      {showAddAirportModal && (
+        <AdminNewAirportModal
+          onClose={toggleModal}
+          onSave={handleAddAirport}
+          isNewAirport={true}
+        />
+      )}
     </div>
   );
 };
