@@ -18,7 +18,7 @@ export default defineConfig({
       "@api": path.resolve(__dirname, "src/api"),
       "@context": path.resolve(__dirname, "src/context"),
       "@enums": path.resolve(__dirname, "src/enums"),
-      "@formaatters": path.resolve(__dirname, "src/formaatters"),
+      "@formatters": path.resolve(__dirname, "src/formatters"),
     },
   },
 });
