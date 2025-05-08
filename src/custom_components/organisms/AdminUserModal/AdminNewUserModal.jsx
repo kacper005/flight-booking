@@ -7,6 +7,7 @@ import {BirthDatePicker} from "@atoms/DatePicker/BirthDatePicker.jsx";
 import { allCountries } from "country-telephone-data";
 import {getNames} from "country-list";
 import "./AdminUserModal.css";
+import "@organisms/AdminFlightsModal/AdminFlightsModal.css";
 
 
 export const AdminNewUserModal = ({onClose, onSave}) => {
