@@ -16,11 +16,15 @@ export const AdminFlights = () => {
   const [selectedFlight, setSelectedFlight] = React.useState(null);
   const [showAddFlightModal, setShowAddFlightModal] = React.useState(false);
 
+  const getFlightsTable = async () => {
+    const res = await getFlights();
+    setFlights(res.data);
+  };
+
   React.useEffect(() => {
     const fetchFlights = async () => {
       try {
-        const res = await getFlights();
-        setFlights(res.data);
+        await getFlightsTable();
       } catch (err) {
         setError(err.message || "Failed to load flights.");
       } finally {
@@ -34,8 +38,7 @@ export const AdminFlights = () => {
   const handleSave = async (updatedFlight) => {
     try {
       await updateFlight(updatedFlight.flightId, updatedFlight);
-      const res = await getFlights();
-      setFlights(res.data);
+      await getFlightsTable();
       setSelectedFlight(null);
     } catch (error) {
       console.error("Error updating flight:", error);
@@ -44,8 +47,7 @@ export const AdminFlights = () => {
 
   const handleClose = async () => {
     try {
-      const res = await getFlights();
-      setFlights(res.data);
+      await getFlightsTable();
       setSelectedFlight(null);
     } catch (error) {
       console.error("Error updating flight:", error);
@@ -55,8 +57,7 @@ export const AdminFlights = () => {
   const handleAddFlight = async () => {
     try {
       toggleModal();
-      const res = await getFlights();
-      setFlights(res.data);
+      await getFlightsTable();
     } catch (error) {
       console.error("Error adding flight:", error);
     }

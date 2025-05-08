@@ -12,14 +12,18 @@ export const AdminFeedback = () => {
   const [feedbackError, setError] = React.useState(null);
   const [selectedFeedback, setSelectedFeedback] = React.useState(null);
 
+  const getSortedFeedbackTable = async () => {
+    const res = await getFeedback();
+    const sorted = res.data.sort((a, b) =>
+      a.createdAt.localeCompare(b.createdAt),
+    );
+    setAllFeedback(sorted);
+  };
+
   React.useEffect(() => {
     const fetchFeedback = async () => {
       try {
-        const res = await getFeedback();
-        const sorted = res.data.sort((a, b) =>
-          a.createdAt.localeCompare(b.createdAt),
-        );
-        setAllFeedback(sorted);
+        await getSortedFeedbackTable();
       } catch (err) {
         setError(err.message || "Failed to load feedback.");
       } finally {
@@ -32,11 +36,7 @@ export const AdminFeedback = () => {
 
   const handleClose = async () => {
     try {
-      const res = await getFeedback();
-      const sorted = res.data.sort((a, b) =>
-        a.createdAt.localeCompare(b.createdAt),
-      );
-      setAllFeedback(sorted);
+      await getSortedFeedbackTable();
       setSelectedFeedback(null);
     } catch (error) {
       console.error("Error updating feedback:", error);

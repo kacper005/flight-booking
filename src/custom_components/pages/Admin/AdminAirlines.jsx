@@ -15,12 +15,16 @@ export const AdminAirlines = () => {
   const [selectedAirline, setSelectedAirline] = React.useState(null);
   const [showAddAirlineModal, setShowAddAirlineModal] = React.useState(false);
 
+  const getSortedAirlinesTable = async () => {
+    const res = await getAirlines();
+    const sorted = res.data.sort((a, b) => a.name.localeCompare(b.name));
+    setAirlines(sorted);
+  };
+
   React.useEffect(() => {
     const fetchAirlines = async () => {
       try {
-        const res = await getAirlines();
-        const sorted = res.data.sort((a, b) => a.name.localeCompare(b.name));
-        setAirlines(sorted);
+        await getSortedAirlinesTable();
       } catch (err) {
         setError(err.message || "Failed to load airlines.");
       } finally {
@@ -34,9 +38,7 @@ export const AdminAirlines = () => {
   const handleSave = async (updatedAirline) => {
     try {
       await updateAirline(updatedAirline.airlineId, updatedAirline);
-      const res = await getAirlines();
-      const sorted = res.data.sort((a, b) => a.name.localeCompare(b.name));
-      setAirlines(sorted);
+      await getSortedAirlinesTable();
       setSelectedAirline(null);
     } catch (error) {
       console.error("Error updating airline:", error);
@@ -45,9 +47,7 @@ export const AdminAirlines = () => {
 
   const handleClose = async () => {
     try {
-      const res = await getAirlines();
-      const sorted = res.data.sort((a, b) => a.name.localeCompare(b.name));
-      setAirlines(sorted);
+      await getSortedAirlinesTable();
       setSelectedAirline(null);
     } catch (error) {
       console.error("Error updating airline:", error);
@@ -57,9 +57,7 @@ export const AdminAirlines = () => {
   const handleAddAirline = async () => {
     try {
       toggleModal();
-      const res = await getAirlines();
-      const sorted = res.data.sort((a, b) => a.name.localeCompare(b.name));
-      setAirlines(sorted);
+      await getSortedAirlinesTable();
     } catch (error) {
       console.error("Error updating airline:", error);
     }

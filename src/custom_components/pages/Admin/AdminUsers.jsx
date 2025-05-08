@@ -17,11 +17,15 @@ export const AdminUsers = () => {
   const [selectedUser, setSelectedUser] = React.useState(null);
   const [showAddUserModal, setShowAddUserModal] = React.useState(false);
 
+  const getUserTable = async () => {
+    const res = await getUsers();
+    setUsers(res.data);
+  };
+
   React.useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await getUsers();
-        setUsers(res.data);
+        await getUserTable();
       } catch (err) {
         setError(err.message || "Failed to load users.");
       } finally {
@@ -35,8 +39,7 @@ export const AdminUsers = () => {
   const handleSave = async (updatedUser) => {
     try {
       await updateUser(updatedUser.userId, updatedUser);
-      const res = await getUsers();
-      setUsers(res.data);
+      await getUserTable();
       setSelectedUser(null);
     } catch (error) {
       console.error("Error updating user:", error);
@@ -46,8 +49,7 @@ export const AdminUsers = () => {
 
   const handleClose = async () => {
     try {
-      const res = await getUsers();
-      setUsers(res.data);
+      await getUserTable();
       setSelectedUser(null);
     } catch (error) {
       console.error("Error updating user:", error);
@@ -58,8 +60,7 @@ export const AdminUsers = () => {
   const handleAddUser = async () => {
     try {
       toggleModal();
-      const res = await getUsers();
-      setUsers(res.data);
+      await getUserTable();
     } catch (error) {
       console.error("Error adding user:", error);
       setError("Failed to add user.");
