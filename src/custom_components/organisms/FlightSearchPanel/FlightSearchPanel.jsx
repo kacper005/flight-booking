@@ -8,6 +8,7 @@ import { DateRangePicker } from "@atoms/DatePicker/DateRangePicker";
 import BookingOptionsModal from "@organisms/BookingOptionsModal/BookingOptionsModal";
 import LocationSwitcher from "@molecules/LocationSwitcher/LocationSwitcher";
 import "./FlightSearchPanel.css";
+import { formatDateIsoMs } from "@formatters/DateFormatters";
 
 export const FlightSearchPanel = () => {
   const [isRoundTrip, setIsRoundTrip] = React.useState(true);
@@ -26,11 +27,6 @@ export const FlightSearchPanel = () => {
 
   const navigate = useNavigate();
 
-  const formatDate = (date) => {
-    const formatted = moment(date).format("YYYY-MM-DDTHH:mm:ss.SSS");
-    return formatted;
-  };
-
   const handleOneWayDateChange = (date) => {
     if (date) {
       const normalizedDate = new Date(date);
@@ -43,10 +39,10 @@ export const FlightSearchPanel = () => {
 
   const handleSearch = () => {
     const start = isRoundTrip
-      ? formatDate(dateRange[0])
-      : formatDate(oneWayDepartureDate);
+      ? formatDateIsoMs(dateRange[0])
+      : formatDateIsoMs(oneWayDepartureDate);
 
-    const end = isRoundTrip ? formatDate(dateRange[1]) : "";
+    const end = isRoundTrip ? formatDateIsoMs(dateRange[1]) : "";
 
     const params = new URLSearchParams({
       from,

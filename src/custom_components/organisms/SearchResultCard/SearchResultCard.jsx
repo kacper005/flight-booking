@@ -2,12 +2,21 @@ import React from "react";
 import { Button } from "@atoms/Button";
 import { useNavigate } from "react-router-dom";
 import "./SearchResultCard.css";
+import { calculateDurationHoursAndMinutes } from "@formatters/DateFormatters";
 
 export const SearchResultCard = ({
   outbandFlightOriginAirportCode,
+  outbandFlightOriginAirportName,
+  outbandFlightOriginAirportCity,
   outbandFlightDestinationAirportCode,
+  outbandFlightDestinationAirportName,
+  outbandFlightDestinationAirportCity,
   returnFlightOriginAirportCode,
+  returnFlightOriginAirportName,
+  returnFlightOriginAirportCity,
   returnFlightDestinationAirportCode,
+  returnFlightDestinationAirportName,
+  returnFlightDestinationAirportCity,
   outboundOperatingAirlineName,
   returnOperatingAirlineName,
   outboundOperatingAirlineLogo,
@@ -22,34 +31,28 @@ export const SearchResultCard = ({
   availableClasses,
   roundTrip,
   price,
+  flightPrices,
   currency,
   totalPrice,
+  totalPassengers,
 }) => {
-  const calculateFlightDuration = (departure, arrival) => {
-    const [depHour, depMin] = departure.split(":").map(Number);
-    const [arrHour, arrMin] = arrival.split(":").map(Number);
-
-    const depDate = new Date(0, 0, 0, depHour, depMin);
-    const arrDate = new Date(0, 0, 0, arrHour, arrMin);
-
-    if (arrDate < depDate) arrDate.setDate(arrDate.getDate() + 1);
-
-    const diffMs = arrDate - depDate;
-    const hours = Math.floor(diffMs / (1000 * 60 * 60));
-    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-
-    return `${hours}h ${minutes}m`;
-  };
-
   const navigate = useNavigate();
 
   const handleSelect = () => {
     navigate("/search-results-details", {
       state: {
         outbandFlightOriginAirportCode,
+        outbandFlightOriginAirportName,
+        outbandFlightOriginAirportCity,
         outbandFlightDestinationAirportCode,
+        outbandFlightDestinationAirportName,
+        outbandFlightDestinationAirportCity,
         returnFlightOriginAirportCode,
+        returnFlightOriginAirportName,
+        returnFlightOriginAirportCity,
         returnFlightDestinationAirportCode,
+        returnFlightDestinationAirportName,
+        returnFlightDestinationAirportCity,
         outbandFlightDepartureDate,
         returnFlightDepartureDate,
         outbandFlightDepartureTime,
@@ -58,12 +61,16 @@ export const SearchResultCard = ({
         returnFlightArrivalTime,
         outboundOperatingAirlineName,
         returnOperatingAirlineName,
+        outboundOperatingAirlineLogo,
+        returnOperatingAirlineLogo,
         price,
+        flightPrices,
         totalPrice,
         currency,
         availableClasses,
         extraFeatures,
         roundTrip,
+        totalPassengers,
       },
     });
   };
@@ -104,7 +111,7 @@ export const SearchResultCard = ({
               </div>
               <div style={{ textAlign: "center", flex: 1 }}>
                 <p style={{ fontSize: "12px", marginBottom: "4px" }}>
-                  {calculateFlightDuration(
+                  {calculateDurationHoursAndMinutes(
                     outbandFlightDepartureTime,
                     outbandFlightArrivalTime
                   )}
@@ -147,7 +154,7 @@ export const SearchResultCard = ({
                 </div>
                 <div style={{ textAlign: "center", flex: 1 }}>
                   <p style={{ fontSize: "12px", marginBottom: "4px" }}>
-                    {calculateFlightDuration(
+                    {calculateDurationHoursAndMinutes(
                       returnFlightDepartureTime,
                       returnFlightArrivalTime
                     )}

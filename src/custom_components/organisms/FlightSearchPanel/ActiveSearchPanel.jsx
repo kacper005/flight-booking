@@ -8,6 +8,7 @@ import { DateRangePicker } from "@atoms/DatePicker/DateRangePicker";
 import LocationSwitcher from "@molecules/LocationSwitcher/LocationSwitcher";
 import BookingOptionsModal from "@organisms/BookingOptionsModal/BookingOptionsModal";
 import "./ActiveSearchPanel.css";
+import { formatDateIsoMs } from "@formatters/DateFormatters";
 
 export const ActiveSearchPanel = ({
   initialFrom,
@@ -39,11 +40,6 @@ export const ActiveSearchPanel = ({
 
   const navigate = useNavigate();
 
-  const formatDate = (date) => {
-    const formatted = moment(date).format("YYYY-MM-DDTHH:mm:ss.SSS");
-    return formatted;
-  };
-
   const handleOneWayDateChange = (date) => {
     if (date) {
       const normalizedDate = new Date(date);
@@ -56,10 +52,10 @@ export const ActiveSearchPanel = ({
 
   const handleSearch = () => {
     const start = isRoundTrip
-      ? formatDate(dateRange[0])
-      : formatDate(oneWayDepartureDate);
+      ? formatDateIsoMs(dateRange[0])
+      : formatDateIsoMs(oneWayDepartureDate);
 
-    const end = isRoundTrip ? formatDate(dateRange[1]) : "";
+    const end = isRoundTrip ? formatDateIsoMs(dateRange[1]) : "";
 
     const params = new URLSearchParams({
       from,

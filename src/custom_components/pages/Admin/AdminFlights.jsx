@@ -7,6 +7,7 @@ import { Button } from "@atoms/Button.jsx";
 import LoadingSpinner from "@atoms/LoadingSpinner";
 import "./AdminFlights.css";
 import { getFlightStatus } from "@enums/FlightStatus";
+import { formatDateTime } from "@formatters/DateFormatters";
 
 export const AdminFlights = () => {
   const [flights, setFlights] = React.useState([]);
@@ -29,14 +30,6 @@ export const AdminFlights = () => {
 
     fetchFlights();
   }, []);
-
-  const formatDateTime = (isoString) => {
-    const date = new Date(isoString);
-    return new Intl.DateTimeFormat("en-GB", {
-      dateStyle: "short",
-      timeStyle: "short",
-    }).format(date);
-  };
 
   const handleSave = async (updatedFlight) => {
     try {

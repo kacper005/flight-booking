@@ -8,6 +8,7 @@ import LoadingSpinner from "@atoms/LoadingSpinner.jsx";
 import { AdminUsersModal } from "@organisms/AdminUserModal/AdminUsersModal.jsx";
 import { AdminNewUserModal } from "@organisms/AdminUserModal/AdminNewUserModal.jsx";
 import { getDisplayRole } from "@enums/UserRole.js";
+import { formatDateTime } from "@formatters/DateFormatters";
 
 export const AdminUsers = () => {
   const [users, setUsers] = React.useState([]);
@@ -30,14 +31,6 @@ export const AdminUsers = () => {
 
     fetchUsers();
   }, []);
-
-  const formDateTime = (isoString) => {
-    const date = new Date(isoString);
-    return new Intl.DateTimeFormat("en-GB", {
-      dateStyle: "short",
-      timeStyle: "short",
-    }).format(date);
-  };
 
   const handleSave = async (updatedUser) => {
     try {
@@ -123,7 +116,7 @@ export const AdminUsers = () => {
                 <td className={"colEmail"}>{users.email}</td>
                 <td className={"colPhone"}>{users.phone}</td>
                 <td className={"colCreatedAt"}>
-                  {formDateTime(users.createdAt)}
+                  {formatDateTime(users.createdAt)}
                 </td>
                 <td className={"colRole"}>{getDisplayRole(users.role)}</td>
                 <td className={"colEdit-admin-user"}>
