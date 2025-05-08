@@ -17,6 +17,7 @@ export const Card = ({
   className,
   flexWrap = "wrap",
   margin,
+  boxShadow,
 }) => {
   return (
     <div
@@ -35,6 +36,7 @@ export const Card = ({
         justifyContent,
         flexWrap,
         margin,
+        boxShadow,
       }}
     >
       {children}

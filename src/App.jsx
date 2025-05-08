@@ -10,7 +10,6 @@ import { SavedTrips } from "@pages/SavedTrips";
 import { ContactUsPage } from "@pages/ContactUs";
 import { UserProfile } from "@pages/UserProfile";
 import { NotFound } from "@pages/NotFound/NotFound";
-import { SearchResults } from "@pages/SearchResults";
 import { Sustainability } from "@pages/Sustainability";
 import { AdminUsers } from "@pages/Admin/AdminUsers.jsx";
 import { AdminFlights } from "@pages/Admin/AdminFlights.jsx";
@@ -18,8 +17,9 @@ import { AdminAirports } from "@pages/Admin/AdminAirports.jsx";
 import { AdminAirlines } from "@pages/Admin/AdminAirlines.jsx";
 import { AirlineInformation } from "@pages/AirlineInformation";
 import { TermsAndConditions } from "@pages/TermsAndConditions";
-import { SearchResultDetails } from "@pages/SearchResultDetails";
+import { SearchResults } from "@pages/SearchResult/SearchResults";
 import { ImportantInformation } from "@pages/ImportantInformation";
+import { SearchResultDetails } from "@pages/SearchResult/SearchResultDetails";
 import { overwriteCountries } from "@/formatters/FormatCountries.jsx";
 
 import { ToastContainer } from "react-toastify";
@@ -73,7 +73,10 @@ export const App = () => {
             element={<TermsAndConditions />}
           />
           <Route path="/search-results" element={<SearchResults />} />
-          <Route path="/details" element={<SearchResultDetails />} />
+          <Route
+            path="/search-results-details"
+            element={<SearchResultDetails />}
+          />
           <Route path="/not-found" element={<NotFound />} />
 
           <Route element={<ProtectedRoute />}>

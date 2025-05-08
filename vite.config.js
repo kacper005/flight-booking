@@ -17,6 +17,8 @@ export default defineConfig({
       "@hooks": path.resolve(__dirname, "src/hooks"),
       "@api": path.resolve(__dirname, "src/api"),
       "@context": path.resolve(__dirname, "src/context"),
+      "@enums": path.resolve(__dirname, "src/enums"),
+      "@formatters": path.resolve(__dirname, "src/formatters"),
     },
   },
 });
