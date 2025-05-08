@@ -52,7 +52,9 @@ export const Admin = () => {
           <AdminCard icon={UserRoundPen} title={"Users"} />
         </Link>
         <AdminCard icon={CalendarDays} title={"Bookings"} />
-        <AdminCard icon={MessageSquare} title={"Feedback"} />
+        <Link to={"/admin/feedback"}>
+          <AdminCard icon={MessageSquare} title={"Feedback"} />
+        </Link>
       </div>
     </div>
   );

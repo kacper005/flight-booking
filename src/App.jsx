@@ -13,6 +13,7 @@ import { NotFound } from "@pages/NotFound/NotFound";
 import { Sustainability } from "@pages/Sustainability";
 import { AdminUsers } from "@pages/Admin/AdminUsers.jsx";
 import { AdminFlights } from "@pages/Admin/AdminFlights.jsx";
+import { AdminFeedback } from "@pages/Admin/AdminFeedback.jsx";
 import { AdminAirports } from "@pages/Admin/AdminAirports.jsx";
 import { AdminAirlines } from "@pages/Admin/AdminAirlines.jsx";
 import { AirlineInformation } from "@pages/AirlineInformation";
@@ -86,9 +87,10 @@ export const App = () => {
             <Route path="/admin" element={<AdminRoute />}>
               <Route index element={<Admin />} />
               <Route path="flights" element={<AdminFlights />} />
-              <Route path={"airlines"} element={<AdminAirlines />} />
-              <Route path={"airports"} element={<AdminAirports />} />
+              <Route path="airlines" element={<AdminAirlines />} />
+              <Route path="airports" element={<AdminAirports />} />
               <Route path="users" element={<AdminUsers />} />
+              <Route path="feedback" element={<AdminFeedback />} />
             </Route>
           </Route>
         </Routes>
