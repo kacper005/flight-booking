@@ -4,7 +4,7 @@ import {Card} from "@atoms/Card/Card";
 
 export const AirlineInformation = () => {
     const airlines = [
-        // Description just to show what text will look like. Replace with actual descriptions.
+        // Description and images for each airline.
         {
             name: "Delta Air Lines",
             description:
