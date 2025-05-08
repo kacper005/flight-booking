@@ -6,6 +6,7 @@ import { AdminNewFlightModal } from "@organisms/AdminFlightsModal/AdminNewFlight
 import { Button } from "@atoms/Button.jsx";
 import LoadingSpinner from "@atoms/LoadingSpinner";
 import "./AdminFlights.css";
+import { getFlightStatus } from "@enums/FlightStatus";
 
 export const AdminFlights = () => {
   const [flights, setFlights] = React.useState([]);
@@ -121,7 +122,9 @@ export const AdminFlights = () => {
                 <td className={"colRoundTrip"}>
                   {flight.roundTrip ? "True" : "False"}
                 </td>
-                <td className={"colStatus"}>{flight.status}</td>
+                <td className={"colStatus"}>
+                  {getFlightStatus(flight.status)}
+                </td>
                 <td className={"colDepartureTime"}>
                   {formatDateTime(flight.departureTime)}
                 </td>

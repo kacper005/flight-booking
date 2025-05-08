@@ -93,7 +93,7 @@ export const AdminAirlines = () => {
               <th className="colAirlineName">Name</th>
               <th className="colAirlineCode">Code</th>
               <th className="colAirlineCountry">Country</th>
-              <th className="colLogoName">Logo File Name</th>
+              <th className="colLogoName">Logo</th>
               <th className="colEdit"></th>
             </tr>
           </thead>
@@ -109,7 +109,12 @@ export const AdminAirlines = () => {
                 <td className="colAirlineName">{airline.name}</td>
                 <td className="colAirlineCode">{airline.code}</td>
                 <td className="colAirlineCountry">{airline.country}</td>
-                <td className="colLogoName">{airline.logoFileName}</td>
+                <td className="colLogoName">
+                  <img
+                    style={{ width: "35px" }}
+                    src={`/airline_logos/${airline.logoFileName}.png`}
+                  />
+                </td>
                 <td className="colEdit">
                   <ButtonSmall
                     onClick={(e) => {
