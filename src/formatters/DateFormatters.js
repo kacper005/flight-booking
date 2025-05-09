@@ -33,6 +33,16 @@ export const formatDateTime = (isoString) => {
   }).format(date);
 };
 
+export const formatDate3elements = (isoString) => {
+  const date = new Date(isoString);
+  return new Intl.DateTimeFormat("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+  }).format(date);
+};
+
+// Calculates the duration between two times
 export const calculateDurationHoursAndMinutes = (departure, arrival) => {
   const [depHour, depMin] = departure.split(":").map(Number);
   const [arrHour, arrMin] = arrival.split(":").map(Number);

@@ -34,10 +34,12 @@ body {
   --buttonColorRedHover: #c23636;
   --TableHeaderColor: #f4f4f4;
   --disabledColor: #d1d1d1;
+  --blueHover: #5f7bd1;
 
   --black: #252525;
   --white: #ffffff;
   --green: #15986d;
+  --greenLight: #1fbf8d;
 }
 
 .App {

@@ -70,7 +70,7 @@ export const Navbar = ({ isOpen, setIsOpen }) => {
             )}
             <li>
               <NavLink to="/sign-in" onClick={logout}>
-                Logout
+                Log Out
               </NavLink>
             </li>
           </>

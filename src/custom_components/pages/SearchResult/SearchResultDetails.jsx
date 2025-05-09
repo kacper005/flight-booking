@@ -3,12 +3,14 @@ import { useLocation } from "react-router-dom";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
 import { Button } from "@atoms/Button";
 import "./SearchResultDetails.css";
-import { calculateDurationHoursAndMinutes } from "@formatters/DateFormatters";
+import {
+  calculateDurationHoursAndMinutes,
+  formatDate3elements,
+} from "@formatters/DateFormatters";
+import { ButtonSmall } from "@atoms/ButtonSmall";
 
 export const SearchResultDetails = () => {
   const { state } = useLocation();
-
-  console.log("State from SearchResultDetails:", state);
 
   const {
     outbandFlightOriginAirportCode,
@@ -44,12 +46,31 @@ export const SearchResultDetails = () => {
   return (
     <PageTemplate>
       <div className="flight-details">
+        <div className="details-section">
+          {flightPrices.map((flightPrice, index) => (
+            <div key={index} className="flight-price-card">
+              <b style={{ fontSize: "1.5rem" }}>
+                {flightPrice.priceProviderName}
+              </b>
+              <b style={{ fontSize: "1.6rem" }}>
+                {flightPrice.price} {currency}
+              </b>
+              <ButtonSmall
+                bgColor={"var(--green)"}
+                hoverBgColor={"var(--greenLight)"}
+              >
+                Save Trip
+              </ButtonSmall>
+            </div>
+          ))}
+        </div>
         <div className="flight-card-section">
           <div style={{ marginBottom: "15px" }}>
             <h4>
               {outbandFlightOriginAirportCity} to{" "}
               {outbandFlightDestinationAirportCity}
             </h4>
+
             <div
               style={{
                 display: "flex",
@@ -64,73 +85,84 @@ export const SearchResultDetails = () => {
 
           <div className="flight-card">
             <div className="flight-info">
-              <img
-                src={`/airline_logos/${outboundOperatingAirlineLogo}.png`}
-                alt={outboundOperatingAirlineName}
-              />
+              <div className="flight-info-header">
+                <img
+                  src={`/airline_logos/${outboundOperatingAirlineLogo}.png`}
+                  alt={outboundOperatingAirlineName}
+                />
+                <div className="flight-info-details">
+                  <b>
+                    {outbandFlightOriginAirportCode} →{" "}
+                    {outbandFlightDestinationAirportCode}{" "}
+                    {formatDate3elements(outbandFlightDepartureDate)}
+                  </b>
+                  <p>{`Direct • ${calculateDurationHoursAndMinutes(
+                    outbandFlightDepartureTime,
+                    outbandFlightArrivalTime
+                  )}`}</p>
+                </div>
+              </div>
 
-              <p>
-                {outbandFlightOriginAirportName} (
-                {outbandFlightOriginAirportCode}) →{" "}
-                {outbandFlightDestinationAirportName} (
-                {outbandFlightDestinationAirportCode})
-              </p>
-              <p>
-                {outbandFlightDepartureDate} | {outbandFlightDepartureTime} →{" "}
-                {outbandFlightArrivalTime}{" "}
-                {`(${calculateDurationHoursAndMinutes(
-                  outbandFlightDepartureTime,
-                  outbandFlightArrivalTime
-                )})`}
-              </p>
-              <p>{outboundOperatingAirlineName}</p>
+              <div style={{ padding: "10px" }}>
+                <b>
+                  {outbandFlightDepartureTime} → {outbandFlightArrivalTime}{" "}
+                  {`(${calculateDurationHoursAndMinutes(
+                    outbandFlightDepartureTime,
+                    outbandFlightArrivalTime
+                  )})`}
+                </b>
+
+                <p>
+                  {outbandFlightOriginAirportName}{" "}
+                  {`(${outbandFlightOriginAirportCode})`} -{" "}
+                  {outbandFlightDestinationAirportName}{" "}
+                  {`(${outbandFlightDestinationAirportCode})`}
+                </p>
+                <p>{outboundOperatingAirlineName}</p>
+              </div>
             </div>
           </div>
 
           {roundTrip && (
             <div className="flight-card">
               <div className="flight-info">
-                <img
-                  src={`/airline_logos/${returnOperatingAirlineLogo}.png`}
-                  alt={returnOperatingAirlineName}
-                />
+                <div className="flight-info-header">
+                  <img
+                    src={`/airline_logos/${returnOperatingAirlineLogo}.png`}
+                    alt={returnOperatingAirlineName}
+                  />
+                  <div className="flight-info-details">
+                    <b>
+                      {returnFlightOriginAirportCode} →{" "}
+                      {returnFlightDestinationAirportCode}{" "}
+                      {formatDate3elements(returnFlightDepartureDate)}
+                    </b>
+                    <p>{`Direct • ${calculateDurationHoursAndMinutes(
+                      returnFlightDepartureTime,
+                      returnFlightArrivalTime
+                    )}`}</p>
+                  </div>
+                </div>
 
-                <p>
-                  {returnFlightOriginAirportName} (
-                  {returnFlightOriginAirportCode}) →{" "}
-                  {returnFlightDestinationAirportName} (
-                  {returnFlightDestinationAirportCode})
-                </p>
-                <p>
-                  {returnFlightDepartureDate} | {returnFlightDepartureTime} →{" "}
-                  {returnFlightArrivalTime}{" "}
-                  {`(${calculateDurationHoursAndMinutes(
-                    returnFlightDepartureTime,
-                    returnFlightArrivalTime
-                  )})`}
-                </p>
-                <p>{returnOperatingAirlineName}</p>
+                <div style={{ padding: "10px" }}>
+                  <b>
+                    {returnFlightDepartureTime} → {returnFlightArrivalTime}{" "}
+                    {`(${calculateDurationHoursAndMinutes(
+                      returnFlightDepartureTime,
+                      returnFlightArrivalTime
+                    )})`}
+                  </b>
+                  <p>
+                    {returnFlightOriginAirportName}{" "}
+                    {`(${returnFlightOriginAirportCode})`} -{" "}
+                    {returnFlightDestinationAirportName}{" "}
+                    {`(${returnFlightDestinationAirportCode})`}
+                  </p>
+                  <p>{returnOperatingAirlineName}</p>
+                </div>
               </div>
             </div>
           )}
-        </div>
-
-        <div className="details-section">
-          {/* <h3>Available Classes</h3>
-          <ul>{availableClasses}</ul>
-
-          <h3>Extra Features</h3>
-          <ul>{extraFeatures}</ul> */}
-
-          {flightPrices.map((flightPrice, index) => (
-            <div key={index} className="flight-price-card">
-              <p>{flightPrice.priceProviderName}</p>
-              <p>
-                {flightPrice.price} {currency}
-              </p>
-              <Button bgColor={"var(--green)"}>Book</Button>
-            </div>
-          ))}
         </div>
       </div>
     </PageTemplate>
