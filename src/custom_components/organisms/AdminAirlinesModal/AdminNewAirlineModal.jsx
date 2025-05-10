@@ -4,13 +4,14 @@ import { Button } from "@atoms/Button.jsx";
 import { showToast } from "@atoms/Toast/Toast.jsx";
 import { createAirline } from "@api/airlineApi.js";
 import "./../AdminFlightsModal/AdminFlightsModal.css";
+import { Tooltip } from "@atoms/Tooltip/Tooltip";
 
 export const AdminNewAirlineModal = ({ onClose, onSave }) => {
   const [formData, setFormData] = React.useState({
     name: "",
     code: "",
     country: "",
-    logoFileName: "",
+    logoFileName: "no_logo",
   });
   const [errors, setErrors] = React.useState({});
 
@@ -115,7 +116,10 @@ export const AdminNewAirlineModal = ({ onClose, onSave }) => {
               )}
             </div>
             <div className="formField">
-              <label>Logo File Name</label>
+              <label>
+                Logo File Name <Tooltip content="Can be added later." />
+              </label>
+
               <input
                 name={"logoFileName"}
                 value={formData.logoFileName}

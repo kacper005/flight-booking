@@ -3,6 +3,8 @@ import { NavLink, useLocation } from "react-router-dom";
 import { CircleUserRound } from "lucide-react";
 import { useAuth } from "@context/AuthContext";
 import "./Navbar.css";
+import { Button } from "@atoms/Button";
+import { X } from "lucide-react";
 
 export const Navbar = ({ isOpen, setIsOpen }) => {
   const { isLoggedIn, user, logout } = useAuth();
@@ -15,6 +17,16 @@ export const Navbar = ({ isOpen, setIsOpen }) => {
 
   return (
     <div className={`sidenav ${isOpen ? "open" : ""}`}>
+      <div className="sidenav-header">
+        <X
+          style={{
+            margin: "none",
+            cursor: "pointer",
+            color: "var(--textColor)",
+          }}
+          onClick={() => setIsOpen(false)}
+        />
+      </div>
       <div className="user-info">
         <CircleUserRound style={{ color: "var(--textColor)" }} />
         <p style={{ color: "var(--textColor)" }}>
@@ -70,7 +82,7 @@ export const Navbar = ({ isOpen, setIsOpen }) => {
             )}
             <li>
               <NavLink to="/sign-in" onClick={logout}>
-                Logout
+                Log Out
               </NavLink>
             </li>
           </>

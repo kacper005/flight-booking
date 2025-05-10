@@ -133,24 +133,24 @@ export const SearchResults = () => {
               }
               outbandFlightArrivalDate={outbound.arrivalTime?.split("T")[0]}
               returnFlightArrivalDate={ret?.arrivalTime?.split("T")[0] || ""}
-              outbandFlightOriginAirportCode={outbound.arrivalAirport?.code}
-              outbandFlightOriginAirportName={outbound.arrivalAirport?.name}
-              outbandFlightOriginAirportCity={outbound.arrivalAirport?.city}
-              outbandFlightDestinationAirportCode={
-                outbound.departureAirport?.code
+              outbandFlightOriginAirportCode={ret.arrivalAirport?.code}
+              outbandFlightOriginAirportName={ret.arrivalAirport?.name}
+              outbandFlightOriginAirportCity={ret.arrivalAirport?.city}
+              outbandFlightDestinationAirportCode={ret.departureAirport?.code}
+              outbandFlightDestinationAirportName={ret.departureAirport?.name}
+              outbandFlightDestinationAirportCity={ret.departureAirport?.city}
+              returnFlightOriginAirportCode={outbound?.arrivalAirport?.code}
+              returnFlightOriginAirportName={outbound?.arrivalAirport?.name}
+              returnFlightOriginAirportCity={outbound?.arrivalAirport?.city}
+              returnFlightDestinationAirportCode={
+                outbound?.departureAirport?.code
               }
-              outbandFlightDestinationAirportName={
-                outbound.departureAirport?.name
+              returnFlightDestinationAirportName={
+                outbound?.departureAirport?.name
               }
-              outbandFlightDestinationAirportCity={
-                outbound.departureAirport?.city
+              returnFlightDestinationAirportCity={
+                outbound?.departureAirport?.city
               }
-              returnFlightOriginAirportCode={ret?.arrivalAirport?.code}
-              returnFlightOriginAirportName={ret?.arrivalAirport?.name}
-              returnFlightOriginAirportCity={ret?.arrivalAirport?.city}
-              returnFlightDestinationAirportCode={ret?.departureAirport?.code}
-              returnFlightDestinationAirportName={ret?.departureAirport?.name}
-              returnFlightDestinationAirportCity={ret?.departureAirport?.city}
               availableClasses={outbound.availableClasses}
               extraFeatures={outbound.extraFeatures}
               pricePerAdult={adultPrice}

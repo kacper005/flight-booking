@@ -22,17 +22,17 @@ import { TermsAndConditions } from "@pages/TermsAndConditions";
 import { SearchResults } from "@pages/SearchResult/SearchResults";
 import { ImportantInformation } from "@pages/ImportantInformation";
 import { SearchResultDetails } from "@pages/SearchResult/SearchResultDetails";
-import { overwriteCountries } from "@/formatters/FormatCountries.jsx";
+import { overwriteCountries } from "@/formatters/FormatCountries.js";
 
 import { ToastContainer } from "react-toastify";
 
 import AdminRoute from "@atoms/AdminRoute";
-import ScrollToTop from "@atoms/ScrollToTop";
 import ProtectedRoute from "@atoms/ProtectedRoute";
 import { Header } from "@organisms/Header/Header";
 import { Footer } from "@organisms/Footer.jsx";
 import { Navbar } from "@organisms/Navbar/Navbar";
 import { useAuth } from "@context/AuthContext";
+import ScrollToTop from "@hooks/ScrollToTop";
 
 export const App = () => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);

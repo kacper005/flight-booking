@@ -8,7 +8,7 @@ export const Button = ({
   maxWidth,
   maxHeight,
   bgColor = "var(--mainColorLight)",
-  hoverBgColor = "var(--secondaryColor)",
+  hoverBgColor = "var(--blueHover)",
   disabledBgColor = "var(--disabledColor)",
   color = "var(--textColor2)",
   disabledColor = "var(--textColor2)",
