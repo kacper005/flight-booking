@@ -51,7 +51,9 @@ export const Admin = () => {
         <Link to={"/admin/users"}>
           <AdminCard icon={UserRoundPen} title={"Users"} />
         </Link>
-        <AdminCard icon={CalendarDays} title={"Bookings"} />
+        <Link to={"/admin/bookings"}>
+          <AdminCard icon={CalendarDays} title={"Bookings"} />
+        </Link>
         <Link to={"/admin/feedback"}>
           <AdminCard icon={MessageSquare} title={"Feedback"} />
         </Link>

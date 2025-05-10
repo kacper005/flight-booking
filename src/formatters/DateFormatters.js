@@ -33,6 +33,12 @@ export const formatDateTime = (isoString) => {
   }).format(date);
 };
 
+// Formats to 15/11/2025
+export const formatDate = (isoString) => {
+  const date = new Date(isoString);
+  return new Intl.DateTimeFormat("en-GB").format(date);
+};
+
 export const calculateDurationHoursAndMinutes = (departure, arrival) => {
   const [depHour, depMin] = departure.split(":").map(Number);
   const [arrHour, arrMin] = arrival.split(":").map(Number);

@@ -112,7 +112,8 @@
     margin-left: 25px;
 }
 
-.h3Price {
+.h3Price,
+.h3Flights {
     font-size: 1.8rem;
     padding: 20px 0 8px 0;
 }

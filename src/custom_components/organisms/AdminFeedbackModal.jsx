@@ -3,6 +3,7 @@ import { Button } from "@atoms/Button";
 import { showToast } from "@atoms/Toast/Toast.jsx";
 import "@organisms/AdminFlightsModal/AdminFlightsModal.css";
 import { deleteFeedback } from "@api/feedbackApi.js";
+import { formatDateTime } from "@formatters/DateFormatters.js";
 
 export const AdminFeedbackModal = ({ feedback, onClose }) => {
   const [formData, setFormData] = React.useState({ ...feedback });
@@ -56,7 +57,7 @@ export const AdminFeedbackModal = ({ feedback, onClose }) => {
             <label>Created at</label>
             <input
               name={"createdAt"}
-              value={new Date(formData.createdAt).toLocaleString()}
+              value={formatDateTime(formData.createdAt)}
               disabled={true}
             />
           </div>
