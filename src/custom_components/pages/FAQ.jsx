@@ -1,6 +1,6 @@
 import React from "react";
-import AccordionList from "@atoms/Accordion/Accordion";
 import { Box } from "@atoms/Box/Box";
+import { AccordionList } from "@atoms/Accordion/Accordion";
 
 export const FAQ = () => {
   const questionSet1 = [

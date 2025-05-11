@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { signIn } from "@api/signInApi";
+import { useAuth } from "@hooks/useAuth";
 import { CircleCheckBig } from "lucide-react";
 import { Button } from "@atoms/Button";
 import { Card } from "@atoms/Card/Card";
 import { RouteLink } from "@atoms/RouteLink";
 import { showToast } from "@atoms/Toast/Toast";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
-import { signIn } from "@api/signInApi";
-import { useAuth } from "@context/AuthContext";
 import "./SignIn.css";
 
 export const SignIn = () => {

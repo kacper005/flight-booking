@@ -1,8 +1,8 @@
 import React from "react";
 import { getNames } from "country-list";
+import { createAirport } from "@api/airportApi.js";
 import { Button } from "@atoms/Button.jsx";
 import { showToast } from "@atoms/Toast/Toast.jsx";
-import { createAirport } from "@api/airportApi.js";
 import "./../AdminFlightsModal/AdminFlightsModal.css";
 
 export const AdminNewAirportModal = ({ onClose, onSave }) => {

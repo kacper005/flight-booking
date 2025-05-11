@@ -1,14 +1,13 @@
 import React from "react";
-
-import "./AdminUsers.css";
-import { ButtonSmall } from "../../atoms/ButtonSmall";
 import { getUsers, updateUser } from "@api/userApi.js";
+import { formatDateTime } from "@formatters/DateFormatters";
+import { getDisplayRole } from "@enums/UserRole.js";
+import { ButtonSmall } from "@atoms/ButtonSmall";
 import { Button } from "@atoms/Button.jsx";
-import LoadingSpinner from "@atoms/LoadingSpinner.jsx";
+import { LoadingSpinner } from "@atoms/LoadingSpinner";
 import { AdminUsersModal } from "@organisms/AdminUserModal/AdminUsersModal.jsx";
 import { AdminNewUserModal } from "@organisms/AdminUserModal/AdminNewUserModal.jsx";
-import { getDisplayRole } from "@enums/UserRole.js";
-import { formatDateTime } from "@formatters/DateFormatters";
+import "./AdminUsers.css";
 
 export const AdminUsers = () => {
   const [users, setUsers] = React.useState([]);

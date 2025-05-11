@@ -1,10 +1,9 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { CircleUserRound } from "lucide-react";
-import { useAuth } from "@context/AuthContext";
-import "./Navbar.css";
-import { Button } from "@atoms/Button";
 import { X } from "lucide-react";
+import { CircleUserRound } from "lucide-react";
+import { useAuth } from "@hooks/useAuth";
+import "./Navbar.css";
 
 export const Navbar = ({ isOpen, setIsOpen }) => {
   const { isLoggedIn, user, logout } = useAuth();

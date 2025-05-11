@@ -12,11 +12,18 @@
   padding: 15px;
   background: #f9f9f9;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+}
+
+.accordion-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .icon {
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
 }
 
 .icon.open {
@@ -27,12 +34,12 @@
   max-height: 0;
   overflow: hidden;
   padding: 0 15px;
-  transition: max-height 0.3s ease, padding 0.3s ease;
+  transition: max-height 0.4s ease, padding 0.4s ease;
   background: #f9f9f9;
 }
 
 .accordion-content.show {
-  max-height: 200px;
+  max-height: 700px;
   padding: 15px;
 }
 

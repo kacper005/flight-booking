@@ -1,10 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Button } from "@atoms/Button.jsx";
-import { getAirportsArray } from "@api/airportApi.js";
 import { getAirlines } from "@api/airlineApi.js";
+import { getAirportsArray } from "@api/airportApi.js";
 import { createPrice, getPrices } from "@api/priceApi.js";
 import { addPricesToFlight, createFlight } from "@api/flightApi.js";
+import { Button } from "@atoms/Button.jsx";
 import { showToast } from "@atoms/Toast/Toast.jsx";
 import "./AdminFlightsModal.css";
 
@@ -132,7 +131,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
     const { name, value } = e.target;
 
     const priceMatch = name.match(
-      /^(price|currency|priceProviderName)\[(\d+)\]$/,
+      /^(price|currency|priceProviderName)\[(\d+)\]$/
     );
     if (priceMatch) {
       const [, field, index] = priceMatch;
@@ -197,7 +196,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
         formData.arrivalAirport.airportId
       ) {
         const userConfirmed = window.confirm(
-          "Departure and arrival airports are the same. Do you want to continue?",
+          "Departure and arrival airports are the same. Do you want to continue?"
         );
 
         if (!userConfirmed) {
@@ -247,8 +246,8 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
               price: p.price,
               currency: p.currency,
               priceProviderName: p.priceProviderName,
-            }),
-          ),
+            })
+          )
         );
 
         const priceIds = createdPrices.map((res) => ({

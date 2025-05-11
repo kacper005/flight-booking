@@ -1,6 +1,6 @@
 import React from "react";
-import { Card } from "@atoms/Card/Card";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
+import { Card } from "@atoms/Card/Card";
 
 export const TermsAndConditions = () => {
   return (

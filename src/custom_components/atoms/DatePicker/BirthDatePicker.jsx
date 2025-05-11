@@ -1,7 +1,7 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./DateRangePicker.css"; // optional, your own styles
+import "./DateRangePicker.css";
 
 export const BirthDatePicker = ({ formData, setFormData }) => {
   const handleDateChange = (date) => {

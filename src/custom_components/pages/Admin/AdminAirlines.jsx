@@ -1,12 +1,12 @@
 import React from "react";
-import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
-import { Button } from "@atoms/Button.jsx";
-import LoadingSpinner from "@atoms/LoadingSpinner";
 import { getAirlines, updateAirline } from "@api/airlineApi.js";
+import { Button } from "@atoms/Button.jsx";
+import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
+import { LoadingSpinner } from "@atoms/LoadingSpinner";
 import { AdminAirlinesModal } from "@organisms/AdminAirlinesModal/AdminAirlinesModal.jsx";
 import { AdminNewAirlineModal } from "@organisms/AdminAirlinesModal/AdminNewAirlineModal.jsx";
 import "./AdminFlights.css";
-import "./AdminAirlines.css";
+import "./AdminAirlines.css"; // TODO: use only one css file
 
 export const AdminAirlines = () => {
   const [airlines, setAirlines] = React.useState([]);

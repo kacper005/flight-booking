@@ -1,13 +1,11 @@
 import React from "react";
-
-import "@organisms/AdminFlightsModal/AdminFlightsModal.css";
-import PropTypes from "prop-types";
-import { showToast } from "@atoms/Toast/Toast.jsx";
-import { Button } from "@atoms/Button.jsx";
-import { getDisplayRole } from "@enums/UserRole.js";
 import { getNames } from "country-list";
 import { deleteUser } from "@api/userApi.js";
-import { useAuth } from "@context/AuthContext.jsx";
+import { useAuth } from "@hooks/useAuth";
+import { getDisplayRole } from "@enums/UserRole.js";
+import { Button } from "@atoms/Button.jsx";
+import { showToast } from "@atoms/Toast/Toast.jsx";
+import "@organisms/AdminFlightsModal/AdminFlightsModal.css";
 
 export const AdminUsersModal = ({ users, onClose, onSave }) => {
   const [formData, setFormData] = React.useState({ ...users });
@@ -208,10 +206,4 @@ export const AdminUsersModal = ({ users, onClose, onSave }) => {
       </div>
     </div>
   );
-};
-
-AdminUsersModal.propTypes = {
-  users: PropTypes.object.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
 };

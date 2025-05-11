@@ -1,9 +1,9 @@
 import React from "react";
 import { getNames } from "country-list";
-import { Button } from "@atoms/Button";
-import { showToast } from "@atoms/Toast/Toast.jsx";
 import { getFlights } from "@api/flightApi.js";
 import { deleteAirport, updateAirport } from "@api/airportApi.js";
+import { Button } from "@atoms/Button";
+import { showToast } from "@atoms/Toast/Toast.jsx";
 import "./../AdminFlightsModal/AdminFlightsModal.css";
 
 export const AdminAirportsModal = ({ airport, onClose, onSave }) => {
@@ -40,7 +40,7 @@ export const AdminAirportsModal = ({ airport, onClose, onSave }) => {
           flight.arrivalAirport.airportId === airport.airportId
         ) {
           alert(
-            "This airport is connected to one or more existing flights.\nPlease delete the flights before deleting the airport.",
+            "This airport is connected to one or more existing flights.\nPlease delete the flights before deleting the airport."
           );
           return;
         }
@@ -50,7 +50,7 @@ export const AdminAirportsModal = ({ airport, onClose, onSave }) => {
     }
 
     const userConfirmed = window.confirm(
-      "Are you sure you want to delete this airport?",
+      "Are you sure you want to delete this airport?"
     );
     if (userConfirmed) {
       try {

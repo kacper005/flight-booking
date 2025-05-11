@@ -1,12 +1,11 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { getSearchFlights } from "@api/flightApi";
-import LoadingSpinner from "@atoms/LoadingSpinner";
-import { SearchResultCard } from "@organisms/SearchResultCard/SearchResultCard";
+import { formatDate2Digit, formatTime2Digit } from "@formatters/DateFormatters";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
+import { LoadingSpinner } from "@atoms/LoadingSpinner";
+import { SearchResultCard } from "@organisms/SearchResultCard/SearchResultCard";
 import { ActiveSearchPanel } from "@organisms/FlightSearchPanel/ActiveSearchPanel";
-import { formatTime2Digit } from "@formatters/DateFormatters";
-import { formatDate2Digit } from "@formatters/DateFormatters";
 
 export const SearchResults = () => {
   const [flights, setFlights] = React.useState([]);
@@ -21,11 +20,26 @@ export const SearchResults = () => {
   const start = params.get("start");
   const end = params.get("end");
   const roundTrip = params.get("roundTrip");
+  const outboundFlightId = params.get("outboundFlightId");
+  const returnFlightId = params.get("returnFlightId");
+  const adult = parseInt(params.get("adult") || "1");
+  const child = parseInt(params.get("child") || "0");
+  const infant = parseInt(params.get("infant") || "0");
+
+  const flightParams = {
+    from,
+    to,
+    start,
+    end,
+    roundTrip,
+    outboundFlightId,
+    returnFlightId,
+  };
 
   React.useEffect(() => {
     const fetchFlights = async () => {
       try {
-        const res = await getSearchFlights({ from, to, start, end, roundTrip });
+        const res = await getSearchFlights(flightParams);
         setFlights(res.data);
       } catch (err) {
         setError(err.message || "Failed to load flights.");
@@ -36,10 +50,6 @@ export const SearchResults = () => {
 
     fetchFlights();
   }, [from, to, start, end, roundTrip]);
-
-  const adult = parseInt(params.get("adult") || "1");
-  const child = parseInt(params.get("child") || "0");
-  const infant = parseInt(params.get("infant") || "0");
 
   return (
     <PageTemplate>
@@ -107,58 +117,49 @@ export const SearchResults = () => {
           return (
             <SearchResultCard
               key={index}
-              price={lowestOutboundPrice}
-              flightPrices={prices}
-              currency={prices[0]?.currency || ""}
-              outbandFlightDepartureTime={formatTime2Digit(
-                outbound.departureTime
-              )}
-              outbandFlightArrivalTime={formatTime2Digit(outbound.arrivalTime)}
-              returnFlightDepartureTime={
-                ret ? formatTime2Digit(ret.departureTime) : ""
+              outboundFlightOriginAirportCode={
+                ret?.arrivalAirport?.code || outbound?.departureAirport?.code
               }
-              returnFlightArrivalTime={
-                ret ? formatTime2Digit(ret.arrivalTime) : ""
+              outboundFlightDestinationAirportCode={
+                ret?.departureAirport?.code || outbound?.arrivalAirport?.code
               }
-              roundTrip={!!ret}
-              outboundOperatingAirlineName={outbound.airline?.name}
-              returnOperatingAirlineName={ret?.airline?.name}
-              outboundOperatingAirlineLogo={outbound.airline?.logoFileName}
-              returnOperatingAirlineLogo={ret?.airline?.logoFileName}
-              outbandFlightDepartureDate={formatDate2Digit(
-                outbound.departureTime
-              )}
-              returnFlightDepartureDate={
-                ret ? formatDate2Digit(ret.departureTime) : ""
-              }
-              outbandFlightArrivalDate={outbound.arrivalTime?.split("T")[0]}
-              returnFlightArrivalDate={ret?.arrivalTime?.split("T")[0] || ""}
-              outbandFlightOriginAirportCode={ret.arrivalAirport?.code}
-              outbandFlightOriginAirportName={ret.arrivalAirport?.name}
-              outbandFlightOriginAirportCity={ret.arrivalAirport?.city}
-              outbandFlightDestinationAirportCode={ret.departureAirport?.code}
-              outbandFlightDestinationAirportName={ret.departureAirport?.name}
-              outbandFlightDestinationAirportCity={ret.departureAirport?.city}
               returnFlightOriginAirportCode={outbound?.arrivalAirport?.code}
-              returnFlightOriginAirportName={outbound?.arrivalAirport?.name}
-              returnFlightOriginAirportCity={outbound?.arrivalAirport?.city}
               returnFlightDestinationAirportCode={
                 outbound?.departureAirport?.code
               }
-              returnFlightDestinationAirportName={
-                outbound?.departureAirport?.name
+              outboundOperatingAirlineName={outbound?.airline?.name}
+              returnOperatingAirlineName={ret?.airline?.name || ""}
+              outboundOperatingAirlineLogo={outbound?.airline?.logoFileName}
+              returnOperatingAirlineLogo={ret?.airline?.logoFileName || ""}
+              outboundFlightDepartureDate={formatDate2Digit(
+                outbound?.departureTime
+              )}
+              returnFlightDepartureDate={
+                ret ? formatDate2Digit(ret?.departureTime) : ""
               }
-              returnFlightDestinationAirportCity={
-                outbound?.departureAirport?.city
+              outboundFlightDepartureTime={formatTime2Digit(
+                outbound?.departureTime
+              )}
+              outboundFlightArrivalTime={formatTime2Digit(
+                outbound?.arrivalTime
+              )}
+              returnFlightDepartureTime={
+                ret ? formatTime2Digit(ret?.departureTime) : ""
               }
-              availableClasses={outbound.availableClasses}
-              extraFeatures={outbound.extraFeatures}
-              pricePerAdult={adultPrice}
+              returnFlightArrivalTime={
+                ret ? formatTime2Digit(ret?.arrivalTime) : ""
+              }
+              availableClasses={outbound?.availableClasses}
+              roundTrip={!!ret}
+              price={lowestOutboundPrice}
+              currency={prices[0]?.currency || ""}
               totalPrice={totalPrice}
               numAdults={adult}
               numChildren={child}
               numInfants={infant}
               totalPassengers={adult + child + infant}
+              outboundFlightId={outbound?.flightId}
+              returnFlightId={ret?.flightId}
             />
           );
         })}

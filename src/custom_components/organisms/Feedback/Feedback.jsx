@@ -1,8 +1,8 @@
 import React from "react";
-import "./Feedback.css";
-import FeedbackCard from "@atoms/FeedbackCard/FeedbackCard.jsx";
 import { ChevronLeft } from "lucide-react";
 import { ChevronRight } from "lucide-react";
+import FeedbackCard from "@atoms/FeedbackCard/FeedbackCard.jsx";
+import "./Feedback.css";
 
 export const Feedback = () => {
   const [scrollPosition, setScrollPosition] = React.useState(0);

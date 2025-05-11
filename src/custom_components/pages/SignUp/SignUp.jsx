@@ -1,13 +1,13 @@
 import React from "react";
-import "./SignUp.css";
-import { RouteLink } from "@atoms/RouteLink";
-import { Button } from "@atoms/Button";
-import { createUser } from "@api/userApi";
-import { showToast } from "@atoms/Toast/Toast";
-import { BirthDatePicker } from "@atoms/DatePicker/BirthDatePicker";
-import { allCountries } from "country-telephone-data";
 import { useNavigate } from "react-router-dom";
 import { getNames } from "country-list";
+import { allCountries } from "country-telephone-data";
+import { createUser } from "@api/userApi";
+import { Button } from "@atoms/Button";
+import { RouteLink } from "@atoms/RouteLink";
+import { showToast } from "@atoms/Toast/Toast";
+import { BirthDatePicker } from "@atoms/DatePicker/BirthDatePicker";
+import "./SignUp.css";
 
 export const SignUp = () => {
   const [formData, setFormData] = React.useState({

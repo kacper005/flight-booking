@@ -2,27 +2,35 @@ import React from "react";
 import { ChevronDown } from "lucide-react";
 import "./Accordion.css";
 
-const Accordion = ({ title, content }) => {
+const Accordion = ({ header, content, actions }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <div className="accordion">
       <div className="accordion-header" onClick={() => setIsOpen(!isOpen)}>
-        <h3>{title}</h3>
-        <ChevronDown className={`icon ${isOpen ? "open" : ""}`} />
+        {header}
+        <div className="accordion-actions">
+          <div onClick={(e) => e.stopPropagation()}>{actions}</div>
+          <ChevronDown className={`icon ${isOpen ? "open" : ""}`} />
+        </div>
       </div>
       <div className={`accordion-content ${isOpen ? "show" : ""}`}>
-        <p>{content}</p>
+        {content}
       </div>
     </div>
   );
 };
 
-export const AccordionList = ({ items }) => {
+export const PriceDetailsAccordion = ({ items }) => {
   return (
     <div className="accordion-container">
       {items.map((item, index) => (
-        <Accordion key={index} title={item.title} content={item.content} />
+        <Accordion
+          key={index}
+          header={item.title}
+          content={item.content}
+          actions={item.actions}
+        />
       ))}
     </div>
   );

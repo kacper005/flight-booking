@@ -1,11 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { getAirlines } from "@api/airlineApi";
+import { getAirportsArray } from "@api/airportApi.js";
+import { getPrices, updatePrice } from "@api/priceApi.js";
+import { deleteFlight, updateFlight } from "@api/flightApi.js";
 import { Button } from "@atoms/Button";
 import { showToast } from "@atoms/Toast/Toast.jsx";
-import { deleteFlight, updateFlight } from "@api/flightApi.js";
-import { getAirportsArray } from "@api/airportApi.js";
-import { getAirlines } from "@api/airlineApi";
-import { getPrices, updatePrice } from "@api/priceApi.js";
 import "./AdminFlightsModal.css";
 
 export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
@@ -160,7 +159,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
   const handleDelete = async (e) => {
     e.preventDefault();
     const userConfirmed = window.confirm(
-      "Are you sure you want to delete this flight?",
+      "Are you sure you want to delete this flight?"
     );
     if (userConfirmed) {
       try {
@@ -191,7 +190,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
         formData.arrivalAirport.airportId
       ) {
         const userConfirmed = window.confirm(
-          "Departure and arrival airports are the same. Do you want to continue?",
+          "Departure and arrival airports are the same. Do you want to continue?"
         );
 
         if (!userConfirmed) {
@@ -239,7 +238,7 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
             price: p.price,
             currency: p.currency,
             priceProviderName: p.priceProviderName,
-          }),
+          })
         );
 
         await Promise.all(updatePromises);
@@ -528,10 +527,4 @@ export const AdminFlightsModal = ({ flight, onClose, onSave }) => {
       </div>
     </div>
   );
-};
-
-AdminFlightsModal.propTypes = {
-  flight: PropTypes.object.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
 };

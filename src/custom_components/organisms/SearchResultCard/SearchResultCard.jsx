@@ -1,78 +1,48 @@
 import React from "react";
-import { Button } from "@atoms/Button";
 import { useNavigate } from "react-router-dom";
-import "./SearchResultCard.css";
 import { calculateDurationHoursAndMinutes } from "@formatters/DateFormatters";
+import { Button } from "@atoms/Button";
+import "./SearchResultCard.css";
 
 export const SearchResultCard = ({
-  outbandFlightOriginAirportCode,
-  outbandFlightOriginAirportName,
-  outbandFlightOriginAirportCity,
-  outbandFlightDestinationAirportCode,
-  outbandFlightDestinationAirportName,
-  outbandFlightDestinationAirportCity,
+  outboundFlightOriginAirportCode,
+  outboundFlightDestinationAirportCode,
   returnFlightOriginAirportCode,
-  returnFlightOriginAirportName,
-  returnFlightOriginAirportCity,
   returnFlightDestinationAirportCode,
-  returnFlightDestinationAirportName,
-  returnFlightDestinationAirportCity,
   outboundOperatingAirlineName,
   returnOperatingAirlineName,
   outboundOperatingAirlineLogo,
   returnOperatingAirlineLogo,
-  outbandFlightDepartureDate,
+  outboundFlightDepartureDate,
   returnFlightDepartureDate,
-  outbandFlightDepartureTime,
-  outbandFlightArrivalTime,
+  outboundFlightDepartureTime,
+  outboundFlightArrivalTime,
   returnFlightDepartureTime,
   returnFlightArrivalTime,
-  extraFeatures,
   availableClasses,
   roundTrip,
   price,
-  flightPrices,
   currency,
   totalPrice,
+  numAdults,
+  numChildren,
+  numInfants,
   totalPassengers,
+  outboundFlightId,
+  returnFlightId,
 }) => {
   const navigate = useNavigate();
 
   const handleSelect = () => {
-    navigate("/search-results-details", {
-      state: {
-        outbandFlightOriginAirportCode,
-        outbandFlightOriginAirportName,
-        outbandFlightOriginAirportCity,
-        outbandFlightDestinationAirportCode,
-        outbandFlightDestinationAirportName,
-        outbandFlightDestinationAirportCity,
-        returnFlightOriginAirportCode,
-        returnFlightOriginAirportName,
-        returnFlightOriginAirportCity,
-        returnFlightDestinationAirportCode,
-        returnFlightDestinationAirportName,
-        returnFlightDestinationAirportCity,
-        outbandFlightDepartureDate,
-        returnFlightDepartureDate,
-        outbandFlightDepartureTime,
-        outbandFlightArrivalTime,
-        returnFlightDepartureTime,
-        returnFlightArrivalTime,
-        outboundOperatingAirlineName,
-        returnOperatingAirlineName,
-        outboundOperatingAirlineLogo,
-        returnOperatingAirlineLogo,
-        price,
-        flightPrices,
-        totalPrice,
-        currency,
-        availableClasses,
-        extraFeatures,
-        roundTrip,
-        totalPassengers,
-      },
-    });
+    if (roundTrip) {
+      navigate(
+        `/search-results-details?outboundFlightId=${outboundFlightId}&returnFlightId=${returnFlightId}&numAdults=${numAdults}&numChildren=${numChildren}&numInfants=${numInfants}&totalPassengers=${totalPassengers}`
+      );
+    } else {
+      navigate(
+        `/search-results-details?outboundFlightId=${outboundFlightId}&numAdults=${numAdults}&numChildren=${numChildren}&numInfants=${numInfants}&totalPassengers=${totalPassengers}`
+      );
+    }
   };
 
   return (
@@ -95,7 +65,7 @@ export const SearchResultCard = ({
           />
           <div style={{ flexGrow: 1 }}>
             <p style={{ margin: 0 }}>
-              <b>Departure:</b> {outbandFlightDepartureDate}
+              <b>Departure:</b> {outboundFlightDepartureDate}
             </p>
             <div
               style={{
@@ -106,22 +76,22 @@ export const SearchResultCard = ({
               }}
             >
               <div style={{ textAlign: "center" }}>
-                <h4 style={{ margin: 0 }}>{outbandFlightDepartureTime}</h4>
-                <p style={{ margin: 0 }}>{outbandFlightOriginAirportCode}</p>
+                <h4 style={{ margin: 0 }}>{outboundFlightDepartureTime}</h4>
+                <p style={{ margin: 0 }}>{outboundFlightOriginAirportCode}</p>
               </div>
               <div style={{ textAlign: "center", flex: 1 }}>
                 <p style={{ fontSize: "12px", marginBottom: "4px" }}>
                   {calculateDurationHoursAndMinutes(
-                    outbandFlightDepartureTime,
-                    outbandFlightArrivalTime
+                    outboundFlightDepartureTime,
+                    outboundFlightArrivalTime
                   )}
                 </p>
                 <hr style={{ width: "100%", border: "1px solid #ccc" }} />
               </div>
               <div style={{ textAlign: "center" }}>
-                <h4 style={{ margin: 0 }}>{outbandFlightArrivalTime}</h4>
+                <h4 style={{ margin: 0 }}>{outboundFlightArrivalTime}</h4>
                 <p style={{ margin: 0 }}>
-                  {outbandFlightDestinationAirportCode}
+                  {outboundFlightDestinationAirportCode}
                 </p>
               </div>
             </div>
@@ -172,7 +142,7 @@ export const SearchResultCard = ({
           </div>
         )}
 
-        <p style={{ fontSize: "14px", color: "#555", marginTop: "8px" }}>
+        <p style={{ fontSize: "14px", color: "#555", marginTop: "auto" }}>
           {returnOperatingAirlineName
             ? outboundOperatingAirlineName === returnOperatingAirlineName
               ? outboundOperatingAirlineName
@@ -196,7 +166,7 @@ export const SearchResultCard = ({
               {price} {currency}
               <span style={{ fontWeight: "normal", fontSize: "1.2rem" }}>
                 {" "}
-                / person
+                / traveller
               </span>
             </p>
             <b style={{ fontSize: "1.2rem", lineHeight: "1.8rem" }}>

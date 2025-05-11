@@ -1,14 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
+import { formatDateIsoMs } from "@formatters/DateFormatters";
 import { Button } from "@atoms/Button";
 import { Select } from "@atoms/Select";
 import { Card } from "@atoms/Card/Card";
 import { DateRangePicker } from "@atoms/DatePicker/DateRangePicker";
-import BookingOptionsModal from "@organisms/BookingOptionsModal/BookingOptionsModal";
 import LocationSwitcher from "@molecules/LocationSwitcher/LocationSwitcher";
+import BookingOptionsModal from "@organisms/BookingOptionsModal/BookingOptionsModal";
 import "./FlightSearchPanel.css";
-import { formatDateIsoMs } from "@formatters/DateFormatters";
 
 export const FlightSearchPanel = () => {
   const [isRoundTrip, setIsRoundTrip] = React.useState(true);
@@ -74,16 +73,6 @@ export const FlightSearchPanel = () => {
       <LocationSwitcher from={from} setFrom={setFrom} to={to} setTo={setTo} />
 
       <div className="booking-options-container">
-        <DateRangePicker
-          roundTrip={isRoundTrip}
-          dateRange={dateRange}
-          setDateRange={setDateRange}
-          oneWayDate={oneWayDepartureDate}
-          setOneWayDate={handleOneWayDateChange}
-        />
-      </div>
-
-      <div className="booking-options-container">
         <div style={{ width: "100%" }}>
           <BookingOptionsModal
             passengers={passengers}
@@ -96,6 +85,16 @@ export const FlightSearchPanel = () => {
             onChange={(e) => setIsRoundTrip(e.target.value === "true")}
           />
         </div>
+      </div>
+
+      <div className="booking-options-container">
+        <DateRangePicker
+          roundTrip={isRoundTrip}
+          dateRange={dateRange}
+          setDateRange={setDateRange}
+          oneWayDate={oneWayDepartureDate}
+          setOneWayDate={handleOneWayDateChange}
+        />
       </div>
 
       <Button onClick={handleSearch} disabled={isSearchDisabled()}>

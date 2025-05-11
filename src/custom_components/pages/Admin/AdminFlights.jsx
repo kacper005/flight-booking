@@ -1,13 +1,13 @@
 import React from "react";
-import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
 import { getFlights, updateFlight } from "@api/flightApi.js";
+import { formatDateTime } from "@formatters/DateFormatters";
+import { Button } from "@atoms/Button.jsx";
+import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
+import { getFlightStatus } from "@enums/FlightStatus";
+import { LoadingSpinner } from "@atoms/LoadingSpinner";
 import { AdminFlightsModal } from "@organisms/AdminFlightsModal/AdminFlightsModal.jsx";
 import { AdminNewFlightModal } from "@organisms/AdminFlightsModal/AdminNewFlightModal.jsx";
-import { Button } from "@atoms/Button.jsx";
-import LoadingSpinner from "@atoms/LoadingSpinner";
 import "./AdminFlights.css";
-import { getFlightStatus } from "@enums/FlightStatus";
-import { formatDateTime } from "@formatters/DateFormatters";
 
 export const AdminFlights = () => {
   const [flights, setFlights] = React.useState([]);

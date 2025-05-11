@@ -1,11 +1,11 @@
 import React from "react";
-import { PageTemplate } from "@templates/PageTemplate/PageTempate";
-import { useAuth } from "@context/AuthContext";
-import { updateOwnProfile } from "@api/userApi.js";
-import { showToast } from "@atoms/Toast/Toast.jsx";
-import { Button } from "@atoms/Button";
-import "./UserProfile.css";
 import { getNames } from "country-list";
+import { updateOwnProfile } from "@api/userApi.js";
+import { useAuth } from "@hooks/useAuth";
+import { PageTemplate } from "@templates/PageTemplate/PageTempate";
+import { Button } from "@atoms/Button";
+import { showToast } from "@atoms/Toast/Toast.jsx";
+import "./UserProfile.css";
 
 export const UserProfile = () => {
   const { user } = useAuth();

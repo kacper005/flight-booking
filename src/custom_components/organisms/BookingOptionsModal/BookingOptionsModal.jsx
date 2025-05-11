@@ -1,6 +1,6 @@
 import React from "react";
-import "./BookingOptionsModal.css";
 import { Button } from "@atoms/Button";
+import "./BookingOptionsModal.css";
 
 export default function BookingOptionsModal({ passengers, setPassengers }) {
   const [isOpen, setIsOpen] = React.useState(false);

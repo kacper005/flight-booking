@@ -1,9 +1,9 @@
 import React from "react";
+import { deleteFeedback } from "@api/feedbackApi.js";
+import { formatDateTime } from "@formatters/DateFormatters.js";
 import { Button } from "@atoms/Button";
 import { showToast } from "@atoms/Toast/Toast.jsx";
 import "@organisms/AdminFlightsModal/AdminFlightsModal.css";
-import { deleteFeedback } from "@api/feedbackApi.js";
-import { formatDateTime } from "@formatters/DateFormatters.js";
 
 export const AdminFeedbackModal = ({ feedback, onClose }) => {
   const [formData, setFormData] = React.useState({ ...feedback });
@@ -16,7 +16,7 @@ export const AdminFeedbackModal = ({ feedback, onClose }) => {
     e.preventDefault();
 
     const userConfirmed = window.confirm(
-      "Are you sure you want to delete this feedback?",
+      "Are you sure you want to delete this feedback?"
     );
     if (userConfirmed) {
       try {

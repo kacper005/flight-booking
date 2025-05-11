@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import "./FeedbackCard.css";
+import React from "react";
 import { Star } from "lucide-react";
+import "./FeedbackCard.css";
 
 export default function FeedbackCard({
   name = "User",
@@ -29,10 +29,3 @@ export default function FeedbackCard({
     </div>
   );
 }
-
-FeedbackCard.propTypes = {
-  name: PropTypes.string,
-  rating: PropTypes.number,
-  feedback: PropTypes.string,
-  date: PropTypes.string,
-};

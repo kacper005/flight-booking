@@ -64,3 +64,16 @@ export const calculateDurationHoursAndMinutes = (departure, arrival) => {
 
   return `${hours}h ${minutes}m`;
 };
+
+export const calculateDurationHoursAndMinutesFromIso = (departure, arrival) => {
+  const depDate = new Date(departure);
+  const arrDate = new Date(arrival);
+
+  if (arrDate < depDate) arrDate.setDate(arrDate.getDate() + 1);
+
+  const diffMs = arrDate - depDate;
+  const hours = Math.floor(diffMs / (1000 * 60 * 60));
+  const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+  return `${hours}h ${minutes}m`;
+};

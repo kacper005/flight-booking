@@ -1,9 +1,9 @@
 import React from "react";
 import { getNames } from "country-list";
+import { getFlights } from "@api/flightApi.js";
+import { deleteAirline, updateAirline } from "@api/airlineApi.js";
 import { Button } from "@atoms/Button";
 import { showToast } from "@atoms/Toast/Toast.jsx";
-import { deleteAirline, updateAirline } from "@api/airlineApi.js";
-import { getFlights } from "@api/flightApi.js";
 import "./../AdminFlightsModal/AdminFlightsModal.css";
 
 export const AdminAirlinesModal = ({ airline, onClose, onSave }) => {
@@ -38,7 +38,7 @@ export const AdminAirlinesModal = ({ airline, onClose, onSave }) => {
       for (const flight of flights.data) {
         if (flight.airline.airlineId === airline.airlineId) {
           alert(
-            "This airline is connected to one or more existing flights.\nPlease delete the flights before deleting the airline.",
+            "This airline is connected to one or more existing flights.\nPlease delete the flights before deleting the airline."
           );
           return;
         }
@@ -48,7 +48,7 @@ export const AdminAirlinesModal = ({ airline, onClose, onSave }) => {
     }
 
     const userConfirmed = window.confirm(
-      "Are you sure you want to delete this airline?",
+      "Are you sure you want to delete this airline?"
     );
     if (userConfirmed) {
       try {

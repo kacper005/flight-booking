@@ -1,5 +1,6 @@
-import "./AdminCard.css";
+import React from "react";
 import { FileQuestion } from "lucide-react";
+import "./AdminCard.css";
 
 export default function AdminCard({
   icon: Icon = FileQuestion,

@@ -1,13 +1,9 @@
 import React from "react";
-import { getNames } from "country-list";
+import { deleteBooking, updateBooking } from "@api/bookingApi.js";
+import { formatDate } from "@formatters/DateFormatters.js";
 import { Button } from "@atoms/Button.jsx";
-import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
 import { showToast } from "@atoms/Toast/Toast.jsx";
 import "@organisms/AdminFlightsModal/AdminFlightsModal.css";
-
-import { deleteBooking, updateBooking } from "@api/bookingApi.js";
-import { getFlights } from "@api/flightApi.js";
-import { formatDate } from "@formatters/DateFormatters.js";
 
 export const AdminBookingsModal = ({ booking, onClose, onSave }) => {
   const [formData, setFormData] = React.useState({ ...booking });
@@ -36,7 +32,7 @@ export const AdminBookingsModal = ({ booking, onClose, onSave }) => {
     e.preventDefault();
 
     const userConfirmed = window.confirm(
-      "Are you sure you want to delete this feedback?",
+      "Are you sure you want to delete this feedback?"
     );
     if (userConfirmed) {
       try {

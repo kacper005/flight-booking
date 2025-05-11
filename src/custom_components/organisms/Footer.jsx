@@ -1,12 +1,12 @@
 import React from "react";
+import { useAuth } from "@hooks/useAuth";
 import { RouteLink } from "@atoms/RouteLink";
-import githubLogo from "@assets/logos/github-mark-white.svg";
 import klarnaLogo from "@assets/logos/klarna.svg";
 import visaLogo from "@assets/logos/visa-white-mark.svg";
-import mastercardLogo from "@assets/logos/mastercard-mark.svg";
 import applePayLogo from "@assets/logos/applepay-mark.svg";
+import githubLogo from "@assets/logos/github-mark-white.svg";
 import googlePayLogo from "@assets/logos/googlepay-mark.svg";
-import { useAuth } from "@context/AuthContext";
+import mastercardLogo from "@assets/logos/mastercard-mark.svg";
 
 export const Footer = () => {
   const { isLoggedIn } = useAuth();

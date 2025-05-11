@@ -1,8 +1,8 @@
 import React from "react";
-import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
-import LoadingSpinner from "@atoms/LoadingSpinner";
 import { getFeedback } from "@api/feedbackApi.js";
 import { formatDateTime } from "@formatters/DateFormatters";
+import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
+import { LoadingSpinner } from "@atoms/LoadingSpinner";
 import { AdminFeedbackModal } from "@organisms/AdminFeedbackModal.jsx";
 import "./AdminFlights.css";
 
@@ -15,7 +15,7 @@ export const AdminFeedback = () => {
   const getSortedFeedbackTable = async () => {
     const res = await getFeedback();
     const sorted = res.data.sort((a, b) =>
-      a.createdAt.localeCompare(b.createdAt),
+      a.createdAt.localeCompare(b.createdAt)
     );
     setAllFeedback(sorted);
   };

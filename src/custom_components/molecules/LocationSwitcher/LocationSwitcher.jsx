@@ -1,8 +1,8 @@
 import React from "react";
-import "./LocationSwitcher.css";
-import { AirportIconInput } from "../AirportIconInput/AirportIconInput";
 import { PlaneLanding, PlaneTakeoff, ArrowRightLeft } from "lucide-react";
 import { getAirports } from "@api/airportApi";
+import { AirportIconInput } from "@molecules/AirportIconInput/AirportIconInput";
+import "./LocationSwitcher.css";
 
 export default function LocationSwitcher({ from, setFrom, to, setTo }) {
   const [airports, setAirports] = React.useState([]);

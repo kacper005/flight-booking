@@ -1,3 +1,4 @@
+import React from "react";
 import "./RecommendationCard.css";
 
 export default function RecommendationCard({

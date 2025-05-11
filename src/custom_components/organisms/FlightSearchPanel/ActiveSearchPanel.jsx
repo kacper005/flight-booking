@@ -1,14 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
 import { Search } from "lucide-react";
 import { Button } from "@atoms/Button";
 import { Select } from "@atoms/Select";
 import { DateRangePicker } from "@atoms/DatePicker/DateRangePicker";
 import LocationSwitcher from "@molecules/LocationSwitcher/LocationSwitcher";
 import BookingOptionsModal from "@organisms/BookingOptionsModal/BookingOptionsModal";
-import "./ActiveSearchPanel.css";
 import { formatDateIsoMs } from "@formatters/DateFormatters";
+import "./ActiveSearchPanel.css";
 
 export const ActiveSearchPanel = ({
   initialFrom,
