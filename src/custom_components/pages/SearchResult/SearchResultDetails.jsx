@@ -8,10 +8,10 @@ import {
   formatTime2Digit,
 } from "@formatters/DateFormatters";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
+import { showToast } from "@atoms/Toast/Toast";
 import { ButtonSmall } from "@atoms/ButtonSmall";
 import { LoadingSpinner } from "@atoms/LoadingSpinner";
 import { PriceDetailsAccordion } from "@atoms/Accordion/PriceDetailsAccordion";
-
 import "./SearchResultDetails.css";
 
 export const SearchResultDetails = () => {
@@ -57,11 +57,21 @@ export const SearchResultDetails = () => {
   };
 
   const handleSaveBooking = () => {
-    console.log("Booking saved!");
+    //TODO: Implement save booking functionality
   };
 
   const handleShareBooking = () => {
-    console.log("Booking shared!");
+    const shareUrl = window.location.href;
+
+    navigator.clipboard
+      .writeText(shareUrl)
+      .then(() => {
+        showToast({
+          message: "Link copied to clipboard!",
+          type: "success",
+        });
+      })
+      .catch((err) => console.error("Failed to copy link: ", err));
   };
 
   return (
