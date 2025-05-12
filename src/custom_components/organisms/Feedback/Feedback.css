@@ -57,6 +57,18 @@
   right: 0;
 }
 
+.h3FeedbackError {
+  margin: 135px 0 76px 10px;
+}
+
+.feedbackSpinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 80px 0 11px 0;
+}
+
 @media screen and (max-width: 630px) {
   .container button {
     padding: 119px 0;

@@ -2,12 +2,36 @@ import React from "react";
 import { ChevronLeft } from "lucide-react";
 import { ChevronRight } from "lucide-react";
 import FeedbackCard from "@atoms/FeedbackCard/FeedbackCard.jsx";
+import { LoadingSpinner } from "@atoms/LoadingSpinner";
+import { getFeedback } from "@api/feedbackApi.js";
+import { formatDate } from "@formatters/DateFormatters.js";
 import "./Feedback.css";
 
 export const Feedback = () => {
   const [scrollPosition, setScrollPosition] = React.useState(0);
   const [itemWidth, setItemWidth] = React.useState(getItemWidth());
   const containerRef = React.useRef();
+  const [allFeedback, setAllFeedback] = React.useState([]);
+  const [loadingFeedback, setLoading] = React.useState(true);
+  const [feedbackError, setError] = React.useState(null);
+
+  React.useEffect(() => {
+    const fetchFeedback = async () => {
+      try {
+        const res = await getFeedback();
+        const sorted = res.data.sort((a, b) =>
+          b.createdAt.localeCompare(a.createdAt),
+        );
+        setAllFeedback(sorted);
+      } catch (err) {
+        setError(err.message || "Failed to load feedback.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeedback();
+  }, []);
 
   // Function to determine ITEM_WIDTH dynamically
   function getItemWidth() {
@@ -48,36 +72,29 @@ export const Feedback = () => {
           }}
         >
           <div className={"feedbackCardContainer"}>
-            <FeedbackCard
-              name="User 1"
-              rating={5}
-              feedback="Feedback text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
-              date="01.01.2025"
-            />
-            <FeedbackCard
-              name="User 2"
-              rating={4}
-              feedback="Feedback text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
-              date="02.02.2025"
-            />
-            <FeedbackCard
-              name="User 3"
-              rating={3}
-              feedback="Feedback text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
-              date="03.03.2025"
-            />
-            <FeedbackCard
-              name="User 4"
-              rating={2}
-              feedback="Feedback text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
-              date="04.04.2025"
-            />
-            <FeedbackCard
-              name="User 5"
-              rating={1}
-              feedback="Feedback text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
-              date="05.05.2025"
-            />
+            {loadingFeedback && (
+              <div className={"feedbackSpinnerContainer"}>
+                <LoadingSpinner />
+              </div>
+            )}
+            {feedbackError && (
+              <h3 className={"h3FeedbackError"}>{feedbackError}</h3>
+            )}
+            {!loadingFeedback && allFeedback.length === 0 && (
+              <h3 className={"h3FeedbackError"}>No feedback found</h3>
+            )}
+
+            {!loadingFeedback &&
+              allFeedback.length > 0 &&
+              allFeedback.map((feedback, index) => (
+                <FeedbackCard
+                  key={index}
+                  name={feedback.user.firstName}
+                  rating={feedback.rating}
+                  feedback={feedback.comment}
+                  date={formatDate(feedback.createdAt)}
+                />
+              ))}
           </div>
         </div>
 
