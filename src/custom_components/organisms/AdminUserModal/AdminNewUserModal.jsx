@@ -144,6 +144,7 @@ export const AdminNewUserModal = ({ onClose, onSave }) => {
               <input
                 type="email"
                 name="email"
+                autoComplete="email"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter email"
@@ -157,6 +158,7 @@ export const AdminNewUserModal = ({ onClose, onSave }) => {
               <input
                 type="password"
                 name="password"
+                autoComplete="new-password"
                 value={formData.password}
                 onChange={handleChange}
               />

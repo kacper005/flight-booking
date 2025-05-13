@@ -92,19 +92,19 @@ export const SignIn = () => {
               <input
                 type="email"
                 name="email"
+                autoComplete="username"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Email"
-                autoComplete="username"
               />
               {errors.email && <small className="error">{errors.email}</small>}
               <input
                 type="password"
                 name="password"
+                autoComplete="current-password"
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Password"
-                autoComplete="current-password"
               />
               {errors.password && (
                 <small className="error">{errors.password}</small>
