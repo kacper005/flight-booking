@@ -1,0 +1,93 @@
+.profile-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  background-color: #f9f7ff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.welcome {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  font-size: 1.5rem;
+}
+
+.user-input-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  font-size: 1.5rem;
+  color: var(--textColor);
+}
+
+.user-input-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--textColorDark);
+}
+
+.user-input-group input,
+.user-input-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.field input{
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: var(--white);
+}
+
+.field select {
+  height: 60px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+
+
+.errors {
+  color: var(--errorColor);
+  font-size: 1.4rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: end;
+}

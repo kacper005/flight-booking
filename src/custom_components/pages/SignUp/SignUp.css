@@ -1,0 +1,96 @@
+.signup-container {
+  background: var(--mainColor);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  text-align: center;
+  margin: 20px auto;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 15px;
+  color: var(--textColor);
+}
+
+.input-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.input-group select {
+  height: 60px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.gender-options {
+  display: flex;
+  gap: 15px;
+}
+
+.gender-options label {
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+}
+
+.gender-options input {
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.error {
+  color: var(--warningColor);
+  font-size: 1.4rem;
+}
+
+.login-link {
+  margin-top: 10px;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+.phone-container {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.phone-code {
+  flex: 0 0 100px;
+  max-width: 120px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.phone-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 80%;
+}

@@ -1,0 +1,9 @@
+.input {
+  width: 100%;
+  border-radius: 8px;
+  outline-color: var(--mainColor);
+}
+
+.input-container input:focus {
+  border-color: var(--mainColor);
+}

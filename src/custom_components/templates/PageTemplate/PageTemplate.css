@@ -1,0 +1,25 @@
+.page-template-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 80%;
+  margin: 50px auto;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+}

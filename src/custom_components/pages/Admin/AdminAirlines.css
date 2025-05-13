@@ -1,0 +1,11 @@
+@media screen and (max-width: 690px) {
+    .colLogoName {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .colAirlineCountry {
+        display: none;
+    }
+}

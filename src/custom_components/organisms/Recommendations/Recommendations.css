@@ -1,0 +1,36 @@
+.recommendations {
+    background-color: var(--textColor);
+    width: 100vw;
+    margin: 20% 0 0 0;
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+.recommendations h1 {
+    left: 20px;
+    padding: 20px 10.2%;
+}
+
+.recommendationCardContainer {
+    display: flex;
+    gap: 6px 16px;
+    flex-wrap: wrap;
+    width: 100%;
+    flex-grow: 2;
+    padding: 0 9.8% 20px;
+}
+
+@media screen and (max-width: 716px) {
+    .recommendations {
+        justify-content: center;
+    }
+    .recommendations h1 {
+        margin: 0 0 0 44px;
+    }
+    .recommendationCardContainer {
+        justify-content: center;
+    }
+}

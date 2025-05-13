@@ -1,0 +1,23 @@
+.logo {
+  width: auto;
+  height: 45px;
+}
+
+.large-logo {
+  display: block;
+}
+
+.small-logo {
+  display: none;
+  height: 35px;
+}
+
+@media (max-width: 600px) {
+  .large-logo {
+    display: none;
+  }
+
+  .small-logo {
+    display: block;
+  }
+}

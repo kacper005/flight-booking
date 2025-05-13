@@ -1,0 +1,19 @@
+@media screen and (max-width: 1050px) {
+    .colBookingFlightNumber1,
+    .colBookingFlightNumber2 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .colBookingDepartureDate,
+    .colBookingArrivalDate {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .colBookingEmail {
+        display: none;
+    }
+}

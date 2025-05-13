@@ -1,0 +1,129 @@
+.flight-details {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  gap: 2rem;
+}
+
+.details-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.traveller-label {
+  font-size: 1.4rem;
+}
+
+.total-price-label {
+  font-size: 1.2rem;
+}
+
+.flight-price-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.flight-card-section {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  max-width: 400px;
+  width: 100%;
+  height: 100%;
+}
+
+.flight-card {
+  border: 1px solid var(--mainColor);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
+
+.flight-card img {
+  width: 40px;
+  margin-right: 1rem;
+}
+
+.flight-info {
+  width: 100%;
+}
+
+.flight-info-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  border-bottom: 1px solid var(--mainColor);
+}
+
+.flight-info-details {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem 1rem 1rem 0;
+}
+
+.full-width-line {
+  height: 1px;
+  width: 100%;
+  background-color: var(--mainColor);
+  margin: 0.5rem 0;
+}
+
+.icon-button {
+  margin: 2px;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  color: var(--mainColor);
+}
+
+b {
+  font-size: 1.4rem;
+}
+
+@media (max-width: 600px) {
+  .flight-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .flight-card img {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 950px) {
+  .flight-details {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .flight-card-section {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .traveller-label,
+  .total-price-label {
+    display: none;
+  }
+}

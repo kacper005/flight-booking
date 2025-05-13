@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html,
+body {
+  height: 100%;
+  min-height: 100vh;
+  background-color: var(--textColor);
+  font-family: "Montserrat", sans-serif;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --mainColor: #3d52a0;
+  --mainColorLight: #7091e6;
+  --secondaryColor: #8697c4;
+  --textColor: #ede8f5;
+  --textColor2: #fffff5;
+  --textColorLight: #f5f5f5;
+  --textColorDark: #141619;
+  --errorColor: #c50900;
+  --successColor: #00c500;
+  --warningColor: #ffcc00;
+  --buttonColorRed: #e64848;
+  --buttonColorRedHover: #c23636;
+  --TableHeaderColor: #f4f4f4;
+  --disabledColor: #d1d1d1;
+  --blueHover: #5f7bd1;
+
+  --black: #252525;
+  --white: #ffffff;
+  --green: #15986d;
+  --greenLight: #1fbf8d;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  font-size: 3.2rem;
+}
+
+h2 {
+  font-size: 2.8rem;
+}
+
+h3 {
+  font-size: 2.4rem;
+}
+
+h4 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1.6rem;
+}

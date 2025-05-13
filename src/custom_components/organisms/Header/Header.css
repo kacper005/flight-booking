@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  padding: 0 1.6rem;
+  background-color: var(--mainColor);
+  color: var(--textColor);
+}
+
+.nav-btn {
+  cursor: pointer;
+  color: var(--textColor);
+}

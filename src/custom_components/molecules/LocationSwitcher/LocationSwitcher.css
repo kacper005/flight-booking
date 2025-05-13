@@ -1,0 +1,67 @@
+.switch-button-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  border-radius: 8px;
+  gap: 10px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+input {
+  padding: 8px;
+  height: 60px;
+  width: 100%;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 2rem;
+}
+
+.swap-button {
+  background-color: var(--white);
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  min-height: 60px;
+  border: none;
+  border-radius: 20%;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+@media screen and (max-width: 1075px) {
+  .swap-button {
+    position: absolute;
+    border: 1px solid #ccc;
+    margin-right: 20px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .switch-button-container {
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0px;
+  }
+
+  .swap-icon {
+    rotate: 90deg;
+  }
+}
+
+.swap-button:hover {
+  background-color: #ddd;
+}
+
+.swap-icon {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}

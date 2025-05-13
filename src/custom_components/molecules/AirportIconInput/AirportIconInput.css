@@ -1,0 +1,32 @@
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input-container input {
+  width: 100%;
+  padding-left: 45px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline-color: var(--mainColor);
+}
+
+.input-container .icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.input-container input:focus {
+  border-color: var(--mainColor);
+}
+
+@media screen and (max-width: 1075px) {
+  .input-container {
+    width: 100%;
+  }
+  .input-container input {
+    width: 100%;
+  }
+}
