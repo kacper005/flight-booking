@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import RecommendationCard from "@atoms/RecommendationCard/RecommendationCard.jsx";
 import "./Recommendations.css";
 
@@ -7,34 +7,58 @@ export const Recommendations = () => {
     <section className={"recommendations"}>
       <h1>Recommendations</h1>
       <div className={"recommendationCardContainer"}>
-        <RecommendationCard
-          imageSrcSet="https://picsum.photos/270/160?=rnd1"
-          title="Recommendation 1"
-          departurePoint={"Oslo"}
-          price={"€120"}
-          info="Recommendation 1 Description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
-        />
-        <RecommendationCard
-          imageSrcSet="https://picsum.photos/270/160?=rnd2"
-          title="Recommendation 2"
-          departurePoint={"New York"}
-          price={"$150"}
-          info="Recommendation 2 Description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
-        />
-        <RecommendationCard
-          imageSrcSet="https://picsum.photos/270/160?=rnd3"
-          title="Recommendation 3"
-          departurePoint={"London"}
-          price={"£100"}
-          info="Recommendation 3 Description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
-        />
-        <RecommendationCard
-          imageSrcSet="https://picsum.photos/270/160?=rnd4"
-          title={"Recommendation 4"}
-          departurePoint={"Frankfurt"}
-          price={"€80"}
-          info="Recommendation 4 Description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum sollicitudin augue, sed volutpat felis commodo in."
-        />
+        <Link
+          to={
+            "search-results?from=JFK&to=LAX&start=2025-08-15T00%3A00%3A00.000&end=&roundTrip=false&adult=1&child=0&infant=0"
+          }
+        >
+          <RecommendationCard
+            imageSrcSet="/recommendations/los_angeles.webp"
+            title="Los Angeles"
+            departurePoint={"New York"}
+            price={"$150"}
+            info="Explore iconic beaches, Hollywood glamour, diverse cuisine, and year-round sunshine in the heart of Southern California."
+          />
+        </Link>
+        <Link
+          to={
+            "search-results?from=OSL&to=AES&start=2025-09-05T00%3A00%3A00.000&end=2025-09-12T00%3A00%3A00.000&roundTrip=true&adult=1&child=0&infant=0"
+          }
+        >
+          <RecommendationCard
+            imageSrcSet="/recommendations/aalesund.webp"
+            title="Ålesund"
+            departurePoint={"Oslo"}
+            price={"1200 NOK"}
+            info="Discover Norway’s coastal gem with stunning Art Nouveau architecture and panoramic fjord views from Mount Aksla."
+          />
+        </Link>
+        <Link
+          to={
+            "search-results?from=FCO&to=CDG&start=2025-11-15T00%3A00%3A00.000&end=2025-11-22T00%3A00%3A00.000&roundTrip=true&adult=1&child=0&infant=0"
+          }
+        >
+          <RecommendationCard
+            imageSrcSet="/recommendations/paris.webp"
+            title="Paris"
+            departurePoint={"Rome"}
+            price={"€80"}
+            info="Stroll charming streets, savor world-class cuisine, and admire iconic landmarks in the romantic heart of art and fashion."
+          />
+        </Link>
+        <Link
+          to={
+            "search-results?from=DOH&to=SYD&start=2025-09-01T00%3A00%3A00.000&end=2025-09-15T00%3A00%3A00.000&roundTrip=true&adult=1&child=0&infant=0"
+          }
+        >
+          <RecommendationCard
+            imageSrcSet="/recommendations/sydney.webp"
+            title={"Sydney"}
+            departurePoint={"Doha"}
+            price={"$1500"}
+            info="Enjoy sunny harbor views, world-famous beaches, and landmarks like the Sydney Opera House and Harbour Bridge."
+          />
+        </Link>
       </div>
     </section>
   );
