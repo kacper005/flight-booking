@@ -5,7 +5,7 @@ import { useAuth } from "@hooks/useAuth";
 import ScrollToTop from "@hooks/ScrollToTop";
 import { overwriteCountries } from "@/formatters/FormatCountries.js";
 import { FAQ } from "@pages/FAQ";
-import { Home } from "@pages/Home";
+import { Home } from "@pages/Home/Home.jsx";
 import { AboutUs } from "@pages/AboutUs";
 import { SignIn } from "@pages/SignIn/SignIn";
 import { SignUp } from "@pages/SignUp/SignUp";
