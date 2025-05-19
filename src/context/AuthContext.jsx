@@ -14,8 +14,11 @@ const AuthProvider = ({ children }) => {
       setUser(res.data);
       setIsLoggedIn(true);
     } catch (err) {
-      console.error("Failed to fetch user:", err);
-      logout();
+      if (err.response?.status === 401) {
+        logout();
+      } else {
+        console.error("Unexpected error fetching user:", err);
+      }
     } finally {
       setLoading(false);
     }

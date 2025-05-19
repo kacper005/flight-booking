@@ -7,6 +7,7 @@ import { overwriteCountries } from "@/formatters/FormatCountries.js";
 import { FAQ } from "@pages/FAQ";
 import { Home } from "@pages/Home";
 import { AboutUs } from "@pages/AboutUs";
+import { Checkout } from "@pages/Checkout";
 import { SignIn } from "@pages/SignIn/SignIn";
 import { SignUp } from "@pages/SignUp/SignUp";
 import { Admin } from "@pages/Admin/Admin.jsx";
@@ -82,6 +83,7 @@ export const App = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/saved-trips" element={<SavedTrips />} />
+            <Route path="/checkout" element={<Checkout />} />
 
             <Route path="/admin" element={<AdminRoute />}>
               <Route index element={<Admin />} />

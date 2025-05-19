@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 export const RouteLink = ({
   to,
   children,
-  float = "right",
-  margin = "0 1.6rem",
+  float,
+  margin,
   textDecoration = "none",
+  color = "var(--textColor)",
 }) => {
   return (
     <Link
       style={{
-        color: "var(--textColor)",
+        color: color,
         textDecoration: textDecoration,
         float: float,
         margin: margin,

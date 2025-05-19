@@ -36,6 +36,8 @@ export default function BookingOptionsModal({ passengers, setPassengers }) {
         textAlign={"left"}
         border={"1px solid #cccccc"}
         onClick={() => setIsOpen(!isOpen)}
+        transition={"none"}
+        transformStyle={"none"}
       >
         {totalTravelers} {travelerText}
       </Button>

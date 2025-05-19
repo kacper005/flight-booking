@@ -20,11 +20,14 @@ export const Button = ({
   cursor = "pointer",
   fontSize = "1.8rem",
   fontFamily = "Montserrat, sans-serif",
+  transition = "background-color 0.2s ease, transform 0.1s ease",
+  transformStyle,
   onClick,
   icon: Icon,
   disabled,
 }) => {
   const [isHovered, setIsHovered] = React.useState(false);
+  const [isActive, setIsActive] = React.useState(false);
 
   const currentBgColor = disabled
     ? disabledBgColor
@@ -34,28 +37,39 @@ export const Button = ({
 
   const currentColor = disabled ? disabledColor : color;
 
+  const computedTransform =
+    transformStyle ??
+    (isActive ? "scale(0.95)" : isHovered ? "scale(1.05)" : "scale(1)");
+
   return (
     <button
       style={{
-        width: width,
-        height: height,
-        maxWidth: maxWidth,
-        maxHeight: maxHeight,
+        width,
+        height,
+        maxWidth,
+        maxHeight,
         backgroundColor: currentBgColor,
         color: currentColor,
-        textAlign: textAlign,
-        padding: padding,
-        margin: margin,
-        border: border,
-        borderRadius: borderRadius,
+        textAlign,
+        padding,
+        margin,
+        border,
+        borderRadius,
         cursor: disabled ? "not-allowed" : cursor,
-        fontSize: fontSize,
-        fontFamily: fontFamily,
+        fontSize,
+        fontFamily,
+        transition,
+        transform: computedTransform,
       }}
       type={type}
       onClick={disabled ? undefined : onClick}
       onMouseEnter={() => !disabled && setIsHovered(true)}
-      onMouseLeave={() => !disabled && setIsHovered(false)}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        setIsActive(false);
+      }}
+      onMouseDown={() => !disabled && setIsActive(true)}
+      onMouseUp={() => setIsActive(false)}
       disabled={disabled}
     >
       {Icon && (

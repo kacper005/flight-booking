@@ -1,8 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowRightLeft, ArrowRight } from "lucide-react";
 import { getBookingsByUserId } from "@api/bookingApi";
 import { useAuth } from "@hooks/useAuth";
 import { formatDate3elements } from "@formatters/DateFormatters";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
+import { Grid } from "@atoms/Grid";
+import { Button } from "@atoms/Button";
+import { ButtonSmall } from "@atoms/ButtonSmall";
+import { showToast } from "@atoms/Toast/Toast";
 import { LoadingSpinner } from "@atoms/LoadingSpinner";
 
 export const SavedTrips = () => {
@@ -10,6 +16,8 @@ export const SavedTrips = () => {
   const [bookings, setBookings] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
+
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const fetchSavedTrips = async () => {
@@ -19,8 +27,10 @@ export const SavedTrips = () => {
           setBookings(response.data);
         }
       } catch (error) {
-        console.error("Failed to fetch saved trips:", error);
-        setError("Unable to load saved trips.");
+        showToast({
+          message: error,
+          type: "error",
+        });
       } finally {
         setLoading(false);
       }
@@ -29,45 +39,88 @@ export const SavedTrips = () => {
     fetchSavedTrips();
   }, [user]);
 
+  const handleViewDetails = (
+    outboundFlightId,
+    returnFlightId = null,
+    numberOfTravellers
+  ) => {
+    const url = `/search-results-details?outboundFlightId=${outboundFlightId}${
+      returnFlightId ? `&returnFlightId=${returnFlightId}` : ""
+    }&totalPassengers=${numberOfTravellers}`;
+    navigate(url);
+  };
+
   return (
     <PageTemplate>
-      <div>
-        <h1>Saved Trips</h1>
-        {loading && <LoadingSpinner />}
-        {error && <h3>{error}</h3>}
-        {!loading && bookings.length === 0 && <h3>No saved trips found</h3>}
-        {!loading &&
-          bookings.map((booking) => {
-            const outboundFlight = booking.flights[0];
-            const returnFlight = booking.flights[1];
+      <h1>Saved Trips</h1>
+      {loading && <LoadingSpinner />}
+      {error && <h3>{error}</h3>}
+      {!loading && bookings.length === 0 && <h3>No saved trips found</h3>}
+      {!loading &&
+        bookings.map((booking) => {
+          const outboundFlight = booking.flights?.[0];
+          const returnFlight = booking.flights?.[1];
 
-            const tripCity = outboundFlight?.arrivalAirport?.city || "Unknown";
+          if (!outboundFlight) return null;
 
-            return (
-              <div
-                key={booking.bookingId}
-                style={{
-                  marginBottom: "2rem",
-                  padding: "1rem",
-                  border: "1px solid #ccc",
-                  borderRadius: "10px",
-                  backgroundColor: "#f9f9f9",
-                }}
+          const outboundCity = outboundFlight.arrivalAirport?.city || "Unknown";
+          const returnCity = returnFlight?.arrivalAirport?.city;
+
+          return (
+            <div
+              key={booking.bookingId}
+              style={{
+                marginBottom: "2rem",
+                padding: "1rem",
+                border: "1px solid #ccc",
+                borderRadius: "10px",
+                backgroundColor: "#f9f9f9",
+                width: "100%",
+                maxWidth: "600px",
+              }}
+            >
+              <h2 style={{ marginBottom: "0.5rem" }}>
+                {returnFlight
+                  ? `${outboundCity} ⇄ ${returnCity}`
+                  : `${outboundCity} Trip`}
+              </h2>
+
+              <p>
+                {formatDate3elements(outboundFlight.departureTime)}
+                {returnFlight &&
+                  ` - ${formatDate3elements(returnFlight.departureTime)}`}
+              </p>
+
+              <Grid
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"space-between"}
               >
-                <h2 style={{ marginBottom: "0.5rem" }}>{tripCity} - trip</h2>
+                <Grid display={"flex"} alignItems={"center"} gap={"0.5rem"}>
+                  <p>{outboundFlight.departureAirport?.code}</p>
+                  {returnFlight ? (
+                    <ArrowRightLeft size={16} />
+                  ) : (
+                    <ArrowRight size={16} />
+                  )}
+                  <p>{outboundFlight.arrivalAirport?.code}</p>
+                </Grid>
 
-                {returnFlight ? (
-                  <p>
-                    {formatDate3elements(outboundFlight?.departureTime)} -{" "}
-                    {formatDate3elements(returnFlight?.departureTime)}
-                  </p>
-                ) : (
-                  <p>{formatDate3elements(outboundFlight?.departureTime)}</p>
-                )}
-              </div>
-            );
-          })}
-      </div>
+                <ButtonSmall
+                  onClick={() =>
+                    handleViewDetails(
+                      outboundFlight.flightId,
+                      returnFlight?.flightId,
+                      booking.numberOfTravellers
+                    )
+                  }
+                >
+                  View
+                </ButtonSmall>
+              </Grid>
+            </div>
+          );
+        })}
     </PageTemplate>
   );
 };

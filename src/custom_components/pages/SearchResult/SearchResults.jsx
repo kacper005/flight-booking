@@ -160,6 +160,7 @@ export const SearchResults = () => {
               totalPassengers={adult + child + infant}
               outboundFlightId={outbound?.flightId}
               returnFlightId={ret?.flightId}
+              adminView={false}
             />
           );
         })}

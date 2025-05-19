@@ -1,13 +1,12 @@
 import React from "react";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
 import { Card } from "@atoms/Card/Card";
+import { Grid } from "@atoms/Grid";
 
 export const AboutUs = () => {
   return (
     <PageTemplate>
-      <div
-        style={{ display: "flex", justifyContent: "center", padding: "15px" }}
-      >
+      <Grid display={"flex"} alignItems={"center"} padding={"15px"}>
         <Card
           color="#EDE8F5"
           display="flex"
@@ -70,7 +69,7 @@ export const AboutUs = () => {
             </p>
           </div>
         </Card>
-      </div>
+      </Grid>
     </PageTemplate>
   );
 };

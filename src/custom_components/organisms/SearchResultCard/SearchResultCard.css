@@ -9,6 +9,7 @@
   padding: 16px;
   margin: auto;
   gap: 20px;
+  cursor: pointer;
 }
 
 .price-info {
@@ -35,5 +36,8 @@
     align-items: center;
     justify-content: center;
     gap: 16px;
+  }
+  .button-container {
+    display: none;
   }
 }
