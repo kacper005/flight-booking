@@ -1,4 +1,5 @@
 import React from "react";
+import { SquarePen } from "lucide-react";
 import { getAirports, updateAirport } from "@api/airportApi.js";
 import { Button } from "@atoms/Button.jsx";
 import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
@@ -108,14 +109,14 @@ export const AdminAirports = () => {
                 <td className="colAirportCountry">{airport.country}</td>
                 <td className="colAirportName">{airport.name}</td>
                 <td className="colEdit">
-                  <ButtonSmall
+                  <SquarePen
+                    className="editIcon"
+                    size={26}
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedAirport(airport);
                     }}
-                  >
-                    Edit
-                  </ButtonSmall>
+                  />
                 </td>
               </tr>
             ))}

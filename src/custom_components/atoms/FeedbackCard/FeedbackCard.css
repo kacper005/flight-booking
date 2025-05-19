@@ -23,7 +23,7 @@
 }
 
 #date {
-  color: #14161980;
+  color: var(--textColorDark);
   position: absolute;
   bottom: 32px;
   padding: 0 25px;

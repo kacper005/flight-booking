@@ -1,4 +1,5 @@
 import React from "react";
+import { Eye } from "lucide-react";
 import { getBookings, updateBooking } from "@api/bookingApi.js";
 import { formatDate } from "@formatters/DateFormatters.js";
 import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
@@ -112,14 +113,14 @@ export const AdminBookings = () => {
                     : ""}
                 </td>
                 <td className="colEdit">
-                  <ButtonSmall
+                  <Eye
+                    className={"editIcon"}
+                    size={26}
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedBooking(booking);
                     }}
-                  >
-                    View
-                  </ButtonSmall>
+                  />
                 </td>
               </tr>
             ))}

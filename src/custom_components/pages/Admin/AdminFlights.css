@@ -71,6 +71,10 @@ h1 {
   color: white;
 }
 
+.editIcon:hover {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 1100px) {
   .colRoundTrip,
   .colStatus,

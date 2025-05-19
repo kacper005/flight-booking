@@ -1,5 +1,6 @@
 import React from "react";
 import { TableProperties, TableOfContents } from "lucide-react";
+import { SquarePen } from "lucide-react";
 import { getFlights, updateFlight } from "@api/flightApi.js";
 import { formatDateTime } from "@formatters/DateFormatters";
 import { formatDate2Digit, formatTime2Digit } from "@formatters/DateFormatters";
@@ -141,16 +142,16 @@ export const AdminFlights = () => {
                   outboundOperatingAirlineLogo={outbound?.airline?.logoFileName}
                   returnOperatingAirlineLogo={ret?.airline?.logoFileName || ""}
                   outboundFlightDepartureDate={formatDate2Digit(
-                    outbound?.departureTime
+                    outbound?.departureTime,
                   )}
                   returnFlightDepartureDate={
                     ret ? formatDate2Digit(ret?.departureTime) : ""
                   }
                   outboundFlightDepartureTime={formatTime2Digit(
-                    outbound?.departureTime
+                    outbound?.departureTime,
                   )}
                   outboundFlightArrivalTime={formatTime2Digit(
-                    outbound?.arrivalTime
+                    outbound?.arrivalTime,
                   )}
                   returnFlightDepartureTime={
                     ret ? formatTime2Digit(ret?.departureTime) : ""
@@ -218,14 +219,14 @@ export const AdminFlights = () => {
                   </td>
                   <td className={"colClasses"}>{flight.availableClasses}</td>
                   <td className={"colEdit"}>
-                    <ButtonSmall
+                    <SquarePen
+                      className="editIcon"
+                      size={26}
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedFlight(flight);
                       }}
-                    >
-                      Edit
-                    </ButtonSmall>
+                    />
                   </td>
                 </tr>
               ))}

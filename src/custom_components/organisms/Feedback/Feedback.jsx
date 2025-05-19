@@ -100,6 +100,7 @@ export const Feedback = () => {
 
         <button
           className={"leftButton"}
+          aria-label={"Scroll left"}
           onClick={() => {
             handleScroll(-itemWidth);
           }}
@@ -108,6 +109,7 @@ export const Feedback = () => {
         </button>
         <button
           className={"rightButton"}
+          aria-label={"Scroll right"}
           onClick={() => {
             handleScroll(itemWidth);
           }}

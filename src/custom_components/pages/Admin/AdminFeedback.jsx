@@ -1,4 +1,5 @@
 import React from "react";
+import { Eye } from "lucide-react";
 import { getFeedback } from "@api/feedbackApi.js";
 import { formatDateTime } from "@formatters/DateFormatters";
 import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
@@ -15,7 +16,7 @@ export const AdminFeedback = () => {
   const getSortedFeedbackTable = async () => {
     const res = await getFeedback();
     const sorted = res.data.sort((a, b) =>
-      a.createdAt.localeCompare(b.createdAt)
+      a.createdAt.localeCompare(b.createdAt),
     );
     setAllFeedback(sorted);
   };
@@ -88,14 +89,14 @@ export const AdminFeedback = () => {
                   {formatDateTime(feedback.createdAt)}
                 </td>
                 <td className="colEdit">
-                  <ButtonSmall
+                  <Eye
+                    className={"editIcon"}
+                    size={26}
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedFeedback(feedback);
                     }}
-                  >
-                    View
-                  </ButtonSmall>
+                  />
                 </td>
               </tr>
             ))}

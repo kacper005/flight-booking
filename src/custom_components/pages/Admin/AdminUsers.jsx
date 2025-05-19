@@ -1,4 +1,5 @@
 import React from "react";
+import { SquarePen } from "lucide-react";
 import { getUsers, updateUser } from "@api/userApi.js";
 import { formatDateTime } from "@formatters/DateFormatters";
 import { getDisplayRole } from "@enums/UserRole.js";
@@ -120,14 +121,14 @@ export const AdminUsers = () => {
                 </td>
                 <td className={"colRole"}>{getDisplayRole(users.role)}</td>
                 <td className={"colEdit-admin-user"}>
-                  <ButtonSmall
+                  <SquarePen
+                    className="editIcon"
+                    size={26}
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedUser(users);
                     }}
-                  >
-                    Edit
-                  </ButtonSmall>
+                  />
                 </td>
               </tr>
             ))}
