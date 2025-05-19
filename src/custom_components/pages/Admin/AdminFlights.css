@@ -90,8 +90,53 @@ h1 {
   .colEdit {
     display: none;
   }
+
   .adminTable tr:hover {
     background-color: lightgray;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .colAirportCity {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .colAirportCountry {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .colLogoName {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .colAirlineCountry {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .colBookingFlightNumber1,
+  .colBookingFlightNumber2 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .colBookingDepartureDate,
+  .colBookingArrivalDate {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .colBookingEmail {
+    display: none;
   }
 }

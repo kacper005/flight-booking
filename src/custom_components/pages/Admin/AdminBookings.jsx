@@ -5,7 +5,6 @@ import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
 import { LoadingSpinner } from "@atoms/LoadingSpinner";
 import { AdminBookingsModal } from "@organisms/AdminBookingsModal.jsx";
 import "./AdminFlights.css";
-import "./AdminBookings.css"; // TODO: use only one css file
 
 export const AdminBookings = () => {
   const [bookings, setBookings] = React.useState([]);

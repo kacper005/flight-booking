@@ -6,7 +6,6 @@ import { LoadingSpinner } from "@atoms/LoadingSpinner";
 import { AdminAirportsModal } from "@organisms/AdminAirportsModal/AdminAirportsModal.jsx";
 import { AdminNewAirportModal } from "@organisms/AdminAirportsModal/AdminNewAirportModal.jsx";
 import "./AdminFlights.css";
-import "./AdminAirports.css"; // TODO: use only one css file
 
 export const AdminAirports = () => {
   const [airports, setAirports] = React.useState([]);

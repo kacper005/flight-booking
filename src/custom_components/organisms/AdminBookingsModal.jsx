@@ -22,17 +22,11 @@ export const AdminBookingsModal = ({ booking, onClose, onSave }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (e) => {
-    // TODO: Handle change for nested objects
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
   const handleDelete = async (e) => {
     e.preventDefault();
 
     const userConfirmed = window.confirm(
-      "Are you sure you want to delete this feedback?"
+      "Are you sure you want to delete this feedback?",
     );
     if (userConfirmed) {
       try {
@@ -60,7 +54,6 @@ export const AdminBookingsModal = ({ booking, onClose, onSave }) => {
         const bookingPayload = {
           bookingId: booking.bookingId,
 
-          // TODO: Check if flight handling is correct
           flights: formData.flights.map((flight) => ({
             flightId: flight.flightId,
           })),
