@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getNames } from "country-list";
 import { allCountries } from "country-telephone-data";
 import { createUser } from "@api/userApi";
+import { PageTemplate } from "@templates/PageTemplate/PageTempate";
 import { Button } from "@atoms/Button";
 import { RouteLink } from "@atoms/RouteLink";
 import { showToast } from "@atoms/Toast/Toast";
@@ -126,176 +127,178 @@ export const SignUp = () => {
   };
 
   return (
-    <div className="signup-container">
-      <h2 style={{ color: "var(--textColor)" }}>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-            autoComplete="email"
-          />
-          {errors.email && <small className="error">{errors.email}</small>}
-        </div>
-
-        <div className="input-group">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Create a password"
-            autoComplete="new-password"
-          />
-          {errors.password && (
-            <small className="error">{errors.password}</small>
-          )}
-        </div>
-
-        <div className="input-group">
-          <label>Repeat Password</label>
-          <input
-            type="password"
-            name="repeatPassword"
-            value={formData.repeatPassword}
-            onChange={handleChange}
-            placeholder="Repeat your password"
-            autoComplete="new-password"
-          />
-          {errors.repeatPassword && (
-            <small className="error">{errors.repeatPassword}</small>
-          )}
-        </div>
-
-        <div className="input-group">
-          <label htmlFor={"mobileNumber"}>Mobile Number</label>
-          <div className="phone-container">
-            <select
-              id={"mobileNumber"}
-              name="phoneCode"
-              value={formData.phoneCode}
+    <PageTemplate>
+      <div className="signup-container">
+        <h2 style={{ color: "var(--textColor)" }}>Sign Up</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
-              className="phone-code"
+              placeholder="Enter your email"
+              autoComplete="email"
+            />
+            {errors.email && <small className="error">{errors.email}</small>}
+          </div>
+
+          <div className="input-group">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Create a password"
+              autoComplete="new-password"
+            />
+            {errors.password && (
+              <small className="error">{errors.password}</small>
+            )}
+          </div>
+
+          <div className="input-group">
+            <label>Repeat Password</label>
+            <input
+              type="password"
+              name="repeatPassword"
+              value={formData.repeatPassword}
+              onChange={handleChange}
+              placeholder="Repeat your password"
+              autoComplete="new-password"
+            />
+            {errors.repeatPassword && (
+              <small className="error">{errors.repeatPassword}</small>
+            )}
+          </div>
+
+          <div className="input-group">
+            <label htmlFor={"mobileNumber"}>Mobile Number</label>
+            <div className="phone-container">
+              <select
+                id={"mobileNumber"}
+                name="phoneCode"
+                value={formData.phoneCode}
+                onChange={handleChange}
+                className="phone-code"
+              >
+                {allCountries.map(({ iso2, dialCode }) => (
+                  <option key={iso2} value={`+${dialCode}`}>
+                    (+{dialCode}) {iso2.toUpperCase()}
+                  </option>
+                ))}
+              </select>
+              <input
+                type="text"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Enter your mobile number"
+                className="phone-input"
+                autoComplete="tel"
+              />
+            </div>
+            {errors.phone && <small className="error">{errors.phone}</small>}
+          </div>
+
+          <div className="input-group">
+            <label>First Name</label>
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              placeholder="Enter your first name"
+            />
+            {errors.firstName && (
+              <small className="error">{errors.firstName}</small>
+            )}
+          </div>
+
+          <div className="input-group">
+            <label>Last Name</label>
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              placeholder="Enter your last name"
+            />
+            {errors.lastName && (
+              <small className="error">{errors.lastName}</small>
+            )}
+          </div>
+          <div className="input-group">
+            <label>Date of Birth</label>
+            <BirthDatePicker
+              formData={formData}
+              setFormData={setFormData}
+              errors={errors}
+            />
+            {errors.dateOfBirth && (
+              <small className="error">{errors.dateOfBirth}</small>
+            )}
+          </div>
+
+          <div className="input-group">
+            <label htmlFor={"country"}>Country</label>
+            <select
+              id={"country"}
+              name="country"
+              value={formData.country || ""}
+              onChange={handleChange}
             >
-              {allCountries.map(({ iso2, dialCode }) => (
-                <option key={iso2} value={`+${dialCode}`}>
-                  (+{dialCode}) {iso2.toUpperCase()}
+              <option value="" disabled>
+                Select your country
+              </option>
+              {getNames().map((name) => (
+                <option key={name} value={name}>
+                  {name}
                 </option>
               ))}
             </select>
-            <input
-              type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="Enter your mobile number"
-              className="phone-input"
-              autoComplete="tel"
-            />
+            {errors.country && (
+              <small className="error">{errors.country}</small>
+            )}
           </div>
-          {errors.phone && <small className="error">{errors.phone}</small>}
-        </div>
 
-        <div className="input-group">
-          <label>First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            placeholder="Enter your first name"
-          />
-          {errors.firstName && (
-            <small className="error">{errors.firstName}</small>
-          )}
-        </div>
-
-        <div className="input-group">
-          <label>Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            placeholder="Enter your last name"
-          />
-          {errors.lastName && (
-            <small className="error">{errors.lastName}</small>
-          )}
-        </div>
-        <div className="input-group">
-          <label>Date of Birth</label>
-          <BirthDatePicker
-            formData={formData}
-            setFormData={setFormData}
-            errors={errors}
-          />
-          {errors.dateOfBirth && (
-            <small className="error">{errors.dateOfBirth}</small>
-          )}
-        </div>
-
-        <div className="input-group">
-          <label htmlFor={"country"}>Country</label>
-          <select
-            id={"country"}
-            name="country"
-            value={formData.country || ""}
-            onChange={handleChange}
-          >
-            <option value="" disabled>
-              Select your country
-            </option>
-            {getNames().map((name) => (
-              <option key={name} value={name}>
-                {name}
-              </option>
-            ))}
-          </select>
-          {errors.country && <small className="error">{errors.country}</small>}
-        </div>
-
-        <div className="input-group">
-          <label>Gender</label>
-          <div className="gender-options">
-            <label>
-              <input
-                type="checkbox"
-                name="gender"
-                value="Male"
-                checked={formData.gender === "Male"}
-                onChange={handleChange}
-              />
-              Male
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="gender"
-                value="Female"
-                checked={formData.gender === "Female"}
-                onChange={handleChange}
-              />
-              Female
-            </label>
+          <div className="input-group">
+            <label>Gender</label>
+            <div className="gender-options">
+              <label>
+                <input
+                  type="checkbox"
+                  name="gender"
+                  value="Male"
+                  checked={formData.gender === "Male"}
+                  onChange={handleChange}
+                />
+                Male
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="gender"
+                  value="Female"
+                  checked={formData.gender === "Female"}
+                  onChange={handleChange}
+                />
+                Female
+              </label>
+            </div>
+            {errors.gender && <small className="error">{errors.gender}</small>}
           </div>
-          {errors.gender && <small className="error">{errors.gender}</small>}
-        </div>
 
-        <Button width={"100%"} type="submit" className="signup-btn">
-          Sign Up
-        </Button>
-      </form>
-      <div className="login-link">
-        <RouteLink to="/sign-in" margin="none" float="none">
-          Already have an account? Sign In
-        </RouteLink>
+          <Button width={"100%"} type="submit" className="signup-btn">
+            Sign Up
+          </Button>
+        </form>
+        <div className="login-link">
+          <RouteLink to="/sign-in">Already have an account? Sign In</RouteLink>
+        </div>
       </div>
-    </div>
+    </PageTemplate>
   );
 };
