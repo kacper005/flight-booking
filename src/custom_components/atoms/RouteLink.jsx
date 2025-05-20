@@ -8,6 +8,7 @@ export const RouteLink = ({
   margin,
   textDecoration = "none",
   color = "var(--textColor)",
+  fontSize = "1.6rem",
 }) => {
   return (
     <Link
@@ -16,7 +17,7 @@ export const RouteLink = ({
         textDecoration: textDecoration,
         float: float,
         margin: margin,
-        fontSize: "1.6rem",
+        fontSize: fontSize,
       }}
       to={to}
     >

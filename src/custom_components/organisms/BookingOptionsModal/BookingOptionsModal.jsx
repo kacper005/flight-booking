@@ -27,6 +27,7 @@ export default function BookingOptionsModal({ passengers, setPassengers }) {
   return (
     <div className="booking-container" ref={dropdownRef}>
       <Button
+        ariaLabel="Booking options"
         height={"60px"}
         width={"100%"}
         bgColor={"var(--white)"}
@@ -34,7 +35,7 @@ export default function BookingOptionsModal({ passengers, setPassengers }) {
         hoverBgColor={"var(--white)"}
         borderRadius={"8px"}
         textAlign={"left"}
-        border={"1px solid #cccccc"}
+        border={"1px solid var(--grey)"}
         onClick={() => setIsOpen(!isOpen)}
         transition={"none"}
         transformStyle={"none"}
@@ -79,6 +80,7 @@ function BookingDialog({ passengers, setPassengers, totalTravelers }) {
             <button
               disabled={passengers[type] === 0}
               onClick={() => handleChange(type, -1)}
+              aria-label="Decrease passenger count"
             >
               -
             </button>
@@ -86,6 +88,7 @@ function BookingDialog({ passengers, setPassengers, totalTravelers }) {
             <button
               disabled={totalTravelers >= 10}
               onClick={() => handleChange(type, 1)}
+              aria-label="Increase passenger count"
             >
               +
             </button>

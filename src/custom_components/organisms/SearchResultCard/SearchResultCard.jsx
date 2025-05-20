@@ -99,7 +99,9 @@ export const SearchResultCard = ({
                     outboundFlightArrivalTime
                   )}
                 </p>
-                <hr style={{ width: "100%", border: "1px solid #ccc" }} />
+                <hr
+                  style={{ width: "100%", border: "1px solid var(--grey)" }}
+                />
               </div>
               <div style={{ textAlign: "center" }}>
                 <h4 style={{ margin: 0 }}>{outboundFlightArrivalTime}</h4>
@@ -142,7 +144,9 @@ export const SearchResultCard = ({
                       returnFlightArrivalTime
                     )}
                   </p>
-                  <hr style={{ width: "100%", border: "1px solid #ccc" }} />
+                  <hr
+                    style={{ width: "100%", border: "1px solid var(--grey)" }}
+                  />
                 </div>
                 <div style={{ textAlign: "center" }}>
                   <h4 style={{ margin: 0 }}>{returnFlightArrivalTime}</h4>
@@ -155,7 +159,13 @@ export const SearchResultCard = ({
           </Grid>
         )}
 
-        <p style={{ fontSize: "14px", color: "#555", marginTop: "auto" }}>
+        <p
+          style={{
+            fontSize: "14px",
+            color: "var(--textColorDark",
+            marginTop: "auto",
+          }}
+        >
           {returnOperatingAirlineName
             ? outboundOperatingAirlineName === returnOperatingAirlineName
               ? outboundOperatingAirlineName

@@ -8,7 +8,7 @@ export const Select = ({ value, onChange }) => {
         height: "60px",
         fontSize: "1.8rem",
         borderRadius: "8px",
-        border: "1px solid #cccccc",
+        border: "1px solid var(--grey)",
         cursor: "pointer",
         padding: "10px 20px",
       }}

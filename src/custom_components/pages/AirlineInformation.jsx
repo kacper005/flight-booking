@@ -4,7 +4,6 @@ import { Card } from "@atoms/Card/Card";
 
 export const AirlineInformation = () => {
   const airlines = [
-    // Description and images for each airline.
     {
       name: "Delta Air Lines",
       description:
@@ -122,23 +121,19 @@ export const AirlineInformation = () => {
     },
   ];
 
-  // State to track selected airline image index
   const [selectedAirlineIndex, setSelectedAirlineIndex] = React.useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = React.useState(0);
 
-  // Open image modal
   const openImageModal = (airlineIndex, imageIndex) => {
     setSelectedAirlineIndex(airlineIndex);
     setSelectedImageIndex(imageIndex);
   };
 
-  // Close modal
   const closeImageModal = () => {
     setSelectedAirlineIndex(null);
     setSelectedImageIndex(0);
   };
 
-  // Navigate images (left/right)
   const handleNextImage = () => {
     if (selectedAirlineIndex !== null) {
       setSelectedImageIndex(
@@ -158,7 +153,6 @@ export const AirlineInformation = () => {
     }
   };
 
-  // Handle keybord navigation
   React.useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Escape") closeImageModal();
@@ -179,13 +173,13 @@ export const AirlineInformation = () => {
         }}
       >
         <Card
-          color={"#EDE8F5"}
+          color={"var(--textColor"}
           display="flex"
           flexDirection="column"
           alignItems="center"
           maxWidth="900px"
           style={{
-            color: "#141619",
+            color: "var(--textColorDark)",
             padding: "40px",
             borderRadius: "12px",
             boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.15)",
@@ -215,10 +209,9 @@ export const AirlineInformation = () => {
                 padding: "24px",
                 paddingBottom: "15px",
                 borderRadius: "12px",
-                borderBottom: "1px solid #ccc",
+                borderBottom: "1px solid var(--grey)",
               }}
             >
-              {/* Text Section */}
               <div
                 style={{ flex: "1", minWidth: "300px", paddingRight: "20px" }}
               >
@@ -316,7 +309,7 @@ export const AirlineInformation = () => {
                   <span
                     style={{
                       fontSize: "40px",
-                      color: "white",
+                      color: "var(--white)",
                       userSelect: "none",
                     }}
                   >
@@ -345,7 +338,7 @@ export const AirlineInformation = () => {
                   <span
                     style={{
                       fontSize: "40px",
-                      color: "white",
+                      color: "var(--white)",
                       userSelect: "none",
                     }}
                   >
@@ -374,7 +367,7 @@ export const AirlineInformation = () => {
           <div
             style={{ marginTop: "30px", textAlign: "center", width: "100%" }}
           >
-            <p style={{ fontSize: "14px", color: "#555" }}>
+            <p style={{ fontSize: "14px", color: "var(--textColorDark)" }}>
               © 2025 Flight Finder. All information provided here is for
               educational purposes.
             </p>

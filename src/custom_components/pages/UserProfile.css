@@ -54,7 +54,7 @@
 .user-input-group select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--grey);
   border-radius: 8px;
   cursor: pointer;
 }
@@ -71,9 +71,9 @@
   color: var(--textColor);
 }
 
-.field input{
+.field input {
   padding: 0.6rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--grey);
   border-radius: 8px;
   background-color: var(--white);
 }
@@ -83,8 +83,6 @@
   font-size: 2rem;
   cursor: pointer;
 }
-
-
 
 .errors {
   color: var(--errorColor);

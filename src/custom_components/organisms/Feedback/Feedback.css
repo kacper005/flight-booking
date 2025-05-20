@@ -1,5 +1,5 @@
 .feedback {
-  background-color: #adbbda;
+  background-color: var(--secondaryColorLight);
   width: 100vw;
   margin: 0;
   display: flex;
@@ -43,7 +43,7 @@
   top: 8px;
   font-weight: normal;
   color: var(--textColorDark);
-  background-color: #adbbda;
+  background-color: var(--secondaryColorLight);
   padding: 119px 5px;
   border: none;
   cursor: pointer;

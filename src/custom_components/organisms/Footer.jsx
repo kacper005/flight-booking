@@ -109,7 +109,7 @@ export const Footer = () => {
       <div
         style={{
           backgroundColor: "var(--mainColor)",
-          color: "white",
+          color: "var(--white)",
           textAlign: "center",
           padding: "20px",
         }}
@@ -150,7 +150,7 @@ export const Footer = () => {
       <div
         style={{
           backgroundColor: "var(--mainColor)",
-          color: "white",
+          color: "var(--white)",
           textAlign: "center",
           padding: "20px",
           display: "flex",

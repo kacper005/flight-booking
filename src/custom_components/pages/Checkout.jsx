@@ -23,7 +23,7 @@ export const Checkout = () => {
       <RouteLink
         color={"var(--textColorDark)"}
         textDecoration={"underline"}
-        to={"/"}
+        to={"/feedback"}
       >
         Give us your feedback
       </RouteLink>

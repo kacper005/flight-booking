@@ -9,7 +9,7 @@ body.active-modal {
 .adminTable {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: "var(--white)";
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
@@ -20,11 +20,11 @@ body.active-modal {
 .adminTable td {
   padding: 6px 16px;
   text-align: left;
-  border-bottom: 1px solid #141619;
+  border-bottom: 1px solid var(--textColorDark);
 }
 
 .adminTable th {
-  background-color: var(--TableHeaderColor);
+  background-color: var(--tableHeaderColor);
   font-weight: bold;
 }
 
@@ -68,7 +68,7 @@ h1 {
 }
 
 .admin-icon-button svg {
-  color: white;
+  color: var(--white);
 }
 
 .editIcon:hover {

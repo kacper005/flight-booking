@@ -1,0 +1,66 @@
+.feedback-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.feedback-heading {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.feedback-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feedback-stars {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0;
+  margin-bottom: 30px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.star-icon {
+  stroke: var(--textColorDark);
+  fill: none;
+  transition: fill 0.2s, stroke 0.2s;
+}
+
+.star-icon.filled {
+  fill: var(--yellow);
+  stroke: var(--textColorDark);
+}
+
+.feedback-textarea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  min-height: 200px;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid var(--grey);
+  border-radius: 6px;
+  resize: vertical;
+  font-size: 1.6rem;
+}
+
+/* Responsive tweaks for small screens */
+@media (max-width: 600px) {
+  .feedback-textarea {
+    max-width: 100%;
+  }
+}

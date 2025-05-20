@@ -2,6 +2,8 @@ import React from "react";
 
 export const Button = ({
   children,
+  title,
+  ariaLabel,
   type = "button",
   width,
   height,
@@ -43,6 +45,8 @@ export const Button = ({
 
   return (
     <button
+      title={title}
+      aria-label={ariaLabel}
       style={{
         width,
         height,

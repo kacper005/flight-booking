@@ -32,6 +32,7 @@ import ProtectedRoute from "@atoms/ProtectedRoute";
 import { Header } from "@organisms/Header/Header";
 import { Footer } from "@organisms/Footer.jsx";
 import { Navbar } from "@organisms/Navbar/Navbar";
+import { Feedback } from "@pages/Feedback/Feedback";
 
 export const App = () => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
@@ -84,6 +85,7 @@ export const App = () => {
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/saved-trips" element={<SavedTrips />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/feedback" element={<Feedback />} />
 
             <Route path="/admin" element={<AdminRoute />}>
               <Route index element={<Admin />} />

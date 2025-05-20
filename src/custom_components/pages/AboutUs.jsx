@@ -8,13 +8,13 @@ export const AboutUs = () => {
     <PageTemplate>
       <Grid display={"flex"} alignItems={"center"} padding={"15px"}>
         <Card
-          color="#EDE8F5"
+          color="var(--textColor"
           display="flex"
           flexDirection="column"
           alignItems="center"
           maxWidth="900px"
           style={{
-            color: "#141619",
+            color: "var(--textColorDark)",
             padding: "40px",
             borderRadius: "16px",
             boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
@@ -60,7 +60,7 @@ export const AboutUs = () => {
               marginTop: "40px",
               textAlign: "center",
               fontSize: "14px",
-              color: "#555",
+              color: "var(--textColorDark)",
             }}
           >
             <p>

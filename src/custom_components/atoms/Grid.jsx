@@ -5,13 +5,22 @@ export const Grid = ({
   display,
   alignItems,
   justifyContent,
+  flexDirection,
   padding,
   gap,
   lineHeight,
 }) => {
   return (
     <div
-      style={{ display, alignItems, justifyContent, padding, gap, lineHeight }}
+      style={{
+        display,
+        alignItems,
+        justifyContent,
+        flexDirection,
+        padding,
+        gap,
+        lineHeight,
+      }}
     >
       {children}
     </div>

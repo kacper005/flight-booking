@@ -17,8 +17,8 @@ export default function FeedbackCard({
           <Star
             key={index}
             size={25}
-            fill={"#ffd250"}
-            stroke={"#141619"}
+            fill={"var(--yellow)"}
+            stroke={"var(--textColorDark)"}
             strokeWidth={1}
           />
         ))}

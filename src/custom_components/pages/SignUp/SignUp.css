@@ -28,7 +28,7 @@ h2 {
 .input-group select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--grey);
   border-radius: 8px;
   cursor: pointer;
 }
@@ -82,7 +82,7 @@ h2 {
   flex: 0 0 100px;
   max-width: 120px;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--grey);
   border-radius: 6px;
   font-size: 0.9rem;
   text-align: center;
@@ -90,7 +90,7 @@ h2 {
 
 .phone-input {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--grey);
   border-radius: 6px;
   width: 80%;
 }

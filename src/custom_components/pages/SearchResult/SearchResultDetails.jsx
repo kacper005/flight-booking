@@ -103,7 +103,7 @@ export const SearchResultDetails = () => {
         setIsSaved(false);
         setSavedBookingId(null);
         showToast({
-          message: "Booking removed successfully!",
+          message: "Trip removed successfully!",
           type: "success",
         });
       } else {

@@ -5,7 +5,6 @@ import { getFlights, updateFlight } from "@api/flightApi.js";
 import { formatDateTime } from "@formatters/DateFormatters";
 import { formatDate2Digit, formatTime2Digit } from "@formatters/DateFormatters";
 import { Button } from "@atoms/Button.jsx";
-import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
 import { getFlightStatus } from "@enums/FlightStatus";
 import { LoadingSpinner } from "@atoms/LoadingSpinner";
 import { AdminFlightsModal } from "@organisms/AdminFlightsModal/AdminFlightsModal.jsx";
@@ -142,16 +141,16 @@ export const AdminFlights = () => {
                   outboundOperatingAirlineLogo={outbound?.airline?.logoFileName}
                   returnOperatingAirlineLogo={ret?.airline?.logoFileName || ""}
                   outboundFlightDepartureDate={formatDate2Digit(
-                    outbound?.departureTime,
+                    outbound?.departureTime
                   )}
                   returnFlightDepartureDate={
                     ret ? formatDate2Digit(ret?.departureTime) : ""
                   }
                   outboundFlightDepartureTime={formatTime2Digit(
-                    outbound?.departureTime,
+                    outbound?.departureTime
                   )}
                   outboundFlightArrivalTime={formatTime2Digit(
-                    outbound?.arrivalTime,
+                    outbound?.arrivalTime
                   )}
                   returnFlightDepartureTime={
                     ret ? formatTime2Digit(ret?.departureTime) : ""

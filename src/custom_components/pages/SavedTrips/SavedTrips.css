@@ -1,0 +1,20 @@
+.remove-icon-button {
+  background-color: var(--mainColorLight);
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.remove-icon-button:hover {
+  background-color: var(--blueHover);
+  transform: scale(1.05);
+}
+
+.remove-icon-button svg {
+  color: var(--white);
+}

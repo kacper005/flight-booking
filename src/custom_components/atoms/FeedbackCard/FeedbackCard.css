@@ -3,8 +3,8 @@
   margin: 10px 5px;
   height: 270px;
   width: 400px;
-  box-shadow: #a1a1a1 3px 3px 5px;
-  background-color: white;
+  box-shadow: var(--grey) 3px 3px 5px;
+  background-color: var(--white);
   border-radius: 10px;
   position: relative;
   flex-shrink: 0;

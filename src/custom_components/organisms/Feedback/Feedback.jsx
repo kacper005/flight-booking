@@ -20,7 +20,7 @@ export const Feedback = () => {
       try {
         const res = await getFeedback();
         const sorted = res.data.sort((a, b) =>
-          b.createdAt.localeCompare(a.createdAt),
+          b.createdAt.localeCompare(a.createdAt)
         );
         setAllFeedback(sorted);
       } catch (err) {

@@ -15,13 +15,13 @@ export const TermsAndConditions = () => {
         }}
       >
         <Card
-          color={"#EDE8F5"}
+          color={"var(--textColor)"}
           display="flex"
           flexDirection="column"
           alignItems="center"
           maxWidth="800px"
           style={{
-            color: "#141619",
+            color: "var(--textColorDark)",
             padding: "30px",
             borderRadius: "10px",
             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
