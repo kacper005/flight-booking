@@ -16,7 +16,7 @@ export const AdminFeedback = () => {
   const getSortedFeedbackTable = async () => {
     const res = await getFeedback();
     const sorted = res.data.sort((a, b) =>
-      a.createdAt.localeCompare(b.createdAt),
+      a.createdAt.localeCompare(b.createdAt)
     );
     setAllFeedback(sorted);
   };
@@ -44,7 +44,6 @@ export const AdminFeedback = () => {
     }
   };
 
-  // Prevent scrolling behind modal when modal is open
   if (selectedFeedback) {
     document.body.classList.add("active-modal");
   } else {

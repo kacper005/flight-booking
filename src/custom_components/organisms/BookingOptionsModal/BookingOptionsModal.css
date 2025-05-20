@@ -77,7 +77,6 @@
   color: var(--white);
 }
 
-/* Removed dropdown width override from media query */
 @media (max-width: 800px) {
   .booking-container {
     width: 100%;

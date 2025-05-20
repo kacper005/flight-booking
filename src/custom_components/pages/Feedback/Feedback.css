@@ -58,7 +58,6 @@
   font-size: 1.6rem;
 }
 
-/* Responsive tweaks for small screens */
 @media (max-width: 600px) {
   .feedback-textarea {
     max-width: 100%;

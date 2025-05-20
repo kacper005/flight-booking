@@ -67,7 +67,6 @@ export const AdminAirlines = () => {
     setShowAddAirlineModal(!showAddAirlineModal);
   };
 
-  // Prevent scrolling behind modal when modal is open
   if (selectedAirline || showAddAirlineModal) {
     document.body.classList.add("active-modal");
   } else {

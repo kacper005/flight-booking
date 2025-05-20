@@ -91,7 +91,6 @@ export const FAQ = () => {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      {/* <h2>Flight Finder FAQ</h2> */}
       <Box width={"100%"} maxWidth={"1000px"} margin={"25px auto"}>
         <h2 style={{ marginBottom: "25px" }}>General Questions</h2>
         <AccordionList items={questionSet1} />

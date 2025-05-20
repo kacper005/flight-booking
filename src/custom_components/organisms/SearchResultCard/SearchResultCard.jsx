@@ -60,7 +60,6 @@ export const SearchResultCard = ({
         }
       }}
     >
-      {/* Flight Info */}
       <div
         style={{
           flex: 3,
@@ -69,7 +68,6 @@ export const SearchResultCard = ({
           gap: "16px",
         }}
       >
-        {/* Outbound Flight */}
         <Grid display={"flex"} alignItems={"center"} gap={"16px"}>
           <img
             src={`/airline_logos/${outboundOperatingAirlineLogo}.png`}
@@ -113,7 +111,6 @@ export const SearchResultCard = ({
           </div>
         </Grid>
 
-        {/* Return Flight */}
         {roundTrip && (
           <Grid display={"flex"} alignItems={"center"} gap={"16px"}>
             <img
@@ -174,7 +171,6 @@ export const SearchResultCard = ({
         </p>
       </div>
 
-      {/* Price & Booking Info */}
       {!adminView && (
         <div className="price-info">
           {price === totalPrice && (

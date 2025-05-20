@@ -73,8 +73,6 @@ export const SavedTrips = () => {
     }
   };
 
-  console.log("Bookings:", bookings);
-
   return (
     <PageTemplate>
       <h1>Saved Trips</h1>

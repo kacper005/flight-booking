@@ -71,7 +71,6 @@ export const AdminUsers = () => {
     setShowAddUserModal(!showAddUserModal);
   };
 
-  // Prevent scrolling behind modal when modal is open
   if (selectedUser || showAddUserModal) {
     document.body.classList.add("active-modal");
   } else {

@@ -33,12 +33,10 @@ export const Feedback = () => {
     fetchFeedback();
   }, []);
 
-  // Function to determine ITEM_WIDTH dynamically
   function getItemWidth() {
     return window.innerWidth <= 520 ? 295 : 425;
   }
 
-  // Update itemWidth when the window is resized
   React.useEffect(() => {
     const handleResize = () => setItemWidth(getItemWidth());
     window.addEventListener("resize", handleResize);
@@ -46,15 +44,11 @@ export const Feedback = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Function to handle scrolling when the button is clicked
   const handleScroll = (scrollAmount) => {
-    // Calculate the new scroll position
     const newScrollPosition = scrollPosition + scrollAmount;
 
-    // Update the state with the new scroll position
     setScrollPosition(newScrollPosition);
 
-    // Access the container element and set its scroll property
     containerRef.current.scrollLeft = newScrollPosition;
   };
 

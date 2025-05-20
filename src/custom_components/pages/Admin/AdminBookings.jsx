@@ -52,7 +52,6 @@ export const AdminBookings = () => {
     }
   };
 
-  // Prevent scrolling behind modal when modal is open
   if (selectedBooking) {
     document.body.classList.add("active-modal");
   } else {

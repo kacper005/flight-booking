@@ -321,7 +321,6 @@ export const AirlineInformation = () => {
             </div>
           )}
 
-          {/* Footer */}
           <div
             style={{ marginTop: "30px", textAlign: "center", width: "100%" }}
           >
