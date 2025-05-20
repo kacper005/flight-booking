@@ -7,7 +7,11 @@ export const Header = ({ toggleSidebar }) => {
   return (
     <header className="header">
       <Logo />
-      <button className="nav-btn" onClick={toggleSidebar}>
+      <button
+        className="nav-btn"
+        aria-label={"Open navigation menu"}
+        onClick={toggleSidebar}
+      >
         <Menu />
       </button>
     </header>

@@ -173,9 +173,10 @@ export const SignUp = () => {
         </div>
 
         <div className="input-group">
-          <label>Mobile Number</label>
+          <label htmlFor={"mobileNumber"}>Mobile Number</label>
           <div className="phone-container">
             <select
+              id={"mobileNumber"}
               name="phoneCode"
               value={formData.phoneCode}
               onChange={handleChange}
@@ -240,8 +241,9 @@ export const SignUp = () => {
         </div>
 
         <div className="input-group">
-          <label>Country</label>
+          <label htmlFor={"country"}>Country</label>
           <select
+            id={"country"}
             name="country"
             value={formData.country || ""}
             onChange={handleChange}

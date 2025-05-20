@@ -2,7 +2,7 @@
   padding: 2rem;
   max-width: 800px;
   margin: auto;
-  background-color: #f9f7ff;
+  background-color: var(--mainColor);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -11,18 +11,21 @@
   font-size: 2rem;
   text-align: center;
   margin-bottom: 0.5rem;
+    color: var(--textColor);
 }
 
 .subtitle {
   font-size: 1.5rem;
   text-align: center;
   margin-bottom: 2rem;
+    color: var(--textColor);
 }
 
 .profile-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
 }
 
 .row {
@@ -65,6 +68,7 @@
 .field label {
   font-weight: 600;
   margin-bottom: 0.5rem;
+  color: var(--textColor);
 }
 
 .field input{
@@ -87,7 +91,7 @@
   font-size: 1.4rem;
 }
 
-.button-container {
+.user-profile-button-container {
   display: flex;
-  justify-content: end;
+  justify-content: center;
 }
