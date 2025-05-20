@@ -1,6 +1,6 @@
 import React from "react";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
-import { Card } from "@atoms/Card/Card";
+import { Grid } from "@atoms/Grid";
 
 export const ImportantInformation = () => {
   return (
@@ -14,18 +14,13 @@ export const ImportantInformation = () => {
           gap: "20px",
         }}
       >
-        <Card
-          color={"var(--textColor)"}
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          maxWidth="800px"
-          style={{
-            color: "var(--textColorDark)",
-            padding: "30px",
-            borderRadius: "10px",
-            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-          }}
+        <Grid
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          flexDirection={"column"}
+          padding={"15px"}
+          gap={"25px"}
         >
           <h1>Important Information</h1>
           <p style={{ textAlign: "justify", maxWidth: "700px" }}>
@@ -86,7 +81,7 @@ export const ImportantInformation = () => {
             © 2025 Flight Finder. All information provided here is for
             educational purposes.
           </p>
-        </Card>
+        </Grid>
       </div>
     </PageTemplate>
   );

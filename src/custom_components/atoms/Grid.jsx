@@ -3,6 +3,8 @@ import React from "react";
 export const Grid = ({
   children,
   display,
+  width,
+  maxWidth,
   alignItems,
   justifyContent,
   flexDirection,
@@ -13,7 +15,9 @@ export const Grid = ({
   return (
     <div
       style={{
+        width,
         display,
+        maxWidth,
         alignItems,
         justifyContent,
         flexDirection,
