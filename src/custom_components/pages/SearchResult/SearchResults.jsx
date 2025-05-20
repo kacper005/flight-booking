@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { getSearchFlights } from "@api/flightApi";
 import { formatDate2Digit, formatTime2Digit } from "@formatters/DateFormatters";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
+import { Grid } from "@atoms/Grid";
 import { LoadingSpinner } from "@atoms/LoadingSpinner";
 import { SearchResultCard } from "@organisms/SearchResultCard/SearchResultCard";
 import { ActiveSearchPanel } from "@organisms/FlightSearchPanel/ActiveSearchPanel";
@@ -88,14 +89,16 @@ export const SearchResults = () => {
             alignItems: "center",
           }}
         >
-          {flightsError && (
-            <h3 style={{ marginTop: "30px" }}>
-              {flightsError || "An error occurred while fetching flights."}
-            </h3>
-          )}
-          {flights?.length === 0 && (
-            <h3 style={{ marginTop: "30px" }}>No flights found</h3>
-          )}
+          <Grid display={"flex"} alignItems={"center"} flexDirection={"column"}>
+            {flightsError && (
+              <h3 style={{ marginTop: "30px" }}>
+                {flightsError || "An error occurred while fetching flights."}
+              </h3>
+            )}
+            {flights?.length === 0 && (
+              <h3 style={{ marginTop: "30px" }}>No flights found</h3>
+            )}
+          </Grid>
         </div>
         {loadingFlights && <LoadingSpinner />}
 
