@@ -1,0 +1,18 @@
+.homeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('@assets/plane_bg.webp');
+    background-size: cover;
+    background-position: center 10%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+@media screen and (max-width: 1950px) {
+    .homeContainer {
+        background-image: url('@assets/plane_bg_medium.webp');
+        background-position: center;
+    }
+}

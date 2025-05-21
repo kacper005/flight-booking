@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth } from "@hooks/useAuth";
+import { Grid } from "@atoms/Grid";
 import { RouteLink } from "@atoms/RouteLink";
 import klarnaLogo from "@assets/logos/klarna.svg";
 import visaLogo from "@assets/logos/visa-white-mark.svg";
@@ -24,22 +25,21 @@ export const Footer = () => {
           gap: "50px",
         }}
       >
-        <div
-          style={{ display: "grid", alignItems: "center", lineHeight: "1.5" }}
+        <Grid
+          display={"grid"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          lineHeight={"1.5"}
         >
           <p style={{ fontWeight: "bold", marginBottom: "0px" }}>About us</p>
           <span style={{ marginTop: "10px" }} />
-          <RouteLink to="/about-us" margin={0} textDecoration="underline">
+          <RouteLink to="/about-us" textDecoration="underline">
             About us
           </RouteLink>
-          <RouteLink
-            to="/important-information"
-            margin={0}
-            textDecoration="underline"
-          >
+          <RouteLink to="/important-information" textDecoration="underline">
             Important information
           </RouteLink>
-          <RouteLink to="/sustainability" margin={0} textDecoration="underline">
+          <RouteLink to="/sustainability" textDecoration="underline">
             Sustainability
           </RouteLink>
           <span style={{ marginBottom: "10px" }} />
@@ -51,67 +51,65 @@ export const Footer = () => {
           >
             <img src={githubLogo} alt="Github logo" width="50px" />
           </a>
-        </div>
-        <div
-          style={{ display: "grid", alignItems: "center", lineHeight: "1.5" }}
+        </Grid>
+        <Grid
+          display={"grid"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          lineHeight={"1.5"}
         >
           <p style={{ fontWeight: "bold", marginBottom: "0px" }}>Support</p>
           <span style={{ marginTop: "10px" }} />
-          <RouteLink to="/contactus" margin={0} textDecoration="underline">
+          <RouteLink to="/contactus" textDecoration="underline">
             Contact us
           </RouteLink>
-          <RouteLink to="/faq" margin={0} textDecoration="underline">
+          <RouteLink to="/faq" textDecoration="underline">
             FAQ
           </RouteLink>
-          <RouteLink
-            to="/airline-information"
-            margin={0}
-            textDecoration="underline"
-          >
+          <RouteLink to="/airline-information" textDecoration="underline">
             Airline information
           </RouteLink>
-          <RouteLink
-            to="/terms-and-conditions"
-            margin={0}
-            textDecoration="underline"
-          >
+          <RouteLink to="/terms-and-conditions" textDecoration="underline">
             Terms and conditions
           </RouteLink>
-        </div>
-        <div
-          style={{ display: "grid", alignItems: "center", lineHeight: "1.5" }}
+        </Grid>
+        <Grid
+          display={"grid"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          lineHeight={"1.5"}
         >
           <p style={{ fontWeight: "bold", marginBottom: "0px" }}>
             {isLoggedIn ? `Profile` : `Log In`}
           </p>
           <span style={{ marginTop: "10px" }} />
           {!isLoggedIn && (
-            <RouteLink to="/sign-in" margin={0} textDecoration="underline">
+            <RouteLink to="/sign-in" textDecoration="underline">
               Log in
             </RouteLink>
           )}
           {!isLoggedIn && (
-            <RouteLink to="/sign-up" margin={0} textDecoration="underline">
+            <RouteLink to="/sign-up" textDecoration="underline">
               Register
             </RouteLink>
           )}
           {isLoggedIn && (
-            <RouteLink to="/profile" margin={0} textDecoration="underline">
+            <RouteLink to="/profile" textDecoration="underline">
               Profile
             </RouteLink>
           )}
           {isLoggedIn && (
-            <RouteLink to="/saved-trips" margin={0} textDecoration="underline">
+            <RouteLink to="/saved-trips" textDecoration="underline">
               Saved trips
             </RouteLink>
           )}
-        </div>
+        </Grid>
       </nav>
 
       <div
         style={{
           backgroundColor: "var(--mainColor)",
-          color: "white",
+          color: "var(--white)",
           textAlign: "center",
           padding: "20px",
         }}
@@ -152,7 +150,7 @@ export const Footer = () => {
       <div
         style={{
           backgroundColor: "var(--mainColor)",
-          color: "white",
+          color: "var(--white)",
           textAlign: "center",
           padding: "20px",
           display: "flex",

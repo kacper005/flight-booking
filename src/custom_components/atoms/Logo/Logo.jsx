@@ -6,7 +6,7 @@ import "./Logo.css";
 
 export const Logo = () => {
   return (
-    <RouteLink to="/">
+    <RouteLink to="/" margin={"0 1.6rem"}>
       <img className="logo large-logo" src={logo} alt="Flight Finder" />
       <img className="logo small-logo" src={small_logo} alt="Flight Finder" />
     </RouteLink>

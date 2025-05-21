@@ -23,6 +23,7 @@ body {
   --mainColor: #3d52a0;
   --mainColorLight: #7091e6;
   --secondaryColor: #8697c4;
+  --secondaryColorLight: #adbbda;
   --textColor: #ede8f5;
   --textColor2: #fffff5;
   --textColorLight: #f5f5f5;
@@ -32,13 +33,15 @@ body {
   --warningColor: #ffcc00;
   --buttonColorRed: #e64848;
   --buttonColorRedHover: #c23636;
-  --TableHeaderColor: #f4f4f4;
+  --tableHeaderColor: #f4f4f4;
   --disabledColor: #d1d1d1;
   --blueHover: #5f7bd1;
 
   --black: #252525;
   --white: #ffffff;
+  --grey: #ccc;
   --green: #15986d;
+  --yellow: #ffd250;
   --greenLight: #1fbf8d;
 }
 

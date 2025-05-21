@@ -1,4 +1,5 @@
 import React from "react";
+import { Eye } from "lucide-react";
 import { getFeedback } from "@api/feedbackApi.js";
 import { formatDateTime } from "@formatters/DateFormatters";
 import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
@@ -43,7 +44,6 @@ export const AdminFeedback = () => {
     }
   };
 
-  // Prevent scrolling behind modal when modal is open
   if (selectedFeedback) {
     document.body.classList.add("active-modal");
   } else {
@@ -88,14 +88,14 @@ export const AdminFeedback = () => {
                   {formatDateTime(feedback.createdAt)}
                 </td>
                 <td className="colEdit">
-                  <ButtonSmall
+                  <Eye
+                    className={"editIcon"}
+                    size={26}
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedFeedback(feedback);
                     }}
-                  >
-                    View
-                  </ButtonSmall>
+                  />
                 </td>
               </tr>
             ))}

@@ -68,8 +68,9 @@ export const UserProfile = () => {
         <form className="profile-form" onSubmit={handleSave}>
           <div className="row">
             <div className="field">
-              <label>First Name</label>
+              <label htmlFor={"firstName"}>First Name</label>
               <input
+                id={"firstName"}
                 type="text"
                 value={formData.firstName}
                 onChange={(e) =>
@@ -84,8 +85,9 @@ export const UserProfile = () => {
               )}
             </div>
             <div className="field">
-              <label>Last Name</label>
+              <label htmlFor={"lastName"}>Last Name</label>
               <input
+                id={"lastName"}
                 type="text"
                 value={formData.lastName}
                 onChange={(e) =>
@@ -100,8 +102,9 @@ export const UserProfile = () => {
 
           <div className="row">
             <div className="field">
-              <label>Phone Number</label>
+              <label htmlFor={"phoneNumber"}>Phone Number</label>
               <input
+                id={"phoneNumber"}
                 type="text"
                 value={formData.phone}
                 onChange={(e) =>
@@ -114,8 +117,9 @@ export const UserProfile = () => {
 
           <div className="row">
             <div className="field">
-              <label>Email</label>
+              <label htmlFor={"email"}>Email</label>
               <input
+                id={"email"}
                 type="email"
                 placeholder="Change Email"
                 autoComplete="new-email"
@@ -130,8 +134,9 @@ export const UserProfile = () => {
 
           <div className="row">
             <div className="field">
-              <label>Password</label>
+              <label htmlFor={"password"}>Password</label>
               <input
+                id={"password"}
                 type="password"
                 placeholder="Change Password"
                 autoComplete="new-password"
@@ -148,8 +153,9 @@ export const UserProfile = () => {
 
           <div className="user-input-group">
             <div className="field">
-              <label>Country</label>
+              <label htmlFor={"country"}>Country</label>
               <select
+                id={"country"}
                 name="country"
                 value={formData.country || ""}
                 onChange={(e) =>
@@ -176,8 +182,10 @@ export const UserProfile = () => {
             </div>
           </div>
 
-          <div className="button-container">
-            <Button type="submit">Save</Button>
+          <div className="user-profile-button-container">
+            <Button type="submit" width={"200px"}>
+              Save
+            </Button>
           </div>
         </form>
       </div>

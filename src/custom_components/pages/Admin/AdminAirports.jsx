@@ -1,4 +1,5 @@
 import React from "react";
+import { SquarePen } from "lucide-react";
 import { getAirports, updateAirport } from "@api/airportApi.js";
 import { Button } from "@atoms/Button.jsx";
 import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
@@ -6,7 +7,6 @@ import { LoadingSpinner } from "@atoms/LoadingSpinner";
 import { AdminAirportsModal } from "@organisms/AdminAirportsModal/AdminAirportsModal.jsx";
 import { AdminNewAirportModal } from "@organisms/AdminAirportsModal/AdminNewAirportModal.jsx";
 import "./AdminFlights.css";
-import "./AdminAirports.css"; // TODO: use only one css file
 
 export const AdminAirports = () => {
   const [airports, setAirports] = React.useState([]);
@@ -67,7 +67,6 @@ export const AdminAirports = () => {
     setShowAddAirportModal(!showAddAirportModal);
   };
 
-  // Prevent scrolling behind modal when modal is open
   if (selectedAirport || showAddAirportModal) {
     document.body.classList.add("active-modal");
   } else {
@@ -109,14 +108,14 @@ export const AdminAirports = () => {
                 <td className="colAirportCountry">{airport.country}</td>
                 <td className="colAirportName">{airport.name}</td>
                 <td className="colEdit">
-                  <ButtonSmall
+                  <SquarePen
+                    className="editIcon"
+                    size={26}
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedAirport(airport);
                     }}
-                  >
-                    Edit
-                  </ButtonSmall>
+                  />
                 </td>
               </tr>
             ))}

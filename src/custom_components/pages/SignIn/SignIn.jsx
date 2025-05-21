@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { CircleCheckBig } from "lucide-react";
 import { signIn } from "@api/signInApi";
 import { useAuth } from "@hooks/useAuth";
-import { CircleCheckBig } from "lucide-react";
+import { PageTemplate } from "@templates/PageTemplate/PageTempate";
 import { Button } from "@atoms/Button";
 import { Card } from "@atoms/Card/Card";
-import { RouteLink } from "@atoms/RouteLink";
 import { showToast } from "@atoms/Toast/Toast";
-import { PageTemplate } from "@templates/PageTemplate/PageTempate";
+
 import "./SignIn.css";
 
 export const SignIn = () => {
@@ -158,9 +158,9 @@ export const SignIn = () => {
             </div>
           </div>
           <div>
-            <RouteLink to="/sign-up">
-              <Button>Create New Profile</Button>
-            </RouteLink>
+            <Button onClick={() => navigate("/sign-up")}>
+              Create New Profile
+            </Button>
           </div>
         </Card>
       </div>

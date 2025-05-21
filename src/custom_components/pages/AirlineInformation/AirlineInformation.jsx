@@ -1,10 +1,10 @@
 import React from "react";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
-import { Card } from "@atoms/Card/Card";
+import { Grid } from "@atoms/Grid";
+import "./AirlineInformation.css";
 
 export const AirlineInformation = () => {
   const airlines = [
-    // Description and images for each airline.
     {
       name: "Delta Air Lines",
       description:
@@ -122,23 +122,19 @@ export const AirlineInformation = () => {
     },
   ];
 
-  // State to track selected airline image index
   const [selectedAirlineIndex, setSelectedAirlineIndex] = React.useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = React.useState(0);
 
-  // Open image modal
   const openImageModal = (airlineIndex, imageIndex) => {
     setSelectedAirlineIndex(airlineIndex);
     setSelectedImageIndex(imageIndex);
   };
 
-  // Close modal
   const closeImageModal = () => {
     setSelectedAirlineIndex(null);
     setSelectedImageIndex(0);
   };
 
-  // Navigate images (left/right)
   const handleNextImage = () => {
     if (selectedAirlineIndex !== null) {
       setSelectedImageIndex(
@@ -158,7 +154,6 @@ export const AirlineInformation = () => {
     }
   };
 
-  // Handle keybord navigation
   React.useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Escape") closeImageModal();
@@ -178,18 +173,12 @@ export const AirlineInformation = () => {
           padding: "40px 20px",
         }}
       >
-        <Card
-          color={"#EDE8F5"}
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          maxWidth="900px"
-          style={{
-            color: "#141619",
-            padding: "40px",
-            borderRadius: "12px",
-            boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.15)",
-          }}
+        <Grid
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          flexDirection={"column"}
+          maxWidth={"900px"}
         >
           <h1
             style={{
@@ -203,22 +192,7 @@ export const AirlineInformation = () => {
           </h1>
 
           {airlines.map((airline, airlineIndex) => (
-            <div
-              key={airlineIndex}
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "100%",
-                marginBottom: "40px",
-                padding: "24px",
-                paddingBottom: "15px",
-                borderRadius: "12px",
-                borderBottom: "1px solid #ccc",
-              }}
-            >
-              {/* Text Section */}
+            <div className="airline-box" key={airlineIndex}>
               <div
                 style={{ flex: "1", minWidth: "300px", paddingRight: "20px" }}
               >
@@ -236,39 +210,19 @@ export const AirlineInformation = () => {
                 </p>
               </div>
 
-              {/* Image Section with clickable functionality */}
               <div
-                style={{
-                  flex: "1",
-                  minWidth: "300px",
-                  height: "200px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-                  cursor: "pointer",
-                  transition: "transform 0.3s ease",
-                }}
-                onClick={() => openImageModal(airlineIndex, 0)} // Open modal on first image
+                className=".clickable-image-container"
+                onClick={() => openImageModal(airlineIndex, 0)}
               >
                 <img
                   src={airline.images[0]}
                   alt={airline.name}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    borderRadius: "12px",
-                    transition: "transform 0.3s ease",
-                  }}
+                  className="clickable-image"
                 />
               </div>
             </div>
           ))}
 
-          {/* Image Modal with navigation*/}
           {selectedAirlineIndex !== null && (
             <div
               style={{
@@ -277,13 +231,13 @@ export const AirlineInformation = () => {
                 left: 0,
                 width: "100%",
                 height: "100%",
-                backgroundColor: "rgba(0, 0, 0, 0.8)", // Dark overlay
+                backgroundColor: "rgba(0, 0, 0, 0.8)",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 zIndex: 1000,
               }}
-              onClick={closeImageModal} // Close modal on click
+              onClick={closeImageModal}
             >
               <div
                 style={{
@@ -295,7 +249,6 @@ export const AirlineInformation = () => {
                   justifyContent: "center",
                 }}
               >
-                {/* Left navigation arrow */}
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
@@ -306,7 +259,7 @@ export const AirlineInformation = () => {
                     left: 0,
                     top: 0,
                     height: "100%",
-                    width: "5%", // Clickable area width
+                    width: "5%",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -316,7 +269,7 @@ export const AirlineInformation = () => {
                   <span
                     style={{
                       fontSize: "40px",
-                      color: "white",
+                      color: "var(--white)",
                       userSelect: "none",
                     }}
                   >
@@ -324,7 +277,6 @@ export const AirlineInformation = () => {
                   </span>
                 </div>
 
-                {/* Right navigation arrow */}
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
@@ -335,7 +287,7 @@ export const AirlineInformation = () => {
                     right: 0,
                     top: 0,
                     height: "100%",
-                    width: "5%", // Clickable area width
+                    width: "5%",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -345,7 +297,7 @@ export const AirlineInformation = () => {
                   <span
                     style={{
                       fontSize: "40px",
-                      color: "white",
+                      color: "var(--white)",
                       userSelect: "none",
                     }}
                   >
@@ -353,7 +305,6 @@ export const AirlineInformation = () => {
                   </span>
                 </div>
 
-                {/* Image Display */}
                 <img
                   src={
                     airlines[selectedAirlineIndex].images[selectedImageIndex]
@@ -370,16 +321,15 @@ export const AirlineInformation = () => {
             </div>
           )}
 
-          {/* Footer */}
           <div
             style={{ marginTop: "30px", textAlign: "center", width: "100%" }}
           >
-            <p style={{ fontSize: "14px", color: "#555" }}>
+            <p style={{ fontSize: "14px", color: "var(--textColorDark)" }}>
               © 2025 Flight Finder. All information provided here is for
               educational purposes.
             </p>
           </div>
-        </Card>
+        </Grid>
       </div>
     </PageTemplate>
   );

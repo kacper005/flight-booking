@@ -46,8 +46,8 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
   React.useEffect(() => {
     const fetchAirlines = async () => {
       try {
-        const response = await getAirlines(); // <- response, not array
-        setAirlines(response.data); // <- use the actual data array
+        const response = await getAirlines();
+        setAirlines(response.data);
       } catch (error) {
         console.error("Failed to fetch airlines:", error);
       }
@@ -62,7 +62,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
         const response = await getPrices();
         const providers = [
           ...new Set(response.data.map((p) => p.priceProviderName)),
-        ]; // Unique list
+        ];
         setPriceProviders(providers);
       } catch (error) {
         console.error("Failed to fetch price providers:", error);
@@ -146,7 +146,6 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
       return;
     }
 
-    // Handle nested objects like airline, departureAirport, arrivalAirport
     if (name === "airline") {
       setFormData((prev) => ({
         ...prev,
@@ -176,7 +175,6 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
         },
       }));
     } else {
-      // Default flat field handling
       setFormData((prev) => ({
         ...prev,
         [name]: value,
@@ -200,7 +198,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
         );
 
         if (!userConfirmed) {
-          return; // Stops form submission if user cancels
+          return;
         }
       }
 
@@ -336,7 +334,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   - Select Airport -
                 </option>
                 {airports
-                  .slice() // make a copy to avoid mutating state
+                  .slice()
                   .sort((a, b) => a.city.localeCompare(b.city))
                   .map((airport) => (
                     <option key={airport.airportId} value={airport.code}>
@@ -361,7 +359,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   - Select Airport -
                 </option>
                 {airports
-                  .slice() // make a copy to avoid mutating state
+                  .slice()
                   .sort((a, b) => a.city.localeCompare(b.city))
                   .map((airport) => (
                     <option key={airport.airportId} value={airport.code}>
@@ -459,7 +457,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                     ---
                   </option>
                   {currency
-                    .slice() // make a copy to avoid mutating state
+                    .slice()
                     .sort((a, b) => a.localeCompare(b))
                     .map((provider, i) => (
                       <option key={i} value={provider}>
@@ -483,7 +481,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   - Select Provider -
                 </option>
                 {priceProviders
-                  .slice() // make a copy to avoid mutating state
+                  .slice()
                   .sort((a, b) => a.localeCompare(b))
                   .map((provider, i) => (
                     <option key={i} value={provider}>
@@ -525,7 +523,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                     ---
                   </option>
                   {currency
-                    .slice() // make a copy to avoid mutating state
+                    .slice()
                     .sort((a, b) => a.localeCompare(b))
                     .map((provider, i) => (
                       <option key={i} value={provider}>
@@ -549,7 +547,7 @@ export const AdminNewFlightModal = ({ onClose, onSave }) => {
                   - Select Provider -
                 </option>
                 {priceProviders
-                  .slice() // make a copy to avoid mutating state
+                  .slice()
                   .sort((a, b) => a.localeCompare(b))
                   .map((provider, i) => (
                     <option key={i} value={provider}>

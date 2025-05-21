@@ -1,26 +1,17 @@
 import React from "react";
 import { PageTemplate } from "@templates/PageTemplate/PageTempate";
-import { Card } from "@atoms/Card/Card";
+import { Grid } from "@atoms/Grid";
 
 export const AboutUs = () => {
   return (
     <PageTemplate>
-      <div
-        style={{ display: "flex", justifyContent: "center", padding: "15px" }}
-      >
-        <Card
-          color="#EDE8F5"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          maxWidth="900px"
-          style={{
-            color: "#141619",
-            padding: "40px",
-            borderRadius: "16px",
-            boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-            backgroundColor: "var(textColor2)",
-          }}
+      <Grid display={"flex"} alignItems={"center"} padding={"15px"}>
+        <Grid
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          width={"100%"}
         >
           <h1
             style={{
@@ -61,7 +52,7 @@ export const AboutUs = () => {
               marginTop: "40px",
               textAlign: "center",
               fontSize: "14px",
-              color: "#555",
+              color: "var(--textColorDark)",
             }}
           >
             <p>
@@ -69,8 +60,8 @@ export const AboutUs = () => {
               educational purposes.
             </p>
           </div>
-        </Card>
-      </div>
+        </Grid>
+      </Grid>
     </PageTemplate>
   );
 };
