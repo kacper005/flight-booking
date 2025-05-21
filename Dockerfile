@@ -6,8 +6,10 @@ COPY package.json .
 
 RUN yarn install
 
+RUN yarn run build
+
 COPY . .
 
-EXPOSE 5173
+EXPOSE 80
 
 CMD ["yarn", "run", "dev"]
