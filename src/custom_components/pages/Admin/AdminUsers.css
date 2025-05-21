@@ -1,68 +1,68 @@
 body.active-modal {
-    overflow-y: hidden;
+  overflow-y: hidden;
 }
 
 .adminClassContainer {
-    padding: 40px 8% 70px 8%;
+  padding: 40px 8% 70px 8%;
 }
 
 .adminTable {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    font-size: 1.6rem;
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  font-size: 1.6rem;
 }
 
 .adminTable th,
 .adminTable td {
-    padding: 6px 16px;
-    text-align: left;
-    border-bottom: 1px solid #141619;
+  padding: 6px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--textColorDark);
 }
 
 .adminTable th {
-    background-color: #f4f4f4;
-    font-weight: bold;
+  background-color: var(--tableHeaderColor);
+  font-weight: bold;
 }
 
 h1 {
-    padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 @media screen and (max-width: 1000px) {
-    .colCreatedAt {
-        display: none;
-    }
+  .colCreatedAt {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 860px) {
-    .colPhone {
-        display: none;
-    }
+  .colPhone {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 750px) {
-    .colEmail {
-        display: none;
-    }
+  .colEmail {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 600px) {
-    .colEdit-admin-user {
-        display: none;
-    }
+  .colEdit-admin-user {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 470px) {
-    .colRole,
-    .colFirstName {
-        display: none;
-    }
-    .adminTable tr:hover {
-        background-color: lightgray;
-        cursor: pointer;
-    }
+  .colRole,
+  .colFirstName {
+    display: none;
+  }
+  .adminTable tr:hover {
+    background-color: lightgray;
+    cursor: pointer;
+  }
 }

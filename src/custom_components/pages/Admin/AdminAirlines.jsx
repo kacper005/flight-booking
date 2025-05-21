@@ -1,4 +1,5 @@
 import React from "react";
+import { SquarePen } from "lucide-react";
 import { getAirlines, updateAirline } from "@api/airlineApi.js";
 import { Button } from "@atoms/Button.jsx";
 import { ButtonSmall } from "@atoms/ButtonSmall.jsx";
@@ -6,7 +7,6 @@ import { LoadingSpinner } from "@atoms/LoadingSpinner";
 import { AdminAirlinesModal } from "@organisms/AdminAirlinesModal/AdminAirlinesModal.jsx";
 import { AdminNewAirlineModal } from "@organisms/AdminAirlinesModal/AdminNewAirlineModal.jsx";
 import "./AdminFlights.css";
-import "./AdminAirlines.css"; // TODO: use only one css file
 
 export const AdminAirlines = () => {
   const [airlines, setAirlines] = React.useState([]);
@@ -67,7 +67,6 @@ export const AdminAirlines = () => {
     setShowAddAirlineModal(!showAddAirlineModal);
   };
 
-  // Prevent scrolling behind modal when modal is open
   if (selectedAirline || showAddAirlineModal) {
     document.body.classList.add("active-modal");
   } else {
@@ -109,19 +108,20 @@ export const AdminAirlines = () => {
                 <td className="colAirlineCountry">{airline.country}</td>
                 <td className="colLogoName">
                   <img
+                    alt={"Airline Logo"}
                     style={{ width: "35px" }}
                     src={`/airline_logos/${airline.logoFileName}.png`}
                   />
                 </td>
                 <td className="colEdit">
-                  <ButtonSmall
+                  <SquarePen
+                    className="editIcon"
+                    size={26}
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedAirline(airline);
                     }}
-                  >
-                    Edit
-                  </ButtonSmall>
+                  />
                 </td>
               </tr>
             ))}

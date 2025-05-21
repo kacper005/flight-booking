@@ -3,7 +3,8 @@
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 450px;
+  width: 100%;
+  max-width: 450px;
   text-align: center;
   margin: 20px auto;
 }
@@ -28,7 +29,7 @@ h2 {
 .input-group select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--grey);
   border-radius: 8px;
   cursor: pointer;
 }
@@ -79,10 +80,9 @@ h2 {
 }
 
 .phone-code {
-  flex: 0 0 100px;
   max-width: 120px;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--grey);
   border-radius: 6px;
   font-size: 0.9rem;
   text-align: center;
@@ -90,7 +90,22 @@ h2 {
 
 .phone-input {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--grey);
   border-radius: 6px;
   width: 80%;
+}
+
+@media screen and (max-width: 420px) {
+  .phone-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .phone-code {
+    width: 100%;
+    padding: none;
+    margin: none;
+    height: auto;
+    max-width: none;
+    text-align: start;
+  }
 }

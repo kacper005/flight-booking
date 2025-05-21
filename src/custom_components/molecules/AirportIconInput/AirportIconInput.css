@@ -6,7 +6,7 @@
 .input-container input {
   width: 100%;
   padding-left: 45px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--grey);
   border-radius: 8px;
   outline-color: var(--mainColor);
 }

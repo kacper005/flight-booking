@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { calculateDurationHoursAndMinutes } from "@formatters/DateFormatters";
+import { Grid } from "@atoms/Grid";
 import { Button } from "@atoms/Button";
 import "./SearchResultCard.css";
 
@@ -30,6 +31,8 @@ export const SearchResultCard = ({
   totalPassengers,
   outboundFlightId,
   returnFlightId,
+  adminView,
+  onClick,
 }) => {
   const navigate = useNavigate();
 
@@ -46,8 +49,17 @@ export const SearchResultCard = ({
   };
 
   return (
-    <div className="search-result-container">
-      {/* Flight Info */}
+    <div
+      className="search-result-container"
+      onClick={(e) => {
+        e.stopPropagation();
+        if (adminView && onClick) {
+          onClick();
+        } else {
+          handleSelect();
+        }
+      }}
+    >
       <div
         style={{
           flex: 3,
@@ -56,8 +68,7 @@ export const SearchResultCard = ({
           gap: "16px",
         }}
       >
-        {/* Outbound Flight */}
-        <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+        <Grid display={"flex"} alignItems={"center"} gap={"16px"}>
           <img
             src={`/airline_logos/${outboundOperatingAirlineLogo}.png`}
             style={{ width: "40px", height: "34px" }}
@@ -86,7 +97,9 @@ export const SearchResultCard = ({
                     outboundFlightArrivalTime
                   )}
                 </p>
-                <hr style={{ width: "100%", border: "1px solid #ccc" }} />
+                <hr
+                  style={{ width: "100%", border: "1px solid var(--grey)" }}
+                />
               </div>
               <div style={{ textAlign: "center" }}>
                 <h4 style={{ margin: 0 }}>{outboundFlightArrivalTime}</h4>
@@ -96,11 +109,10 @@ export const SearchResultCard = ({
               </div>
             </div>
           </div>
-        </div>
+        </Grid>
 
-        {/* Return Flight */}
         {roundTrip && (
-          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+          <Grid display={"flex"} alignItems={"center"} gap={"16px"}>
             <img
               src={`/airline_logos/${returnOperatingAirlineLogo}.png`}
               style={{ width: "40px", height: "34px" }}
@@ -129,7 +141,9 @@ export const SearchResultCard = ({
                       returnFlightArrivalTime
                     )}
                   </p>
-                  <hr style={{ width: "100%", border: "1px solid #ccc" }} />
+                  <hr
+                    style={{ width: "100%", border: "1px solid var(--grey)" }}
+                  />
                 </div>
                 <div style={{ textAlign: "center" }}>
                   <h4 style={{ margin: 0 }}>{returnFlightArrivalTime}</h4>
@@ -139,10 +153,16 @@ export const SearchResultCard = ({
                 </div>
               </div>
             </div>
-          </div>
+          </Grid>
         )}
 
-        <p style={{ fontSize: "14px", color: "#555", marginTop: "auto" }}>
+        <p
+          style={{
+            fontSize: "14px",
+            color: "var(--textColorDark",
+            marginTop: "auto",
+          }}
+        >
           {returnOperatingAirlineName
             ? outboundOperatingAirlineName === returnOperatingAirlineName
               ? outboundOperatingAirlineName
@@ -151,44 +171,45 @@ export const SearchResultCard = ({
         </p>
       </div>
 
-      {/* Price & Booking Info */}
-      <div className="price-info">
-        {price === totalPrice && (
-          <p style={{ fontWeight: "bold", fontSize: "2rem", margin: 0 }}>
-            {price} {currency}
-            <span style={{ fontWeight: "normal", fontSize: "2rem" }}></span>
-          </p>
-        )}
-
-        {price !== totalPrice && (
-          <>
+      {!adminView && (
+        <div className="price-info">
+          {price === totalPrice && (
             <p style={{ fontWeight: "bold", fontSize: "2rem", margin: 0 }}>
               {price} {currency}
-              <span style={{ fontWeight: "normal", fontSize: "1.2rem" }}>
-                {" "}
-                / traveller
-              </span>
+              <span style={{ fontWeight: "normal", fontSize: "2rem" }}></span>
             </p>
-            <b style={{ fontSize: "1.2rem", lineHeight: "1.8rem" }}>
-              Total price: {totalPrice} {currency}
-            </b>
-          </>
-        )}
+          )}
 
-        <div>
-          <p style={{ fontSize: "1.1rem", lineHeight: "1.8rem" }}>
-            {availableClasses}
-          </p>
+          {price !== totalPrice && (
+            <>
+              <p style={{ fontWeight: "bold", fontSize: "2rem", margin: 0 }}>
+                {price} {currency}
+                <span style={{ fontWeight: "normal", fontSize: "1.2rem" }}>
+                  {" "}
+                  / traveller
+                </span>
+              </p>
+              <b style={{ fontSize: "1.2rem", lineHeight: "1.8rem" }}>
+                Total price: {totalPrice} {currency}
+              </b>
+            </>
+          )}
+
+          <div>
+            <p style={{ fontSize: "1.1rem", lineHeight: "1.8rem" }}>
+              {availableClasses}
+            </p>
+          </div>
+          <div
+            style={{ width: "100%", marginTop: "auto" }}
+            className="button-container"
+          >
+            <Button width={"100%"} onClick={handleSelect}>
+              Select
+            </Button>
+          </div>
         </div>
-        <div
-          style={{ width: "100%", marginTop: "auto" }}
-          className="button-container"
-        >
-          <Button width={"100%"} onClick={handleSelect}>
-            Select
-          </Button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

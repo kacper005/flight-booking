@@ -13,7 +13,7 @@ export const ContactUsPage = () => {
         }}
       >
         <Card
-          color={"#ffffff"}
+          color={"var(--white)"}
           display="flex"
           flexDirection="column"
           alignItems="flex-start"
@@ -69,7 +69,7 @@ export const ContactUsPage = () => {
           <div
             style={{ marginTop: "30px", textAlign: "center", width: "100%" }}
           >
-            <p style={{ fontSize: "14px", color: "#555" }}>
+            <p style={{ fontSize: "14px", color: "var(--textColorDark)" }}>
               © 2025 Flight Finder. All information provided here is for
               educational purposes.
             </p>

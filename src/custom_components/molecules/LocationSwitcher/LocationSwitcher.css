@@ -14,7 +14,7 @@ input {
   padding: 8px;
   height: 60px;
   width: 100%;
-  border: 1px solid #cccccc;
+  border: 1px solid var(--grey);
   border-radius: 8px;
   font-size: 2rem;
 }
@@ -38,7 +38,7 @@ input {
 @media screen and (max-width: 1075px) {
   .swap-button {
     position: absolute;
-    border: 1px solid #ccc;
+    border: 1px solid var(--grey);
     margin-right: 20px;
     min-width: 40px;
     min-height: 40px;
@@ -57,7 +57,7 @@ input {
 }
 
 .swap-button:hover {
-  background-color: #ddd;
+  background-color: var(--grey);
 }
 
 .swap-icon {

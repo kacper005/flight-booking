@@ -72,7 +72,6 @@ export const AdminUsersModal = ({ users, onClose, onSave }) => {
   const handleDelete = async (e) => {
     e.preventDefault();
 
-    // Prevent self-deletion
     if (formData.userId === authUser.userId) {
       showToast({
         message: "You cannot delete your own account.",

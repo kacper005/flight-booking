@@ -49,7 +49,11 @@ export default function LocationSwitcher({ from, setFrom, to, setTo }) {
         className="input-left"
       />
 
-      <button onClick={swapLocations} className="swap-button">
+      <button
+        onClick={swapLocations}
+        className="swap-button"
+        aria-label="Swap locations"
+      >
         <ArrowRightLeft className="swap-icon" />
       </button>
 

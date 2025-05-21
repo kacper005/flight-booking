@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Heart, Forward } from "lucide-react";
 import { getFlightById } from "@api/flightApi";
 import {
@@ -17,6 +18,7 @@ import { FlightCard } from "./FlightCard";
 import "./SearchResultDetails.css";
 
 export const SearchResultDetails = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [outboundFlight, setOutboundFlight] = React.useState(null);
   const [returnFlight, setReturnFlight] = React.useState(null);
@@ -31,7 +33,9 @@ export const SearchResultDetails = () => {
   const numAdults = parseInt(params.get("numAdults") || "1");
   const numChildren = parseInt(params.get("numChildren") || "0");
   const numInfants = parseInt(params.get("numInfants") || "0");
-  const totalPassengers = numAdults + numChildren + numInfants;
+  const totalPassengers =
+    parseInt(params.get("totalPassengers")) ||
+    numAdults + numChildren + numInfants;
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -99,13 +103,14 @@ export const SearchResultDetails = () => {
         setIsSaved(false);
         setSavedBookingId(null);
         showToast({
-          message: "Booking removed successfully!",
+          message: "Trip removed successfully!",
           type: "success",
         });
       } else {
         const bookingData = {
           user: { userId: user.userId },
           bookingDate: new Date().toISOString(),
+          numberOfTravellers: totalPassengers,
         };
 
         const bookingRes = await createBooking(bookingData);
@@ -223,6 +228,9 @@ export const SearchResultDetails = () => {
                         <ButtonSmall
                           bgColor={"var(--green)"}
                           hoverBgColor={"var(--greenLight)"}
+                          onClick={() => {
+                            navigate("/checkout");
+                          }}
                         >
                           Book
                         </ButtonSmall>
