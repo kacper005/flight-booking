@@ -11,6 +11,7 @@ export const Select = ({ value, onChange }) => {
         border: "1px solid var(--grey)",
         cursor: "pointer",
         padding: "10px 20px",
+        fontFamily: '"Montserrat", sans-serif',
       }}
       value={value}
       onChange={onChange}
