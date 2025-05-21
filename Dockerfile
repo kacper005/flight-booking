@@ -1,15 +1,20 @@
-FROM node:22-alpine
+FROM node:22-alpine as build
 
 WORKDIR /app
 
-COPY package.json .
+COPY package.json ./
 
 RUN yarn install
 
-RUN yarn run build
 
 COPY . .
 
+RUN yarn run build
+
+FROM nginx:alpine
+
+COPY --from=build /app/dist /usr/share/nginx/html
+
 EXPOSE 80
 
-CMD ["yarn", "run", "dev"]
+CMD ["nginx", "-g", "daemon off;"]
