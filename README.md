@@ -9,10 +9,12 @@ to interact with the database.
 
 ## How to run the project
 
+This version of the application is specifically designed to be run on the server with Nginx.
+
 ### Docker
 
-* First time running this project, run `docker compose up` in the `flight-booking` directory (root directory).
-* If the docker image is already built, run `docker compose start` to start the container and `docker compose stop` to stop the container.
+Run the command `sudo docker compose run --rm frontend-builder`. This will build the application and 
+move the build files to the `nginx` folder. The Nginx server will then serve the application.
 
 ### Local
 
