@@ -164,6 +164,7 @@ export const UserProfile = () => {
                     country: e.target.value,
                   }))
                 }
+                className="country-select"
               >
                 <option value="" disabled>
                   Select your country
