@@ -32,3 +32,10 @@ This should be set to the URL of the backend API. For example, if you are runnin
 locally, set  it to `VITE_FLIGHT_FINDER_API_URL=http://localhost:8080`. The `.env` file will not
 be included in this repository for security reasons, so it needs to be created manually in the root 
 directory of the project.
+
+## Screenshots
+
+![sc1.webp](public/screenshots/sc1.webp)
+![sc2.webp](public/screenshots/sc2.webp)
+![sc3.webp](public/screenshots/sc3.webp)
+![sc4.webp](public/screenshots/sc4.webp)
