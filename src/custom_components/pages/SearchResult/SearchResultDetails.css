@@ -15,6 +15,10 @@
   width: 100%;
 }
 
+.price-provider-name-label {
+  font-size: 1.5rem;
+}
+
 .traveller-label {
   font-size: 1.4rem;
 }
@@ -107,6 +111,10 @@ b {
 
   .flight-card img {
     margin-bottom: 1rem;
+  }
+
+  .price-provider-name-label {
+    display: none;
   }
 }
 

@@ -156,6 +156,7 @@ export const Footer = () => {
           display: "flex",
           justifyContent: "center",
           gap: "8px",
+          flexWrap: "wrap",
         }}
       >
         <img src={klarnaLogo} alt="Klarna Logo" width="100px" />

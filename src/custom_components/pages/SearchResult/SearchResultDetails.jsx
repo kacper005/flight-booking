@@ -153,7 +153,7 @@ export const SearchResultDetails = () => {
                     {
                       title: (
                         <>
-                          <b style={{ fontSize: "1.5rem" }}>
+                          <b className="price-provider-name-label">
                             {flightPrice.priceProviderName}
                           </b>
                           <div>
@@ -182,7 +182,19 @@ export const SearchResultDetails = () => {
                           }}
                         >
                           <div>
-                            <div style={{ marginBottom: "10px" }}>
+                            <b
+                              style={{
+                                fontSize: "1.5rem",
+                              }}
+                            >
+                              {flightPrice.priceProviderName}
+                            </b>
+                            <div
+                              style={{
+                                marginTop: "10px",
+                                marginBottom: "10px",
+                              }}
+                            >
                               <b>
                                 {outboundFlight.departureAirport.code} →{" "}
                                 {outboundFlight.arrivalAirport.code}
